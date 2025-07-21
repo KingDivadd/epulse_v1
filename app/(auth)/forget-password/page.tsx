@@ -7,10 +7,12 @@ import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
+import { useRouter } from 'next/navigation'
 
 
 
 const ForgetPassword = () => {
+    const router = useRouter()
     const [auth, setAuth] = useState({email:'' })
     const [loading, setLoading] = useState(false)
 
@@ -28,15 +30,14 @@ const ForgetPassword = () => {
         setLoading(true)
 
         try {
-            const response = await post_request('auth/patient-signup', auth)
+            const response = await post_request('auth/generate-patient-otp', {email:auth.email})
             console.log(response)
             
             if (response.status === 200 || response.status === 201) {
                 localStorage.setItem('x-id-key', response.data.headers.get('x-id-key')) 
 
-                console.log("Signup successful:", response.data);
 
-                toast_msg({title: "Account created successfully! Please login to continue."})
+                toast_msg({title: "OTP sent to your email. Please check your inbox."})
 
                 setLoading(false)
             } else if (response.status === 500 ){
@@ -73,14 +74,14 @@ const ForgetPassword = () => {
 
 
                     
-                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded-md text-md"  disabled={auth.email === ''}>
+                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.email === ''}>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Next'}
                     </Button>
                 </form>
 
 
                 <h3 className="text-md flex items-center justify-center gap-1 font-semibold mt-[-10px] font-mont text-slate-700">
-                    Remembered your Password? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 '>Login</Link>
+                    Remembered Password? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 '>Login</Link>
                 </h3>
             </div>
 

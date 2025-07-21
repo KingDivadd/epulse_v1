@@ -75,7 +75,7 @@ const ResetPassword = () => {
 
 
                     
-                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded-md text-md"  disabled={auth.password === '' || auth.confirm_password === '' }>
+                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.password === '' || auth.confirm_password === '' }>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Next'}
                     </Button>
                 </form>

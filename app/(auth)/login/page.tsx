@@ -79,21 +79,21 @@ const Login = () => {
             <p className="text-xl sm:text-2xl text-slate-700 font-[500] font-mont">Log in</p>
 
             {!auth_via_email ? <div className="w-full flex flex-col gap-5 items-center justify-center mb-2">
-                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded-md font-[500] hover:bg-slate-100 transition-all duration-300">
+                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300">
                     <span className="overflow-hidden relative h-5 w-5">
                         {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
                     </span>
                     Continue with Google
                 </button>
 
-                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded-md font-[500] hover:bg-slate-100 transition-all duration-300">
+                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300">
                     <span className="overflow-hidden relative h-5 w-5">
                         {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
                     </span>
                     Continue with Apple
                 </button>
 
-                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded-md font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> setAuth_via_email(!auth_via_email)}>
+                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> setAuth_via_email(!auth_via_email)}>
                     <span className="overflow-hidden relative h-5 w-5">
                         {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
                     </span>
@@ -113,7 +113,7 @@ const Login = () => {
                     <input type="checkbox" name="remember_me" className='h-4 w-4' id="remember_me" onChange={(e) => setRemember_me(e.target.checked)}/>
                     <label htmlFor="remember_me" className="text-sm  font-[500] font-mont text-slate-700 cursor-pointer " >Remember me</label>
                 </span>
-                <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded-md text-md" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit"  >
+                <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit"  >
                     {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Login'}
                 </Button>
             </form>}

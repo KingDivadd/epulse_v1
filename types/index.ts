@@ -7,9 +7,16 @@ declare interface InputProps {
 }
 
 declare interface PhoneInputProps {
-    title: string;
-    name: string;
-    value: string; // Phone number without country code (e.g., "7044907610")
-    countryCode: string; // Country code (e.g., "+234")
-    onChange: (e: { name: string; value: string; countryCode: string }) => void;
+    phone_number: string; 
+    country_code: string; 
+    on_change?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+declare interface UserInfoProps {
+    patient_id?: string;
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    phone_number?: string; 
+    gender?: string; 
 }

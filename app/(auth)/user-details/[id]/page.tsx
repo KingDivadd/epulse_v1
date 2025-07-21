@@ -1,27 +1,27 @@
 'use client'
 import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
-import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
 import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,  DropdownMenuRadioGroup, DropdownMenuRadioItem,  DropdownMenuSeparator,  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import {ChevronDown} from 'lucide-react'
-
+import {useChat} from '@/app/context/ChatContext'
 import PhoneInputComponent from '@/components/auth_components/phone_input_component'
+import DateOfBirth from '@/components/auth_components/date_of_birth'
 
 
 const UserDetails = () => {
     const [auth, setAuth] = useState({gender:'', country_code:'', phone_number:'' })
     const [loading, setLoading] = useState(false)
     const [position, setPosition] = React.useState("")
+    const {setUser_information, user_information, country_dial_code} = useChat()  
 
     useEffect(() => {
-        setAuth({...auth, gender: position})
-    }, [position])
+        setAuth({...auth, gender: position, country_code: country_dial_code})
+    }, [position, country_dial_code])
 
     function handle_change(e:any) {
         const name = e.target.name
@@ -77,26 +77,41 @@ const UserDetails = () => {
 
                 <form onSubmit={handle_submit} className="w-full flex flex-col gap-5 justify-center items-start ">
 
-                    <DropdownMenu >
-                        <DropdownMenuTrigger asChild className='w-full'>
-                            <Button className='w-full h-[50px] border-slate-400 bg-white text-[15px] font-mont justify-between outline-0 hover:bg-white focus:bg-white' variant="outline">
-                                {position || 'Select'}
-                                <ChevronDown className="h-5 w-5 text-gray-500" />
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-[300px] border-slate-700 box-shadow-1">
-                            <DropdownMenuRadioGroup value={position} onValueChange={setPosition} className='w-full '>
-                                <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Male">Male</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Female">Female</DropdownMenuRadioItem>
-                                <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Confused">Confused</DropdownMenuRadioItem>
-                            </DropdownMenuRadioGroup>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                    <span className="flex flex-col items-start justify-start gap-2 w-full">
+                        <p className="text-sm font-medium font-mont">Gender</p>
 
+                        <DropdownMenu >
+                            <DropdownMenuTrigger asChild className='w-full'>
+                                <Button className='w-full h-[50px] border-slate-400 bg-white text-[15px] font-mont justify-between outline-0 hover:bg-white focus:bg-white' variant="outline">
+                                    {position || 'Select'}
+                                    <ChevronDown className="h-5 w-5 text-gray-500" />
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-[300px] border-slate-700 box-shadow-1">
+                                <DropdownMenuRadioGroup value={position} onValueChange={setPosition} className='w-full '>
+                                    <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Male">Male</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Female">Female</DropdownMenuRadioItem>
+                                    <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Confused">Confused</DropdownMenuRadioItem>
+                                </DropdownMenuRadioGroup>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </span>
 
-                    <PhoneInputComponent />
                     
-                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded-md text-md"  disabled={auth.phone_number === '' || auth.gender === '' || auth.country_code === ''  }>
+                    <span className="flex flex-col items-start justify-start gap-2 w-full">
+                        <p className="text-sm font-medium font-mont">Date of Birth</p>
+
+                        <DateOfBirth />
+                    </span>
+
+
+                    <span className="flex flex-col items-start justify-start gap-2 w-full">
+                        <p className="text-sm font-medium font-mont">Phone number</p>
+
+                        <PhoneInputComponent country_code={auth.country_code} phone_number={auth.phone_number} on_change={handle_change}  />
+                    </span>
+                    
+                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.phone_number === '' || auth.gender === '' || auth.country_code === ''  }>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Next'}
                     </Button>
                 </form>

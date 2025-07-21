@@ -7,14 +7,14 @@ import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
-
+import { useRouter } from 'next/navigation'
 
 
 const Signup = () => {
     const [auth_via_email, setAuth_via_email] = useState(false)
     const [auth, setAuth] = useState({email:'', password: '', first_name: '', last_name: ''})
     const [loading, setLoading] = useState(false)
-    const [signup_stage, setSignup_stage] = useState('signup')
+    const router = useRouter()    
 
     function handle_change(e:any) {
         const name = e.target.name
@@ -30,14 +30,13 @@ const Signup = () => {
 
         try {
             const response = await post_request('auth/patient-signup', auth)
-            console.log(response)
             
             if (response.status === 200 || response.status === 201) {
-                localStorage.setItem('x-id-key', response.data.headers.get('x-id-key')) 
+                localStorage.setItem('x-id-key', response.headers.get('x-id-key')) 
 
-                console.log("Signup successful:", response.data);
+                toast_msg({title: "Account created successfully! "})
 
-                toast_msg({title: "Account created successfully! Please login to continue."})
+                router.push(`/user-details/${response.headers.get('x-id-key')}`)
 
                 setLoading(false)
             } else if (response.status === 500 ){
@@ -68,21 +67,21 @@ const Signup = () => {
                 <p className="text-xl sm:text-2xl text-slate-700 font-[500] font-mont">Create an account</p>
 
                 {!auth_via_email ? <div className="w-full flex flex-col gap-5 items-center justify-center mb-2">
-                    <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded-md font-[500] hover:bg-slate-100 transition-all duration-300">
+                    <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300">
                         <span className="overflow-hidden relative h-5 w-5">
                             {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
                         </span>
                         Continue with Google
                     </button>
 
-                    <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded-md font-[500] hover:bg-slate-100 transition-all duration-300">
+                    <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300">
                         <span className="overflow-hidden relative h-5 w-5">
                             {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
                         </span>
                         Continue with Apple
                     </button>
 
-                    <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded-md font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> setAuth_via_email(!auth_via_email)}>
+                    <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> setAuth_via_email(!auth_via_email)}>
                         <span className="overflow-hidden relative h-5 w-5">
                             {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
                         </span>
@@ -101,9 +100,9 @@ const Signup = () => {
 
                     <InputComponent title="Password" type="password" name="password" value={auth.password} onChange={handle_change} />
 
-                    {/* <button className="w-full h- rounded-md bg-[#] text-white"></button> */}
+                    {/* <button className="w-full h- rounded bg-[#] text-white"></button> */}
 
-                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded-md text-md"  disabled={auth.email === '' || auth.password === ''}>
+                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.email === '' || auth.password === ''}>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Signup'}
                     </Button>
                 </form>}

@@ -112,13 +112,13 @@ const UserDetails = () => {
                     </InputOTP>
 
 
-                    {/* <button className="w-full h- rounded-md bg-[#] text-white"></button> */}
+                    {/* <button className="w-full h- rounded bg-[#] text-white"></button> */}
 
                     <h3 className="text-md flex items-center justify-center gap-1 font-semibold font-mont text-slate-700">
                         {'Didn\'t receive any code?'} <p className='text-[#306CE9] hover:underline duration-300 ' onClick={handle_new_otp}>Request Again</p>
                     </h3>
 
-                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded-md text-md"  disabled={otp.length < 6}>
+                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={otp.length < 6}>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Next'}
                     </Button>
                 </form>
