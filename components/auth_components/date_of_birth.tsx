@@ -6,10 +6,12 @@ import { ChevronDownIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { useChat } from "@/app/context/ChatContext"
 
 const DateOfBirth = ()=> {
     const [open, setOpen] = React.useState(false)
     const [date, setDate] = React.useState<Date | undefined>(undefined)
+    const { setUser_information, user_information } = useChat()
 
     return (
         <div className="flex flex-col gap-3 w-full ">
@@ -30,8 +32,13 @@ const DateOfBirth = ()=> {
                     selected={date}
                     captionLayout="dropdown"
                     onSelect={(date) => {
-                    setDate(date)
-                    setOpen(false)
+                        setDate(date)
+                        setOpen(false)
+                        if (date){
+
+                            setUser_information({...user_information, date_of_birth: Math.floor(date.getTime() / 1000).toString()})
+
+                        }
                     }}
                 />
                 </PopoverContent>

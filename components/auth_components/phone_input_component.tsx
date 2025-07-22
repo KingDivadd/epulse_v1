@@ -24,7 +24,8 @@ const PhoneInputComponent = ({country_code, phone_number, on_change}:PhoneInputP
                     countries.map((country,ind)=>{
 
                         return(
-                            <option key={ind} value={country.dial_code}>
+                            <option key={ind} value={country.dial_code} className='flex gap-5'>
+                                    
                                 {country.dial_code}  {country.name}
                             </option>
                         )

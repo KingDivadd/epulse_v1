@@ -18,7 +18,7 @@ const InputComponent = ({ title, type, name, value, onChange }: InputProps) => {
 
     return (
         <span className="flex flex-col items-start justify-start gap-2 w-full">
-            <p className="text-sm font-medium font-mont">{title}</p>
+            <p className="text-sm font-medium text-slate-700 font-mont">{title}</p>
             <div className="relative w-full">
                 <input
                 type={inputType}

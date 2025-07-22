@@ -48,7 +48,7 @@ const Footer = () => {
                 <span className="flex flex-wrap max-md:justify-center items-center justify-between gap-5">
 
                     {
-                        ['facebook', 'instagram', 'twitter', 'linkedin'].map((icon, index) => {
+                        ['facebook', 'instagram', 'twitter', 'linkedIn'].map((icon, index) => {
                             return (
                                 <Link href={'/'} key={index} className="text-sm text-white font-mon">{icon}</Link>
                             )

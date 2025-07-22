@@ -8,9 +8,15 @@ import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
 import {toast_msg} from '@/components/toast'
 import { toast } from "sonner"
+import { third_parthy_auth } from '@/constants'
+import {useChat} from "@/app/context/ChatContext"
+import {useRouter} from 'next/navigation'
+import AuthHeading from '@/components/auth_components/auth_heading'
 
 
 const Login = () => {
+    const router = useRouter()
+    const {setUser_information, user_information} = useChat()
     const [auth_via_email, setAuth_via_email] = useState(false)
     const [auth, setAuth] = useState({email:'', password: '', device_type: 'web'})
     const [loading, setLoading] = useState(false)
@@ -37,9 +43,29 @@ const Login = () => {
                 const res = await post_request('auth/patient-login', auth)
 
                 if (res.status === 200 || res.status === 201) {
-                    localStorage.setItem('x-id-key', res.data.headers.get('x-id-key')) 
+
+                    localStorage.setItem('x-id-key', res.headers.get('x-id-key'))
 
                     toast_msg({title: "Login successful!"})
+
+
+                    if (res.data.user_data.physican_id) {
+                        // router.push('/dashboard')
+
+                        console.log('redirecting to dashboard...')
+
+                    }else{
+                        const {gender, country_code, phone_number, date_of_birth} = res.data.user_data
+
+                        if (!gender || !country_code || !phone_number || !date_of_birth) {
+
+                            setUser_information({...user_information, ...res.data.user_data, email:auth.email})
+
+                            router.push(`/user-details/${res.data.user_data.patient_id}`)
+                            
+                        }
+                    }
+                    setAuth({...auth, email:'', password: '', })
 
                     setLoading(false)
 
@@ -48,7 +74,12 @@ const Login = () => {
 
                     toast_msg({title: "Network error. Please try again later."})
                     
-                }else {
+                } else if (res.status === 403){
+                    setUser_information({...user_information, email:auth.email})
+
+                    router.push('/verification')
+                }
+                else {
                     setLoading(false)
     
                     const error_msg = `${res.response.data.msg || "An error occurred during login."}`
@@ -67,38 +98,37 @@ const Login = () => {
 
     return (
         <section className="w-full h-full px-[1rem] md:px-[2rem] lg:px-[4rem] flex flex-col items-center justify-center gap-8 relative ">
-            <Button className=' absolute top-[1.5rem] left-[1rem] md:left-[2rem] lg:left-[4rem] flex items-center gap-3 text-md font-mont text-[#101010] hover:text-[#306ce9]'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
-                <span className="h-5 w-5 overflow-hidden relative">
-                    <Image src="/back.svg" alt="Back Icon" fill className="object-contain" />
-                </span>
-                {'Back'}
-            </Button>
+            {auth_via_email && <span className="w-full flex justify-start">
+                        <Button className=' flex items-center  text-md font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
+                            <span className="h-5 w-5 overflow-hidden relative">
+                                <Image src="/icons/left-icon.png" alt="Back Icon" fill className="object-contain" />
+                            </span>
+                            Back
+                        </Button>
+                    </span>}
 
-            <h5 className="font-bold font-mont text-4xl text-[#306CE9]">EPULSE.</h5>
-
-            <p className="text-xl sm:text-2xl text-slate-700 font-[500] font-mont">Log in</p>
+            <AuthHeading title={'Log in'} />
 
             {!auth_via_email ? <div className="w-full flex flex-col gap-5 items-center justify-center mb-2">
-                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300">
-                    <span className="overflow-hidden relative h-5 w-5">
-                        {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
-                    </span>
-                    Continue with Google
-                </button>
-
-                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300">
-                    <span className="overflow-hidden relative h-5 w-5">
-                        {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
-                    </span>
-                    Continue with Apple
-                </button>
-
-                <button className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md text-slate-600 font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> setAuth_via_email(!auth_via_email)}>
-                    <span className="overflow-hidden relative h-5 w-5">
-                        {/* <Image src="/" alt="Google Logo" fill className="object-contain" /> */}
-                    </span>
-                    Continue with Email
-                </button>
+                {
+                        third_parthy_auth.map((data) => {
+                            const {name, icon, id} = data
+                            return (
+                                <button key={id} className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" 
+                                    onClick={()=> {
+                                        if (id === 'email') {
+                                            setAuth_via_email(!auth_via_email)
+                                        }
+                                    }}
+                                >
+                                    <span className="overflow-hidden relative h-5 w-5">
+                                        <Image src={icon} alt={`${name} Logo`} fill className="object-contain" />
+                                    </span>
+                                    Continue with {name}
+                                </button>
+                            )
+                        })
+                    }
 
             </div>
             :
@@ -121,8 +151,8 @@ const Login = () => {
 
             {auth_via_email && <Link href={'/forget-password'} className="text-md  text-center w-[300px] font-mont hover:cursor-pointer font-medium text-[#306ce9] mt-2 " >I forgot my password.</Link>}
 
-            <h3 className="text-md flex items-center justify-center gap-1  mt-[-10px] font-mont">
-                Don't have an account? <Link href={'/signup'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Sign up</Link>
+            <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
+                Don't have an account? <Link href={'/signup-type'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Sign up</Link>
             </h3>
 
         </section>

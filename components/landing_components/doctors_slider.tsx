@@ -34,7 +34,7 @@ const DoctorSlider = ()=> {
 
                                     <p className="text-[13px] sm:text-md text-start text-slate-600 mt-3 font-mont">{data.description}</p>
 
-                                    <button className="mt-2 py-2.5 w-full rounded-full text-white text-[13px] bg-[#306CE9] ">View all specialist</button>
+                                    <button className="mt-2 py-2.5 w-full rounded-full text-white text-[13px] bg-[#306CE9] font-mont ">View all specialist</button>
                                 </div>
 
 

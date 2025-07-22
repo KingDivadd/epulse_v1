@@ -8,10 +8,12 @@ import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
 import { useRouter } from 'next/navigation'
-
+import AuthHeading from '@/components/auth_components/auth_heading'
+import { useChat } from '@/app/context/ChatContext'
 
 
 const ForgetPassword = () => {
+    const {setUser_information, user_information} = useChat()
     const router = useRouter()
     const [auth, setAuth] = useState({email:'' })
     const [loading, setLoading] = useState(false)
@@ -30,14 +32,17 @@ const ForgetPassword = () => {
         setLoading(true)
 
         try {
-            const response = await post_request('auth/generate-patient-otp', {email:auth.email})
-            console.log(response)
+            const response = await post_request('auth/generate-user-otp', {email:auth.email})
             
             if (response.status === 200 || response.status === 201) {
-                localStorage.setItem('x-id-key', response.data.headers.get('x-id-key')) 
 
+                setUser_information({...user_information, email: auth.email })
 
-                toast_msg({title: "OTP sent to your email. Please check your inbox."})
+                setAuth({email:''}) 
+
+                toast_msg({title: "OTP has been sent to your email. Please check your inbox."})
+
+                router.push('/reset-verification')
 
                 setLoading(false)
             } else if (response.status === 500 ){
@@ -52,7 +57,7 @@ const ForgetPassword = () => {
             }
 
         } catch (error) {
-            console.error("Error during signup:", error);
+            console.log("Error during signup:", error);
         } finally {
             setLoading(false)
         }
@@ -62,11 +67,8 @@ const ForgetPassword = () => {
     return (
         <section className="w-full h-full px-[1rem] md:px-[2rem] lg:px-[4rem] flex flex-col items-center justify-center gap-8 relative overflow-y-hidden">
             <div className="w-full h-full flex flex-col items-center justify-center gap-8 my-10">
-                
-                <h5 className="font-bold font-mont text-4xl text-[#306CE9]">EPULSE.</h5>
 
-                <p className="text-xl sm:text-2xl text-slate-700 font-[500] font-mont">Input Details</p>
-
+                <AuthHeading title={'Input Details'} />
 
                 <form onSubmit={handle_submit} className="w-full flex flex-col gap-5 justify-center items-start ">
 
@@ -80,8 +82,8 @@ const ForgetPassword = () => {
                 </form>
 
 
-                <h3 className="text-md flex items-center justify-center gap-1 font-semibold mt-[-10px] font-mont text-slate-700">
-                    Remembered Password? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 '>Login</Link>
+                <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
+                    Remembered Password? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Login</Link>
                 </h3>
             </div>
 

@@ -14,9 +14,21 @@ declare interface PhoneInputProps {
 
 declare interface UserInfoProps {
     patient_id?: string;
+    physician_id?: string;
     first_name?: string;
     last_name?: string;
     email?: string;
-    phone_number?: string; 
     gender?: string; 
+    country_code?: string;
+    date_of_birth?: string;
+    phone_number?: string; 
+    role?: string;
+    address?: string;
+    country?: string;
+    state?: string;
+    city?: string;
+    genotype?: string;
+    is_verified_by_admin?: boolean;
+    avatar?: string;
+    
 }

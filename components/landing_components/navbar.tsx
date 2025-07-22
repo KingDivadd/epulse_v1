@@ -6,7 +6,6 @@ import {landing_navbar_data} from '@/constants/index'
 import MobileSidebar from '@/components/landing_components/mobile_sidebar'
 
 
-
 const Navbar = () => {
     const [is_scroll, setIs_scroll] = useState(false)
     const [show_side_nav, setShow_side_nav] = useState(false)
@@ -25,6 +24,7 @@ const Navbar = () => {
 
     }, [])
 
+
     return (
         <div className='w-full relative'>
             <section className={show_side_nav ? ` show-side-bar`: 'hide-side-bar'}>
@@ -40,7 +40,7 @@ const Navbar = () => {
                 <div className=" w-full nav-cont flex items-center justify-between ">
                     
                     <Link href={'/'} className="xl:w-[250px] flex justify-start items-end ">
-                        <p className="text-lg md:text-xl font-mont font-semibold ml-3">EPulse</p>
+                        <p className="text-lg md:text-xl font-mich font-semibold ml-3">EPulse</p>
                         <span className="relative overflow-hidden h-[15px] w-[15px] mb-[5px]">
                             <Image src={'/icons/blue-dot.png'} alt='red-dot' layout='fill' objectFit='cotain' />
                         </span> 
@@ -61,7 +61,7 @@ const Navbar = () => {
                     <span className=" xl:w-[250px] sm:flex items-center justify-end gap-5 sm:gap-3 ">
                         
 
-                        <Link href={'/login'} className="hidden rounded-full md:flex items-center justify-center gap-3 px-7 lg:px-10 py-2 text-white bg-[#306CE9] text-[15px] font-mont whitespace-nowrap">
+                        <Link href={'/signup-type'} className="hidden rounded-full md:flex items-center justify-center gap-3 px-7 lg:px-10 py-2 text-white bg-[#306CE9] text-[15px] font-mont whitespace-nowrap">
                             Get Started
                             <span className="hidden relative overflow-hidden h-2 w-2 lg:flex items-center">
 

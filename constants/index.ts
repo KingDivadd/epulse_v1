@@ -41,3 +41,15 @@ export const footer_list = [
     { title: 'BUSINESS', items: ['Medical Services', 'Healthcare Marketplace', 'Partner App', 'Clinic Porter'], },
     { title: 'ABOUT', items: ['About us', 'News & Article', 'Privacy Policy', 'Customer Service'], },
 ]
+
+export const signup_roles = [
+    {role: 'patient', img: '/icons/patient-role.svg', title: 'Sign Up as a Patient'},
+    {role: 'physician', img: '/icons/physician-role.svg', title: 'Sign Up as a Physician'},
+]
+
+export const third_parthy_auth = [
+    {name: 'Google', icon: '/icons/google-icon.png', id: 'google' },
+    {name: 'Facebook', icon: '/icons/facebook-icon.png', id: 'facebook' },
+    {name: 'Apple', icon: '/icons/apple-icon.png', id: 'apple' },
+    {name: 'Email', icon: '/icons/email-icon.png', id: 'email' },
+]
