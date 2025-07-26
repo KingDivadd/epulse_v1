@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { transaction_history } from '@/constants'
 import { format_date_from_unix } from '@/lib/date_formater'
 import { Dot } from 'lucide-react'
@@ -7,9 +7,31 @@ import { Dot } from 'lucide-react'
 
 const ITEMS_PER_PAGE = 5
 
-const WalletFundHistoryTable = () => {
+interface FundSearchProps {
+    fund_search: string;
+    setFund_search: (fund_search: string) => void;
+}
+const WalletFundHistoryTable = ({fund_search, setFund_search}:FundSearchProps) => {
     const [currentPage, setCurrentPage] = useState(1)
+    const [filtered_transactions, setFiltered_transactions] = useState<TransactionHistoryProps | []>([])
     const totalPages = Math.ceil(transaction_history.length / ITEMS_PER_PAGE)
+
+    useEffect(() => {
+        const new_list = currentTransactions.filter((item:TransactionHistoryProps) => {
+            const formated_datetime = `${format_date_from_unix(Number(item.date)).date} ${format_date_from_unix(Number(item.date)).time}`;
+            console.log(formated_datetime)
+            return( 
+                item.narration.toLowerCase().includes(fund_search.toLowerCase()) ||
+                item.amount.toString().includes(fund_search) ||
+                item.transaction_type.toLowerCase().includes(fund_search.toLowerCase()) ||
+                formated_datetime.toLowerCase().includes(fund_search.toLowerCase())
+            )
+        });
+
+        console.log(new_list); // Output: [{ narration: 'Fund transfer', amount: 300 }]
+        setFiltered_transactions(new_list)
+
+    }, [fund_search])
 
     // Calculate the slice of transactions to display
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
@@ -28,6 +50,8 @@ const WalletFundHistoryTable = () => {
             setCurrentPage(currentPage - 1)
         }
     }
+
+
 
     return (
         <div className="w-full max-sm:-mt-2 bg-white py-5 pb-0 shadow-md rounded-md overflow-x-auto hide-scrollbar">
@@ -117,16 +141,18 @@ const WalletFundHistoryTable = () => {
             <div className="w-full flex flex-col md:hidden ">
 
                 {
-                    currentTransactions.map((data:TransactionHistoryProps, ind:number)=>{
+                    filtered_transactions && filtered_transactions.map((data:TransactionHistoryProps, ind:number)=>{
                         const {transaction_type, narration, amount, date} = data
-                        const formated_date = format_date_from_unix(Number(amount))
+                        const formated_date = format_date_from_unix(Number(date))
+
+                        console.log('formated date : ', formated_date)
 
                         const transaction_type_style = `text-[14px] flex items-center ${transaction_type === 'debit'?'text-red-500':'text-green-500'}`
 
                         return(
                             <div key={ind} className="w-full flex flex-col gap-2 font-mont p-4 first:pt-0 last:pb-4 border-b border-[#f2f2f2]">
                                 <span className="w-full flex items-start justify-between">
-                                    <p className="text-[14px] w-[70%] font-medium truncate">{narration}</p>
+                                    <p className="text-[14px] w-[70%] font-medium wrap ">{narration}</p>
                                     <span className="text-[14px] flex items-center">₦<p className='font-medium'>{amount}</p></span>
                                 </span>
                                 
