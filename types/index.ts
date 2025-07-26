@@ -1,3 +1,17 @@
+// src/types/next-auth.d.ts
+import { DefaultSession } from 'next-auth';
+
+declare module 'next-auth' {
+    interface Session {
+        accessToken?: string; // Optional since it may not always be present
+    }
+
+    interface JWT {
+        accessToken?: string; // Optional to match the session
+    }
+}
+
+
 declare interface InputProps {
     title: string;
     name: string;
@@ -12,7 +26,7 @@ declare interface PhoneInputProps {
     on_change?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-declare interface UserInfoProps {
+declare type UserInfoProps = {
     patient_id?: string;
     physician_id?: string;
     first_name?: string;
@@ -31,4 +45,12 @@ declare interface UserInfoProps {
     is_verified_by_admin?: boolean;
     avatar?: string;
     
+}
+
+declare interface TransactionHistoryProps {
+    transaction_id: string | number
+    transaction_type: string
+    narration: string
+    amount: number | string
+    date: number | string
 }

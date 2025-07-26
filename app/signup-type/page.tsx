@@ -30,7 +30,7 @@ const SignupType = () => {
                             return(
                                 <div key={role} className="w-full flex flex-col items-start gap-5">
                                     <p className="text-md  font-mont">{title}</p>
-                                    <article className="role-selection-card h-[350px]" onClick={()=> handle_selected_role(role)}>
+                                    <article className="role-selection-card hover:-translate-y-1 hover:bg-gradient-to-t from-[#306ce9] to-purple-400/70 h-[350px]" onClick={()=> handle_selected_role(role)}>
                                         <span className="w-full h-full overflow-hidden relative">
                                             <Image src={data.img!} alt={role} objectFit='contain' fill />
                                         </span>

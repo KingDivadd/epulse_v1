@@ -1,9 +1,16 @@
 import React from 'react'
+import DashboardNav from '@/components/dashboard_nav'
+import DashboardBody from '@/pages/dashboard_body'
 
-const Consultation = () => {
+const Dashboard = () => {
     return (
-        <div>Consultation</div>
+        <div className="w-full h-full flex flex-col bg-white overflow-y-auto">
+            <div className="w-full">
+                <DashboardNav />
+                <DashboardBody />
+            </div>
+        </div>
     )
 }
 
-export default Consultation
+export default Dashboard

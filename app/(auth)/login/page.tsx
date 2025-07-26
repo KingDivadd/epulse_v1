@@ -17,7 +17,7 @@ import AuthHeading from '@/components/auth_components/auth_heading'
 const Login = () => {
     const router = useRouter()
     const {setUser_information, user_information} = useChat()
-    const [auth_via_email, setAuth_via_email] = useState(false)
+    const [auth_via_email, setAuth_via_email] = useState(true)
     const [auth, setAuth] = useState({email:'', password: '', device_type: 'web'})
     const [loading, setLoading] = useState(false)
     const [remember_me, setRemember_me] = useState(false)
@@ -50,7 +50,7 @@ const Login = () => {
 
 
                     if (res.data.user_data.physican_id) {
-                        // router.push('/dashboard')
+                        router.push('/dashboard')
 
                         console.log('redirecting to dashboard...')
 
@@ -63,6 +63,8 @@ const Login = () => {
 
                             router.push(`/user-details/${res.data.user_data.patient_id}`)
                             
+                        }else{
+                            router.push('/dashboard')
                         }
                     }
                     setAuth({...auth, email:'', password: '', })
@@ -98,14 +100,14 @@ const Login = () => {
 
     return (
         <section className="w-full h-full px-[1rem] md:px-[2rem] lg:px-[4rem] flex flex-col items-center justify-center gap-8 relative ">
-            {auth_via_email && <span className="w-full flex justify-start">
+            {/* {auth_via_email && <span className="w-full flex justify-start">
                         <Button className=' flex items-center  text-md font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
                             <span className="h-5 w-5 overflow-hidden relative">
                                 <Image src="/icons/left-icon.png" alt="Back Icon" fill className="object-contain" />
                             </span>
                             Back
                         </Button>
-                    </span>}
+                    </span>} */}
 
             <AuthHeading title={'Log in'} />
 

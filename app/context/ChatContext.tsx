@@ -8,6 +8,9 @@ interface ChatContextType {
     setUser_information: (user_information: UserInfoProps | null) => void;
     country_dial_code: string;
     setCountry_dial_code: (country_dial_code: string) => void;
+    show_activity_history: boolean;
+    setShow_activity_history: (show_activity_history: boolean) =>void;
+
 }
 
 
@@ -18,12 +21,14 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [header_nav, setHeader_nav] = useState('home');
     const [user_information, setUser_information] = useState<UserInfoProps | null>(null);
     const [country_dial_code, setCountry_dial_code] = useState('+234');
+    const [show_activity_history, setShow_activity_history] = useState(false)
 
     return (
         <ChatContext.Provider value={{
             header_nav, setHeader_nav,
             user_information, setUser_information,
-            country_dial_code, setCountry_dial_code
+            country_dial_code, setCountry_dial_code,
+            show_activity_history, setShow_activity_history
             
             }}>
             {children}

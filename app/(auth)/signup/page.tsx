@@ -11,11 +11,12 @@ import { useRouter } from 'next/navigation'
 import {useChat} from '@/app/context/ChatContext'
 import {third_parthy_auth} from '@/constants'
 import AuthHeading from '@/components/auth_components/auth_heading'
+import { signIn } from 'next-auth/react';
 
 
 const Signup = () => {
     const {user_information, setUser_information} = useChat()
-    const [auth_via_email, setAuth_via_email] = useState(false)
+    const [auth_via_email, setAuth_via_email] = useState(true)
     const [auth, setAuth] = useState({email:'', password: '', first_name: '', last_name: ''})
     const [loading, setLoading] = useState(false)
     const router = useRouter()
@@ -82,7 +83,7 @@ const Signup = () => {
                 
 
                 <div className="w-full   flex flex-col items-center justify-center gap-8 my-10">
-                    {auth_via_email && 
+                    {/* {auth_via_email && 
                     <span className="w-full flex justify-start ">
                         <Button className=' flex items-center  text-md font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
                             <span className="h-5 w-5 overflow-hidden relative">
@@ -90,7 +91,7 @@ const Signup = () => {
                             </span>
                             Back
                         </Button>
-                    </span>}
+                    </span>} */}
 
                     <AuthHeading title={`Sign up as a ${ user_information.role == 'patient' ? "Patient":"Physician"}`} />
                     

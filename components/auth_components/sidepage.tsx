@@ -26,10 +26,10 @@ const Sidepage = () => {
                     // pagination={{ clickable: true }}
                     navigation={false}
                     loop={true}
-                    autoplay={{
-                        delay: 12000, // Slide every 3 seconds (adjust as needed)
-                        disableOnInteraction: false, // Continue autoplay after user interaction
-                    }}
+                    // autoplay={{
+                    //     delay: 12000, // Slide every 3 seconds (adjust as needed)
+                    //     disableOnInteraction: false, // Continue autoplay after user interaction
+                    // }}
                     modules={[Pagination, Navigation, Autoplay]} // Include Autoplay module
                     className="w-full h-full">
 

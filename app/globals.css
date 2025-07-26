@@ -204,6 +204,22 @@ body {
     background: transparent;
 }
 
+.transparent-bg-2 {
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent */
+    backdrop-filter: blur(5px);
+    /* Blurred effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.transparent-bg {
+    background: rgba(255, 255, 255, 0.1);
+    /* Semi-transparent */
+    backdrop-filter: blur(6px);
+    /* Blurred effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .navbar.scrolled {
     background: rgba(255, 255, 255, 0.1);
     /* Semi-transparent */
@@ -217,6 +233,18 @@ body {
     padding: .5rem .75rem;
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.temp-240 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.temp-220 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
 }
 
 .temp-195 {
@@ -252,6 +280,11 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.input-type-3 {
+    @apply h-full rounded bg-white w-full outline-0 text-[15px];
+    font-family: "Montserrat", sans-serif;
+}
+
 .input-type-2:focus {
     @apply border-2 border-[#306ce9]
 }
@@ -266,9 +299,10 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.role-selection-card:hover {
+
+/* .role-selection-card:hover {
     @apply -translate-y-1 bg-[#306ce9]
-}
+} */
 
 .swiper-pagination {
     position: absolute;
@@ -292,4 +326,66 @@ body {
     background: #ff0000;
     /* Red color for active bullet */
     opacity: 1;
+}
+
+.current-nav-item {
+    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full relative text-[#306ce9];
+}
+
+.current-nav-item-text {
+    @apply font-[500] text-[14px];
+    font-family: "Montserrat", sans-serif;
+}
+
+.current-nav-item::before {
+    content: '';
+    @apply absolute left-0 top-0 h-full w-[5px] bg-[#306ce9];
+}
+
+.nav-item {
+    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full;
+}
+
+.nav-item-text {
+    @apply font-[500] text-[14px];
+    font-family: "Montserrat", sans-serif;
+}
+
+.current-consultation-nav {
+    @apply px-2 text-[#306ce9] font-medium relative h-full flex items-center justify-center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.current-consultation-nav::before {
+    content: '';
+    @apply absolute left-0 bottom-0 w-full h-[2.5px] bg-[#306ce9]/90;
+}
+
+.consultation-nav {
+    @apply px-2 text-slate-700 font-medium relative h-full flex items-center justify-center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.consultation-nav:hover {
+    @apply cursor-pointer;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.consultation-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.history-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.current-mobile-nav-item {
+    @apply h-full flex items-center justify-center text-[#306ce9] rounded-md;
+}
+
+.mobile-nav-item {
+    @apply h-full flex items-center justify-center text-slate-500;
 }
