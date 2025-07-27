@@ -15,12 +15,12 @@ const Consultation = () => {
         <div className="w-full flex flex-col ">
             <h3 className="font-mont font-semibold text-lg text-slate-700">Appointments</h3>
 
-            <span className="h-[50px] mt-1 flex items-center justify-start gap-10 border-b border-slate-100">
+            <div className="h-[50px] mt-1 flex items-center justify-start gap-10 border-b border-slate-100">
                 <span className={true ? 'current-consultation-nav':'consultation-nav'}>Upcoming</span>
                 <span className={!true?'current-consultation-nav':'consultation-nav'}>Recent</span>
-            </span>
+            </div>
 
-            <div className="w-full  mt-5 overflow-y-auto max-h-[450px] sm:max-h-[550px] consultation-scrollbar ">
+            <div className="w-full  mt-5 overflow-y-auto max-h-[450px] sm:max-h-[550px] hide-scrollbar ">
                 <div className="w-full temp-240">
                     {
                         consultation_card_list.sort((a, b) => a.appointment_date - b.appointment_date).map((item,ind)=>{

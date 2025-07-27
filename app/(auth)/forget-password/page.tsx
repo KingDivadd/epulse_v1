@@ -46,14 +46,14 @@ const ForgetPassword = () => {
 
                 setLoading(false)
             } else if (response.status === 500 ){
-                toast_msg({title: "Network error. Please try again later."})
+                toast_msg({title: "Network error. Please try again later.", type: 'danger'})
             }
             else {
                 setLoading(false)
 
                 const error_msg = `${response.response.data.msg || "An error occurred during signup."}`
 
-                toast_msg({title: error_msg})
+                toast_msg({title: error_msg, type:'danger'})
             }
 
         } catch (error) {

@@ -74,7 +74,7 @@ const Login = () => {
                     // window.location.href = '/dashboard'
                 } else if (res.status === 500 ){
 
-                    toast_msg({title: "Network error. Please try again later."})
+                    toast_msg({title: "Network error. Please try again later.", type:'danger'})
                     
                 } else if (res.status === 403){
                     setUser_information({...user_information, email:auth.email})
@@ -86,7 +86,7 @@ const Login = () => {
     
                     const error_msg = `${res.response.data.msg || "An error occurred during login."}`
     
-                    toast_msg({title: error_msg})
+                    toast_msg({title: error_msg, type:'danger'})
                 }
                 
             } catch (error) {

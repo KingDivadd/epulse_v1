@@ -394,14 +394,6 @@ body {
     display: none;
 }
 
-.consultation-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
-.history-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-
 .current-mobile-nav-item {
     @apply h-full flex items-center justify-center text-[#306ce9] rounded-md;
 }

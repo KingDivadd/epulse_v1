@@ -62,9 +62,9 @@ export const third_parthy_auth = [
 export const route_list = [
     { name: 'Dashboard', icon: RiDashboardFill, path: '/dashboard', id: 'dashboard' },
     { name: 'Appointments', icon: RiCalendar2Fill, path: '/appointments', id: 'appointments' },
-    { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'consult_doctor' },
+    { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'doctors' },
     // { name: 'Medical Records', icon: , path: '/medical-records', id: 'medical_records' },
-    { name: 'Wallet Funding', icon: RiWallet3Fill, path: '/wallet-funding', id: 'wallet_funding' },
+    { name: 'Wallet Funding', icon: RiWallet3Fill, path: '/wallet-funding', id: 'wallet-funding' },
     { name: 'Settings', icon: RiSettings3Fill, path: '/settings', id: 'settings' },
     { name: 'Logout', icon: RiLogoutBoxRLine, path: '/login', id: 'logout' },
 ];
@@ -438,3 +438,7 @@ export const registered_doctors = [
     "current_hospital_or_clinic": "Paris Endocrine Clinic"
   }
 ];
+
+export const genotypes = ['AA', 'AS', 'AC', 'SS', 'SC', 'CC'];
+
+export const blood_groups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];

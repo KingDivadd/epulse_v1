@@ -7,7 +7,7 @@ const ActivityHistory = () => {
         <div className="w-full flex flex-col gap-3 ">
             <h3 className="font-mont font-semibold text-lg text-slate-700">History</h3>
 
-            <div className="w-full min-h-[70vh] max-h-[1172px] overflow-y-auto history-scrollbar ">
+            <div className="w-full min-h-[70vh] max-h-[1172px] overflow-y-auto hide-scrollbar ">
                 <div className="w-full flex flex-col gap-5">
 
                     {

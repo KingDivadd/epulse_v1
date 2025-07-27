@@ -4,12 +4,14 @@ import { route_list } from '@/constants';
 import Link from 'next/link'
 import Image from 'next/image';
 import {useChat} from '@/app/context/ChatContext'
+import { useRouter } from 'next/navigation';
 
 
 
 const MobileNavbar = () => {
     const [current_route, setCurrent_route] = useState('')
     const {show_mobile_sidebar, setShow_mobile_sidebar,} = useChat()
+    const router = useRouter()
 
     useEffect(() => {
         const path = window.location.pathname
@@ -44,9 +46,14 @@ const MobileNavbar = () => {
                 {
                     route_list.map((route, index) => (
                         <Link key={index} href={route.path} className={current_route === route.path ? "pl-5 lg:px-8 current-nav-item bg-blue-100  ": "pl-5 lg:px-8 nav-item "} onClick={()=>  {
-                                    setCurrent_route(route.path)
-                                    setShow_mobile_sidebar(!show_mobile_sidebar)
+                                if(route.id == 'logout'){
+                                    localStorage.clear()
+                                    return;
                                 }
+                                setCurrent_route(route.path)
+                                setShow_mobile_sidebar(!show_mobile_sidebar)
+
+                            }
                             }>
                             <route.icon size={'18px'} className=' duration-200' />
                             <h5 className={'font-mont'}>{route.name}</h5>

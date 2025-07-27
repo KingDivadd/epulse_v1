@@ -1,10 +1,32 @@
 'use client'
-import React from 'react'
+import React, {useState} from 'react'
 import Image from 'next/image'
-import { Dot } from 'lucide-react'
+import { Dot, Loader2Icon } from 'lucide-react'
 import {  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
+import { toast_msg } from './toast'
 
 const WalletFundCont = () => {
+    const [amount, setAmount] = useState(0)
+    const [loading, setLoading] = useState(false)
+    
+
+    async function handle_submit(e:any) {
+        e.preventDefault()
+        setLoading(true)
+        if (amount < 100){
+            toast_msg({title: 'Amount cannot be less than ₦100'})
+            setLoading(false)
+            return;
+        }
+        
+        try {
+            toast_msg({title: 'Funds transafer in progress'})
+        } catch (error) {
+            console.log(error)
+        }finally{
+            setLoading(false)
+        }
+    }
     return (
         <div className="w-full max-md:flex-col flex items-start justify-between gap-5 lg:gap-8 xl:gap-10 min-h-[250px]">
             <span className="flex-1 max-md:w-full min-h-[250px] bg-[#306ce9] relative rounded-lg ">
@@ -62,14 +84,36 @@ const WalletFundCont = () => {
                         <p className="text-white text-lg font-mont">Wallet Balance</p>
                     </span>
 
-                    <span className="flex items-center gap-3">
+                    <span className="flex items-center gap-3 mb-5">
                         <span className="h-10 w-10 relative overflow-hidden">
                             <Image src={'/icons/naira-icon.png'} alt='' fill objectFit='contain' />
                         </span>
                         <p className="text-4xl font-bold text-white">10,000</p>
                     </span>
 
-                    <button className="rounded-full bg-white text-sm py-3 px-7 mt-5 cursor-pointer hover:bg-[#f2f2f2]">Fund Wallet</button>
+                    <Dialog >
+                        <DialogTrigger>
+                            <span className="rounded-full bg-white text-sm py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">Fund Wallet</span>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle className='text-xl font-mont font-semibold'>Fund your wallet</DialogTitle>
+                                <DialogDescription className='font-mont text-[13px ' >
+                                    Please, enter the amount you would like to fund your wallet with.
+                                </DialogDescription>
+                            </DialogHeader>
+                                
+                            <form onSubmit={handle_submit} className="w-full min-h-[150px] flex flex-col justify-between gap-20 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
+                                <input type="number" placeholder="amount" name="amount" onChange={(e)=> setAmount(Number(e.target.value))} className="input-type-2" />
+
+                                <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-sm font-mont" onClick={handle_submit}>
+                                    {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Fund'}
+                                </button>
+                            </form>
+                        </DialogContent>
+                    </Dialog>
+
+                    
                 </div>
 
             </span>

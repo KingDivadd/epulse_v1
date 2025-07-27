@@ -1,11 +1,19 @@
 import { toast } from "sonner"
 
-export function toast_msg({title, description}:{title: string, description?: string}) {
+export function toast_msg({title, description, type}:{title: string, description?: string, type?:('success'|'danger'|'primary') }) {
     toast(title, {
             description: description,
             action: {
-                label: "Undo",
+                label: "close",
                 onClick: () => console.log("Undo"),
-        },
+        },style:{
+            fontFamily: "Montserrat",
+            color: `${type === 'danger'? '#FF3333': ''}`,
+            background: `${type === 'danger' ? '#FFF5F5': '#ffffff'}`,
+            border: `none`
+        },actionButtonStyle:{
+            background: '#FF3333',
+            
+        }
     })
 }

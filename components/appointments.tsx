@@ -57,7 +57,7 @@ const Appointments = () => {
             </span>
 
 
-            <div className="w-full mt-2 overflow-y-auto max-h-[90vh] consultation-scrollbar ">
+            <div className="w-full mt-2 overflow-y-auto max-h-[90vh] hide-scrollbar ">
                 <div className="w-full temp-240 ">
                     {
                         consultation_card_list.sort((a, b) => a.appointment_date - b.appointment_date).map((item,ind)=>{
@@ -70,7 +70,7 @@ const Appointments = () => {
                             return(
                                 <div key={ind} className="w-full">
 
-                                    <div className={`hidden w-full md:flex flex-col font-mont rounded-lg box-shadow-1 ${appointments_within_24hrs ? "bg-[#306ce9] duration-700 ": "bg-white hover:bg-gray-100 group "}`}>
+                                    <div className={`hidden hover:translate-y-2  ease-in-out duration-300  w-full md:flex flex-col font-mont rounded-lg box-shadow-1 ${appointments_within_24hrs ? "bg-[#306ce9]": "bg-white group "}`}>
 
                                         <div  className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
                                             <span className="w-full flex items-center justify-between">

@@ -64,10 +64,10 @@ const UserDetails = () => {
             if (response.status === 200 || response.status === 201) {
                 toast_msg({title: "OTP sent successfully!"})
             } else if (response.status === 500 ){
-                toast_msg({title: "Network error. Please try again later."})
+                toast_msg({title: "Network error. Please try again later.", type:'danger'})
             } else {
                 const error_msg = `${response.response.data.msg || "An error occurred while requesting OTP."}`
-                toast_msg({title: error_msg})
+                toast_msg({title: error_msg, type:'danger'})
             }
         } catch (error) {
             console.log("Error requesting OTP:", error);
@@ -95,14 +95,14 @@ const UserDetails = () => {
 
                 setLoading(false)
             } else if (response.status === 500 ){
-                toast_msg({title: "Network error. Please try again later."})
+                toast_msg({title: "Network error. Please try again later.", type:'danger'})
             }
             else {
                 setLoading(false)
 
                 const error_msg = `${response.response.data.msg || "An error occurred during signup."}`
 
-                toast_msg({title: error_msg})
+                toast_msg({title: error_msg, type:'danger'})
             }
 
         } catch (error) {

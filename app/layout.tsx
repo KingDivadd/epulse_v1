@@ -18,8 +18,8 @@ export default function RootLayout({ children }: Readonly<{
     }>) {
     return (
         <html lang="en" className="scroll-smooth">
-           
-            <body className={` antialiased w-screen h-screen overflow-x-hidden bg-[#ffffff]`}>
+
+            <body className={` antialiased w-screen h-screen overflow-x-hidden bg-[#f2f2f2]`}>
                 <ChatProvider>
                     <main>{children}</main>
                     <Toaster position="top-center"/>

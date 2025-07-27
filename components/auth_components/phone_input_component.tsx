@@ -3,6 +3,13 @@ import {InputComponent2} from './input_component'
 import countries from '@/constants/countries.json'
 import {useChat} from '@/app/context/ChatContext'
 
+interface PhoneInputProps {
+    phone_number: string; 
+    country_code: string; 
+    on_change?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+
 const PhoneInputComponent = ({country_code, phone_number, on_change}:PhoneInputProps) => {
 
     const { setCountry_dial_code} = useChat()
@@ -17,14 +24,14 @@ const PhoneInputComponent = ({country_code, phone_number, on_change}:PhoneInputP
                         setCountry_dial_code(e.target.value)
                     }
                 } 
-                className="border border-slate-400 rounded px-3 h-[50px] w-1/3"
+                className="border border-slate-400 rounded px-1 h-[50px] w-1/3 text-sm font-mont"
             >
                 <option value="+234">+234 Nigeria</option>
                 {
                     countries.map((country,ind)=>{
 
                         return(
-                            <option key={ind} value={country.dial_code} className='flex gap-5'>
+                            <option key={ind} value={country.dial_code} className='flex gap-5 text-sm font-mont'>
                                     
                                 {country.dial_code}  {country.name}
                             </option>

@@ -19,6 +19,7 @@ const UserDetails = () => {
     const [auth, setAuth] = useState({gender:'', country_code:'', phone_number:'' , date_of_birth:''})
     const [loading, setLoading] = useState(false)
     const [position, setPosition] = React.useState("")
+    
     const {setUser_information, user_information, country_dial_code} = useChat()  
 
     useEffect(() => {
@@ -56,14 +57,14 @@ const UserDetails = () => {
 
                 setLoading(false)
             } else if (response.status === 500 ){
-                toast_msg({title: "Network error. Please try again later."})
+                toast_msg({title: "Network error. Please try again later.", type:'danger'})
             }
             else {
                 setLoading(false)
 
                 const error_msg = `${response.response.data.msg || "An error occurred during signup."}`
 
-                toast_msg({title: error_msg})
+                toast_msg({title: error_msg, type:'danger'})
             }
 
         } catch (error) {
@@ -83,24 +84,21 @@ const UserDetails = () => {
 
                 <form onSubmit={handle_submit} className="w-full flex flex-col gap-5 justify-center items-start ">
 
-                    <span className="flex flex-col items-start justify-start gap-2 w-full">
-                        <p className="text-sm font-medium font-mont">Gender</p>
 
-                        <DropdownMenu >
-                            <DropdownMenuTrigger asChild className='w-full'>
-                                <Button className='w-full h-[50px] border-slate-400 bg-white text-[15px] font-mont justify-between outline-0 hover:bg-white focus:bg-white rounded text-slate-700' variant="outline">
-                                    {position || 'Select'}
-                                    <ChevronDown className="h-10 w-10 text-slate-800" />
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-[300px] border-slate-700 box-shadow-1">
-                                <DropdownMenuRadioGroup value={position} onValueChange={setPosition} className='w-full '>
-                                    <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Male">Male</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Female">Female</DropdownMenuRadioItem>
-                                    <DropdownMenuRadioItem className='w-full h-[50px] text-md font-mont hover:bg-slate-200 ' value="Confused">Confused</DropdownMenuRadioItem>
-                                </DropdownMenuRadioGroup>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                    <span className="flex flex-col gap-2 w-full">
+                        <p className="text-sm font-medium font-mont">Gender</p>
+                        <select
+                            name="gender"
+                            id="gender"
+                            className="w-full h-[50px] border border-slate-400 px-2 bg-white text-sm rounded-[4px] focus:outline-none focus:ring-2 focus:ring-[#306ce9] font-mont"
+                            value={auth.gender}
+                            onChange={handle_change}
+                        >
+                            <option className='font-mont' value="">Select Gender</option>
+                            <option className='font-mont' value="male">Male</option>
+                            <option className='font-mont' value="female">Female</option>
+                            <option className='font-mont' value="other">Other</option>
+                        </select>
                     </span>
 
                     
