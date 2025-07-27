@@ -11,7 +11,7 @@ import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
 import {useRouter} from 'next/navigation'
 import AuthHeading from '@/components/auth_components/auth_heading'
-import { AxiosError, AxiosResponse } from 'axios'
+import {  AxiosError, AxiosResponse } from 'axios'
 
 
 const Login = () => {
@@ -72,13 +72,9 @@ const Login = () => {
 
                     setLoading(false)
 
-                    // window.location.href = '/dashboard'
                 } 
                 
-                
-                
-            } catch (error: any) {
-                console.log("Error during login:", error);
+            } catch (error: AxiosError ) {
                 if (error.status === 500 ){
 
                     toast_msg({title: "Network error. Please try again later.", type:'danger'})
@@ -90,8 +86,6 @@ const Login = () => {
                 }
                 else {
                     setLoading(false)
-
-                    console.log('current error',error)
     
                     const error_msg = `${error.response.data.msg || "An error occurred during login."}`
     
