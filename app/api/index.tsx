@@ -3,7 +3,7 @@ import axios from "axios"
 // const base_url = process.env.NEXT_PUBLIC_LIVE_URL
 const base_url = process.env.NEXT_PUBLIC_BASE_URL
 
-export const post_request = async (endpoint: string, payload: any) => {
+export const post_request = async (endpoint: string, payload: object) => {
 
     try {
         const response = await axios.post(`${base_url}/${endpoint}`, payload, {
@@ -18,7 +18,7 @@ export const post_request = async (endpoint: string, payload: any) => {
     }
 };
 
-export const patch_request = async (endpoint: string, payload: any) => {
+export const patch_request = async (endpoint: string, payload: object) => {
     try {
         const response = await axios.patch(`${base_url}/${endpoint}`, payload, {
             headers: {
@@ -32,7 +32,7 @@ export const patch_request = async (endpoint: string, payload: any) => {
     }
 };
 
-export const patch_auth_request = async (endpoint: string, payload: any) => {
+export const patch_auth_request = async (endpoint: string, payload: object) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')
         const response = await axios.patch(`${base_url}/${endpoint}`, payload, {
@@ -48,7 +48,7 @@ export const patch_auth_request = async (endpoint: string, payload: any) => {
     }
 };
 
-export const post_auth_request = async (endpoint: string, payload: any) => {
+export const post_auth_request = async (endpoint: string, payload: object) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')
         const response = await axios.post(`${base_url}/${endpoint}`, payload, {
