@@ -1,11 +1,10 @@
 'use client'
-import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
+import React, {useState} from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
-import { patch_auth_request, post_request } from '@/app/api/index'
+import { patch_auth_request,  } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
 import AuthHeading from '@/components/auth_components/auth_heading'
 import { useRouter } from 'next/navigation'
@@ -18,14 +17,14 @@ const ResetPassword = () => {
     const [loading, setLoading] = useState(false)
 
 
-    function handle_change(e:any) {
+    function handle_change(e: React.ChangeEvent<HTMLInputElement>) {
         const name = e.target.name
         const value = e.target.value
 
         setAuth({...auth, [name]:value})
     }
 
-    async function handle_submit(e:any) {
+    async function handle_submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         if (auth.password !== auth.confirm_password) {

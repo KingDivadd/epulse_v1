@@ -11,7 +11,6 @@ import { useRouter } from 'next/navigation'
 import {useChat} from '@/app/context/ChatContext'
 import {third_parthy_auth} from '@/constants'
 import AuthHeading from '@/components/auth_components/auth_heading'
-import { signIn } from 'next-auth/react';
 
 
 const Signup = () => {
@@ -29,14 +28,14 @@ const Signup = () => {
         }
     }, [])
 
-    function handle_change(e:any) {
+    function handle_change(e:  React.ChangeEvent<HTMLInputElement>) {
         const name = e.target.name
         const value = e.target.value
 
         setAuth({...auth, [name]:value})
     }
 
-    async function handle_submit(e:any) {
+    async function handle_submit(e: React.FormEvent<HTMLFormElement | HTMLButtonElement>) {
         e.preventDefault()
     
         setLoading(true)

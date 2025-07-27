@@ -1,6 +1,5 @@
 'use client'
-import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
+import React, {useState} from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
@@ -19,14 +18,14 @@ const ForgetPassword = () => {
     const [loading, setLoading] = useState(false)
 
 
-    function handle_change(e:any) {
+    function handle_change(e: React.ChangeEvent<HTMLInputElement>) {
         const name = e.target.name
         const value = e.target.value
 
         setAuth({...auth, [name]:value})
     }
 
-    async function handle_submit(e:any) {
+    async function handle_submit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
     
         setLoading(true)

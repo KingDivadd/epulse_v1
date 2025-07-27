@@ -1,10 +1,7 @@
 'use client'
 import React, {useState, useEffect} from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
-import InputComponent from '@/components/auth_components/input_component'
 import { get_auth_request, patch_request, post_request } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
 import { InputOTP,  InputOTPGroup,  InputOTPSeparator,  InputOTPSlot,} from "@/components/ui/input-otp"
@@ -77,7 +74,7 @@ const UserDetails = () => {
     }
 
 
-    async function handle_submit(e:any) {
+    async function handle_submit(e: React.FormEvent<HTMLFormElement | HTMLButtonElement>) {
         e.preventDefault()
     
         setLoading(true)

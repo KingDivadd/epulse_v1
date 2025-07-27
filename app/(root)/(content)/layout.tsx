@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from '@/components/sidebar';
 import MobileNavbar from '@/components/mobile_navbar';
 import { useChat } from '@/app/context/ChatContext';

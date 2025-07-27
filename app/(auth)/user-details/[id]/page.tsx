@@ -5,8 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import { patch_auth_request, } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
-import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,  DropdownMenuRadioGroup, DropdownMenuRadioItem,  DropdownMenuSeparator,  DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
-import {ChevronDown} from 'lucide-react'
 import {useChat} from '@/app/context/ChatContext'
 import PhoneInputComponent from '@/components/auth_components/phone_input_component'
 import DateOfBirth from '@/components/auth_components/date_of_birth'
@@ -20,7 +18,7 @@ const UserDetails = () => {
     const [loading, setLoading] = useState(false)
     const [position, setPosition] = React.useState("")
     
-    const {setUser_information, user_information, country_dial_code} = useChat()  
+    const { user_information, country_dial_code} = useChat()  
 
     useEffect(() => {
         setAuth({...auth, gender: position.toLowerCase(), country_code: country_dial_code})
@@ -30,14 +28,14 @@ const UserDetails = () => {
         setAuth({...auth, date_of_birth: user_information?.date_of_birth || Math.floor(Date.now() / 1000).toString()}) 
     }, [user_information?.date_of_birth])
 
-    function handle_change(e:any) {
+    function handle_change(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
         const name = e.target.name
         const value = e.target.value
 
         setAuth({...auth, [name]:value})
     }
 
-    async function handle_submit(e:any) {
+    async function handle_submit(e: React.FormEvent<HTMLFormElement | HTMLButtonElement>) {
         e.preventDefault()
     
         setLoading(true)

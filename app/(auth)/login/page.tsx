@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useEffect, use} from 'react'
+import React, {useState, useEffect,} from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -7,7 +7,6 @@ import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
 import {toast_msg} from '@/components/toast'
-import { toast } from "sonner"
 import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
 import {useRouter} from 'next/navigation'
@@ -26,14 +25,14 @@ const Login = () => {
         setAuth({...auth, device_type: remember_me ? 'mobile' : 'web' })
     }, [remember_me])
 
-    function handle_change(e:any) {
+    function handle_change(e: React.ChangeEvent<HTMLInputElement>) {
         const name = e.target.name
         const value = e.target.value
 
         setAuth({...auth, [name]:value})
     }
 
-    async function handle_login(e:any) {
+    async function handle_login(e: React.FormEvent<HTMLFormElement> | React.FormEvent<HTMLButtonElement>) {
         e.preventDefault()
     
             setLoading(true)
