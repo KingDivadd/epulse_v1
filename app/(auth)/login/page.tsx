@@ -74,12 +74,11 @@ const Login = () => {
 
                 } 
                 
-            } catch (error: AxiosError ) {
-                if (error.status === 500 ){
+                else if (res.status === 500 ){
 
                     toast_msg({title: "Network error. Please try again later.", type:'danger'})
                     
-                } else if (error.status === 403){
+                } else if (res.status === 403){
                     setUser_information({...user_information, email:auth.email})
 
                     router.push('/verification')
@@ -87,10 +86,12 @@ const Login = () => {
                 else {
                     setLoading(false)
     
-                    const error_msg = `${error.response.data.msg || "An error occurred during login."}`
+                    const error_msg = `${res.response.data.msg || "An error occurred during login."}`
     
                     toast_msg({title: error_msg, type:'danger'})
                 }
+            } catch (error ) {
+                console.log('error during signup ',error)
                 setLoading(false)
             } finally {
                 setLoading(false)
