@@ -11,13 +11,8 @@ import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
 import {useRouter} from 'next/navigation'
 import AuthHeading from '@/components/auth_components/auth_heading'
-import { UserInfoProps } from '@/types'
+import { AxiosError, AxiosResponse } from 'axios'
 
-interface PayloadProps {
-    status?:200;
-    headers?:any;
-    data?:any;
-}
 
 const Login = () => {
     const router = useRouter()
@@ -38,18 +33,18 @@ const Login = () => {
         setAuth({...auth, [name]:value})
     }
 
-    async function handle_login(e: React.FormEvent<HTMLFormElement> | React.FormEvent<HTMLButtonElement>) {
+    async function handle_login(e: React.FormEvent) {
         e.preventDefault()
     
             setLoading(true)
     
             try {
 
-                const res = await post_request('auth/patient-login', auth)
+                const res = await post_request('auth/patient-login', auth) as AxiosResponse 
 
                 if (res.status === 200 || res.status === 201) {
 
-                    localStorage.setItem('x-id-key', res.headers.get('x-id-key'))
+                    localStorage.setItem('x-id-key', res?.headers?.get('x-id-key') ?? '');
 
                     toast_msg({title: "Login successful!"})
 
@@ -59,7 +54,8 @@ const Login = () => {
 
                         console.log('redirecting to dashboard...')
 
-                    }else{
+                    }
+                    else{
                         const {gender, country_code, phone_number, date_of_birth} = res.data.user_data
 
                         if (!gender || !country_code || !phone_number || !date_of_birth) {
@@ -77,25 +73,30 @@ const Login = () => {
                     setLoading(false)
 
                     // window.location.href = '/dashboard'
-                } else if (res.status === 500 ){
+                } 
+                
+                
+                
+            } catch (error: any) {
+                console.log("Error during login:", error);
+                if (error.status === 500 ){
 
                     toast_msg({title: "Network error. Please try again later.", type:'danger'})
                     
-                } else if (res.status === 403){
+                } else if (error.status === 403){
                     setUser_information({...user_information, email:auth.email})
 
                     router.push('/verification')
                 }
                 else {
                     setLoading(false)
+
+                    console.log('current error',error)
     
-                    const error_msg = `${res.response.data.msg || "An error occurred during login."}`
+                    const error_msg = `${error.response.data.msg || "An error occurred during login."}`
     
                     toast_msg({title: error_msg, type:'danger'})
                 }
-                
-            } catch (error) {
-                console.log("Error during login:", error);
                 setLoading(false)
             } finally {
                 setLoading(false)

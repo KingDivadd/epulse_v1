@@ -13,8 +13,8 @@ export const post_request = async (endpoint: string, payload: object) => {
         });
 
         return response;
-    } catch (err: any) {
-        return err;
+    } catch (err: unknown) {
+        throw err;
     }
 };
 
@@ -27,7 +27,7 @@ export const patch_request = async (endpoint: string, payload: object) => {
         });
 
         return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
         return err;
     }
 };
@@ -43,7 +43,7 @@ export const patch_auth_request = async (endpoint: string, payload: object) => {
         });
 
         return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
         return err;
     }
 };
@@ -59,7 +59,7 @@ export const post_auth_request = async (endpoint: string, payload: object) => {
         });
 
         return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
         return err;
     }
 };
@@ -75,7 +75,7 @@ export const get_request = async (endpoint: string) => {
         });
 
         return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
         return err;
     }
 };
@@ -91,7 +91,7 @@ export const get_auth_request = async (endpoint: string) => {
         });
 
         return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
         return err;
     }
 };
@@ -107,7 +107,7 @@ export const delete_auth_request = async (endpoint: string) => {
         });
 
         return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
         return err;
     }
 };
