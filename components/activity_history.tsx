@@ -7,13 +7,13 @@ const ActivityHistory = () => {
         <div className="w-full flex flex-col gap-3 ">
             <h3 className="font-mont font-semibold text-lg text-slate-700">History</h3>
 
-            <div className="w-full min-h-[70vh] max-h-[150vh] overflow-y-auto history-scrollbar ">
+            <div className="w-full min-h-[70vh] max-h-[1172px] overflow-y-auto history-scrollbar ">
                 <div className="w-full flex flex-col gap-5">
 
                     {
-                        [1,2,3,4,5,6,7].map((data, ind)=>{
+                        [1,2,3,4,5,6,7,8,9,10].map((data, ind)=>{
                             return(
-                                <article key={ind} className="w-full min-h-[100px] rounded-sm flex flex-col gap-3 p-3 bg-white font-mont">
+                                <article key={ind} className="w-full min-h-[100px] box-shadow-1 rounded-sm flex flex-col gap-3 p-3 bg-white font-mont">
                                     <h5 className="text-[13px] font-medium text-[#306ce9]  ">Scheduled Consultation</h5>
 
                                     <h4 className="text-[13px] font-medium">24th of July 2025, 12:00 PM</h4>

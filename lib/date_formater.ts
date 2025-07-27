@@ -42,3 +42,7 @@ export function is_within_12hrs(appointment_date:number) {
     // Check if appointment_date is within 24 hours from today
     return appointment_date >= today && appointment_date <= today + oneDayInSeconds;
 }
+
+export function convert_to_unix(dateString: string): number {
+    return Math.floor(new Date(dateString).getTime() / 1000);
+}

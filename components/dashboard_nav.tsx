@@ -1,12 +1,12 @@
 'use client'
 import React, {useState, useEffect} from 'react'
-import { Button } from './ui/button'
 import {BellIcon, } from 'lucide-react' 
-import { Badge } from "@/components/ui/badge"
 import Image from 'next/image'
+import {useChat} from '@/app/context/ChatContext'
 
 const DashboardNav = () => {
     const [current_route, setCurrent_route] = useState('')
+    const {show_mobile_sidebar, setShow_mobile_sidebar,} = useChat()
 
     useEffect(() => {
         const path = window.location.pathname
@@ -17,6 +17,13 @@ const DashboardNav = () => {
     return (
         <nav className="px-5 lg:px-8 xl:px-10 w-full flex items-center justify-between h-[60px] sm:h-[90px]  ">
             <div className="flex-1 h-full flex items-center justify-start gap-3">
+
+                <span className=" sm:hidden h-full flex items-center jusify-center rotate-180 " onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)}>
+                    <span className="h-5 w-5 overflow-hidden relative">
+                        <Image src={'/icons/menu-black.png'} alt='sun' fill objectFit='cover' />
+                    </span>
+                </span>
+                
                 <span className="h-full flex items-center jusify-center">
                     <span className="h-10 w-10 overflow-hidden relative">
                         <Image src={'/sun.png'} alt='sun' fill objectFit='cover' />

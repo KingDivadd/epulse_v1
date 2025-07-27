@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import { patch_auth_request, } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
-import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,  DropdownMenuRadioGroup, DropdownMenuRadioItem,  DropdownMenuSeparator,  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,  DropdownMenuRadioGroup, DropdownMenuRadioItem,  DropdownMenuSeparator,  DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {ChevronDown} from 'lucide-react'
 import {useChat} from '@/app/context/ChatContext'
 import PhoneInputComponent from '@/components/auth_components/phone_input_component'

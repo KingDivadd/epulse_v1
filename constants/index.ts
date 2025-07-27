@@ -1,4 +1,7 @@
-import { Home, CalendarClock, FileHeart, WalletCards, CreditCard, Settings, LogOut, Languages } from 'lucide-react';
+import { Home, CalendarClock, FileHeart, WalletCards, CreditCard, Settings, LogOut, Languages, Stethoscope } from 'lucide-react';
+
+import { RiDashboardFill, RiCalendar2Fill, RiStethoscopeFill, RiWallet3Fill, RiSettings3Fill, RiLogoutBoxRLine } from 'react-icons/ri'
+
 
 // landing Page Navbar contents
 export const landing_navbar_data = [
@@ -57,13 +60,15 @@ export const third_parthy_auth = [
 ]
 
 export const route_list = [
-    {name: 'Dashboard', icon: Home , path: '/dashboard', id: 'dashboard' },
-    {name: 'Appointments', icon:CalendarClock , path: '/appointments', id: 'appointments' },
-    {name: 'Medical Records', icon: FileHeart, path: '/medical-records', id: 'medical_records' },
-    {name: 'Wallet Funding', icon: WalletCards , path: '/wallet-funding', id: 'wallet_funding' },
-    {name: 'Settings', icon: Settings , path: '/settings', id: 'settings' },
-    {name: 'Logout', icon: LogOut , path: '/logout', id: 'logout' },
-]
+    { name: 'Dashboard', icon: RiDashboardFill, path: '/dashboard', id: 'dashboard' },
+    { name: 'Appointments', icon: RiCalendar2Fill, path: '/appointments', id: 'appointments' },
+    { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'consult_doctor' },
+    // { name: 'Medical Records', icon: , path: '/medical-records', id: 'medical_records' },
+    { name: 'Wallet Funding', icon: RiWallet3Fill, path: '/wallet-funding', id: 'wallet_funding' },
+    { name: 'Settings', icon: RiSettings3Fill, path: '/settings', id: 'settings' },
+    { name: 'Logout', icon: RiLogoutBoxRLine, path: '/login', id: 'logout' },
+];
+
 export const consultation_card_list = [
     {
         registered_as: 'Orthopaedist',
@@ -217,4 +222,219 @@ export const transaction_history = [
         amount: 70.00,
         transaction_id: '7a1c3d9f-0b8e-4a2d-9c0b-2f4d5e1a6b2d'
     }
+];
+
+export const doctors_specialties = [
+    "Allergy and Immunology",
+    "Anesthesiology",
+    "Cardiology",
+    "Dermatology",
+    "Dentist",
+    "Emergency Medicine",
+    "Endocrinology",
+    "Family Medicine",
+    "Gastroenterology",
+    "General Surgery",
+    "Geriatric Medicine",
+    "Hematology",
+    "Infectious Disease",
+    "Internal Medicine",
+    "Nephrology",
+    "Neurology",
+    "Obstetrics and Gynecology",
+    "Oncology",
+    "Ophthalmology",
+    "Orthopedic Surgery",
+    "Otolaryngology",
+    "Pediatrics",
+    "Physical Medicine and Rehabilitation",
+    "Plastic Surgery",
+    "Psychiatry",
+    "Pulmonology",
+    "Radiology",
+    "Rheumatology",
+    "Urology"
+]
+
+export const registered_doctors = [
+  {
+    "physician_id": "550e8400-e29b-41d4-a716-446655440000",
+    "first_name": "Aisha",
+    "last_name": "Okeke",
+    "country": "Nigeria",
+    "languages_spoken": ["English", "Yoruba"],
+    "avatar": "https://images.unsplash.com/photo-1576091160550-2173fdabea36?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Cardiology",
+    "description": "With over 20 years of extensive experience in the field, I focus on cardiovascular diagnostics and heart failure management, aiming to improve patient outcomes and advance cardiac care innovation.",
+    "current_hospital_or_clinic": "Lagos Heart Center"
+  },
+  {
+    "physician_id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+    "first_name": "James",
+    "last_name": "Wilson",
+    "country": "United States",
+    "languages_spoken": ["English", "Spanish"],
+    "avatar": "https://images.unsplash.com/photo-1576091160397-57d467c91409?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "general_doctor",
+    "speciality": "General Practice",
+    "description": "With over 15 years of extensive experience in the field, I focus on preventive care and chronic disease management, aiming to improve patient outcomes and advance community health practices.",
+    "current_hospital_or_clinic": "Springfield Community Clinic"
+  },
+  {
+    "physician_id": "7c9e6679-7425-40de-944b-e07fc1f90ae7",
+    "first_name": "Priya",
+    "last_name": "Sharma",
+    "country": "India",
+    "languages_spoken": ["Hindi", "English"],
+    "avatar": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Dermatology",
+    "description": "With over 18 years of extensive experience in the field, I focus on skin health and cosmetic dermatology, aiming to improve patient outcomes and advance dermatological research.",
+    "current_hospital_or_clinic": "Mumbai Skin Institute"
+  },
+  {
+    "physician_id": "8d6c8a4b-3b6e-4f2a-b8c9-1f2d3e4f5b6c",
+    "first_name": "Carlos",
+    "last_name": "Mendes",
+    "country": "Brazil",
+    "languages_spoken": ["Portuguese", "English"],
+    "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea6f8828?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Dentist",
+    "description": "With over 22 years of extensive experience in the field, I focus on restorative dentistry and orthodontics, aiming to improve patient outcomes and advance dental care techniques.",
+    "current_hospital_or_clinic": "Rio Dental Clinic"
+  },
+  {
+    "physician_id": "9e7f9b5c-4c7f-5g3b-c9d0-2g3e4f5g6c7d",
+    "first_name": "Sophie",
+    "last_name": "Taylor",
+    "country": "United Kingdom",
+    "languages_spoken": ["English"],
+    "avatar": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Pediatrics",
+    "description": "With over 20 years of extensive experience in the field, I focus on childhood development and infectious diseases, aiming to improve patient outcomes and advance pediatric care standards.",
+    "current_hospital_or_clinic": "London Children’s Hospital"
+  },
+  {
+    "physician_id": "af8g0c6d-5d8g-6i4c-dae1-3i4f5g6i7e8f",
+    "first_name": "Mohammed",
+    "last_name": "Khan",
+    "country": "Pakistan",
+    "languages_spoken": ["Urdu", "English"],
+    "avatar": "https://images.unsplash.com/photo-1594824476934-3a4b9d6b7b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Neurology",
+    "description": "With over 20 years of extensive experience in the field, I focus on neurocritical care and neurodegenerative conditions, aiming to improve patient outcomes and advance neurological research.",
+    "current_hospital_or_clinic": "Karachi Neuro Clinic"
+  },
+  {
+    "physician_id": "b0g2i8e9-6e9i-7j5d-ebf2-4j5g6i8j9f0g",
+    "first_name": "Elena",
+    "last_name": "Rodriguez",
+    "country": "Spain",
+    "languages_spoken": ["Spanish", "English"],
+    "avatar": "https://images.unsplash.com/photo-1579684453423-8a6b9f3b7e7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "general_doctor",
+    "speciality": "General Practice",
+    "description": "With over 17 years of extensive experience in the field, I focus on holistic primary care and chronic illness management, aiming to improve patient outcomes and advance preventive medicine.",
+    "current_hospital_or_clinic": "Madrid Family Clinic"
+  },
+  {
+    "physician_id": "c1h3j9fa-7fai-8k6e-fcg3-5k6i7j9k0g1h",
+    "first_name": "Chinwe",
+    "last_name": "Adebayo",
+    "country": "Nigeria",
+    "languages_spoken": ["English", "Igbo"],
+    "avatar": "https://images.unsplash.com/photo-1594824476934-3a4b9d6b7b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Obstetrics and Gynecology",
+    "description": "With over 25 years of extensive experience in the field, I focus on women’s reproductive health and prenatal care, aiming to improve patient outcomes and advance maternal health practices.",
+    "current_hospital_or_clinic": "Abuja Women’s Hospital"
+  },
+  {
+    "physician_id": "d2i4k0gb-8gbj-9l7f-gdh4-6l7j8k0l1i2j",
+    "first_name": "Hiroshi",
+    "last_name": "Tanaka",
+    "country": "Japan",
+    "languages_spoken": ["Japanese", "English"],
+    "avatar": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Neurology",
+    "description": "With over 23 years of extensive experience in the field, I focus on epilepsy management and stroke care, aiming to improve patient outcomes and advance neurological treatment methodologies.",
+    "current_hospital_or_clinic": "Tokyo Neuro Clinic"
+  },
+  {
+    "physician_id": "e3j5l1hc-9hck-al8g-hei5-7m8k9l1m2j3k",
+    "first_name": "Fatima",
+    "last_name": "Ali",
+    "country": "Egypt",
+    "languages_spoken": ["Arabic", "English"],
+    "avatar": "https://images.unsplash.com/photo-1576091160397-57d467c91409?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Ophthalmology",
+    "description": "With over 19 years of extensive experience in the field, I focus on cataract surgery and glaucoma treatment, aiming to improve patient outcomes and advance vision care technologies.",
+    "current_hospital_or_clinic": "Cairo Eye Institute"
+  },
+  {
+    "physician_id": "f4k6m2id-aidl-bm9h-ifj6-8n9l0m2n3k4l",
+    "first_name": "Lucas",
+    "last_name": "Moreira",
+    "country": "Brazil",
+    "languages_spoken": ["Portuguese", "Spanish"],
+    "avatar": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Gastroenterology",
+    "description": "With over 21 years of extensive experience in the field, I focus on endoscopic procedures and liver disease management, aiming to improve patient outcomes and advance digestive health research.",
+    "current_hospital_or_clinic": "São Paulo Gastro Clinic"
+  },
+  {
+    "physician_id": "g5l7n3je-bjem-cn0i-jgk7-9o0m1n3o4l5m",
+    "first_name": "Amara",
+    "last_name": "Diallo",
+    "country": "Senegal",
+    "languages_spoken": ["French", "Wolof", "English"],
+    "avatar": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "general_doctor",
+    "speciality": "General Practice",
+    "description": "With over 16 years of extensive experience in the field, I focus on community health and preventive care, aiming to improve patient outcomes and advance public health initiatives.",
+    "current_hospital_or_clinic": "Dakar Community Clinic"
+  },
+  {
+    "physician_id": "h6m8o4kf-ckfn-do1j-khl8-ap1n2o4p5m6n",
+    "first_name": "Anna",
+    "last_name": "Schmidt",
+    "country": "Germany",
+    "languages_spoken": ["German", "English"],
+    "avatar": "https://images.unsplash.com/photo-1576091160550-2173fdabea36?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Psychiatry",
+    "description": "With over 24 years of extensive experience in the field, I focus on mood disorders and therapeutic interventions, aiming to improve patient outcomes and advance mental health care practices.",
+    "current_hospital_or_clinic": "Berlin Mental Health Center"
+  },
+  {
+    "physician_id": "i7n9p5lg-dlgo-ep2k-lim9-bq2o3p5q6n7o",
+    "first_name": "Sanjay",
+    "last_name": "Patel",
+    "country": "India",
+    "languages_spoken": ["Hindi", "English", "Gujarati"],
+    "avatar": "https://images.unsplash.com/photo-1594824476934-3a4b9d6b7b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Urology",
+    "description": "With over 20 years of extensive experience in the field, I focus on kidney stone treatment and prostate health, aiming to improve patient outcomes and advance urological care techniques.",
+    "current_hospital_or_clinic": "Ahmedabad Urology Clinic"
+  },
+  {
+    "physician_id": "j8o0q6mh-emhp-fq3l-mjna-cr3p4q6r7o8p",
+    "first_name": "Isabelle",
+    "last_name": "Dubois",
+    "country": "France",
+    "languages_spoken": ["French", "English"],
+    "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea6f8828?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
+    "registered_as": "specialist",
+    "speciality": "Endocrinology",
+    "description": "With over 22 years of extensive experience in the field, I focus on diabetes management and thyroid disorders, aiming to improve patient outcomes and advance endocrine health research.",
+    "current_hospital_or_clinic": "Paris Endocrine Clinic"
+  }
 ];

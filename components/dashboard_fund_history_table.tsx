@@ -19,7 +19,7 @@ interface FundSearchProps {
     setFund_search?: (fund_search: string) => void
 }
 
-const WalletFundHistoryTable = ({ fund_search, setFund_search }: FundSearchProps) => {
+const DashboardFundHistoryTable = ({ fund_search, setFund_search }: FundSearchProps) => {
     const [currentPage, setCurrentPage] = useState(1)
     const [filteredTransactions, setFilteredTransactions] = useState<TransactionHistoryProps[]>([])
 
@@ -62,7 +62,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search }: FundSearchProps
     return (
         <div className="w-full max-sm:-mt-2 bg-white py-5 pb-0 shadow-md rounded-md overflow-x-auto scrollbar-hidden font-mont">
         {/* Desktop View */}
-            <div className={`hidden min-w-[1000px] md:flex flex-col items-start justify-start`}>
+            <div className={`hidden min-w-[400px] xl:flex flex-col items-start justify-start`}>
                 <div className="w-full flex items-center justify-between border-b border-gray-200 pb-2">
                 <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
                     <p className="text-sm font-medium">Date</p>
@@ -146,7 +146,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search }: FundSearchProps
             </div>
 
             {/* Mobile View */}
-            <div className="w-full flex flex-col md:hidden">
+            <div className="w-full flex flex-col xl:hidden">
                 {currentTransactions.map((data: TransactionHistoryProps, ind: number) => {
                 const { transaction_id, transaction_type, narration, amount, date } = data
                 const formatted_date = format_date_from_unix(date)
@@ -205,4 +205,4 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search }: FundSearchProps
     )
 }
 
-export default WalletFundHistoryTable
+export default DashboardFundHistoryTable

@@ -13,7 +13,7 @@ const SidebarHeading = () => {
                     className="object-cover"
                 />
             </span>
-            <h5 className="hidden lg:block font-bold font-mich text-[15px] text-[#101010]">EPulse</h5>
+            <h5 className="hidden lg:block font-semibold font-mont text-[15px] text-gray-600">EPulse</h5>
 
         </span>
     )

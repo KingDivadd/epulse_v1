@@ -1,5 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { UserInfoProps } from '@/types';
 
 interface ChatContextType {
     header_nav: string; 
@@ -10,6 +11,11 @@ interface ChatContextType {
     setCountry_dial_code: (country_dial_code: string) => void;
     show_activity_history: boolean;
     setShow_activity_history: (show_activity_history: boolean) =>void;
+    show_mobile_sidebar: boolean;
+    setShow_mobile_sidebar: (show_mobile_sidebar: boolean) =>void;
+    selected_user: UserInfoProps | null;
+    setSelected_user: (selected_user: UserInfoProps | null)=>void;
+
 
 }
 
@@ -22,13 +28,17 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [user_information, setUser_information] = useState<UserInfoProps | null>(null);
     const [country_dial_code, setCountry_dial_code] = useState('+234');
     const [show_activity_history, setShow_activity_history] = useState(false)
+    const [show_mobile_sidebar, setShow_mobile_sidebar] = useState(false)
+    const [selected_user, setSelected_user] = useState<UserInfoProps | null>(null)
 
     return (
         <ChatContext.Provider value={{
             header_nav, setHeader_nav,
             user_information, setUser_information,
             country_dial_code, setCountry_dial_code,
-            show_activity_history, setShow_activity_history
+            show_activity_history, setShow_activity_history,
+            show_mobile_sidebar, setShow_mobile_sidebar,
+            selected_user, setSelected_user,
             
             }}>
             {children}

@@ -26,7 +26,19 @@ declare interface PhoneInputProps {
     on_change?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-declare type UserInfoProps = {
+declare interface DoctorProps {
+    first_name: string;
+    last_name: string;
+    description: string;
+    country: string;
+    registered_as: string;
+    speciality: string;
+    languages_spoken: string[];
+    avatar: string;
+    current_hospital_or_clinic: string;
+}
+
+export interface UserInfoProps {
     patient_id?: string;
     physician_id?: string;
     first_name?: string;
@@ -44,10 +56,14 @@ declare type UserInfoProps = {
     genotype?: string;
     is_verified_by_admin?: boolean;
     avatar?: string;
-    
+    registered_as?: string;
+    speciality?: string;
+    description?: string;
+    languages_spoken?: string[];
+    current_hospital_or_clinic?: string;
 }
 
-declare interface TransactionHistoryProps {
+declare type TransactionHistoryProps = {
     transaction_id: string | number
     transaction_type: string
     narration: string

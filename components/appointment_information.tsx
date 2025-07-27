@@ -19,17 +19,21 @@ const AppointmentInformation = () => {
             </span>
 
             <div className="w-full flex flex-col gap-2">
-                <span className="flex w-full gap-2 items-center justify-starat">
+                <span className="flex w-full gap-2 items-center justify-start">
                     <p className="text-sm font-medium">Doctor's Name:</p>
                     <p className="text-sm ">Dr. Davies Robert</p>
                 </span>
-                <span className="flex w-full gap-2 items-center justify-starat">
+                <span className="flex w-full gap-2 items-center justify-start">
                     <p className="text-sm font-medium">Doctor's Speciality:</p>
-                    <p className="text-sm ">Dr. Davies Robert</p>
+                    <p className="text-sm ">General Practice</p>
                 </span>
-                <span className="flex w-full gap-2 items-center justify-starat">
+                <span className="flex w-full gap-2 items-center justify-start">
                     <p className="text-sm font-medium">Language:</p>
                     <p className="text-sm ">English, Korean</p>
+                </span>
+                <span className="flex flex-col w-full gap-2 ">
+                    <p className="text-sm font-medium">Description:</p>
+                    <p className="text-sm leading-[25px]">With over 15 years of extensive experience in the field, I focus on preventive care and chronic disease management, aiming to improve patient outcomes and advance community health practices.</p>
                 </span>
             </div>
         </section>

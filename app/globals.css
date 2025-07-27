@@ -235,6 +235,12 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+.temp-300 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
 .temp-240 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -266,6 +272,11 @@ body {
 
 /* ----------- landing page styling-------------- */
 
+.textarea-type-1 {
+    @apply h-[100px] p-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    font-family: "Montserrat", sans-serif;
+}
+
 .input-type-1 {
     @apply h-[60px] px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
     font-family: "Montserrat", sans-serif;
@@ -275,18 +286,27 @@ body {
     @apply border-2 border-[#306ce9]
 }
 
+.input-type {
+    @apply px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    font-family: "Montserrat", sans-serif;
+}
+
+.input-type:focus {
+    @apply border-2 border-[#306ce9]
+}
+
 .input-type-2 {
     @apply h-[50px] px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
     font-family: "Montserrat", sans-serif;
 }
 
+.input-type-2:focus {
+    @apply border-2 border-[#306ce9]
+}
+
 .input-type-3 {
     @apply h-full rounded bg-white w-full outline-0 text-[15px];
     font-family: "Montserrat", sans-serif;
-}
-
-.input-type-2:focus {
-    @apply border-2 border-[#306ce9]
 }
 
 .otp-input {
@@ -343,7 +363,7 @@ body {
 }
 
 .nav-item {
-    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full;
+    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full text-gray-600;
 }
 
 .nav-item-text {
