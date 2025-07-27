@@ -11,7 +11,13 @@ import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
 import {useRouter} from 'next/navigation'
 import AuthHeading from '@/components/auth_components/auth_heading'
+import { UserInfoProps } from '@/types'
 
+interface PayloadProps {
+    status?:200;
+    headers?:any;
+    data?:any;
+}
 
 const Login = () => {
     const router = useRouter()
@@ -153,7 +159,7 @@ const Login = () => {
             {auth_via_email && <Link href={'/forget-password'} className="text-md  text-center w-[300px] font-mont hover:cursor-pointer font-medium text-[#306ce9] mt-2 " >I forgot my password.</Link>}
 
             <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
-                Don't have an account? <Link href={'/signup-type'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Sign up</Link>
+                {"Don't have an account?"} <Link href={'/signup-type'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Sign up</Link>
             </h3>
 
         </section>

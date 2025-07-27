@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {useChat} from '@/app/context/ChatContext'
 import {signup_roles} from '@/constants'
 import {useRouter} from 'next/navigation'

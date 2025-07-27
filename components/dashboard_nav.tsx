@@ -35,7 +35,7 @@ const DashboardNav = () => {
 
                 <div className="flex flex-col items-start justify-center gap-2">
                     <h3 className="max-sm:hidden font-mont font-semibold text-2xl">Hello David!</h3>
-                    <p className="text-[13px] text-slate-700 font-mont">It's 30 degress outside. Stay hydrated</p>
+                    <p className="text-[13px] text-slate-700 font-mont">{"It's 30 degress outside. Stay hydrated"}</p>
 
                 </div>
             </div>

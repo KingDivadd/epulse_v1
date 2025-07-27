@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import React, { useState, useEffect, MouseEventHandler } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoArrowBackOutline } from 'react-icons/io5';
 import { registered_doctors } from '@/constants';
 import { useChat } from '@/app/context/ChatContext';
@@ -65,7 +65,7 @@ const AppointmentBooking = () => {
         }
     }, [selected_user, setSelected_user, router]);
 
-    const handle_submit = async (e: any) => {
+    const handle_submit = async (e: React.FormEvent) => {
         e.preventDefault();
         toast_msg({ title: 'Appointment booking in progress' });
     };

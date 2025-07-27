@@ -3,7 +3,7 @@ import axios from "axios"
 // const base_url = process.env.NEXT_PUBLIC_LIVE_URL
 const base_url = process.env.NEXT_PUBLIC_BASE_URL
 
-export const post_request = async (endpoint: string, payload: unknown) => {
+export const post_request = async (endpoint: string, payload: any) => {
 
     try {
         const response = await axios.post(`${base_url}/${endpoint}`, payload, {
@@ -13,12 +13,12 @@ export const post_request = async (endpoint: string, payload: unknown) => {
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };
 
-export const patch_request = async (endpoint: string, payload: unknown) => {
+export const patch_request = async (endpoint: string, payload: any) => {
     try {
         const response = await axios.patch(`${base_url}/${endpoint}`, payload, {
             headers: {
@@ -27,12 +27,12 @@ export const patch_request = async (endpoint: string, payload: unknown) => {
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };
 
-export const patch_auth_request = async (endpoint: string, payload: unknown) => {
+export const patch_auth_request = async (endpoint: string, payload: any) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')
         const response = await axios.patch(`${base_url}/${endpoint}`, payload, {
@@ -43,12 +43,12 @@ export const patch_auth_request = async (endpoint: string, payload: unknown) => 
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };
 
-export const post_auth_request = async (endpoint: string, payload: unknown) => {
+export const post_auth_request = async (endpoint: string, payload: any) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')
         const response = await axios.post(`${base_url}/${endpoint}`, payload, {
@@ -59,7 +59,7 @@ export const post_auth_request = async (endpoint: string, payload: unknown) => {
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };
@@ -75,7 +75,7 @@ export const get_request = async (endpoint: string) => {
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };
@@ -91,7 +91,7 @@ export const get_auth_request = async (endpoint: string) => {
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };
@@ -107,7 +107,7 @@ export const delete_auth_request = async (endpoint: string) => {
         });
 
         return response;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };

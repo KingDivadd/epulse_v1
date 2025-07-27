@@ -10,7 +10,7 @@ const WalletFundCont = () => {
     const [loading, setLoading] = useState(false)
     
 
-    async function handle_submit(e:any) {
+    async function handle_submit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
         if (amount < 100){

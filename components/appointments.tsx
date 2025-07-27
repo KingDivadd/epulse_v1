@@ -157,7 +157,7 @@ const Appointments = () => {
 
                                             <DrawerContent className='p-5 font-mont'>
                                                 <DrawerHeader>
-                                                    <DrawerTitle>Doctor's Information</DrawerTitle>
+                                                    <DrawerTitle>{"Doctor's Information"}</DrawerTitle>
                                                 </DrawerHeader>
                                                     
                                                 <div className="w-full flex item-center justify-start gap-5 p-5 relative rounded-lg">
@@ -168,11 +168,11 @@ const Appointments = () => {
 
                                                 <div className="w-full flex flex-col gap-2 mt-5">
                                                     <span className="flex w-full gap-2 items-center justify-starat">
-                                                        <p className="text-sm font-medium">Doctor's Name:</p>
+                                                        <p className="text-sm font-medium">{"Doctor's Name:"}</p>
                                                         <p className="text-sm ">Dr. {item.first_name} {item.last_name}</p>
                                                     </span>
                                                     <span className="flex w-full gap-2 items-center justify-starat">
-                                                        <p className="text-sm font-medium">Doctor's Speciality:</p>
+                                                        <p className="text-sm font-medium">{"Doctor's Speciality:"}</p>
                                                         <p className="text-sm "> {item.registered_as}</p>
                                                     </span>
                                                     <span className="flex w-full gap-2 items-center justify-starat">
