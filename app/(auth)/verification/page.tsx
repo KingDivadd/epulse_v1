@@ -8,6 +8,7 @@ import { InputOTP,  InputOTPGroup,  InputOTPSeparator,  InputOTPSlot,} from "@/c
 import { useChat } from '@/app/context/ChatContext'
 import { useRouter } from 'next/navigation'
 import AuthHeading from '@/components/auth_components/auth_heading'
+import { AxiosResponseHeaders } from 'axios'
 
 
 
@@ -27,7 +28,7 @@ const UserDetails = () => {
     async function handle_get_user_info() {
         try {
 
-            const res = await get_auth_request('auth/user-information')
+            const res = await get_auth_request('auth/user-information') as AxiosResponseHeaders
 
             if (res.status === 200 || res.status === 201) {
                 console.log(res.data.user.email)
@@ -56,7 +57,7 @@ const UserDetails = () => {
         setLoading(true)
 
         try {
-            const response = await post_request(`auth/generate-user-otp`, {email: user_information?.email,})
+            const response = await post_request(`auth/generate-user-otp`, {email: user_information?.email,}) as AxiosResponseHeaders
 
             if (response.status === 200 || response.status === 201) {
                 toast_msg({title: "OTP sent successfully!"})
@@ -80,7 +81,7 @@ const UserDetails = () => {
         setLoading(true)
 
         try {
-            const response = await patch_request(`auth/verify-user-otp`, {email:user_information?.email ,otp: otp})
+            const response = await patch_request(`auth/verify-user-otp`, {email:user_information?.email ,otp: otp}) as AxiosResponseHeaders
             
             if (response.status === 200 || response.status === 201) {
 

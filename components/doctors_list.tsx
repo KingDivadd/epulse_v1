@@ -7,6 +7,7 @@ import { useChat } from '@/app/context/ChatContext';
 import { useRouter } from 'next/navigation';
 import { toast_msg } from './toast';
 import { get_auth_request } from '@/app/api';
+import { AxiosResponseHeaders } from 'axios';
 
 interface DoctorProps {
     first_name: string;
@@ -47,7 +48,7 @@ const DoctorsList = () => {
         if (loading || !hasMore) return;
         setLoading(true);
         try {
-            const res = await get_auth_request(`auth/all-physicians/${pageNum}/${10}`);
+            const res = await get_auth_request(`auth/all-physicians/${pageNum}/${10}`)  as AxiosResponseHeaders;
             console.log(res)
 
             if (res.status === 200 || res.status === 201) {

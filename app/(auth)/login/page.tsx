@@ -11,7 +11,7 @@ import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
 import {useRouter} from 'next/navigation'
 import AuthHeading from '@/components/auth_components/auth_heading'
-import {  AxiosError, AxiosResponse } from 'axios'
+import { AxiosResponse, AxiosResponseHeaders } from 'axios'
 
 
 const Login = () => {
@@ -40,11 +40,11 @@ const Login = () => {
     
             try {
 
-                const res = await post_request('auth/patient-login', auth) as AxiosResponse 
+                const res = await post_request('auth/patient-login', auth) as AxiosResponseHeaders
 
                 if (res.status === 200 || res.status === 201) {
 
-                    localStorage.setItem('x-id-key', res?.headers?.get('x-id-key') ?? '');
+                    localStorage.setItem('x-id-key', res.headers.get('x-id-key'));
 
                     toast_msg({title: "Login successful!"})
 
@@ -91,7 +91,7 @@ const Login = () => {
                     toast_msg({title: error_msg, type:'danger'})
                 }
             } catch (error ) {
-                console.log('error during signup ',error)
+                console.log('error during signup ',)
                 setLoading(false)
             } finally {
                 setLoading(false)

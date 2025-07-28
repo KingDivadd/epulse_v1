@@ -9,6 +9,7 @@ import { toast_msg } from '@/components/toast'
 import { useRouter } from 'next/navigation'
 import AuthHeading from '@/components/auth_components/auth_heading'
 import { useChat } from '@/app/context/ChatContext'
+import { AxiosResponseHeaders } from 'axios'
 
 
 const ForgetPassword = () => {
@@ -31,7 +32,7 @@ const ForgetPassword = () => {
         setLoading(true)
 
         try {
-            const response = await post_request('auth/generate-user-otp', {email:auth.email})
+            const response = await post_request('auth/generate-user-otp', {email:auth.email}) as AxiosResponseHeaders
             
             if (response.status === 200 || response.status === 201) {
 

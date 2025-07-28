@@ -11,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import {useChat} from '@/app/context/ChatContext'
 import {third_parthy_auth} from '@/constants'
 import AuthHeading from '@/components/auth_components/auth_heading'
+import { AxiosResponseHeaders } from 'axios'
 
 
 const Signup = () => {
@@ -43,7 +44,7 @@ const Signup = () => {
         try {
             const patient_signup_url = 'auth/patient-signup'
             const physician_signup_url = 'auth/physician-signup'
-            const response = await post_request(`${user_information?.role == 'patient' ? patient_signup_url : physician_signup_url }`, auth)
+            const response = await post_request(`${user_information?.role == 'patient' ? patient_signup_url : physician_signup_url }`, auth) as AxiosResponseHeaders
             
             if (response.status === 200 || response.status === 201) {
                 localStorage.setItem('x-id-key', response.headers.get('x-id-key')) 

@@ -3,7 +3,7 @@ import axios from "axios"
 // const base_url = process.env.NEXT_PUBLIC_LIVE_URL
 const base_url = process.env.NEXT_PUBLIC_BASE_URL
 
-export const post_request = async (endpoint: string, payload: object) => {
+export const post_request = async (endpoint: string, payload: object ) => {
 
     try {
         const response = await axios.post(`${base_url}/${endpoint}`, payload, {
@@ -12,13 +12,14 @@ export const post_request = async (endpoint: string, payload: object) => {
             }
         });
 
-        return response;
+        const data = response;
+        return data;
     } catch (err: unknown) {
-        throw err;
+        return err;
     }
 };
 
-export const patch_request = async (endpoint: string, payload: object) => {
+export const patch_request = async (endpoint: string, payload: object ) => {
     try {
         const response = await axios.patch(`${base_url}/${endpoint}`, payload, {
             headers: {
@@ -26,13 +27,14 @@ export const patch_request = async (endpoint: string, payload: object) => {
             }
         });
 
-        return response;
+        const data = response;
+        return data;
     } catch (err: unknown) {
         return err;
     }
 };
 
-export const patch_auth_request = async (endpoint: string, payload: object) => {
+export const patch_auth_request = async (endpoint: string, payload: object ) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')
         const response = await axios.patch(`${base_url}/${endpoint}`, payload, {
@@ -42,13 +44,14 @@ export const patch_auth_request = async (endpoint: string, payload: object) => {
             }
         });
 
-        return response;
+        const data = response;
+        return data;
     } catch (err: unknown) {
         return err;
     }
 };
 
-export const post_auth_request = async (endpoint: string, payload: object) => {
+export const post_auth_request = async (endpoint: string, payload: object ) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')
         const response = await axios.post(`${base_url}/${endpoint}`, payload, {
@@ -58,27 +61,14 @@ export const post_auth_request = async (endpoint: string, payload: object) => {
             }
         });
 
-        return response;
+        const data = response;
+        return data;
     } catch (err: unknown) {
         return err;
     }
 };
 
 
-
-export const get_request = async (endpoint: string) => {
-    try {
-        const response = await axios.get(`${base_url}/${endpoint}`, {
-            headers: {
-                "Content-Type": "application/json",
-            }
-        });
-
-        return response;
-    } catch (err: unknown) {
-        return err;
-    }
-};
 
 export const get_auth_request = async (endpoint: string) => {
     try {
@@ -90,7 +80,8 @@ export const get_auth_request = async (endpoint: string) => {
             }
         });
 
-        return response;
+        const data = response;
+        return data;
     } catch (err: unknown) {
         return err;
     }
@@ -106,9 +97,9 @@ export const delete_auth_request = async (endpoint: string) => {
             }
         });
 
-        return response;
+        const data = response;
+        return data;
     } catch (err: unknown) {
         return err;
     }
 };
-

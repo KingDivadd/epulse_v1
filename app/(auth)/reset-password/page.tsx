@@ -8,6 +8,7 @@ import { patch_auth_request,  } from '@/app/api/index'
 import { toast_msg } from '@/components/toast'
 import AuthHeading from '@/components/auth_components/auth_heading'
 import { useRouter } from 'next/navigation'
+import { AxiosResponseHeaders } from 'axios'
 
 
 
@@ -35,7 +36,7 @@ const ResetPassword = () => {
         setLoading(true)
 
         try {
-            const response = await patch_auth_request('auth/reset-user-password', {new_password: auth.password})
+            const response = await patch_auth_request('auth/reset-user-password', {new_password: auth.password}) as AxiosResponseHeaders
             
             if (response.status === 200 || response.status === 201) {
                 localStorage.setItem('x-id-key', response.headers.get('x-id-key')) 

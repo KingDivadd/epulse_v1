@@ -10,6 +10,7 @@ import PhoneInputComponent from '@/components/auth_components/phone_input_compon
 import DateOfBirth from '@/components/auth_components/date_of_birth'
 import AuthHeading from '@/components/auth_components/auth_heading'
 import { useRouter } from 'next/navigation'
+import { AxiosResponseHeaders } from 'axios'
 
 
 const UserDetails = () => {
@@ -41,7 +42,7 @@ const UserDetails = () => {
         setLoading(true)
 
         try {
-            const response = await patch_auth_request('auth/signup-update-patient-data', auth)
+            const response = await patch_auth_request('auth/signup-update-patient-data', auth) as AxiosResponseHeaders
             
             if (response.status === 200 || response.status === 201) {
                 localStorage.setItem('x-id-key', response.headers.get('x-id-key')) 
