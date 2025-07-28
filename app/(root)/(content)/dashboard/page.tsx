@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import DashboardNav from '@/components/dashboard_nav'
-import DashboardBody from '@/pages/dashboard_body'
+import DashboardBody from '@/page/dashboard_body'
 
 const Dashboard = () => {
     return (

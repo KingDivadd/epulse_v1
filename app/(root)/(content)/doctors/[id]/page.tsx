@@ -1,7 +1,7 @@
 'use client'
 import DashboardNav from '@/components/dashboard_nav'
 import React from 'react'
-import BookAppointmentPage from '@/pages/book_appointment_page'
+import BookAppointmentPage from '@/page/book_appointment_page'
 
 const ConsultationRoom = () => {
     return (
