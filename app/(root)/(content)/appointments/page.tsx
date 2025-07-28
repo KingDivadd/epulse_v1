@@ -1,3 +1,4 @@
+'use client'
 import DashboardNav from '@/components/dashboard_nav'
 import React from 'react'
 import AppointmentPage from '@/pages/appointment_page'
