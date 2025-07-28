@@ -1,19 +1,7 @@
 'use client'
 import React from 'react';
-import DoctorConsultationList from '@components/doctor_consultation_list'
+import DoctorConsultationList from '@/components/doctor_consultation_list'
 
-interface DoctorProps {
-    physician_id: string;
-    first_name: string;
-    last_name: string;
-    country: string;
-    languages_spoken: string[];
-    avatar: string;
-    registered_as: string;
-    speciality: string;
-    description: string;
-    current_hospital_or_clinic: string;
-}
 
 const AppointmentBooking = () => {
     
