@@ -34,21 +34,16 @@ const AboutUs = () => {
 
             <SectionTitle title='About Us' />
 
-            <motion.p 
-                variants={containerVariants}
-                initial="initial"
-                animate="animate"
-            
-            
+            <p 
                 className="text-[#242424] mt-10 mx-w-3xl sm:max-w-4xl font-mont md:font-[500] text-xl sm:text-4xl lg:text-[35px] leading-2xl md:leading-[45px] align-middle text-center  ">
                     {
                         text.map((word, index)=>{
                             return(
-                                <motion.span key={index} variants={worldVarient}> {word}</motion.span>
+                                <span key={index} className=''> {word}</span>
                             )
                         })
                     }
-            </motion.p>
+            </p>
 
             {/* an image should be added here as te background */}
 
