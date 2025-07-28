@@ -1,6 +1,6 @@
 import React from 'react'
 import DashboardNav from '@/components/dashboard_nav'
-import AppointmentBooking from "@/pages/appointment_booking.tsx"
+import AppointmentBooking from "@/pages/appointment_booking"
 
 const AppointmentBookingPage = () => {
     return (
