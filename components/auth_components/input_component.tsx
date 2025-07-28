@@ -25,10 +25,11 @@ const InputComponent = ({ title, type, name, value, onChange }: InputProps) => {
     return (
         <span className="flex flex-col items-start justify-start gap-2 w-full">
             <p className="text-sm font-medium text-slate-700 font-mont">{title}</p>
-            <div className="relative w-full">
+
+            <div className="relative w-full h-[50px] sm:h-[55px] md:h-[60px]">
                 <input
                 type={inputType}
-                className="input-type-1 w-full pr-10" // Extra padding for icon
+                className="input-type w-full pr-10" // Extra padding for icon
                 value={value}
                 onChange={onChange}
                 name={name}

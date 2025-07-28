@@ -35,67 +35,67 @@ const Login = () => {
 
     async function handle_login(e: React.FormEvent) {
         e.preventDefault()
-    
-            setLoading(true)
-    
-            try {
+        
+        setLoading(true)
+        
+        try {
+            
+            const res = await post_request('auth/patient-login', auth) as AxiosResponseHeaders
+            
+            if (res.status === 200 || res.status === 201) {
 
-                const res = await post_request('auth/patient-login', auth) as AxiosResponseHeaders
+                localStorage.setItem('x-id-key', res.headers.get('x-id-key'));
 
-                if (res.status === 200 || res.status === 201) {
+                toast_msg({title: "Login successful!"})
 
-                    localStorage.setItem('x-id-key', res.headers.get('x-id-key'));
+                if (res.data.user_data.physican_id) {
+                    router.push('/dashboard')
 
-                    toast_msg({title: "Login successful!"})
-
-
-                    if (res.data.user_data.physican_id) {
-                        router.push('/dashboard')
-
-                        console.log('redirecting to dashboard...')
-
-                    }
-                    else{
-                        const {gender, country_code, phone_number, date_of_birth} = res.data.user_data
-
-                        if (!gender || !country_code || !phone_number || !date_of_birth) {
-
-                            setUser_information({...user_information, ...res.data.user_data, email:auth.email})
-
-                            router.push(`/user-details/${res.data.user_data.patient_id}`)
-                            
-                        }else{
-                            router.push('/dashboard')
-                        }
-                    }
-                    setAuth({...auth, email:'', password: '', })
-
-                    setLoading(false)
-
-                } 
-                
-                else if (res.status === 500 ){
-
-                    toast_msg({title: "Network error. Please try again later.", type:'danger'})
+                    console.log('redirecting to dashboard...')
                     
-                } else if (res.status === 403){
-                    setUser_information({...user_information, email:auth.email})
+                }
+                else{
+                    const {gender, country_code, phone_number, date_of_birth} = res.data.user_data
+                    
+                    if (!gender || !country_code || !phone_number || !date_of_birth) {
 
-                    router.push('/verification')
+                        setUser_information({...user_information, ...res.data.user_data, email:auth.email})
+
+                        router.push(`/user-details/${res.data.user_data.patient_id}`)
+                        
+                    }else{
+                        router.push('/dashboard')
+                    }
                 }
-                else {
-                    setLoading(false)
-    
-                    const error_msg = `${res.response.data.msg || "An error occurred during login."}`
-    
-                    toast_msg({title: error_msg, type:'danger'})
-                }
-            } catch (error ) {
-                console.log('error during signup ',)
+                setAuth({...auth, email:'', password: '', })
+
                 setLoading(false)
-            } finally {
-                setLoading(false)
+                
+            } 
+            
+            else if (res.status === 500 ){
+                
+                toast_msg({title: "Network error. Please try again later.", type:'danger'})
+                
+            } else if (res.status === 403){
+
+                setUser_information({...user_information, email:auth.email})
+                
+                router.push('/verification')
             }
+            else {
+                setLoading(false)
+                
+                const error_msg = `${res.response.data.msg || "An error occurred during login."}`
+                
+                toast_msg({title: error_msg, type:'danger'})
+            }
+        } catch (error ) {
+            console.log('error during signup ',)
+            setLoading(false)
+        } finally {
+            setLoading(false)
+        }
     }
 
 
@@ -146,13 +146,13 @@ const Login = () => {
                     <input type="checkbox" name="remember_me" className='h-4 w-4' id="remember_me" onChange={(e) => setRemember_me(e.target.checked)}/>
                     <label htmlFor="remember_me" className="text-sm  font-[500] font-mont text-slate-700 cursor-pointer " >Remember me</label>
                 </span>
-                <button className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit"  >
+                <button className="mt-5 w-full h-[50px] sm:h-[55px] md:h-[60px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md flex items-center justify-center" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit">
                     {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Login'}
                 </button>
             </form>}
 
 
-            {auth_via_email && <Link href={'/forget-password'} className="text-md  text-center w-[300px] font-mont hover:cursor-pointer font-medium text-[#306ce9] mt-2 " >I forgot my password.</Link>}
+            {auth_via_email && <Link href={'/forget-password'} className="text-sm  text-center w-[300px] font-mont hover:cursor-pointer font-medium text-[#306ce9] mt-2 " >I forgot my password.</Link>}
 
             <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
                 {"Don't have an account?"} <Link href={'/signup-type'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Sign up</Link>

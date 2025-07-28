@@ -287,7 +287,7 @@ body {
 }
 
 .input-type {
-    @apply px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    @apply h-full px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
     font-family: "Montserrat", sans-serif;
 }
 
