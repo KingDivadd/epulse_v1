@@ -19,8 +19,8 @@ const UserDetails = () => {
     const [otp, setOtp] = useState('')
 
     useEffect(() => {
-        if (!user_information?.email || localStorage.getItem('x-id-key') === null) {
-            // then we have to get informations from x-id-key
+        
+        if (!user_information?.email) {
             handle_get_user_info()
         }
     }, [])
@@ -30,13 +30,16 @@ const UserDetails = () => {
 
             const res = await get_auth_request('auth/user-information') as AxiosResponseHeaders
 
+            console.log(res)
+
             if (res.status === 200 || res.status === 201) {
                 console.log(res.data.user.email)
 
                 setUser_information({...user_information, email: res.data.user.email, patient_id: res.data.user.patient_id || null, physician_id: res.data.user.physician_id || null, role: res.data.user.role})
 
             }else{
-                router.push('/login')
+                router.push('/login') 
+                console.log('user-informatin-2 ',user_information)
             }
 
         } catch (err) {
