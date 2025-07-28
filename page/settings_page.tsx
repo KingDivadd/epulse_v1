@@ -139,7 +139,7 @@ const SettingsPage = () => {
                                 value={information.blood_group}
                                 onChange={handle_change}
                             >
-                                <option value="">Select Blood Group</option>
+                                <option value="">Select Blood Groupp</option>
                                 {
                                     blood_groups.map((item:string, ind:number)=>{
                                         return(
