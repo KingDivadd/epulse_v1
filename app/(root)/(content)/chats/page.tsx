@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import DashboardNav from '@/components/dashboard_nav'
-import ChatPage from '@/pages/chat_page'
+import ChatPage from '@/page/chat_page'
 
 const Chats = () => {
     return (
