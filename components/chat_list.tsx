@@ -6,9 +6,6 @@ import { useChat } from '@/app/context/ChatContext'
 const ChatList = () => {
     const {show_selected_chat, setShow_selected_chat} = useChat()
 
-    function handle_show_chat(data:any) {
-        setShow_selected_chat(!show_selected_chat)
-    }
 
     return (
         <div className=" flex flex-col gap-3  w-full h-full justify-start ">
@@ -20,7 +17,7 @@ const ChatList = () => {
                     {
                         [1,2,3,4,5,6,7,8,9,0].map((data,ind)=>{
                             return(
-                                <div key={ind} className="w-full h-[80px] sm:h-[90px] bg-white shadow-md  hover:bg-[#306ce9] duration-200 hover:text-white rounded-md p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer" onClick={()=> handle_show_chat(data) }>
+                                <div key={ind} className="w-full h-[80px] sm:h-[90px] bg-white shadow-md  hover:bg-[#306ce9] duration-200 hover:text-white rounded-md p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer" onClick={()=> setShow_selected_chat(!show_selected_chat) }>
                                     <div className=" h-full flex items-start">
                                         <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                             <Image src={'/profile-img-2b.jpg'} alt='' fill objectFit='cover'  />
