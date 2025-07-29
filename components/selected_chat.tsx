@@ -45,7 +45,7 @@ const SelectedChat = () => {
 
     return (
         <div className="w-full h-full bg-white rounded-sm p-4 flex flex-col items-start justify-between gap-2 shadow-md">
-            <div className=" w-full flex items-center justify-between max-md:justify-end ">
+            <div className=" w-full flex items-center justify-between max-md:justify-end border-b border-[#f2f2f2] pb-3">
                 <span className="max-md:hidden h-[40px] flex items-center justify-start gap-2">
                     <span className="h-[40px] w-[40px] rounded-full relative overflow-hidden">
                         <Image src="/profile-img-2b.jpg" alt="" fill className="object-cover" />
@@ -66,7 +66,7 @@ const SelectedChat = () => {
                 </span>
             </div>
 
-            <div className="w-full h-[calc(100vh-255px)] bg-white flex flex-col p-3.5 rounded-sm justify-between  border border-gray-300">
+            <div className="w-full h-[calc(100vh-265px)] bg-white flex flex-col py-3.5 rounded-sm justify-between  ">
                 {/* <p className="text-sm w-full text-center">{"TODAY AT 11:00"}</p> */}
 
                 <div ref={messagesContainerRef} className="w-full h-full  overflow-y-auto hide-scrollbar">
@@ -77,15 +77,18 @@ const SelectedChat = () => {
 
                                 const sender_dir = sender === 'patient' ? 'justify-end':'justify-start'
                                 const sender_box_color = sender === 'patient' ? 'bg-[#306ce9] text-white':'bg-[#306ce9]/70 text-white'
+                                const prevSender = ind > 0 ? messages[ind - 1].sender : null;
+                                const additionalSpacing = ind > 0 && sender !== prevSender ? 'mt-4' : '';
+
                                 return(
-                                    <div key={ind} className={`w-full flex ${sender_dir}`}>
-                                        <div key={ind} className={`flex items-start gap-3 min-w-auto lg:max-w-[75%] 2xl:max-w-[60%] `}>
+                                    <div key={ind} className={`w-full flex ${sender_dir} ${additionalSpacing} `}>
+                                        <div key={ind} className={`flex items-start gap-3 min-w-auto w-[80%]  lg:max-w-[75%] 2xl:max-w-[60%] `}>
                                             {sender == 'physician' && <span className="h-[35px] w-[35px] rounded-full relative overflow-hidden">
                                                 <Image src={msg.image} alt={msg.name} fill className="object-cover" />
                                             </span>}
-                                            <div className={`p-3 rounded-b-sm flex-1  ${sender_box_color}`}>
+                                            <div className={`p-2 rounded-b-sm flex-1  ${sender_box_color}`}>
                                                 <p className="text-[12px]">{msg.text}</p>
-                                                <p className="text-[10px] w-full text-end mt-2">{(get_time_from_unix(Number(msg.time)))}</p>
+                                                <p className="text-[10px] w-full text-end mt-1">{(get_time_from_unix(Number(msg.time)))}</p>
                                             </div>
                                             {sender === 'patient' && <span className="h-[35px] w-[35px] rounded-full relative overflow-hidden">
                                                 <Image src={msg.image} alt={msg.name} fill className="object-cover" />

@@ -28,7 +28,7 @@ const Sidebar = () => {
 
     return (
         <div className="w-full  flex flex-col gap-3 h-full bg-white ">
-            <span className="w-full flex justify-start h-24 lg-pl-5 xl:pl-7 "> <SidebarHeading /> </span>
+            <span className="w-full flex justify-start h-24 "> <SidebarHeading /> </span>
 
             <article className="w-full flex flex-col pr-2 xl:pr-5 relative">
                 {

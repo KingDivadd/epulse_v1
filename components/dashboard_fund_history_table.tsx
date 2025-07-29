@@ -64,18 +64,18 @@ const DashboardFundHistoryTable = ({ fund_search, setFund_search }: FundSearchPr
         {/* Desktop View */}
             <div className={`hidden min-w-[400px] xl:flex flex-col items-start justify-start`}>
                 <div className="w-full flex items-center justify-between border-b border-gray-200 pb-2">
-                <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                    <p className="text-sm font-medium">Date</p>
-                </div>
-                <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                    <p className="text-sm font-medium">Transaction Type</p>
-                </div>
-                <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                    <p className="text-sm font-medium">Narration</p>
-                </div>
-                <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                    <p className="text-sm font-medium">Amount</p>
-                </div>
+                    <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
+                        <p className="text-sm font-medium">Date</p>
+                    </div>
+                    <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
+                        <p className="text-sm font-medium">Transaction Type</p>
+                    </div>
+                    <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
+                        <p className="text-sm font-medium">Narration</p>
+                    </div>
+                    <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
+                        <p className="text-sm font-medium">Amount</p>
+                    </div>
                 </div>
 
                 {/* Transaction Rows */}

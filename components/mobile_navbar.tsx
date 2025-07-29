@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image';
 import {useChat} from '@/app/context/ChatContext'
 import { useRouter } from 'next/navigation';
+import SidebarHeading from './reuseable_heading_component';
 
 
 
@@ -21,19 +22,8 @@ const MobileNavbar = () => {
 
     return (
         <div className="w-full  flex flex-col gap-3 h-full bg-white ">
-            <span className="w-full flex justify-between items-center h-24 px-5 "> 
-                <span className=" flex items-start gap-2 ">
-                    <span className="relative overflow-hidden h-8 w-8 ">
-                        <Image
-                            src="/logo.png"
-                            alt="epulse logo"
-                            fill
-                            className="object-cover"
-                        />
-                    </span>
-                    <h5 className=" font-bold font-mont text-[20px] text-gray-700">EPulse</h5>
-
-                </span>
+            <span className="w-full flex justify-between items-center h-24  pr-5"> 
+                <span className="w-full flex justify-start h-24 "> <SidebarHeading /> </span>
 
                 <span className="h-4 w-4 relative overflow-hidden" onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)}>
                     <Image src={'/icons/close-black.png'} alt='' fill layout='contain' />

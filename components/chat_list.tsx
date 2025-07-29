@@ -13,11 +13,11 @@ const ChatList = () => {
 
             <div className="w-full mt-2 overflow-y-auto max-h-[calc(100vh-160px)]  hide-scrollbar ">
 
-                <div className="w-full flex flex-col gap-2.5">
+                <div className="w-full flex flex-col ">
                     {
                         [1,2,3,4,5,6,7,8,9,0].map((data,ind)=>{
                             return(
-                                <div key={ind} className="w-full h-[80px] sm:h-[90px] bg-white shadow-md  hover:bg-[#306ce9] duration-200 hover:text-white rounded-md p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer" onClick={()=> setShow_selected_chat(!show_selected_chat) }>
+                                <div key={ind} className="w-full h-[80px] sm:h-[90px] bg-white  hover:bg-[#306ce9] duration-200 hover:text-white border-b border-gray-100 last:border-0 p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer" onClick={()=> setShow_selected_chat(!show_selected_chat) }>
                                     <div className=" h-full flex items-start">
                                         <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                             <Image src={'/profile-img-2b.jpg'} alt='' fill objectFit='cover'  />

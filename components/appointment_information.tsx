@@ -2,14 +2,19 @@
 import React from 'react'
 import Image from 'next/image'
 
-const AppointmentInformation = () => {
+interface ShowSelectedAppointmentProps{
+    show_selected_appointment: boolean;
+    setShow_selected_appointment: (show_selected_appointment: boolean) => void;
+}
+
+const AppointmentInformation = ({show_selected_appointment, setShow_selected_appointment}: ShowSelectedAppointmentProps) => {
     return (
         <section className="w-full shadow-md bg-white rounded-lg p-5 flex flex-col items-start justify-start gap-4">
             <span className="w-full flex items-center justify-between pb-3 flex-wrap whitespace-nowrap gap-3 border-b border-gray-200 ">
                 <p className="text-md font-medium text-slate-800">{"Doctor's Card"}</p>
 
                 <span className="flex flex-wrap items-center justify-end gap-2">
-                    <button className="px-5 h-[40px] rounded-sm cursor-pointer bg-[#f2f2f2] duration-300 hover:bg-[#f2f2f2]/90 text-gray-600 text-[13px]">Cancel</button>
+                    <button className="px-5 h-[40px] rounded-sm cursor-pointer bg-[#f2f2f2] duration-300 hover:bg-[#f2f2f2]/90 text-gray-600 text-[13px]" onClick={()=> setShow_selected_appointment(!show_selected_appointment)}>Cancel</button>
                     <button className="px-5 h-[40px] rounded-sm cursor-pointer bg-[#306ce8] duration-300 hover:bg-[#306ce8]/90 text-white text-[13px]">Start Consultation</button>
                 </span>
             </span>
