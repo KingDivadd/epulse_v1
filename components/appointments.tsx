@@ -139,7 +139,7 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
         <div className="w-full temp-240 gap-5 px-5 my-3">
           {filteredAppointments
             .slice((currentPage - 1) * appointmentsPerPage, currentPage * appointmentsPerPage)
-            .map((item:any, ind:number) => {
+            .map((item, ind:number) => {
               const date = format_date_from_unix(Number(item.appointment_date));
               const appointments_within_24hrs = is_within_24hrs(Number(item.appointment_date));
 
