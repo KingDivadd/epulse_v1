@@ -5,7 +5,7 @@ export function toast_msg({title, description, type}:{title: string, description
             description: description,
             action: {
                 label: "close",
-                onClick: () => console.log("Undo"),
+                onClick: () => {},
         },style:{
             fontFamily: "Montserrat",
             color: `${type === 'danger'? '#FF3333': ''}`,

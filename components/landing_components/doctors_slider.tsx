@@ -22,7 +22,7 @@ const DoctorSlider = ()=> {
                 {doctor_slider_list.map((data, ind) => (
                     <CarouselItem key={ind} className="md:basis-1/3 lg:basis-1/4">
                         <div className="p-1">
-                            <Card className="bg-[#ffffff] box-shadow-1 border-0 sm:h-[400px] px-3 py-4  gap-3">
+                            <Card className="bg-[#ffffff] shadow-md border-0 sm:h-[400px] px-3 py-4  gap-3">
                                 <p className="text-md font-[500] text-start">{data.title}</p>
 
                                 <span className="relative overflow-hidden h-[225px] sm:h-[175px] w-full bg-amber-500">

@@ -148,7 +148,7 @@ const DoctorConsultationList = () => {
                         ></textarea>
                     </span>
 
-                    <button type="submit" className="h-[50px] mt-10 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 text-sm" onClick={handle_submit} > Proceed
+                    <button type="submit" className="h-[50px] mt-5 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 text-sm" onClick={handle_submit} > Proceed
                     </button>
                 </form>
                 </div>

@@ -24,7 +24,7 @@ const ServiceSlider = ()=> {
                 {doctor_slider_list.map((data, ind) => (
                     <CarouselItem key={ind} className="md:basis-1/2 lg:basis-1/3">
                         <div className="p-1">
-                            <Card className="bg-[#ffffff] box-shadow-1 border-0  px-3 py-4  gap-3 justify-between">
+                            <Card className="bg-[#ffffff] shadow-md border-0  px-3 py-4  gap-3 justify-between">
                                 {/* <p className="text-md font-[500] text-start">{data.title}</p> */}
 
                                 <span className="relative overflow-hidden h-[275px] sm:h-[255px] w-full bg-amber-500 rounded-[10px]">

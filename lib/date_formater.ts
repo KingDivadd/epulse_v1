@@ -46,3 +46,10 @@ export function is_within_12hrs(appointment_date:number) {
 export function convert_to_unix(dateString: string): number {
     return Math.floor(new Date(dateString).getTime() / 1000);
 }
+
+export function get_time_from_unix(unixTimestamp: number) {
+    const date = new Date(unixTimestamp * 1000); // Convert to milliseconds
+    const hours = date.getUTCHours().toString().padStart(2, '0'); // Get hours in UTC, pad with 0
+    const minutes = date.getUTCMinutes().toString().padStart(2, '0'); // Get minutes, pad with 0
+    return `${hours}:${minutes}`;
+}

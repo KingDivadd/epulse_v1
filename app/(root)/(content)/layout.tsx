@@ -10,7 +10,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     // Handler to close mobile sidebar when clicking outside
     const handleOutsideClick = (e: React.MouseEvent) => {
         if (show_mobile_sidebar) {
-        setShow_mobile_sidebar(false);
+            setShow_mobile_sidebar(false);
         }
     };
 
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
     return (
         <main className="w-screen h-screen flex overflow-hidden relative sm:p-0" onClick={handleOutsideClick}>
-            <section className="hidden sm:block w-[80px] lg:w-[250px]">
+            <section className="hidden sm:block w-[200px] xl:w-[250px]">
                 <Sidebar />
             </section>
 
@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </section>
 
             <section
-                className={`absolute w-[275px] h-screen bg-white border-r border-[#f2f2f2] sm:hidden top-0 ${
+                className={`absolute w-[250px] h-screen bg-white border-r border-[#f2f2f2] sm:hidden top-0 ${
                 show_mobile_sidebar ? 'left-0' : 'left-[-280px]'
                 } duration-300 z-10 flex items-start justify-between`}
                 onClick={handleMobileSidebarClick}>

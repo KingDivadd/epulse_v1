@@ -35,7 +35,7 @@ const Consultation = () => {
 
                                     <div className="w-full hidden md:block">
 
-                                        <div className={appointments_within_24hrs ? "w-full flex flex-col font-mont rounded-lg box-shadow-1 bg-gradient-to-t bg-[#306ce9] duration-700 ": "bg-white w-full flex flex-col font-mont rounded-lg box-shadow-1 hover:bg-slate-100 group duration-700 group "}>
+                                        <div className={appointments_within_24hrs ? "w-full flex flex-col font-mont rounded-lg shadow-md bg-gradient-to-t bg-[#306ce9] duration-700 ": "bg-white w-full flex flex-col font-mont rounded-lg shadow-md hover:bg-slate-100 group duration-700 group "}>
 
                                             <div key={ind} className="w-full h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
                                                 <span className="w-full flex items-center justify-between">
@@ -64,7 +64,7 @@ const Consultation = () => {
 
                                         <Drawer>
                                             <DrawerTrigger className='w-full'>
-                                                <div key={ind} className={`w-full flex flex-col font-mont rounded-lg box-shadow-1 ${appointments_within_24hrs ? "bg-[#306ce9] duration-700 ": "bg-white hover:bg-gray-100 group "}`}>
+                                                <div key={ind} className={`w-full flex flex-col font-mont rounded-lg shadow-md ${appointments_within_24hrs ? "bg-[#306ce9] duration-700 ": "bg-white hover:bg-gray-100 group "}`}>
 
                                                     <div key={ind} className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
                                                         <span className="w-full flex items-center justify-between">

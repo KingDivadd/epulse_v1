@@ -73,8 +73,8 @@ const BoodAppointmentPageComponent = () => {
                 Back
             </Link>
 
-            <div className="w-full grid grid-cols-12 gap-5 lg:gap-8 xl:gap-10 mt-3">
-                <span className="hidden md:block col-span-6 min-h-[500px] relative rounded-lg overflow-hidden">
+            <div className="w-full grid grid-cols-12 gap-5 mt-3 ">
+                <span className="hidden lg:block col-span-6 min-h-[500px] relative rounded-lg overflow-hidden bg-[#306ce9]">
                     <Image
                         src={selected_user.avatar || '/default-doctor.svg'}
                         alt={`${selected_user.first_name} ${selected_user.last_name}`}
@@ -84,8 +84,8 @@ const BoodAppointmentPageComponent = () => {
                     />
                 </span>
 
-                <div className="col-span-12 md:col-span-6  flex flex-col min-h-[300px] gap-10 items-start justify-between bg-white shadow-md rounded-lg p-5">
-                    <span className="md:hidden w-full h-[400px] relative rounded-lg overflow-hidden">
+                <div className="col-span-12 lg:col-span-6  flex flex-col min-h-[300px] gap-10 items-start justify-between bg-white shadow-md rounded-lg p-5">
+                    <span className="lg:hidden w-full h-[400px] relative rounded-lg overflow-hidden">
                         <Image
                             src={selected_user.avatar || '/default-doctor.svg'}
                             alt={`${selected_user.first_name} ${selected_user.last_name}`}
@@ -95,7 +95,7 @@ const BoodAppointmentPageComponent = () => {
                         />
                     </span>
 
-                    <div className="w-full flex flex-col gap-5 max-md:-mt-5">
+                    <div className="w-full flex flex-col gap-5 max-lg:-mt-5">
                         <span className="flex w-full flex-col gap-2.5 py-2 border-b border-gray-300">
                         <p className="text-xl font-medium">Dr. {selected_user.first_name} {selected_user.last_name}</p>
                         <p className="text-[13px] text-green-600">Available</p>

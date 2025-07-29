@@ -1,7 +1,7 @@
 'use client'
 import DashboardNav from '@/components/dashboard_nav'
 import React from 'react'
-import AppointmentPage from '@/page/appointment_page'
+import AppointmentPage from '@/pages/appointment_page'
 
 const Appointments = () => {
     return (

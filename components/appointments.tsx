@@ -19,22 +19,6 @@ const Appointments = () => {
         <div className=" flex flex-col gap-4  ">
             <h3 className="font-mont font-semibold text-lg  text-slate-700">All Appointments</h3>
 
-            {/* <Drawer >   
-                <DrawerTrigger >Open</DrawerTrigger>
-                <DrawerContent className='h-[600px] '  >
-                    <DrawerHeader>
-                    <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-                    <DrawerDescription>This action cannot be undone.</DrawerDescription>
-                    </DrawerHeader>
-                    <span>
-                        <Button>Submit</Button>
-                        <DrawerClose>
-                            <Button variant="outline">Cancel</Button>
-                        </DrawerClose>
-                    </span>
-                </DrawerContent>
-            </Drawer> */}
-
             <span className="flex flex-col items-start justify-start gap-2 w-[250px]">
 
                 <DropdownMenu >
@@ -44,7 +28,7 @@ const Appointments = () => {
                             <ChevronDown className="h-10 w-10 text-slate-800" />
                         </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-[250px] bg-white  box-shadow-1 p-2 z-20">
+                    <DropdownMenuContent className="w-[250px] bg-white  shadow-md p-2 z-20">
                         <DropdownMenuRadioGroup value={position} onValueChange={setPosition} className='w-full '>
                             <DropdownMenuRadioItem className='w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa] ' value="Today">Today</DropdownMenuRadioItem>
                             <DropdownMenuRadioItem className='w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa] ' value="Tomorrow">Tomorrow</DropdownMenuRadioItem>
@@ -57,8 +41,8 @@ const Appointments = () => {
             </span>
 
 
-            <div className="w-full mt-2 overflow-y-auto max-h-[90vh] hide-scrollbar ">
-                <div className="w-full temp-240 ">
+            <div className="w-full mt-2 overflow-y-auto max-h-[95.3vh] hide-scrollbar ">
+                <div className="w-full temp-240 gap-5 ">
                     {
                         consultation_card_list.sort((a, b) => a.appointment_date - b.appointment_date).map((item,ind)=>{
 
@@ -70,7 +54,7 @@ const Appointments = () => {
                             return(
                                 <div key={ind} className="w-full">
 
-                                    <div className={`hidden hover:translate-y-2  ease-in-out duration-300  w-full md:flex flex-col font-mont rounded-lg box-shadow-1 ${appointments_within_24hrs ? "bg-[#306ce9]": "bg-white group "}`}>
+                                    <div className={`hidden hover:translate-y-1  ease-in-out duration-300  w-full md:flex flex-col font-mont rounded-lg shadow-md ${appointments_within_24hrs ? "bg-[#306ce9]": "bg-white group "}`}>
 
                                         <div  className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
                                             <span className="w-full flex items-center justify-between">
@@ -114,7 +98,7 @@ const Appointments = () => {
 
                                         <Drawer>
                                             <DrawerTrigger className='w-full'>
-                                                <div key={ind} className={`w-full flex flex-col font-mont rounded-lg box-shadow-1 ${appointments_within_24hrs ? "bg-[#306ce9] duration-700 ": "bg-white hover:bg-gray-100 group "}`}>
+                                                <div key={ind} className={`w-full flex flex-col font-mont rounded-lg shadow-md duration-300 ${appointments_within_24hrs ? "bg-[#306ce9] duration-300 ": "bg-white hover:translate-y-1 group "}`}>
 
                                                     <div key={ind} className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
                                                         <span className="w-full flex items-center justify-between">
@@ -185,6 +169,11 @@ const Appointments = () => {
                                                             <span className="text-sm ">{item.description}</span>
                                                         </span>
                                                     </DrawerDescription>
+
+                                                    <div className="w-full flex items-center justify-end gap-5 h-[40px] mt-5">
+                                                        <button className="h-full bg-[#f2f2f2] hover:bg-[#f2f2f2]/90 duration-300 font-mont rounded-sm px-5 text-sm">Cancel</button>
+                                                        <button className="h-full bg-[#306ce9] hover:[#306ce9]/90 duration-300 font-mont rounded-sm px-5 text-white text-sm">Start Consultation</button>
+                                                    </div>
                                                 </div>
 
                                                 

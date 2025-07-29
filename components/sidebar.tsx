@@ -28,12 +28,12 @@ const Sidebar = () => {
 
     return (
         <div className="w-full  flex flex-col gap-3 h-full bg-white ">
-            <span className="w-full flex justify-start items-center h-24 pl-7 "> <SidebarHeading /> </span>
+            <span className="w-full flex justify-start h-24 lg-pl-5 xl:pl-7 "> <SidebarHeading /> </span>
 
-            <article className="w-full flex flex-col pr-2 lg:pr-5 relative">
+            <article className="w-full flex flex-col pr-2 xl:pr-5 relative">
                 {
                     route_list.map((route, index) => (
-                        <Link key={index} href={route.path} className={current_route === route.path ? "pl-5 lg:px-8 current-nav-item bg-blue-100  ": "pl-5 lg:px-8 nav-item "} 
+                        <Link key={index} href={route.path} className={`pl-5 xl:px-8 ${ current_route === route.path ? "current-nav-item bg-blue-100  ": "nav-item "}`} 
                         onClick={()=>  {
                                 if(route.id == 'logout'){
                                     localStorage.clear()
@@ -43,7 +43,7 @@ const Sidebar = () => {
 
                             }}>
                             <route.icon size={'18px'} className=' duration-200' />
-                            <h5 className={current_route === route.path ? "hidden lg:block current-nav-item-text": "hidden lg:block nav-item-text"}>{route.name}</h5>
+                            <h5 className={current_route === route.path ? " current-nav-item-text": " nav-item-text"}>{route.name}</h5>
                         </Link>))
                 }
 

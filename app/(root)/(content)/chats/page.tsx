@@ -1,18 +1,18 @@
 'use client'
-import DashboardNav from '@/components/dashboard_nav'
 import React from 'react'
-import BookAppointmentPage from '@/pages/book_appointment_page'
+import DashboardNav from '@/components/dashboard_nav'
+import ChatPage from '@/pages/chat_page'
 
-const ConsultationRoom = () => {
+const Chats = () => {
     return (
         <div  className='w-full h-full flex flex-col bg-white overflow-y-auto'>
             <div className="w-full">
                 <DashboardNav />
 
-                <BookAppointmentPage />
+                <ChatPage />
             </div>
         </div>
     )
-    }
+}
 
-export default ConsultationRoom
+export default Chats

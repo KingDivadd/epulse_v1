@@ -13,6 +13,8 @@ interface ChatContextType {
     setShow_activity_history: (show_activity_history: boolean) =>void;
     show_mobile_sidebar: boolean;
     setShow_mobile_sidebar: (show_mobile_sidebar: boolean) =>void;
+    show_selected_chat: boolean;
+    setShow_selected_chat: (show_selected_chat:boolean) => void;
     selected_user: UserInfoProps | null;
     setSelected_user: (selected_user: UserInfoProps | null)=>void;
 
@@ -29,6 +31,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [country_dial_code, setCountry_dial_code] = useState('+234');
     const [show_activity_history, setShow_activity_history] = useState(false)
     const [show_mobile_sidebar, setShow_mobile_sidebar] = useState(false)
+    const [show_selected_chat, setShow_selected_chat] = useState(true)
     const [selected_user, setSelected_user] = useState<UserInfoProps | null>(null)
 
     return (
@@ -39,6 +42,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             show_activity_history, setShow_activity_history,
             show_mobile_sidebar, setShow_mobile_sidebar,
             selected_user, setSelected_user,
+            show_selected_chat, setShow_selected_chat
             
             }}>
             {children}

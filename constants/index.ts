@@ -1,6 +1,4 @@
-import { Home, CalendarClock, FileHeart, WalletCards, CreditCard, Settings, LogOut, Languages, Stethoscope } from 'lucide-react';
-
-import { RiDashboardFill, RiCalendar2Fill, RiStethoscopeFill, RiWallet3Fill, RiSettings3Fill, RiLogoutBoxRLine } from 'react-icons/ri'
+import { RiDashboardFill, RiCalendar2Fill, RiStethoscopeFill, RiChat4Line , RiWallet3Fill, RiSettings3Fill, RiLogoutBoxRLine } from 'react-icons/ri'
 
 
 // landing Page Navbar contents
@@ -63,6 +61,7 @@ export const route_list = [
     { name: 'Dashboard', icon: RiDashboardFill, path: '/dashboard', id: 'dashboard' },
     { name: 'Appointments', icon: RiCalendar2Fill, path: '/appointments', id: 'appointments' },
     { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'doctors' },
+    { name: 'Chat', icon: RiChat4Line , path: '/chats', id: 'chats' },
     // { name: 'Medical Records', icon: , path: '/medical-records', id: 'medical_records' },
     { name: 'Wallet Funding', icon: RiWallet3Fill, path: '/wallet-funding', id: 'wallet-funding' },
     { name: 'Settings', icon: RiSettings3Fill, path: '/settings', id: 'settings' },
@@ -442,3 +441,107 @@ export const registered_doctors = [
 export const genotypes = ['AA', 'AS', 'AC', 'SS', 'SC', 'CC'];
 
 export const blood_groups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+
+export const messages_data = [
+    {
+        id: '550e8400-e29b-41d4-a716-446655440000',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'physician',
+        name: 'Sophia Wong',
+        text: 'Hello! How can I assist you today?',
+        image: '/profile-img-2b.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (5 * 60 * 60), // 11:00 WAT (6 hours before 17:05)
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440003',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'patient',
+        name: 'You',
+        text: 'Hi, I have some questions about my appointment.',
+        image: '/profile-img-2d.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (2 * 60), // 11:02 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440004',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'physician',
+        name: 'Sophia Wong',
+        text: 'Sure, please let me know your appointment details.',
+        image: '/profile-img-2b.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (3 * 60), // 11:03 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440005',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'patient',
+        name: 'You',
+        text: 'It’s scheduled for tomorrow at 10 AM.',
+        image: '/profile-img-2d.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (4 * 60), // 11:04 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440006',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'patient',
+        name: 'You',
+        text: 'Hi, I have some questions about my appointment.',
+        image: '/profile-img-2d.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (2 * 60), // 11:02 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440007',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'physician',
+        name: 'Sophia Wong',
+        text: 'Sure, please let me know your appointment details.',
+        image: '/profile-img-2b.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (3 * 60), // 11:03 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440008',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'patient',
+        name: 'You',
+        text: 'It’s scheduled for tomorrow at 10 AM.',
+        image: '/profile-img-2d.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (4 * 60), // 11:04 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-446655440009',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'patient',
+        name: 'You',
+        text: 'Hi, I have some questions about my appointment.',
+        image: '/profile-img-2d.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (2 * 60), // 11:02 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-44665544000a',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'physician',
+        name: 'Sophia Wong',
+        text: 'Sure, please let me know your appointment details.',
+        image: '/profile-img-2b.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (3 * 60), // 11:03 WAT
+    },
+    {
+        id: '550e8400-e29b-41d4-a716-44665544000b',
+        patient_id: '550e8400-e29b-41d4-a716-446655440001',
+        physician_id: '550e8400-e29b-41d4-a716-446655440002',
+        sender: 'patient',
+        name: 'You',
+        text: 'It’s scheduled for tomorrow at 10 AM.',
+        image: '/profile-img-2d.jpg',
+        time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (4 * 60), // 11:04 WAT
+    },
+    
+];

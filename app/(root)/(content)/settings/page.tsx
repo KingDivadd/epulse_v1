@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import DashboardNav from '@/components/dashboard_nav'
-import SettingsPage from '@/page/settings_page'
+import SettingsPage from '@/pages/settings_page'
 
 const Settings = () => {
     return (

@@ -28,17 +28,15 @@ const WalletFundCont = () => {
         }
     }
     return (
-        <div className="w-full max-md:flex-col flex items-start justify-between gap-5 lg:gap-8 xl:gap-10 min-h-[250px]">
-            <span className="flex-1 max-md:w-full min-h-[250px] bg-[#306ce9] relative rounded-lg ">
+        <div className="w-full max-md:flex-col flex items-start justify-between gap-5  min-h-[250px]">
+            <span className="flex-1 max-md:w-full min-h-[250px] bg-[#306ce9] shadow-md relative rounded-lg ">
                 <span className="w-full h-200px">
                     <Image src={'/wallet-img-1.jpg'} alt='wallet img ' fill objectFit='cover' className='rounded-md' />
                 </span>
 
-
-
                 <Dialog >
                     <DialogTrigger>
-                        <div className="absolute right-5 top-5 h-5 w-5 cursor-pointer z-2 sm:hidden">
+                        <div className="absolute right-5 top-5 h-5 w-5 cursor-pointer z-2 md:hidden">
                             <Image src={'/icons/information-icon.png'} alt='' fill objectFit='contain' />
                         </div>
                     </DialogTrigger>
@@ -103,7 +101,7 @@ const WalletFundCont = () => {
                                 </DialogDescription>
                             </DialogHeader>
                                 
-                            <form onSubmit={handle_submit} className="w-full min-h-[150px] flex flex-col justify-between gap-20 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
+                            <form onSubmit={handle_submit} className="w-full md:mt-5 min-h-[150px] flex flex-col justify-between gap-20  rounded-lg border border-[#E6E6E6] bg-[#fafafa] p-5 ">
                                 <input type="number" placeholder="amount" name="amount" onChange={(e)=> setAmount(Number(e.target.value))} className="input-type-2" />
 
                                 <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-sm font-mont" onClick={handle_submit}>
@@ -118,7 +116,7 @@ const WalletFundCont = () => {
 
             </span>
 
-            <span className="max-sm:hidden max-md:w-full w-[300px] xl:w-[350px] h-full rounded-lg border border-[#E6E6E6] bg-white  flex flex-col gap-7 p-5">
+            <span className="hidden md-[250px] lg:w-[300px] xl:w-[350px] h-full rounded-lg border border-[#E6E6E6] bg-white shadow-md  md:flex flex-col gap-7 p-5">
                 <p className="text-xl font-semibold">Overview</p>
 
                 <div className="w-full min-h-[150px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">

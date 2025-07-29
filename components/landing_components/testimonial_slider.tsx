@@ -24,7 +24,7 @@ const TestimonialSlider = ()=> {
                 {doctor_slider_list.map((data, ind) => (
                     <CarouselItem key={ind} className="md:basis-1/2 lg:basis-1/3">
                         <div className="p-1">
-                            <Card className="bg-[#ffffff] box-shadow-1 border-0  p-3  gap-3 flex-row items-start justify-between">
+                            <Card className="bg-[#ffffff] shadow-md border-0  p-3  gap-3 flex-row items-start justify-between">
                                 {/* <p className="text-md font-[500] text-start">{data.title}</p> */}
 
                                 <span className="relative overflow-hidden h-[100px] w-[150px] bg-amber-500 rounded-[10px]">

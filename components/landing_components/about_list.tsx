@@ -9,7 +9,7 @@ const AboutList = () => {
             {
                     about_list.map((data, ind)=>{
                         return(
-                            <div key={ind} className="min-w-[195px] h-[175px] sm:h-[195] rounded-[8px]  flex flex-col items-center py-[25px] px-[20px] hover:-translate-y-1 duration-400 box-shadow-1 bg-[#ffffff] hover:bg-[#306CE9] group">
+                            <div key={ind} className="min-w-[195px] h-[175px] sm:h-[195] rounded-[8px]  flex flex-col items-center py-[25px] px-[20px] hover:-translate-y-1 duration-400 shadow-md bg-[#ffffff] hover:bg-[#306CE9] group">
                                 <span className="h-[40px] w-[40px] flex items-center justify-center rounded-[50px] bg-[#f0f8ff]  mt-2">
                                     <span className={`relative overflow-hidden h-[20.83px] w-[20px] `}>
                                         <Image src={data.icon} alt='' layout='fill' objectFit='contain' />

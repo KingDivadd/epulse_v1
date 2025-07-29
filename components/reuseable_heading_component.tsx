@@ -4,16 +4,16 @@ import Image from 'next/image'
 
 const SidebarHeading = () => {
     return (
-        <span className=" flex items-center gap-2 ">
-            <span className="relative overflow-hidden h-8 w-8 ">
+        <span className=" flex  items-center gap-2 ">
+            <span className="hidden relative overflow-hidden h-[40px] w-[40px] rounded-full">
                 <Image
-                    src="/logo.png"
-                    alt="epulse logo"
+                    src="/profile-img-2a.jpg"
+                    alt="personal"
                     fill
-                    className="object-cover"
+                    objectFit='cover'
                 />
             </span>
-            <h5 className="hidden lg:block font-semibold font-mont text-[15px] text-gray-600">EPulse</h5>
+            <h5 className="hidden lg:block font-semibold font-mont text-xl text-gray-700 truncate">{"EPulse"}</h5>
 
         </span>
     )
