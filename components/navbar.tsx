@@ -16,7 +16,7 @@ const Navbar = () => {
     useEffect(() => {
         const path = window.location.pathname
         setCurrent_route(path)
-        console.log('avatar  : ', user_information?.avatar)
+        
     }, [user_information?.avatar])
 
 
