@@ -37,6 +37,8 @@ const Login = () => {
         e.preventDefault()
         
         setLoading(true)
+
+        setUser_information({...user_information, email:auth.email})
         
         try {
             
@@ -52,33 +54,33 @@ const Login = () => {
 
                 setUser_information({...user_information, ...res.data.user_data, email:auth.email, role:user_role })
 
-                if (res.data.user_data.physican_id) {
+                setAuth({...auth, email:'', password: '', })
+
+                setLoading(false)
+                
+                if (res.data.user_data.physican_id !== null) {
                     router.push('/dashboard')
 
-                    console.log('redirecting to dashboard...')
-                    
+                    return
                 }
                 else{
                     const {gender, country_code, phone_number, date_of_birth} = res.data.user_data
                     
                     if (!gender || !country_code || !phone_number || !date_of_birth) {
 
-
                         router.push(`/user-details/${res.data.user_data.patient_id}`)
                         
                     }else{
                         router.push('/dashboard')
                     }
+                    return
                 }
-                setAuth({...auth, email:'', password: '', })
-
-                setLoading(false)
-                
             } 
             
             else if (res.status === 500 ){
+                const error_msg = `${res.response.data.msg || "Network error. Please try again later."}`
                 
-                toast_msg({title: "Network error. Please try again later.", type:'danger'})
+                toast_msg({title: error_msg, type:'danger'})
                 
             } else if (res.status === 403){
 

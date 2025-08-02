@@ -11,10 +11,7 @@ const LoadingDashboard = () => {
                     <span className="w-full h-200px">
                         <Image src={'/wallet-img-1.jpg'} alt='wallet img ' fill objectFit='cover' className='rounded-md' />
                     </span>
-                    <div className="absolute top-0 left-0 w-full h-[250px] flex flex-col items-center justify-center gap-2">
-                        <Skeleton className='md-[250px] lg:w-[300px] xl:w-[350px] h-[175px] bg-gray-300' />
-
-                    </div>
+                    
                 </div>
                 <div className="md-[250px] lg:w-[300px] xl:w-[350px] min-h-[250px] rounded-md shadow-md bg-white p-5  flex flex-col gap-7">
                     <p className="text-lg font-semibold">Overview</p>

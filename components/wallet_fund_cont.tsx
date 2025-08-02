@@ -110,7 +110,7 @@ const WalletFundCont = () => {
 
                     <Dialog >
                         <DialogTrigger>
-                            <span className="rounded-full bg-white text-sm py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">Fund Wallet</span>
+                            <span className="rounded-full bg-white text-sm py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">{(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}</span>
                         </DialogTrigger>
                         <DialogContent className='w-xl'>
                             <DialogHeader>

@@ -19,7 +19,7 @@ const UserDetails = () => {
     const [otp, setOtp] = useState('')
 
     useEffect(() => {
-        if (!user_information?.email || localStorage.getItem('x-id-key') === null) {
+        if (user_information?.email || localStorage.getItem('x-id-key') === null) {
             // then we have to get informations from x-id-key
             handle_get_user_info()
         }

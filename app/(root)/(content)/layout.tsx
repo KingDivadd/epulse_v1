@@ -37,12 +37,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         try {
 
             const res = await get_auth_request('auth/user-information') as AxiosResponseHeaders
-            console.log('count retry ', count_retry)
 
             if (res.status === 200 || res.status === 201) {
-                // console.log(res.data.user.email)
                 
-
                 const user_role = res.data.user.patient_id ? 'patient' : 'physician'
 
                 setUser_information({...user_information, ...res.data.user, role: user_role })
