@@ -10,7 +10,7 @@ import { get_auth_request } from '@/app/api';
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
     const [begin_rendering, setBegin_rendering] = useState(false)
-    let [count_retry, setCount_retry] = useState(0)
+    const [count_retry, setCount_retry] = useState(0)
 
 
     const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information } = useChat();
@@ -50,10 +50,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 setBegin_rendering(true)
                 
             }else{
-                setCount_retry(count_retry++)
-
+                
                 if (count_retry < 5){
                     handle_verify_status()
+                    setCount_retry(count_retry + 1)
                 }else{
                     console.log('waiting for 5sec begins now')
                     setTimeout(() => {
