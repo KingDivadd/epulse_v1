@@ -70,6 +70,21 @@ export const post_auth_request = async (endpoint: string, payload: object ) => {
 
 
 
+export const get_request = async (endpoint: string) => {
+    try {
+        const response = await axios.get(`${base_url}/${endpoint}`, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+
+        const data = response;
+        return data;
+    } catch (err: unknown) {
+        return err;
+    }
+};
+
 export const get_auth_request = async (endpoint: string) => {
     try {
         const auth_id = localStorage.getItem('x-id-key')

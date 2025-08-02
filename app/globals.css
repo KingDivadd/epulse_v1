@@ -164,39 +164,8 @@ body {
 
 /* ----------- landing page styling-------------- */
 
-.show-side-bar {
-    @apply h-[100vh] w-[250px] fixed top-0 z-50 bg-white flex flex-col shadow-md border-l border-slate-200;
-    animation: show_side_bar_animation 0.3s ease-in-out forwards;
-}
-
-.hide-side-bar {
-    @apply h-[100vh] w-[250px] fixed top-0 z-50 bg-white flex flex-col shadow-md border-l border-slate-200;
-    animation: hide_side_bar_animation 0.3s ease-in-out forwards;
-}
-
-@keyframes show_side_bar_animation {
-    0% {
-        right: -260px;
-    }
-    100% {
-        right: 0;
-    }
-}
-
-@keyframes hide_side_bar_animation {
-    0% {
-        right: 0;
-    }
-    90% {
-        right: -260px;
-    }
-    100% {
-        display: none;
-    }
-}
-
 .navbar {
-    @apply fixed w-full z-50 flex items-center justify-between duration-300;
+    @apply fixed w-full z-20 flex items-center justify-between duration-300;
     /* padding: 1rem 2rem; */
 }
 

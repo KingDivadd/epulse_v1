@@ -3,12 +3,12 @@ import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {landing_navbar_data} from '@/constants/index'
-import MobileSidebar from '@/components/landing_components/mobile_sidebar'
+import { useChat } from '@/app/context/ChatContext'
 
 
 const Navbar = () => {
+    const {show_mobile_nav, setShow_mobile_nav} = useChat()
     const [is_scroll, setIs_scroll] = useState(false)
-    const [show_side_nav, setShow_side_nav] = useState(false)
     
     useEffect(() => {
 
@@ -27,9 +27,6 @@ const Navbar = () => {
 
     return (
         <div className='w-full relative'>
-            <section className={show_side_nav ? ` show-side-bar`: 'hide-side-bar'}>
-                <MobileSidebar setShow_side_nav={setShow_side_nav} />
-            </section>
 
             <div className="fixed mx-auto overflow-hidden top-0 right-0 h-[100vh] w-[90%] -z-10 translate-y-[-80%] ">
                 <Image src={'/header-bg-color.png'} alt='header bg color' fill={true} objectFit='contain'  className='w-full' />
@@ -69,8 +66,8 @@ const Navbar = () => {
                             </span>
                         </Link>
 
-                        <button className="md:hidden relative overflow-hidden flex h-[18px] w-[18px] md:h-[20px] md:w-[22px] " onClick={()=> setShow_side_nav(!show_side_nav)}>
-                            <Image src={!show_side_nav ? '/icons/menu-black.png' : '/icons/close-black.png'} alt='menu' objectFit='contain' layout='fill' />
+                        <button className="md:hidden relative overflow-hidden flex h-[18px] w-[18px] md:h-[20px] md:w-[22px] " onClick={()=> {setShow_mobile_nav(!show_mobile_nav); }}>
+                            <Image src={'/icons/menu-black.png'} alt='menu' objectFit='contain' layout='fill' />
                         </button>
                     </span>
                 </div>

@@ -7,7 +7,7 @@ import DoctorSlider from './doctors_slider'
 const Doctors = () => {
     return (
         <section 
-            id='doctors' className="w-full min-h-screen px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15  scroll-mt-20  flex flex-col items-start  ">
+            id='doctors' className="w-full min-h-screen px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15  scroll-mt-20  flex flex-col items-start  bg-gray-100">
 
             <SectionTitle title='Categories Doctor' />
 

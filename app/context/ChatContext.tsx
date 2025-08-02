@@ -3,6 +3,8 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { UserInfoProps } from '@/types';
 
 interface ChatContextType {
+    show_mobile_nav: boolean;
+    setShow_mobile_nav: (show_mobile_nav: boolean) => void;
     header_nav: string; 
     setHeader_nav: (header_nav: string) => void;
     user_information: UserInfoProps | null;
@@ -25,6 +27,7 @@ interface ChatContextType {
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [show_mobile_nav, setShow_mobile_nav] = useState(false)
     const [header_nav, setHeader_nav] = useState('home');
     const [user_information, setUser_information] = useState<UserInfoProps | null>(null);
     const [country_dial_code, setCountry_dial_code] = useState('+234');
@@ -35,6 +38,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
     return (
         <ChatContext.Provider value={{
+            show_mobile_nav, setShow_mobile_nav,
             header_nav, setHeader_nav,
             user_information, setUser_information,
             country_dial_code, setCountry_dial_code,
