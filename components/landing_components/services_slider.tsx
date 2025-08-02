@@ -7,8 +7,20 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import {  service_list, testimonial_list, } from '@/constants'
+import { useRouter } from 'next/navigation'
 
 const ServicesSlider = () => {
+
+    const router = useRouter()
+
+    function handle_get_started() {
+        const auth_id = localStorage.getItem('x-id-key')
+        if (!auth_id || auth_id == null) {
+            return router.push('/signup-type')
+        }else{
+            return router.push('/login')
+        }
+    }
     return (
         <article className="w-full relative">
 
@@ -57,7 +69,7 @@ const ServicesSlider = () => {
 
                                             <p className="text-sm text-gray-100 line-clamp-3 ">{description}</p>
 
-                                            <button className="h-[45px] bg-white hover:bg-gray-100 rounded-full w-[200px] flex items-center justify-center text-sm font-medium gap-1">{'Book appointment'}</button>
+                                            <button className="h-[45px] bg-white hover:bg-gray-100 rounded-full w-[200px] flex items-center justify-center text-sm font-medium gap-1" onClick={handle_get_started}>{'Book appointment'}</button>
                                         </div>
                                     </div>                                
                                 </SwiperSlide>

@@ -7,8 +7,22 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import {  categories_doctor_list, service_list, testimonial_list, } from '@/constants'
+import { useRouter } from 'next/navigation'
 
 const DoctorSlider = () => {
+
+    const router = useRouter()
+
+    function handle_get_started() {
+        const auth_id = localStorage.getItem('x-id-key')
+        if (!auth_id || auth_id == null) {
+            return router.push('/signup-type')
+        }else{
+            return router.push('/login')
+        }
+    }
+
+
     return (
         <article className="w-full relative">
 
@@ -63,7 +77,7 @@ const DoctorSlider = () => {
 
                                             <p className="text-[13px] text-gray-600 line-clamp-3 ">{description}</p>
 
-                                            <button className="h-[35px] bg-[#306ce9] hover:bg-[#306ce9]/90 text-white rounded-full w-full flex items-center justify-center text-[12.5px] font-medium gap-1">{'Veiw all specialist'}</button>
+                                            <button className="h-[35px] bg-[#306ce9] hover:bg-[#306ce9]/90 text-white rounded-full w-full flex items-center justify-center text-[12.5px] font-medium gap-1" onClick={handle_get_started}>{'Veiw all specialist'}</button>
                                         </div>
                                     </div>                                
                                 </SwiperSlide>
