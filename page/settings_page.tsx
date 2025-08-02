@@ -1,17 +1,12 @@
 
 'use client'
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import { CiEdit } from 'react-icons/ci';
 import { InputComponent3 } from '@/components/auth_components/input_component';
 import PhoneInputComponent from '@/components/auth_components/phone_input_component';
 import DateOfBirth from '@/components/auth_components/date_of_birth';
-import { Button } from '@/components/ui/button';
-import { ChevronDown } from 'lucide-react';
 import {genotypes, blood_groups} from "@/constants"
 import { useChat } from '@/app/context/ChatContext';
 import { ImgUploader } from '@/lib/file_uploader';
-import { Skeleton } from '@/components/ui/skeleton';
 
 interface FormInformation {
     first_name: string;

@@ -7,7 +7,7 @@ import {doctors_specialties} from '@/constants'
 import { Loader2Icon } from 'lucide-react';
 import { Button } from 'react-day-picker';
 import { toast_msg } from '@/lib/toast';
-import {FileUploader, FileUploaderNew, ImgUploader} from '@/lib/file_uploader'
+import { FileUploaderNew, ImgUploader} from '@/lib/file_uploader'
 import { CiEdit } from "react-icons/ci";
 
 interface PhysicianFormInfoProps {
