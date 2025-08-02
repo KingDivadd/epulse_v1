@@ -1,53 +1,80 @@
-import * as React from "react"
+'use client'
+import React from 'react'
+import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation, Autoplay } from 'swiper/modules' // Import Autoplay module
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import {  categories_doctor_list, service_list, testimonial_list, } from '@/constants'
 
-import { Card, CardContent,  } from "@/components/ui/card"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-
-import {doctor_slider_list} from '@/constants'
-
-const DoctorSlider = ()=> {
+const DoctorSlider = () => {
     return (
-        <Carousel
-            opts={{
-                align: "start",
-            }}
-            className="w-full ">
-            <CarouselContent className="">
-                {doctor_slider_list.map((data, ind) => (
-                    <CarouselItem key={ind} className="md:basis-1/3 lg:basis-1/4">
-                        <div className="p-1">
-                            <Card className="bg-[#ffffff] shadow-md border-0 sm:h-[400px] px-3 py-4  gap-3">
-                                <p className="text-md font-[500] text-start">{data.title}</p>
+        <article className="w-full relative">
 
-                                <span className="relative overflow-hidden h-[225px] sm:h-[175px] w-full bg-amber-500">
+            <div className=" w-full ">
+                <Swiper
+                    spaceBetween={20}
+                    breakpoints={{
+                        // Default (mobile < 768px)
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        // Medium screens (≥ 768px)
+                        640: {
+                        slidesPerView: 2,
+                        },
+                        768: {
+                        slidesPerView: 3,
+                        },
+                        // Large screens (≥ 1024px)
+                        1024: {
+                        slidesPerView: 4,
+                        },
+                    }}
+                    //   pagination={{ clickable: true }}
+                    navigation={false}
+                    loop={true}
+                    autoplay={{
+                        delay: 8000, // Set to 10 seconds (10000 milliseconds)
+                        disableOnInteraction: false, // Continue autoplay after user interaction
+                    }}
+                    modules={[Pagination, Navigation, Autoplay]} // Include Autoplay module
+                    className="w-full h-full"
+                    >
 
-                                </span>
-
-                                <div className="w-full flex flex-col items-between  h-[150px] justify-between">
-                                    <p className="text-md font-semibold">{data.count}</p>
-
-                                    <p className="text-[13px] sm:text-md text-start text-slate-600 mt-3 font-mont">{data.description}</p>
-
-                                    <button className="mt-2 py-2.5 w-full rounded-full text-white text-[13px] bg-[#306CE9] font-mont ">View all specialist</button>
-                                </div>
+                        {
+                        categories_doctor_list.map((slide, index)=>{
+                            const {description, img, number_of_doctors, specialty} = slide
 
 
-                                
-                            </Card>
-                        </div>
-                    </CarouselItem>
-                ))}
-            </CarouselContent>
+                            return (
+                                <SwiperSlide key={index} className=" bg-white shadow-md p-3.5 rounded-md flex items-center justify-start font-mont">
+                                    <div className=" flex flex-col min-h-[90px] items-center justify-start gap-3">
+                                        <p className="text-[14px] text-gray-700 font-medium w-full text-start">{specialty}</p>
 
-            {/* <CarouselPrevious className="max-sm:hidden top-[-50px] right-[-20rem]" /> */}
-            {/* <CarouselNext className="hidden sm:block top-[-50px] right-0" /> */}
-        </Carousel>
+                                        <span className="relative h-[200px] w-full overflow-hidden rounded-md ">
+                                            <Image src={'/profile-img-2b.jpg'} alt='' fill objectFit='cover' />
+                                        </span> 
+
+                                        <div className="w-full h-[130px] flex flex-col justify-between items-start gap-1.5">
+                                            
+                                            <p className="text-[15.5px] font-medium text-gray-600">{number_of_doctors > 20 ? `20 + Doctors`: `${number_of_doctors} Doctors` }</p>
+
+                                            <p className="text-[13px] text-gray-600 line-clamp-3 ">{description}</p>
+
+                                            <button className="h-[35px] bg-[#306ce9] hover:bg-[#306ce9]/90 text-white rounded-full w-full flex items-center justify-center text-[12.5px] font-medium gap-1">{'Veiw all specialist'}</button>
+                                        </div>
+                                    </div>                                
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+
+                    
+                </Swiper>
+            </div>
+        </article>
     )
 }
 

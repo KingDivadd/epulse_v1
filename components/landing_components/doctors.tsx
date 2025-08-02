@@ -9,17 +9,38 @@ const Doctors = () => {
         <section 
             id='doctors' className="w-full min-h-screen px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15  scroll-mt-20  flex flex-col items-start  bg-gray-100">
 
-            <SectionTitle title='Categories Doctor' />
+            <motion.span    
+                initial={{y: -30, opacity: 0}}
+                whileInView={{y: 0, opacity: 1}}
+                transition={{duration: 0.4, delay: 0.15 }}
+                >
+                <SectionTitle title='Categories Doctor' />
+            </motion.span>
 
-            <p className="mt-10 text-xl sm:text-3xl w-[250px] sm:w-[350px] text-start font-[500] font-mont">Find the Right Doctor for Your Needs</p>
+            <motion.p 
+                initial={{y: -30, opacity: 0}}
+                whileInView={{y: 0, opacity: 1}}
+                transition={{duration: 0.4, delay: 0.15 }}
+            
+                className="mt-10 text-xl sm:text-3xl w-[250px] sm:w-[350px] text-start font-[500] font-mont">Find the Right Doctor for Your Needs</motion.p>
 
-            <p className="text-[13px] sm:text-md text-start sm:w-[500px] text-slate-600 mt-5 font-mont">Whether you need a general consultation, specialist care or mental health support, we have the right doctor for you.</p>
+            <motion.p 
+                initial={{y: -30, opacity: 0}}
+                whileInView={{y: 0, opacity: 1}}
+                transition={{duration: 0.4, delay: 0.15 }}
+
+                className="text-[13px] sm:text-md text-start sm:w-[500px] text-slate-600 mt-5 font-mont">Whether you need a general consultation, specialist care or mental health support, we have the right doctor for you.</motion.p>
             
 
-            <div className="w-full mt-8 flex items-center justify-center ">
+            <motion.div 
+                initial={{y: 30, opacity: 0}}
+                whileInView={{y: 0, opacity: 1}}
+                transition={{duration: 0.4, delay: 0.15 }}
+                
+                className="w-full mt-8 flex items-center justify-center ">
 
                 <DoctorSlider />
-            </div>
+            </motion.div>
 
         </section>
     )

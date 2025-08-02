@@ -4,6 +4,7 @@ import { AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai';
 import { MdCheckCircleOutline, MdOutlineCancel } from 'react-icons/md';
 import { FaCheckCircle } from 'react-icons/fa';
 import { HiOutlineClock } from 'react-icons/hi';
+import { FaHandsHelping, FaUsers, FaUserMd, FaHospital ,FaCalendarAlt, FaVideo, FaUserPlus } from 'react-icons/fa';
 
 // landing Page Navbar contents
 export const landing_navbar_data = [
@@ -16,16 +17,17 @@ export const landing_navbar_data = [
     // {title: 'My Work', icon: '', id: '#work', },
 ]
 
+
 export const header_list = [
-    { icon: '/icons/code-icon.png', title: 'Doctor Schedule', description: 'Find and schedule appointments with top doctors at your preferred hospital', },
-    { icon: '/icons/edu-icon.png', title: 'Room Info', description: 'Immediate access to emergency care. Find the nearest hospital and get urgent help.', },
-    { icon: '/icons/project-icon.png', title: 'Online Registration', description: 'Find and schedule appointments with top doctors at your preferred hospital.', },
+    { icon: FaCalendarAlt , title: 'Doctor Schedule', description: 'Book appointments with top doctors at your preferred time and hospital.' },
+    { icon: FaVideo , title: 'Virtual Rooms', description: 'Join secure video consultations with doctors from anywhere.' },
+    { icon: FaUserPlus , title: 'Online Registration', description: 'Sign up or log in to access personalized healthcare services.' },
 ]
 export const about_list = [
-    { icon: '/icons/code-icon.png', count: '41', description: 'Our Hospitals', },
-    { icon: '/icons/edu-icon.png', count: '12K', description: 'Medical Personnel', },
-    { icon: '/icons/project-icon.png', count: '500K', description: 'Patients Served', },
-    { icon: '/icons/code-icon.png', count: '400', description: 'Insurance Partners', },
+    { icon: FaHospital, count: '41', description: 'Our Hospitals', icon_color:'text-indigo-500', bg_color: 'bg-indigo-500/10'},
+    { icon: FaUserMd, count: '12K', description: 'Medical Personnel', icon_color:'text-teal-500', bg_color: 'bg-teal-500/10' },
+    { icon: FaUsers, count: '500K', description: 'Patients Served', icon_color:'text-green-500', bg_color: 'bg-green-500/10' },
+    { icon: FaHandsHelping, count: '400', description: 'Collaborators',icon_color:'text-[#306ce9]', bg_color: 'bg-[#306ce9]/10' },
 ]
 
 export const doctor_slider_list = [
@@ -41,7 +43,386 @@ export const doctor_slider_list = [
     {
         img: '/' , title: "Dermatologist", count: '18', description: 'Expert on skin conditions...'
     },
+    {
+        img: '/' , title: "General Practitioner", count: '50+', description: 'Routine check-ups, common illnesses, and health management with a general practitional.'
+    },
+    {
+        img: '/' , title: "Pediatrician", count: '20+', description: 'The best pediatrician to ensure your child\'s health from infancy to adolescence.'
+    },
 ]
+
+export const categories_doctor_list = [
+    {
+        specialty: 'Allergy and Immunology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Doctor with patient, allergy focus
+        number_of_doctors: 15,
+        description: 'Diagnosis and treatment of allergies, asthma, and immune system disorders.',
+    },
+    {
+        specialty: 'Anesthesiology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Anesthesiologist in surgery
+        number_of_doctors: 12,
+        description: 'Management of pain relief and sedation during surgical procedures.',
+    },
+    {
+        specialty: 'Cardiology',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Cardiologist with heart monitor
+        number_of_doctors: 20,
+        description: 'Care for heart conditions, including heart disease and hypertension.',
+    },
+    {
+        specialty: 'Dermatology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Dermatologist examining skin
+        number_of_doctors: 18,
+        description: 'Treatment of skin conditions, including acne, eczema, and skin cancer.',
+    },
+    {
+        specialty: 'Dentist',
+        img: 'https://images.pexels.com/photos/40561/dentist-dentistry-teeth-care-40561.jpeg?auto=compress&cs=tinysrgb&w=80', // Dentist with tools
+        number_of_doctors: 25,
+        description: 'Oral health care, including teeth cleaning, fillings, and extractions.',
+    },
+    {
+        specialty: 'Emergency Medicine',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Emergency room doctor
+        number_of_doctors: 30,
+        description: 'Immediate care for acute illnesses and injuries in emergency settings.',
+    },
+    {
+        specialty: 'Endocrinology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Endocrinologist with patient
+        number_of_doctors: 10,
+        description: 'Management of hormone-related disorders like diabetes and thyroid issues.',
+    },
+    {
+        specialty: 'Family Medicine',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Family doctor with family
+        number_of_doctors: 40,
+        description: 'Comprehensive care for individuals and families across all ages.',
+    },
+    {
+        specialty: 'Gastroenterology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Gastroenterologist with equipment
+        number_of_doctors: 15,
+        description: 'Diagnosis and treatment of digestive system disorders.',
+    },
+    {
+        specialty: 'General Surgery',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Surgeon in operating room
+        number_of_doctors: 22,
+        description: 'Surgical treatment for a wide range of conditions and injuries.',
+    },
+    {
+        specialty: 'Geriatric Medicine',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Geriatric doctor with elderly patient
+        number_of_doctors: 12,
+        description: 'Specialized care for the health needs of older adults.',
+    },
+    {
+        specialty: 'Hematology',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Hematologist with blood sample
+        number_of_doctors: 8,
+        description: 'Treatment of blood disorders, including anemia and leukemia.',
+    },
+    {
+        specialty: 'Infectious Disease',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Infectious disease specialist
+        number_of_doctors: 14,
+        description: 'Management of infections caused by bacteria, viruses, and fungi.',
+    },
+    {
+        specialty: 'Internal Medicine',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Internist with patient
+        number_of_doctors: 35,
+        description: 'Comprehensive care for adult patients with complex health issues.',
+    },
+    {
+        specialty: 'Nephrology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Nephrologist with kidney model
+        number_of_doctors: 10,
+        description: 'Care for kidney diseases and disorders, including dialysis support.',
+    },
+    {
+        specialty: 'Neurology',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Neurologist with brain scan
+        number_of_doctors: 16,
+        description: 'Diagnosis and treatment of nervous system disorders.',
+    },
+    {
+        specialty: 'Obstetrics and Gynecology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // OB/GYN with patient
+        number_of_doctors: 20,
+        description: 'Care for women’s reproductive health and pregnancy.',
+    },
+    {
+        specialty: 'Oncology',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Oncologist with patient
+        number_of_doctors: 13,
+        description: 'Treatment of cancer through chemotherapy, radiation, and surgery.',
+    },
+    {
+        specialty: 'Ophthalmology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Ophthalmologist with eye exam
+        number_of_doctors: 17,
+        description: 'Medical and surgical care for eye conditions and vision.',
+    },
+    {
+        specialty: 'Orthopedic Surgery',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Orthopedic surgeon with cast
+        number_of_doctors: 19,
+        description: 'Surgical and non-surgical treatment of bone and joint disorders.',
+    },
+    {
+        specialty: 'Otolaryngology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // ENT specialist with equipment
+        number_of_doctors: 11,
+        description: 'Care for ear, nose, and throat conditions and surgeries.',
+    },
+    {
+        specialty: 'Pediatrics',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Pediatrician with child
+        number_of_doctors: 28,
+        description: 'Health care for infants, children, and adolescents.',
+    },
+    {
+        specialty: 'Physical Medicine and Rehabilitation',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Rehab specialist with patient
+        number_of_doctors: 9,
+        description: 'Rehabilitation for physical disabilities and injuries.',
+    },
+    {
+        specialty: 'Plastic Surgery',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Plastic surgeon in operation
+        number_of_doctors: 14,
+        description: 'Cosmetic and reconstructive surgical procedures.',
+    },
+    {
+        specialty: 'Psychiatry',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Psychiatrist with patient
+        number_of_doctors: 16,
+        description: 'Mental health care, including therapy and medication management.',
+    },
+    {
+        specialty: 'Pulmonology',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Pulmonologist with lung model
+        number_of_doctors: 10,
+        description: 'Treatment of lung and respiratory system conditions.',
+    },
+    {
+        specialty: 'Radiology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Radiologist with X-ray
+        number_of_doctors: 21,
+        description: 'Imaging-based diagnosis and treatment using X-rays and scans.',
+    },
+    {
+        specialty: 'Rheumatology',
+        img: 'https://images.pexels.com/photos/6695232/pexels-photo-6695232.jpeg?auto=compress&cs=tinysrgb&w=80', // Rheumatologist with patient
+        number_of_doctors: 8,
+        description: 'Care for autoimmune and joint-related diseases like arthritis.',
+    },
+    {
+        specialty: 'Urology',
+        img: 'https://images.pexels.com/photos/4173232/pexels-photo-4173232.jpeg?auto=compress&cs=tinysrgb&w=80', // Urologist with equipment
+        number_of_doctors: 13,
+        description: 'Treatment of urinary tract and male reproductive system disorders.',
+    },
+];
+
+export const testimonial_list = [
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Aisha',
+        country: 'Nigeria',
+        country_img: 'https://flagcdn.com/w80/ng.png',
+        testimonial: "I was amazed at how easy it was to consult a specialist through EPulse. The video call quality was excellent, and my doctor was very supportive!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'John',
+        country: 'United States',
+        country_img: 'https://flagcdn.com/w80/us.png',
+        testimonial: "EPulse made my first online appointment a breeze. The doctor understood my concerns and provided a clear treatment plan in no time!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Fatima',
+        country: 'Kenya',
+        country_img: 'https://flagcdn.com/w80/ke.png',
+        testimonial: "Finding a doctor online was never this simple! EPulse connected me with an expert who helped me manage my condition effectively."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Carlos',
+        country: 'Brazil',
+        country_img: 'https://flagcdn.com/w80/br.png',
+        testimonial: "I love how EPulse saved me a trip to the clinic. The chat feature with my doctor was incredibly convenient and insightful."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Priya',
+        country: 'India',
+        country_img: 'https://flagcdn.com/w80/in.png',
+        testimonial: "Thanks to EPulse, I got a second opinion from a top specialist without leaving home. The experience was seamless and professional!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Mohammed',
+        country: 'Egypt',
+        country_img: 'https://flagcdn.com/w80/eg.png',
+        testimonial: "EPulse transformed my healthcare journey. The doctor I consulted was knowledgeable, and the process was hassle-free."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Sophie',
+        country: 'France',
+        country_img: 'https://flagcdn.com/w80/fr.png',
+        testimonial: "I was skeptical about online consultations, but EPulse proved me wrong. My doctor was thorough and very approachable!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Ahmed',
+        country: 'South Africa',
+        country_img: 'https://flagcdn.com/w80/za.png',
+        testimonial: "EPulse made it easy to book an appointment with a specialist. The follow-up care advice was spot-on and helpful."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Maria',
+        country: 'Mexico',
+        country_img: 'https://flagcdn.com/w80/mx.png',
+        testimonial: "The speed of service on EPulse is incredible! I got a consultation within hours, and the doctor was very caring."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Liam',
+        country: 'Canada',
+        country_img: 'https://flagcdn.com/w80/ca.png',
+        testimonial: "EPulse connected me with a doctor who understood my needs perfectly. The video call was clear, and the advice was great!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Zara',
+        country: 'Pakistan',
+        country_img: 'https://flagcdn.com/w80/pk.png',
+        testimonial: "I’m so glad I used EPulse. The doctor I met online was professional, and the platform was user-friendly."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Emmanuel',
+        country: 'Ghana',
+        country_img: 'https://flagcdn.com/w80/gh.png',
+        testimonial: "EPulse saved me time and effort. The specialist I consulted gave me a detailed plan that worked wonders!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Elena',
+        country: 'Spain',
+        country_img: 'https://flagcdn.com/w80/es.png',
+        testimonial: "The convenience of EPulse is unmatched. My doctor was kind, and the consultation felt just like an in-person visit."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Kwame',
+        country: 'Uganda',
+        country_img: 'https://flagcdn.com/w80/ug.png',
+        testimonial: "EPulse made healthcare accessible for me. The doctor’s advice was clear, and the process was smooth."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Hiroshi',
+        country: 'Japan',
+        country_img: 'https://flagcdn.com/w80/jp.png',
+        testimonial: "I was impressed by how quickly EPulse connected me with a specialist. The experience was top-notch!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Lina',
+        country: 'Germany',
+        country_img: 'https://flagcdn.com/w80/de.png',
+        testimonial: "EPulse turned my healthcare worries into relief. The doctor was attentive, and the platform was easy to navigate."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Omar',
+        country: 'Morocco',
+        country_img: 'https://flagcdn.com/w80/ma.png',
+        testimonial: "Thanks to EPulse, I got expert advice without the travel. The consultation was detailed and reassuring."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Sofia',
+        country: 'Italy',
+        country_img: 'https://flagcdn.com/w80/it.png',
+        testimonial: "EPulse made my online doctor visit stress-free. The specialist was knowledgeable, and the support was great!"
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Tunde',
+        country: 'Senegal',
+        country_img: 'https://flagcdn.com/w80/sn.png',
+        testimonial: "I highly recommend EPulse. The doctor I consulted was fantastic, and the process was quick and efficient."
+    },
+    {
+        img: 'https://via.placeholder.com/80',
+        first_name: 'Anna',
+        country: 'Australia',
+        country_img: 'https://flagcdn.com/w80/au.png',
+        testimonial: "EPulse brought healthcare to my doorstep. The video consultation was smooth, and the doctor was very helpful!"
+    },
+];
+
+export const service_list = [
+    {
+        img: 'https://via.placeholder.com/80?text=Video+Call', // Placeholder for video call icon
+        title: 'Virtual Consultation',
+        description: 'Connect with a doctor via video call for a personalized health checkup from anywhere.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Chat', // Placeholder for chat icon
+        title: 'Live Chat Support',
+        description: 'Get instant medical advice through secure text-based consultations with experts.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Prescription', // Placeholder for prescription icon
+        title: 'Online Prescriptions',
+        description: 'Receive digital prescriptions and have them delivered or filled at your pharmacy.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Follow-Up', // Placeholder for follow-up icon
+        title: 'Follow-Up Care',
+        description: 'Schedule follow-up appointments to monitor your health progress remotely.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Diagnosis', // Placeholder for diagnosis icon
+        title: 'Remote Diagnosis',
+        description: 'Get accurate diagnoses using uploaded medical reports and live consultations.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Mental+Health', // Placeholder for mental health icon
+        title: 'Mental Health Support',
+        description: 'Access therapy sessions with licensed counselors via video or chat.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Lab+Results', // Placeholder for lab results icon
+        title: 'Lab Result Review',
+        description: 'Upload lab results for expert analysis and personalized feedback.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Second+Opinion', // Placeholder for second opinion icon
+        title: 'Second Opinion',
+        description: 'Consult another specialist for a second opinion on your medical condition.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Wellness', // Placeholder for wellness icon
+        title: 'Wellness Coaching',
+        description: 'Receive guidance on fitness, nutrition, and mental well-being from experts.',
+    },
+    {
+        img: 'https://via.placeholder.com/80?text=Emergency', // Placeholder for emergency icon
+        title: 'Emergency Guidance',
+        description: 'Get immediate advice for urgent health issues until you reach a facility.',
+    },
+];
 
 export const footer_list = [
     { title: 'PERSONAL', items: ['Our Services', 'Online Consultation', 'Medical Orders', 'Policies & Terms'], },

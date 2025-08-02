@@ -1,55 +1,75 @@
-import * as React from "react"
+'use client'
+import React from 'react'
+import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination, Navigation, Autoplay } from 'swiper/modules' // Import Autoplay module
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import {  service_list, testimonial_list, } from '@/constants'
 
-import { Card, CardContent,  } from "@/components/ui/card"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from "@/components/ui/carousel"
-
-import {doctor_slider_list} from '@/constants'
-
-
-
-const ServiceSlider = ()=> {
+const ServicesSlider = () => {
     return (
-        <Carousel
-            opts={{
-                align: "start",
-            }}
-            className="w-full ">
-            <CarouselContent className="">
-                {doctor_slider_list.map((data, ind) => (
-                    <CarouselItem key={ind} className="md:basis-1/2 lg:basis-1/3">
-                        <div className="p-1">
-                            <Card className="bg-[#ffffff] shadow-md border-0  px-3 py-4  gap-3 justify-between">
-                                {/* <p className="text-md font-[500] text-start">{data.title}</p> */}
+        <article className="w-full relative">
 
-                                <span className="relative overflow-hidden h-[275px] sm:h-[255px] w-full bg-amber-500 rounded-[10px]">
+            <div className=" w-full ">
+                <Swiper
+                    spaceBetween={20}
+                    breakpoints={{
+                        // Default (mobile < 768px)
+                        0: {
+                            slidesPerView: 1,
+                        },
+                        // Medium screens (≥ 768px)
+                        640: {
+                        slidesPerView: 2,
+                        },
+                        // Large screens (≥ 1024px)
+                        1024: {
+                        slidesPerView: 3,
+                        },
+                    }}
+                    //   pagination={{ clickable: true }}
+                    navigation={false}
+                    loop={true}
+                    autoplay={{
+                        delay: 10000, // Set to 10 seconds (10000 milliseconds)
+                        disableOnInteraction: false, // Continue autoplay after user interaction
+                    }}
+                    modules={[Pagination, Navigation, Autoplay]} // Include Autoplay module
+                    className="w-full h-full"
+                    >
 
-                                </span>
-
-                                <div className="w-full flex flex-col items-start  h-[80px] justify-between">
-                                    <p className="text-md font-[500] text-start">{data.title}</p>
-                                    {/* <p className="text-[13px] sm:text-md text-start text-slate-600 mt-3 font-mont">{data.description}</p> */}
-
-                                    <button className="mt-2 py-2.5 px-14 rounded-full text-white text-[13px] bg-[#306CE9] font-mont">View all specialist</button>
-                                </div>
+                        {
+                        service_list.map((slide, index)=>{
+                            const {description, img, title} = slide
 
 
-                                
-                            </Card>
-                        </div>
-                    </CarouselItem>
-                ))}
-            </CarouselContent>
+                            return (
+                                <SwiperSlide key={index} className="  rounded-md flex items-center justify-start font-mont">
+                                    <div className=" flex flex-col min-h-[90px] items-center justify-start gap-3">
+                                        <span className="relative h-[200px] w-full overflow-hidden rounded-md bg-[#306ce9]">
+                                            <Image src={ '/service-bg.jpg'} alt='' fill objectFit='cover' />
+                                        </span> 
 
-            {/* <CarouselPrevious className="max-sm:hidden top-[-50px] right-[-20rem]" /> */}
-            {/* <CarouselNext className="hidden sm:block top-[-50px] right-0" /> */}
-        </Carousel>
+                                        <div className="w-full h-full flex flex-col justify-between items-start gap-3">
+                                            <p className="text-[15.5px] font-medium text-white">{title}</p>
+
+                                            <p className="text-sm text-gray-100 line-clamp-3 ">{description}</p>
+
+                                            <button className="h-[45px] bg-white hover:bg-gray-100 rounded-full w-[200px] flex items-center justify-center text-sm font-medium gap-1">{'Book appointment'}</button>
+                                        </div>
+                                    </div>                                
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+
+                    
+                </Swiper>
+            </div>
+        </article>
     )
 }
 
-export default ServiceSlider
+export default ServicesSlider

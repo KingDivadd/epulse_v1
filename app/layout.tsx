@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: "epulse",
     description: "Your health, our pulse.",
     icons: {
-        icon: "/icons/heart-rate-3.png",
+        icon: "/wallet-img-1.jpg",
     }
     
 };
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Readonly<{
     return (
         <html lang="en" className="scroll-smooth">
 
-            <body className={` antialiased w-screen h-screen overflow-x-hidden bg-gray-100`}>
+            <body className={` antialiased w-screen h-screen overflow-x-hidden bg-gray-50`}>
                 <ChatProvider>
                     <main>{children}</main>
                     <Toaster position="top-center"/>

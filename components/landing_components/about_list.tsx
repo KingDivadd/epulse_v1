@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import {about_list} from "@/constants"
+import { FaHandsHelping, FaUsers, FaUserMd, FaHospital } from 'react-icons/fa';
 
 const AboutList = () => {
     return (
@@ -10,15 +11,13 @@ const AboutList = () => {
                     about_list.map((data, ind)=>{
                         return(
                             <div key={ind} className="min-w-[195px] h-[175px] sm:h-[195] rounded-[8px]  flex flex-col items-center py-[25px] px-[20px] hover:-translate-y-1 duration-400 shadow-md bg-[#ffffff] hover:bg-[#306CE9] group">
-                                <span className="h-[40px] w-[40px] flex items-center justify-center rounded-[50px] bg-[#f0f8ff]  mt-2">
-                                    <span className={`relative overflow-hidden h-[20.83px] w-[20px] `}>
-                                        <Image src={data.icon} alt='' layout='fill' objectFit='contain' />
-                                    </span>
+                                <span className={`h-[40px] w-[40px] flex items-center justify-center rounded-[50px] ${data.bg_color}  mt-2`}>
+                                    <data.icon className={`size-[20px] ${data.icon_color} `} />
                                 </span>
 
                                 <p className="mt-[24px] font-[500] font-mont group-hover:text-[#ffffff] text-[#101010] text-2xl sm:text-3xl">{data.count}+</p>
 
-                                <p className="mt-[5px] font-[400] font-mont group-hover:text-[#ffffff] text-[#505050] text-[13px] ">{data.description}</p>
+                                <p className="mt-[5px] font-[400] font-mont text-center group-hover:text-[#ffffff] text-[#505050] text-[13px] ">{data.description}</p>
 
                             </div>
                         )

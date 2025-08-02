@@ -9,11 +9,9 @@ const HeaderListCards = () => {
             {
                     header_list.map((data, ind)=>{
                         return(
-                            <div key={ind} className="min-w-[195px] h-[195px] rounded-[8px]  flex flex-col py-[25px] px-[20px] hover:-translate-y-1 duration-400 shadow-md bg-[#ffffff] hover:bg-[#306CE9] group">
+                            <div key={ind} className="min-w-[195px] h-[195px] rounded-[8px]  flex flex-col py-[25px] px-[20px] hover:-translate-y-1 duration-400 shadow-md bg-[#ffffff] ">
                                 <span className="h-[40px] w-[40px] flex items-center justify-center rounded-[50px] bg-[#f0f8ff] ">
-                                    <span className={`relative overflow-hidden h-[20.83px] w-[20px] `}>
-                                        <Image src={data.icon} alt='' layout='fill' objectFit='contain' />
-                                    </span>
+                                    <data.icon className={`size-[20px] text-[#306ce9]`} />
                                 </span>
 
                                 <p className="mt-[24px] font-[500] font-mont group-hover:text-[#ffffff] text-[#101010] text-[18px]">{data.title}</p>
