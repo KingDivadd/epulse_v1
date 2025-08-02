@@ -63,21 +63,21 @@ const DoctorSlider = () => {
 
 
                             return (
-                                <SwiperSlide key={index} className=" bg-white shadow-md p-3.5 rounded-md flex items-center justify-start font-mont">
+                                <SwiperSlide key={index} className=" bg-[#306ce9]  shadow-md p-3.5 rounded-md flex items-center justify-start font-mont">
                                     <div className=" flex flex-col min-h-[90px] items-center justify-start gap-3">
-                                        <p className="text-[14px] text-gray-700 font-medium w-full text-start">{specialty}</p>
+                                        <p className="text-[14px] text-white font-medium w-full text-start">{specialty}</p>
 
-                                        <span className="relative h-[200px] w-full overflow-hidden rounded-md ">
+                                        <span className="relative h-[300px] md:h-[200px] w-full overflow-hidden rounded-md ">
                                             <Image src={'/profile-img-2b.jpg'} alt='' fill objectFit='cover' />
                                         </span> 
 
                                         <div className="w-full h-[130px] flex flex-col justify-between items-start gap-1.5">
                                             
-                                            <p className="text-[15.5px] font-medium text-gray-600">{number_of_doctors > 20 ? `20 + Doctors`: `${number_of_doctors} Doctors` }</p>
+                                            <p className="text-[15.5px] font-medium text-gray-100">{number_of_doctors > 20 ? `20 + Doctors`: `${number_of_doctors} Doctors` }</p>
 
-                                            <p className="text-[13px] text-gray-600 line-clamp-3 ">{description}</p>
+                                            <p className="text-[13px] text-gray-100 line-clamp-3 ">{description}</p>
 
-                                            <button className="h-[35px] bg-[#306ce9] hover:bg-[#306ce9]/90 text-white rounded-full w-full flex items-center justify-center text-[12.5px] font-medium gap-1" onClick={handle_get_started}>{'Veiw all specialist'}</button>
+                                            <button className="h-[35px] bg-white hover:bg-[#f2f2f2]  rounded-full w-full flex items-center justify-center text-[12.5px] font-medium gap-1" onClick={handle_get_started}>{'Veiw all specialist'}</button>
                                         </div>
                                     </div>                                
                                 </SwiperSlide>

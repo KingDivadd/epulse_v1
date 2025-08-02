@@ -4,7 +4,7 @@ import {header_list} from "@/constants"
 
 const HeaderListCards = () => {
     return (
-        <div className="w-full md:w-[70%] mt-20 md:mt-30 lg:mt-50 gap-[20px] temp-220 ">
+        <div className="w-full md:w-[70%] mt-20 md:mt-30 lg:mt-50 gap-5 sm:gap-[20px] temp-220 ">
 
             {
                     header_list.map((data, ind)=>{
