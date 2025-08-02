@@ -4,8 +4,10 @@ import {BellIcon, } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import {useChat} from '@/app/context/ChatContext'
-import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,  DropdownMenuRadioGroup, DropdownMenuRadioItem,  DropdownMenuSeparator,  DropdownMenuTrigger, DropdownMenuItem, DropdownMenuShortcut, DropdownMenuGroup, DropdownMenuPortal, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger} from "@/components/ui/dropdown-menu"
-import { Button } from 'react-day-picker'
+import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,   DropdownMenuSeparator,  DropdownMenuTrigger, DropdownMenuItem, DropdownMenuGroup, } from "@/components/ui/dropdown-menu"
+import { HiOutlineMenu } from "react-icons/hi";
+import { RiMenuFold3Line } from "react-icons/ri";
+
 
 const Navbar = () => {
     const [current_route, setCurrent_route] = useState('')
@@ -24,9 +26,9 @@ const Navbar = () => {
 
                 <span className=" sm:hidden h-full flex items-center jusify-center rotate-180 " 
                     onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)}>
-                    <span className="h-5 w-5 overflow-hidden relative">
-                        <Image src={'/icons/menu-black.png'} alt='sun' fill objectFit='cover' />
-                    </span>
+
+                    <RiMenuFold3Line className='size-[27.5px] text-gray-700 ' />
+                    
                 </span>
                 
                 <span className="h-full flex items-center jusify-center">

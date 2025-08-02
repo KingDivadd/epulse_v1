@@ -2,12 +2,10 @@
 import React, {useState,useEffect} from 'react'
 import { route_list } from '@/constants';
 import Link from 'next/link'
-import Image from 'next/image';
 import {useChat} from '@/app/context/ChatContext'
 import { useRouter } from 'next/navigation';
 import SidebarHeading from './reuseable_heading_component';
-
-
+import { RiMenuFold3Line } from "react-icons/ri";
 
 const MobileSidebar = () => {
     const [current_route, setCurrent_route] = useState('')
@@ -25,9 +23,9 @@ const MobileSidebar = () => {
             <span className="w-full flex justify-between items-center h-24  pr-5"> 
                 <span className="w-full flex justify-start h-24 "> <SidebarHeading /> </span>
 
-                <span className="h-4 w-4 relative overflow-hidden" onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)}>
-                    <Image src={'/icons/close-black.png'} alt='' fill layout='contain' />
-                </span> 
+
+                <RiMenuFold3Line className=' size-[27.5px] text-gray-700 ' onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)} />
+                
 
 
             </span>
