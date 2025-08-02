@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import { get_auth_request, patch_request, post_request } from '@/app/api/index'
-import { toast_msg } from '@/components/toast'
+import { toast_msg } from '@/lib/toast'
 import { InputOTP,  InputOTPGroup,  InputOTPSeparator,  InputOTPSlot,} from "@/components/ui/input-otp"
 import { useChat } from '@/app/context/ChatContext'
 import { useRouter } from 'next/navigation'
@@ -153,7 +153,7 @@ const UserDetails = () => {
                     {/* <button className="w-full h- rounded bg-[#] text-white"></button> */}
 
                     <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
-                        {'Didn\'t receive any code?'} <p className='text-[#306CE9] hover:underline duration-300 font-semibold' onClick={handle_new_otp}>Request Again</p>
+                        {'Didn\'t receive any code?'} <p className='text-[#306CE9] hover:underline duration-300 font-semibold cursor-pointer' onClick={handle_new_otp}>Request Again</p>
                     </h3>
 
                     <Button type='submit' size="sm" className=" w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={otp.length < 6} onClick={handle_submit}>

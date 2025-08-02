@@ -17,13 +17,13 @@ export function format_date_from_unix(appointment_date: number) {
     // Get time in 12-hour format
     let hours = date.getHours();
     const minutes = date.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'pm' : 'am';
+    const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12 || 12; // Convert to 12-hour format
 
     // Return formatted object
     return {
         date: `${day}${suffix} of ${month}`,
-        time: `${hours}:${minutes}${ampm}`
+        time: `${hours}:${minutes} ${ampm}`
     };
 }
 

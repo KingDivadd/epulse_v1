@@ -155,9 +155,9 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search }: FundSearchProps
                 }`
 
                 return (
-                    <div key={transaction_id} className="w-full flex flex-col gap-2 font-mont py-4  first:pt-0 last:pb-4 border-b border-[#f2f2f2]">
+                    <div key={transaction_id} className="w-full flex flex-col gap-2 font-mont py-4   last:pb-4 border-b border-[#f2f2f2] first:border-[#e2e2e2] first:border-t">
                         <span className="w-full flex items-start justify-between">
-                            <p className="text-[14px] w-[70%] font-medium">{narration}</p>
+                            <p className="text-[14px] w-[70%] text-gray-700 font-medium">{narration}</p>
                             <span className="text-[14px] flex items-center">
                             ₦<p className="font-medium">{amount.toFixed(2)}</p>
                             </span>

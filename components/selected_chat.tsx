@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { RiSearchLine, RiAttachment2 } from 'react-icons/ri';
-import { toast_msg } from './toast';
+import { toast_msg } from '@/lib/toast';
 import {messages_data} from '@/constants'
 import { get_time_from_unix } from '@/lib/date_formater';
 import { IoSend,IoClose } from "react-icons/io5";
@@ -56,13 +56,11 @@ const SelectedChat = () => {
                     </span>
                 </span>
 
-                <span className="flex items-center justify-end gap-3">
-                    {/* <RiSearchLine size="18px" className="text-gray-600" /> */}
-                    <button className="bg-[#306ce9] px-2.5 md:px-5 lg:px-7 rounded-sm text-white text-[13px] py-2.5">Start Consultation</button>
+                <span className="flex items-center justify-end gap-3 lg:gap-1">
                     
-                    <button className=" lg:hidden h-[30px] w-[30px] flex items-center justify-center cursor-pointer rounded-full duration-300 hover:bg-[#f2f2f2]" onClick={()=> setShow_selected_chat(!show_selected_chat)}>
-                        <IoClose size={'18px'} className='text-gray-500' />
-                    </button>
+                    <button className="bg-[#306ce9] h-[40px] md:px-5 rounded-sm text-white text-[13px] py-2.5">Start Consultation</button>
+                    
+                    
                 </span>
             </div>
 

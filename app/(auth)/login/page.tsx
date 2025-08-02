@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
-import {toast_msg} from '@/components/toast'
+import {toast_msg} from '@/lib/toast'
 import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
 import {useRouter} from 'next/navigation'
@@ -40,13 +40,17 @@ const Login = () => {
         
         try {
             
-            const res = await post_request('auth/patient-login', auth) as AxiosResponseHeaders
+            const res = await post_request('auth/user-login', auth) as AxiosResponseHeaders
             
             if (res.status === 200 || res.status === 201) {
 
                 localStorage.setItem('x-id-key', res.headers.get('x-id-key'));
 
                 toast_msg({title: "Login successful!"})
+
+                const user_role = res.data.user_data.patient_id ? 'patient' : 'physician'
+
+                setUser_information({...user_information, ...res.data.user_data, email:auth.email, role:user_role })
 
                 if (res.data.user_data.physican_id) {
                     router.push('/dashboard')
@@ -59,7 +63,6 @@ const Login = () => {
                     
                     if (!gender || !country_code || !phone_number || !date_of_birth) {
 
-                        setUser_information({...user_information, ...res.data.user_data, email:auth.email})
 
                         router.push(`/user-details/${res.data.user_data.patient_id}`)
                         

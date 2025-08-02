@@ -1,15 +1,26 @@
 'use client'
-import DashboardNav from '@/components/dashboard_nav'
+import Navbar from '@/components/navbar'
 import React from 'react'
 import ConsultDoctorPage from '@/page/consult_doctor_page'
+import { useChat } from '@/app/context/ChatContext'
+import LoadingConsultDoctor from '@/page/skeleton/loading_consult_doctor'
 
 const Doctors = () => {
+    const { user_information} = useChat()
     return (
         <div  className='w-full h-full flex flex-col bg-white overflow-y-auto'>
             <div className="w-full">
-                <DashboardNav />
+                <Navbar />
 
-                <ConsultDoctorPage />
+                <div className="w-full">
+                    {
+                        user_information ? 
+                        <ConsultDoctorPage />
+                        :
+                        <LoadingConsultDoctor />
+                    }
+                </div>
+                
             </div>
         </div>
     )

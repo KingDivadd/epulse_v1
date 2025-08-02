@@ -1,13 +1,13 @@
 'use client'
 import React from 'react'
-import DashboardNav from '@/components/dashboard_nav'
+import Navbar from '@/components/navbar'
 import AppointmentBooking from "@/page/appointment_booking"
 
 const AppointmentBookingPage = () => {
     return (
         <div  className='w-full h-full flex flex-col bg-white overflow-y-auto'>
             <div className="w-full">
-                <DashboardNav />
+                <Navbar />
 
                 <AppointmentBooking />
             </div>

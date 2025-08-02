@@ -1,5 +1,9 @@
 import { RiDashboardFill, RiCalendar2Fill, RiStethoscopeFill, RiChat4Line , RiWallet3Fill, RiSettings3Fill, RiLogoutBoxRLine } from 'react-icons/ri'
-
+import { FiUser } from "react-icons/fi";
+import { AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai';
+import { MdCheckCircleOutline, MdOutlineCancel } from 'react-icons/md';
+import { FaCheckCircle } from 'react-icons/fa';
+import { HiOutlineClock } from 'react-icons/hi';
 
 // landing Page Navbar contents
 export const landing_navbar_data = [
@@ -58,14 +62,13 @@ export const third_parthy_auth = [
 ]
 
 export const route_list = [
-    { name: 'Dashboard', icon: RiDashboardFill, path: '/dashboard', id: 'dashboard' },
-    { name: 'Appointments', icon: RiCalendar2Fill, path: '/appointments', id: 'appointments' },
-    { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'doctors' },
-    { name: 'Chat', icon: RiChat4Line , path: '/chats', id: 'chats' },
-    // { name: 'Medical Records', icon: , path: '/medical-records', id: 'medical_records' },
-    { name: 'Wallet Funding', icon: RiWallet3Fill, path: '/wallet-funding', id: 'wallet-funding' },
-    { name: 'Settings', icon: RiSettings3Fill, path: '/settings', id: 'settings' },
-    { name: 'Logout', icon: RiLogoutBoxRLine, path: '/login', id: 'logout' },
+    { name: 'Dashboard', icon: RiDashboardFill, path: '/dashboard', id: 'dashboard', role: ['patient', 'physician'] },
+    { name: 'Appointments', icon: RiCalendar2Fill, path: '/appointments', id: 'appointments', role: ['patient', 'physician'] },
+    { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'doctors', role: ['patient',] },
+    { name: 'Consultation', icon: RiChat4Line , path: '/consultation', id: 'consultation', role: ['patient', 'physician'] },
+    { name: 'Wallet', icon: RiWallet3Fill, path: '/wallet', id: 'wallet-funding', role: ['patient', 'physician'] },
+    { name: 'Profile', icon: FiUser, path: '/profile', id: 'profile', role: [ 'physician', 'patient'] },
+    { name: 'Logout', icon: RiLogoutBoxRLine, path: '/login', id: 'logout', role: ['patient', 'physician'] },
 ];
 
 export const consultation_card_list = [
@@ -688,4 +691,62 @@ export const messages_data = [
         time: Math.floor(new Date('2025-07-28T16:05:00Z').getTime() / 1000) - (4 * 60 * 60) + (4 * 60), // 11:04 WAT
     },
     
+];
+
+export const metrics = [
+    { name: 'All Appointments', icon: AiOutlineCalendar, id: 'all_appointments', count: 30 },
+    { name: 'Pending', icon: AiOutlineClockCircle, id: 'pending', count: 10 },
+    { name: 'Approved', icon: MdCheckCircleOutline, id: 'approved', count: 20 },
+    { name: 'Completed', icon: FaCheckCircle, id: 'completed', count: 15 },
+    // { name: 'Missed Appointments', icon: MdOutlineCancel, id: 'missed_appointments', count: 2 },
+    // { name: 'Today\'s Appointments', icon: HiOutlineClock, id: 'todays_appointments', count: 3 },
+];
+
+export const physician_appointment_sample = [
+  // 2 Months Ago (May 31, 2025 - June 30, 2025) - 10 entries
+  { first_name: 'John', last_name: 'Doe', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1717100400, status: 'completed' }, // May 31, 2025, 09:00
+  { first_name: 'Jane', last_name: 'Smith', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1717104000, status: 'missed' }, // May 31, 2025, 09:40
+  { first_name: 'Michael', last_name: 'Johnson', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1717186800, status: 'approved' }, // June 1, 2025, 09:00
+  { first_name: 'Emily', last_name: 'Brown', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1717190400, status: 'pending' }, // June 1, 2025, 09:40
+  { first_name: 'David', last_name: 'Wilson', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1717628400, status: 'completed' }, // June 6, 2025, 09:00
+  { first_name: 'Sarah', last_name: 'Davis', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1717632000, status: 'missed' }, // June 6, 2025, 09:40
+  { first_name: 'James', last_name: 'Taylor', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1717947600, status: 'approved' }, // June 10, 2025, 09:00
+  { first_name: 'Lisa', last_name: 'Anderson', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1717951200, status: 'pending' }, // June 10, 2025, 09:40
+  { first_name: 'Robert', last_name: 'Martinez', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1718530800, status: 'completed' }, // June 18, 2025, 09:00
+  { first_name: 'Mary', last_name: 'Garcia', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1718534400, status: 'missed' }, // June 18, 2025, 09:40
+
+  // Last Month (June 30, 2025 - July 31, 2025) - 10 entries
+  { first_name: 'William', last_name: 'Hernandez', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1719692400, status: 'approved' }, // June 30, 2025, 09:00
+  { first_name: 'Patricia', last_name: 'Lopez', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1719696000, status: 'pending' }, // June 30, 2025, 09:40
+  { first_name: 'Thomas', last_name: 'Clark', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1719778800, status: 'completed' }, // July 1, 2025, 09:00
+  { first_name: 'Linda', last_name: 'Lewis', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1719782400, status: 'missed' }, // July 1, 2025, 09:40
+  { first_name: 'Charles', last_name: 'Walker', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1720098000, status: 'approved' }, // July 6, 2025, 09:00
+  { first_name: 'Barbara', last_name: 'Hall', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1720101600, status: 'pending' }, // July 6, 2025, 09:40
+  { first_name: 'Daniel', last_name: 'Allen', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1720681200, status: 'completed' }, // July 14, 2025, 09:00
+  { first_name: 'Elizabeth', last_name: 'Young', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1720684800, status: 'missed' }, // July 14, 2025, 09:40
+  { first_name: 'Matthew', last_name: 'King', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1721266800, status: 'approved' }, // July 22, 2025, 09:00
+  { first_name: 'Jennifer', last_name: 'Wright', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1721270400, status: 'pending' }, // July 22, 2025, 09:40
+
+  // This Month (July 1, 2025 - July 31, 2025) - 20 entries
+  // Starting 2 days ago (July 29, 2025) to today (July 31, 2025, 10:00 AM WAT)
+  { first_name: 'Joseph', last_name: 'Scott', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1722226800, status: 'completed' }, // July 29, 2025, 09:00
+  { first_name: 'Margaret', last_name: 'Green', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1722229200, status: 'missed' }, // July 29, 2025, 09:40
+  { first_name: 'Richard', last_name: 'Adams', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1722231600, status: 'approved' }, // July 29, 2025, 10:20
+  { first_name: 'Dorothy', last_name: 'Baker', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1722234000, status: 'pending' }, // July 29, 2025, 11:00
+  { first_name: 'Paul', last_name: 'Nelson', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1722236400, status: 'completed' }, // July 29, 2025, 11:40
+  { first_name: 'Nancy', last_name: 'Mitchell', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1722238800, status: 'missed' }, // July 29, 2025, 12:20
+  { first_name: 'Mark', last_name: 'Perez', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1722241200, status: 'approved' }, // July 29, 2025, 13:00
+  { first_name: 'Karen', last_name: 'Roberts', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1722243600, status: 'pending' }, // July 29, 2025, 13:40
+  { first_name: 'Donald', last_name: 'Turner', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1722311600, status: 'completed' }, // July 30, 2025, 09:00
+  { first_name: 'Betty', last_name: 'Phillips', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1722314000, status: 'missed' }, // July 30, 2025, 09:40
+  { first_name: 'George', last_name: 'Campbell', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1722316400, status: 'approved' }, // July 30, 2025, 10:20
+  { first_name: 'Helen', last_name: 'Parker', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1722318800, status: 'pending' }, // July 30, 2025, 11:00
+  { first_name: 'Kenneth', last_name: 'Evans', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1722321200, status: 'completed' }, // July 30, 2025, 11:40
+  { first_name: 'Sandra', last_name: 'Edwards', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1722323600, status: 'missed' }, // July 30, 2025, 12:20
+  { first_name: 'Steven', last_name: 'Collins', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1722326000, status: 'approved' }, // July 30, 2025, 13:00
+  { first_name: 'Donna', last_name: 'Stewart', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1722328400, status: 'pending' }, // July 30, 2025, 13:40
+  { first_name: 'Edward', last_name: 'Sanchez', gender: 'Male', avatar: '/profile-img-2a.jpg', consultation_type: 'chat', time: 1722404400, status: 'completed' }, // July 31, 2025, 09:00
+  { first_name: 'Ruth', last_name: 'Morris', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1722406800, status: 'missed' }, // July 31, 2025, 09:40
+  { first_name: 'Ronald', last_name: 'Rogers', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1722409200, status: 'approved' }, // July 31, 2025, 10:20
+  { first_name: 'Sharon', last_name: 'Reed', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1722411600, status: 'pending' } // July 31, 2025, 11:00
 ];

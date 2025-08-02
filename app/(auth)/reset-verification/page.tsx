@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import { get_auth_request, patch_request, post_request } from '@/app/api/index'
-import { toast_msg } from '@/components/toast'
+import { toast_msg } from '@/lib/toast'
 import { InputOTP,  InputOTPGroup,  InputOTPSeparator,  InputOTPSlot,} from "@/components/ui/input-otp"
 import { useChat } from '@/app/context/ChatContext'
 import { useRouter } from 'next/navigation'

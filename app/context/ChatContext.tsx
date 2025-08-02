@@ -18,7 +18,6 @@ interface ChatContextType {
     selected_user: UserInfoProps | null;
     setSelected_user: (selected_user: UserInfoProps | null)=>void;
 
-
 }
 
 
@@ -42,7 +41,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             show_activity_history, setShow_activity_history,
             show_mobile_sidebar, setShow_mobile_sidebar,
             selected_user, setSelected_user,
-            show_selected_chat, setShow_selected_chat
+            show_selected_chat, setShow_selected_chat,
             
             }}>
             {children}

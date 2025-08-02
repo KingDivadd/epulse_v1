@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import { patch_auth_request, } from '@/app/api/index'
-import { toast_msg } from '@/components/toast'
+import { toast_msg } from '@/lib/toast'
 import {useChat} from '@/app/context/ChatContext'
 import PhoneInputComponent from '@/components/auth_components/phone_input_component'
 import DateOfBirth from '@/components/auth_components/date_of_birth'
@@ -17,13 +17,12 @@ const UserDetails = () => {
     const router = useRouter()
     const [auth, setAuth] = useState({gender:'', country_code:'', phone_number:'' , date_of_birth:''})
     const [loading, setLoading] = useState(false)
-    const [position, setPosition] = React.useState("")
     
     const { user_information, country_dial_code} = useChat()  
 
     useEffect(() => {
-        setAuth({...auth, gender: position.toLowerCase(), country_code: country_dial_code})
-    }, [position, country_dial_code])
+        setAuth({...auth, country_code: country_dial_code})
+    }, [ country_dial_code])
 
     useEffect(() => {
         setAuth({...auth, date_of_birth: user_information?.date_of_birth || Math.floor(Date.now() / 1000).toString()}) 
@@ -45,17 +44,24 @@ const UserDetails = () => {
             const response = await patch_auth_request('auth/signup-update-patient-data', auth) as AxiosResponseHeaders
             
             if (response.status === 200 || response.status === 201) {
-                localStorage.setItem('x-id-key', response.headers.get('x-id-key')) 
+                localStorage.setItem('x-id-key', response.headers.get('x-id-key'))
 
 
                 toast_msg({title: "Details updated successfully."})
 
                 setTimeout(() => {
-                    router.push('/dashboard') 
-                }, 3000);
+                    router.push('/profile') 
+                }, 4000);
 
                 setLoading(false)
-            } else if (response.status === 500 ){
+            } else if (response.status === 401){
+                toast_msg({title: 'Session expired, log in again.'})
+                
+                setTimeout(() => {
+                    router.push('/login')
+                }, 3000);
+            }
+            else if (response.status === 500 ){
                 toast_msg({title: "Network error. Please try again later.", type:'danger'})
             }
             else {

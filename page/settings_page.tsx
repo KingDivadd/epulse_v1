@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button';
 import { ChevronDown } from 'lucide-react';
 import {genotypes, blood_groups} from "@/constants"
 import { useChat } from '@/app/context/ChatContext';
+import { ImgUploader } from '@/lib/file_uploader';
+import { Skeleton } from '@/components/ui/skeleton';
 
 interface FormInformation {
     first_name: string;
@@ -19,19 +21,27 @@ interface FormInformation {
     country_code: string;
     phone_number: string;
     country: string;
-    weight: string;
-    height: string;
+    weight: number;
+    height: number;
     blood_group: string;
     date_of_birth: string;
     genotype: string;
 }
 
 const SettingsPage = () => {
-    const {user_information, country_dial_code} = useChat()
+    const {user_information, setUser_information, country_dial_code} = useChat()
     const [position, setPosition] = useState('')
     const [information, setInformation] = useState<FormInformation>({
-        first_name: '',last_name: '',avatar: '',gender: '', country_code: '', phone_number: '',country: '',  weight: '', height: '', blood_group: '',genotype: '', date_of_birth: '',
+        first_name: '',last_name: '',avatar: '',gender: '', country_code: '', phone_number: '',country: '',  weight: 0, height: 0, blood_group: '',genotype: '', date_of_birth: '',
     });
+    const [loading, setLoading] = useState(true)
+
+    useEffect(()=>{
+        // dumping user information
+        setTimeout(() => {
+            setInformation({...information, ...user_information})
+        }, 500);
+    }, [])
 
     useEffect(() => {
         setInformation({...information, gender: position.toLowerCase(), country_code: country_dial_code})
@@ -43,72 +53,74 @@ const SettingsPage = () => {
 
     const handle_change = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setInformation({ ...information, [name]: value });
+
+        setInformation({ ...information, [name]: (name == 'height' || name == 'weight')? Number(value):value });
     };
 
     const handle_submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         // Add API call or save logic here
         console.log('Saving changes:', information);
+        if (information.avatar){
+            setUser_information({...user_information, avatar:information.avatar})
+        }
     };
+
+    function handle_file_upload(file:string, id?:string) {
+        console.log('image uploaded successfully')
+        setInformation({...information, [id!]:file})
+    }
 
     return (
         <div className="p-5 h-[calc(100vh-70px)] w-full bg-gray-100 font-mont ">
             <div className="h-full overflow-y-auto hide-scrollbar">
+                
                 <form onSubmit={handle_submit} className=" max-lg:max-w-5xl xl:w-full mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 bg-white p-5 rounded-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                     {/* Profile Image Section */}
-                        <div className="flex flex-col justify-between items-center gap-10 md:gap-4  ">
-                            <span className=" w-[150px] h-[150px] sm:w-[275px] sm:h-[275px] lg:w-[300px] lg:h-[300px] xl:w-[275px] xl:h-[275px] relative overflow-hidden mx-auto">
-                            <Image
-                                src={information.avatar || '/profile-img-2c.jpg'}
-                                alt="Profile"
-                                fill
-                                style={{ objectFit: 'cover' }}
-                                className="rounded-full"
-                            />
-                            <CiEdit size="20px" className="absolute text-[#306ce9] bottom-3 right-3 sm:bottom-5 sm:right-5 cursor-pointer" />
+                        <div className="col-span-1 flex flex-col gap-15 bg-white p-5 rounded-md shadow-md  justify-between  ">
+                            <span className="h-[300px] w-[300px] md:h-[200px] md:w-[200px] lg:w-[320px] lg:h-[320px] flex mx-auto justify-center relative group">
+                                <ImgUploader id={'avatar'} title={''} url={''} onFileUpload={handle_file_upload} />                                
                             </span>
-                            <button
-                            type="submit"
-                            className="hidden md:block h-[50px] w-full rounded-sm text-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90" >
+                            
+                            <button type="submit" className="hidden md:block h-[50px] w-full rounded-sm text-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90" >
                             Update Information
                             </button>
                         </div>
 
                         {/* Personal Info Section */}
-                        <div className="flex flex-col gap-4 ">
+                        <div className="col-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md ">
                             <InputComponent3
-                            title="First Name"
-                            type="text"
-                            name="first_name"
-                            value={information.first_name}
-                            onChange={handle_change}
+                                title="First Name"
+                                type="text"
+                                name="first_name"
+                                value={information.first_name}
+                                onChange={handle_change}
                             />
                             <InputComponent3
-                            title="Last Name"
-                            type="text"
-                            name="last_name"
-                            value={information.last_name}
-                            onChange={handle_change}
+                                title="Last Name"
+                                type="text"
+                                name="last_name"
+                                value={information.last_name}
+                                onChange={handle_change}
                             />
                             <InputComponent3
-                            title="Country"
-                            type="text"
-                            name="country"
-                            value={information.country}
-                            onChange={handle_change}
+                                title="Country"
+                                type="text"
+                                name="country"
+                                value={information.country}
+                                onChange={handle_change}
                             />
                             <span className="flex flex-col gap-2 w-full">
-                            <p className="text-sm font-medium">Phone Number</p>
-                            <PhoneInputComponent
-                                country_code={information.country_code}
-                                phone_number={information.phone_number}
-                                on_change={handle_change}
-                            />
+                                <p className="text-sm font-medium text-slate-700 font-mont">Phone Number</p>
+                                <PhoneInputComponent
+                                    country_code={information.country_code}
+                                    phone_number={information.phone_number}
+                                    on_change={handle_change}
+                                />
                             </span>
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium">Gender</p>
+                                <p className="text-sm font-medium text-slate-700 font-mont">Gender</p>
                                 <select
                                     name="gender"
                                     id="gender"
@@ -125,14 +137,14 @@ const SettingsPage = () => {
                         </div>
 
                         {/* Health Info Section */}
-                        <div className="flex flex-col gap-4 ">
+                        <div className="bcol-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md  ">
                             <span className="flex flex-col gap-2 w-full">
-                            <p className="text-sm font-medium">Date of Birth</p>
+                            <p className="text-sm font-medium text-slate-700 font-mont">Date of Birth</p>
                             <DateOfBirth />
                             </span>
                             
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium">Blood Group</p>
+                                <p className="text-sm font-medium text-slate-700 font-mont">Blood Group</p>
                                 <select
                                     name="blood_group"
                                     id="blood_group"
@@ -153,7 +165,7 @@ const SettingsPage = () => {
                             </span>
 
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium">Genotype</p>
+                                <p className="text-sm font-medium text-slate-700 font-mont">Genotype</p>
                                 <select
                                     name="genotype"
                                     id="genotype"
@@ -174,28 +186,28 @@ const SettingsPage = () => {
                             </span>
 
                             <InputComponent3
-                            title="Height (cm)"
-                            type="text"
-                            name="height"
-                            value={information.height}
-                            onChange={handle_change}
+                                title="Height (cm)"
+                                type="number"
+                                name="height"
+                                value={information.height}
+                                onChange={handle_change}
                             />
                             <InputComponent3
-                            title="Weight (kg)"
-                            type="text"
-                            name="weight"
-                            value={information.weight}
-                            onChange={handle_change}
+                                title="Weight (kg)"
+                                type="number"
+                                name="weight"
+                                value={information.weight}
+                                onChange={handle_change}
                             />
                         </div>
-                    <button
-                            type="submit"
-                            className="md:hidden mt-5 h-[50px] w-full rounded-sm text-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90" >
+
+                        <button type="submit" className="md:hidden mt-5 h-[50px] w-full rounded-sm text-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90" >
                             Update Information
-                            </button>
+                        </button>
                     </div>
 
                 </form>
+                
             </div>
         </div>
     );

@@ -85,9 +85,9 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
 
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="font-mont font-semibold text-lg text-slate-700 px-5">All Appointments</h3>
+      <h3 className="font-mont font-semibold text-lg text-slate-700 sm:px-5">All Appointments</h3>
 
-      <span className="flex flex-col items-start justify-start gap-2 w-[250px] px-5">
+      <span className="flex flex-col items-start justify-start gap-2 w-[250px] sm:px-5">
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="w-[250px]">
             <Button
@@ -136,7 +136,7 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
       </span>
 
       <div className="w-full hide-scrollbar ">
-        <div className="w-full temp-240 gap-5 px-5 my-3">
+        <div className="w-full temp-240 gap-5 sm:px-5 my-3">
           {filteredAppointments
             .slice((currentPage - 1) * appointmentsPerPage, currentPage * appointmentsPerPage)
             .map((item, ind:number) => {
@@ -201,7 +201,7 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
                         <div
                           key={ind}
                           className={`w-full flex flex-col font-mont rounded-lg box-shadow-1 duration-300 ${
-                            appointments_within_24hrs ? 'bg-[#306ce9] duration-300' : 'bg-white hover:translate-y-1 group'
+                            appointments_within_24hrs ? 'bg-[#306ce9] duration-300' : 'bg-white shadow-md  hover:translate-y-1 group'
                           }`}
                         >
                           <div key={ind} className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
@@ -302,7 +302,7 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
 
       {/* Pagination */}
       {filteredAppointments.length > 0 && (
-        <div className="w-full px-5 flex items-center justify-center gap-4 pt-4 border-t border-gray-300">
+        <div className="w-full sm:px-5 flex items-center justify-center gap-4 pt-4 border-t border-gray-300">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}

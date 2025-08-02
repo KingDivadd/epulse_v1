@@ -19,7 +19,7 @@ const AppointmentPage = () => {
 
     return (
         <div className='p-5 min-h-[calc(100vh-70px)] w-full bg-gray-100 font-mont ' onClick={handleOutsideClick}>
-            <div className="w-full h-full overflow-y-auto gap-5  relative bg-white rounded-md shadow-md py-5 hide-scrollbar">
+            <div className="w-full h-full overflow-y-auto gap-5  relative  sm:bg-white rounded-md sm:shadow-md py-5 hide-scrollbar">
                 <Appointments show_selected_appointment={show_selected_appointment} setShow_selected_appointment={setShow_selected_appointment}/>
 
                 <div className={`hidden md:block w-full md:w-[400px] lg:w-[500px] h-[400px] z-10 absolute top-0 duration-300 ${show_selected_appointment ? 'right-0':'right-[-500px]'}`}>  

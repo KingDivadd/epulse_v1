@@ -6,7 +6,7 @@ import { IoArrowBackOutline } from 'react-icons/io5';
 import { registered_doctors } from '@/constants';
 import { useChat } from '@/app/context/ChatContext';
 import { useRouter } from 'next/navigation';
-import { toast_msg } from '@/components/toast';
+import { toast_msg } from '@/lib/toast';
 import { convert_to_unix } from '@/lib/date_formater';
 
 
@@ -90,17 +90,13 @@ const DoctorConsultationList = () => {
 
     return (
         <div className="w-full">
-             <Link
-                href={`/doctors/${selected_user.physician_id}`}
-                className="text-md text-[#306ce9] flex items-center justify-start font-medium gap-1"
-                >
-                <IoArrowBackOutline size="18px" />
-                Back
-                </Link>
+            <Link href={`/doctors`} className="text-md text-[#306ce9] flex items-center justify-start font-medium gap-1" >
+                <IoArrowBackOutline size="18px" /> Back
+            </Link>
 
                 <div className="w-full flex flex-col gap-3">
-                <h3 className="font-medium text-md text-start">Select the date and time you would like to have your appointment.</h3>
-                <h3 className="text-[14px] text-start">Please note that appointments can only be selected at 30-minute intervals.</h3>
+                <h3 className="font-medium text-[14.5px] text-start">Select the date and time you would like to have your appointment.</h3>
+                <h3 className="text-[13px] text-start">Please note that appointments can only be selected at 30-minute intervals.</h3>
 
                 <form onSubmit={handle_submit} className="flex flex-col gap-5 p-5 rounded-md bg-white w-full">
                     <span className="w-full flex flex-col gap-2 mt-5">
@@ -148,7 +144,7 @@ const DoctorConsultationList = () => {
                         ></textarea>
                     </span>
 
-                    <button type="submit" className="h-[50px] mt-5 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 text-sm" onClick={handle_submit} > Proceed
+                    <button type="submit" className="h-[50px] mt-5 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 text-sm" onClick={handle_submit} > Book Appointment
                     </button>
                 </form>
                 </div>

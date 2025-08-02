@@ -3,32 +3,51 @@ import React, {useState} from 'react'
 import Image from 'next/image'
 import { Dot, Loader2Icon } from 'lucide-react'
 import {  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
-import { toast_msg } from './toast'
+import { toast_msg } from '@/lib/toast'
+import { useChat } from '@/app/context/ChatContext'
 
 const WalletFundCont = () => {
     const [amount, setAmount] = useState(0)
     const [loading, setLoading] = useState(false)
+    const {user_information} = useChat()
     
 
     async function handle_submit(e: React.FormEvent) {
         e.preventDefault()
         setLoading(true)
+
         if (amount < 100){
             toast_msg({title: 'Amount cannot be less than ₦100'})
             setLoading(false)
             return;
         }
-        
-        try {
-            toast_msg({title: 'Funds transafer in progress'})
-        } catch (error) {
-            console.log(error)
-        }finally{
-            setLoading(false)
+
+        if (user_information && user_information.role == 'patient') {
+            
+            try {
+                toast_msg({title: 'Funds transafer in progress'})
+            } catch (error) {
+                console.log(error)
+            }finally{
+                setLoading(false)
+            }
+            return
+        }else{
+            try {
+                toast_msg({title: 'Funds withdrawal in progress'})
+            } catch (error) {
+                console.log(error)
+            }finally{
+                setLoading(false)
+            }
+            return
+
         }
+
+        
     }
     return (
-        <div className="w-full max-md:flex-col flex items-start justify-between gap-5  min-h-[250px]">
+        <div className="w-full max-md:flex-col flex items-start justify-between gap-5  min-h-[250px] font-mont">
             <span className="flex-1 max-md:w-full min-h-[250px] bg-[#306ce9] shadow-md relative rounded-lg ">
                 <span className="w-full h-200px">
                     <Image src={'/wallet-img-1.jpg'} alt='wallet img ' fill objectFit='cover' className='rounded-md' />
@@ -93,11 +112,12 @@ const WalletFundCont = () => {
                         <DialogTrigger>
                             <span className="rounded-full bg-white text-sm py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">Fund Wallet</span>
                         </DialogTrigger>
-                        <DialogContent>
+                        <DialogContent className='w-xl'>
                             <DialogHeader>
-                                <DialogTitle className='text-xl font-mont font-semibold'>Fund your wallet</DialogTitle>
+                                <DialogTitle className='text-xl font-mont font-semibold'>{(user_information && user_information.role == 'patient') ?  "Fund your wallet" : "Withdraw from your wallet"}</DialogTitle>
                                 <DialogDescription className='font-mont text-[13px ' >
-                                    Please, enter the amount you would like to fund your wallet with.
+                                    {(user_information && user_information.role == 'patient') ?  "Please, enter the amount you would like to fund your wallet with." : "Please, enter the amount you would like to withdraw from your wallet"}
+                                    
                                 </DialogDescription>
                             </DialogHeader>
                                 
@@ -105,7 +125,7 @@ const WalletFundCont = () => {
                                 <input type="number" placeholder="amount" name="amount" onChange={(e)=> setAmount(Number(e.target.value))} className="input-type-2" />
 
                                 <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-sm font-mont" onClick={handle_submit}>
-                                    {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Fund'}
+                                    {loading ? <Loader2Icon className="animate-spin size-8 " /> : `${(user_information && user_information.role == 'patient') ?  "Fund wallet" : "Withdraw"}`}
                                 </button>
                             </form>
                         </DialogContent>
@@ -117,7 +137,7 @@ const WalletFundCont = () => {
             </span>
 
             <span className="hidden md-[250px] lg:w-[300px] xl:w-[350px] h-full rounded-lg border border-[#E6E6E6] bg-white shadow-md  md:flex flex-col gap-7 p-5">
-                <p className="text-xl font-semibold">Overview</p>
+                <p className="text-lg font-semibold">Overview</p>
 
                 <div className="w-full min-h-[150px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
                     <span className="flex flex-col gap-1">

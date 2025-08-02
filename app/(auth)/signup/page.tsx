@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
 import { post_request } from '@/app/api/index'
-import { toast_msg } from '@/components/toast'
+import { toast_msg } from '@/lib/toast'
 import { useRouter } from 'next/navigation'
 import {useChat} from '@/app/context/ChatContext'
 import {third_parthy_auth} from '@/constants'
@@ -130,12 +130,12 @@ const Signup = () => {
 
                         {/* <button className="w-full h- rounded bg-[#] text-white"></button> */}
 
-                        <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.email === '' || auth.password === ''}>
+                        <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.email === '' || auth.password === '' || auth.first_name == '' || auth.last_name == ''}>
                             {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Signup'}
                         </Button>
                     </form>}
 
-                    <p className="text-[15px] text-center w-full sm:w-[350px] font-mont mt-[-10px]">By continuing, you agree to EPulse Terms of Use and Privacy Policy.</p>
+                    <p className="text-[14px] text-center w-full sm:w-[350px] font-mont mt-[-10px]">By continuing, you agree to EPulse Terms of Use and Privacy Policy.</p>
 
                     <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
                         Already have an account? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Login</Link>
