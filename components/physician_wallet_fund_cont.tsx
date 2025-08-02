@@ -94,7 +94,7 @@ const AdminWalletFundCont = () => {
                             <DialogTrigger>
                                 <span className="rounded-full bg-white text-sm py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">Withdraw</span>
                             </DialogTrigger>
-                            <DialogContent>
+                            <DialogContent className='w-xl'>
                                 <DialogHeader>
                                     <DialogTitle className='text-xl font-mont font-semibold'>Withdraw from your wallet</DialogTitle>
                                     <DialogDescription className='font-mont text-[13px ' >
