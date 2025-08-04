@@ -43,7 +43,7 @@ const Footer = () => {
             
 
             <div className="w-full p-5  min-h-[50px] rounded-full flex flex-wrap gap-5 items-center justify-between max-md:justify-center bg-[#306CE9] ">
-                <p className="text-[14px] text-[#ffffff] ">© EPulse 2025, All right reserved</p>
+                <p className="text-[14px] text-[#ffffff] ">© ePulse 2025, All right reserved</p>
 
                 <span className="flex flex-wrap max-md:justify-center items-center justify-between gap-5">
 

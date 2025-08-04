@@ -234,140 +234,140 @@ export const testimonial_list = [
         first_name: 'Aisha',
         country: 'Nigeria',
         country_img: 'https://flagcdn.com/w80/ng.png',
-        testimonial: "I was amazed at how easy it was to consult a specialist through EPulse. The video call quality was excellent, and my doctor was very supportive!"
+        testimonial: "I was amazed at how easy it was to consult a specialist through ePulse. The video call quality was excellent, and my doctor was very supportive!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'John',
         country: 'United States',
         country_img: 'https://flagcdn.com/w80/us.png',
-        testimonial: "EPulse made my first online appointment a breeze. The doctor understood my concerns and provided a clear treatment plan in no time!"
+        testimonial: "ePulse made my first online appointment a breeze. The doctor understood my concerns and provided a clear treatment plan in no time!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Fatima',
         country: 'Kenya',
         country_img: 'https://flagcdn.com/w80/ke.png',
-        testimonial: "Finding a doctor online was never this simple! EPulse connected me with an expert who helped me manage my condition effectively."
+        testimonial: "Finding a doctor online was never this simple! ePulse connected me with an expert who helped me manage my condition effectively."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Carlos',
         country: 'Brazil',
         country_img: 'https://flagcdn.com/w80/br.png',
-        testimonial: "I love how EPulse saved me a trip to the clinic. The chat feature with my doctor was incredibly convenient and insightful."
+        testimonial: "I love how ePulse saved me a trip to the clinic. The chat feature with my doctor was incredibly convenient and insightful."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Priya',
         country: 'India',
         country_img: 'https://flagcdn.com/w80/in.png',
-        testimonial: "Thanks to EPulse, I got a second opinion from a top specialist without leaving home. The experience was seamless and professional!"
+        testimonial: "Thanks to ePulse, I got a second opinion from a top specialist without leaving home. The experience was seamless and professional!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Mohammed',
         country: 'Egypt',
         country_img: 'https://flagcdn.com/w80/eg.png',
-        testimonial: "EPulse transformed my healthcare journey. The doctor I consulted was knowledgeable, and the process was hassle-free."
+        testimonial: "ePulse transformed my healthcare journey. The doctor I consulted was knowledgeable, and the process was hassle-free."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Sophie',
         country: 'France',
         country_img: 'https://flagcdn.com/w80/fr.png',
-        testimonial: "I was skeptical about online consultations, but EPulse proved me wrong. My doctor was thorough and very approachable!"
+        testimonial: "I was skeptical about online consultations, but ePulse proved me wrong. My doctor was thorough and very approachable!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Ahmed',
         country: 'South Africa',
         country_img: 'https://flagcdn.com/w80/za.png',
-        testimonial: "EPulse made it easy to book an appointment with a specialist. The follow-up care advice was spot-on and helpful."
+        testimonial: "ePulse made it easy to book an appointment with a specialist. The follow-up care advice was spot-on and helpful."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Maria',
         country: 'Mexico',
         country_img: 'https://flagcdn.com/w80/mx.png',
-        testimonial: "The speed of service on EPulse is incredible! I got a consultation within hours, and the doctor was very caring."
+        testimonial: "The speed of service on ePulse is incredible! I got a consultation within hours, and the doctor was very caring."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Liam',
         country: 'Canada',
         country_img: 'https://flagcdn.com/w80/ca.png',
-        testimonial: "EPulse connected me with a doctor who understood my needs perfectly. The video call was clear, and the advice was great!"
+        testimonial: "ePulse connected me with a doctor who understood my needs perfectly. The video call was clear, and the advice was great!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Zara',
         country: 'Pakistan',
         country_img: 'https://flagcdn.com/w80/pk.png',
-        testimonial: "I’m so glad I used EPulse. The doctor I met online was professional, and the platform was user-friendly."
+        testimonial: "I’m so glad I used ePulse. The doctor I met online was professional, and the platform was user-friendly."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Emmanuel',
         country: 'Ghana',
         country_img: 'https://flagcdn.com/w80/gh.png',
-        testimonial: "EPulse saved me time and effort. The specialist I consulted gave me a detailed plan that worked wonders!"
+        testimonial: "ePulse saved me time and effort. The specialist I consulted gave me a detailed plan that worked wonders!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Elena',
         country: 'Spain',
         country_img: 'https://flagcdn.com/w80/es.png',
-        testimonial: "The convenience of EPulse is unmatched. My doctor was kind, and the consultation felt just like an in-person visit."
+        testimonial: "The convenience of ePulse is unmatched. My doctor was kind, and the consultation felt just like an in-person visit."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Kwame',
         country: 'Uganda',
         country_img: 'https://flagcdn.com/w80/ug.png',
-        testimonial: "EPulse made healthcare accessible for me. The doctor’s advice was clear, and the process was smooth."
+        testimonial: "ePulse made healthcare accessible for me. The doctor’s advice was clear, and the process was smooth."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Hiroshi',
         country: 'Japan',
         country_img: 'https://flagcdn.com/w80/jp.png',
-        testimonial: "I was impressed by how quickly EPulse connected me with a specialist. The experience was top-notch!"
+        testimonial: "I was impressed by how quickly ePulse connected me with a specialist. The experience was top-notch!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Lina',
         country: 'Germany',
         country_img: 'https://flagcdn.com/w80/de.png',
-        testimonial: "EPulse turned my healthcare worries into relief. The doctor was attentive, and the platform was easy to navigate."
+        testimonial: "ePulse turned my healthcare worries into relief. The doctor was attentive, and the platform was easy to navigate."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Omar',
         country: 'Morocco',
         country_img: 'https://flagcdn.com/w80/ma.png',
-        testimonial: "Thanks to EPulse, I got expert advice without the travel. The consultation was detailed and reassuring."
+        testimonial: "Thanks to ePulse, I got expert advice without the travel. The consultation was detailed and reassuring."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Sofia',
         country: 'Italy',
         country_img: 'https://flagcdn.com/w80/it.png',
-        testimonial: "EPulse made my online doctor visit stress-free. The specialist was knowledgeable, and the support was great!"
+        testimonial: "ePulse made my online doctor visit stress-free. The specialist was knowledgeable, and the support was great!"
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Tunde',
         country: 'Senegal',
         country_img: 'https://flagcdn.com/w80/sn.png',
-        testimonial: "I highly recommend EPulse. The doctor I consulted was fantastic, and the process was quick and efficient."
+        testimonial: "I highly recommend ePulse. The doctor I consulted was fantastic, and the process was quick and efficient."
     },
     {
         img: 'https://via.placeholder.com/80',
         first_name: 'Anna',
         country: 'Australia',
         country_img: 'https://flagcdn.com/w80/au.png',
-        testimonial: "EPulse brought healthcare to my doorstep. The video consultation was smooth, and the doctor was very helpful!"
+        testimonial: "ePulse brought healthcare to my doorstep. The video consultation was smooth, and the doctor was very helpful!"
     },
 ];
 

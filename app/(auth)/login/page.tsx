@@ -151,9 +151,10 @@ const Login = () => {
                     <input type="checkbox" name="remember_me" className='h-4 w-4' id="remember_me" onChange={(e) => setRemember_me(e.target.checked)}/>
                     <label htmlFor="remember_me" className="text-sm  font-[500] font-mont text-slate-700 cursor-pointer " >Remember me</label>
                 </span>
-                <button className="mt-5 w-full h-[50px] sm:h-[55px] md:h-[60px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md flex items-center justify-center" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit">
+                
+                <Button className="mt-5 w-full h-[50px] sm:h-[55px] md:h-[60px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md flex items-center justify-center" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit">
                     {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Login'}
-                </button>
+                </Button>
             </form>}
 
 

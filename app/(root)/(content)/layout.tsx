@@ -6,11 +6,12 @@ import { useChat } from '@/app/context/ChatContext';
 import { useRouter } from 'next/navigation';
 import axios, { AxiosResponseHeaders } from 'axios';
 import { get_auth_request } from '@/app/api';
+import { toast_msg } from '@/lib/toast';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
-    const [begin_rendering, setBegin_rendering] = useState(false)
-    const [count_retry, setCount_retry] = useState(0)
+
+    let count = 0
 
 
     const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information } = useChat();
@@ -18,22 +19,30 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     useEffect(() => {
     
         if (!user_information?.role) {
+            
             const x_id_key = localStorage.getItem('x-id-key')
+            
             if (x_id_key) {
+                
                 handle_verify_status()
+                
             }else{
+                
                 localStorage.clear()
+                
                 router.push('/login')
             }
-        }else{
-            setBegin_rendering(true)
         }
         
-    }, [])
+    }, [user_information?.role])
 
 
     async function handle_verify_status() {
-        
+
+        if (count == 1 || count == 6){
+            !navigator.onLine && toast_msg({title: "Please connect to the internet.", type: 'danger'})
+        }
+
         try {
 
             const res = await get_auth_request('auth/user-information') as AxiosResponseHeaders
@@ -44,23 +53,25 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
                 setUser_information({...user_information, ...res.data.user, role: user_role })
 
-                setBegin_rendering(true)
-                
+                count = 0
+
             }else{
                 
-                if (count_retry < 5){
-                    handle_verify_status()
-                    setCount_retry(count_retry + 1)
+                if (count < 10){
+
+                    count = count + 1
+
+                    handle_verify_status(); 
+
                 }else{
-                    console.log('waiting for 5sec begins now')
+                    count = 0
+
                     setTimeout(() => {
-                        handle_verify_status()
-                        console.log('waited for 5 secs, retry has started')
-                    
-                        setCount_retry(0)
-                    }, 20000);
+                        
+                        handle_verify_status(); 
+                        
+                    }, 10000);
                 }
-                console.log('user-informatin-2 ',user_information)
             }
 
         } catch (err) {
@@ -94,7 +105,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <section
                     className={`absolute w-[250px] h-screen bg-white border-r border-[#f2f2f2] sm:hidden top-0 ${
                     show_mobile_sidebar ? 'left-0' : 'left-[-280px]'
-                    } duration-300 z-10 flex items-start justify-between`}
+                    } duration-500 ease-in-out z-10 flex items-start justify-between`}
                     onClick={handleMobileSidebarClick}>
                     <MobileSidebar />
                 </section>

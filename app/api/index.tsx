@@ -80,7 +80,7 @@ export const get_request = async (endpoint: string) => {
 
         const data = response;
         return data;
-    } catch (err: unknown) {
+    } catch (err: any) {
         return err;
     }
 };

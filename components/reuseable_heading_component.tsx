@@ -8,7 +8,7 @@ const SidebarHeading = () => {
             <span className="relative overflow-hidden h-[40px] w-[40px] rounded-[2px]">
                 <Image src={'/wallet-img-1.jpg'} alt='wallet img ' fill objectFit='cover' className='rounded-md' />
             </span>
-            <h5 className=" font-semibold font-mont text-xl text-gray-700 truncate">{"EPulse"}</h5>
+            <h5 className=" font-semibold font-mont text-xl text-gray-700 truncate">{"ePulse"}</h5>
 
         </span>
     )

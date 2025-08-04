@@ -46,10 +46,10 @@ const Navbar = () => {
             
             <nav className={`navbar px-[0.75rem] py-[1rem] md:px-[2rem]  ${is_scroll ? 'scrolled ' : 'default '}`}>
 
-                <div className=" w-full nav-cont flex items-center justify-between ">
+                <div className=" w-full nav-cont flex items-center justify-between bg-white/60 ">
                     
                     <Link href={'/'} className="xl:w-[250px] flex justify-start items-end ">
-                        <p className="text-lg md:text-xl font-mont font-semibold ml-3">EPulse</p>
+                        <p className="text-lg md:text-xl font-mont font-semibold ">ePulse</p>
                     </Link>
 
                     <span className={`max-md:hidden flex gap-8 rounded-full px-5 lg:px-12 py-3 items-center justify-center h-[70%] duration-300; `}>

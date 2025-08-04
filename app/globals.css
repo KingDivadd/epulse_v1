@@ -200,7 +200,6 @@ body {
 .nav-cont {
     @apply rounded-full;
     padding: .5rem .75rem;
-    background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 

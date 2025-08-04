@@ -135,7 +135,7 @@ const Signup = () => {
                         </Button>
                     </form>}
 
-                    <p className="text-[14px] text-center w-full sm:w-[350px] font-mont mt-[-10px]">By continuing, you agree to EPulse Terms of Use and Privacy Policy.</p>
+                    <p className="text-[14px] text-center w-full sm:w-[350px] font-mont mt-[-10px]">By continuing, you agree to ePulse Terms of Use and Privacy Policy.</p>
 
                     <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
                         Already have an account? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Login</Link>
