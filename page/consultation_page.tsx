@@ -13,7 +13,7 @@ const ConsultationPage = () => {
                 <ChatList />
             </div>
 
-            <div className="lg:col-span-4 h-full">
+            <div className="hidden lg:block lg:col-span-4 h-full">
                 <SelectedChat/>
             </div>
         </div>

@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { UserInfoProps } from '@/types';
+import { UserInfoProps, WalletInformationProps } from '@/types';
 
 interface ChatContextType {
     show_mobile_nav: boolean;
@@ -19,6 +19,8 @@ interface ChatContextType {
     setShow_selected_chat: (show_selected_chat:boolean) => void;
     selected_user: UserInfoProps | null;
     setSelected_user: (selected_user: UserInfoProps | null)=>void;
+    wallet_information: WalletInformationProps;
+    setWallet_information: (wallet_information: WalletInformationProps) => void;
 
 }
 
@@ -35,6 +37,8 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [show_mobile_sidebar, setShow_mobile_sidebar] = useState(false)
     const [show_selected_chat, setShow_selected_chat] = useState(false)
     const [selected_user, setSelected_user] = useState<UserInfoProps | null>(null)
+    // wallet page
+    const [wallet_information, setWallet_information] = useState<WalletInformationProps>({total_amount_credited: 0, total_amount_debited: 0, total_number_of_pages: 1, total_number_of_transactions:0, transactions: [], wallet_balance:0, items_per_page:10, page_number:1})
 
     return (
         <ChatContext.Provider value={{
@@ -46,6 +50,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             show_mobile_sidebar, setShow_mobile_sidebar,
             selected_user, setSelected_user,
             show_selected_chat, setShow_selected_chat,
+            wallet_information, setWallet_information,
             
             }}>
             {children}

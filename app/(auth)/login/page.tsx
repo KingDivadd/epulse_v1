@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Loader2Icon } from 'lucide-react'
 import InputComponent from '@/components/auth_components/input_component'
-import { post_request } from '@/app/api/index'
+import { get_auth_request, post_request } from '@/app/api/index'
 import {toast_msg} from '@/lib/toast'
 import { third_parthy_auth } from '@/constants'
 import {useChat} from "@/app/context/ChatContext"
@@ -21,6 +21,54 @@ const Login = () => {
     const [auth, setAuth] = useState({email:'', password: '', device_type: 'web'})
     const [loading, setLoading] = useState(false)
     const [remember_me, setRemember_me] = useState(false)
+
+    
+
+    useEffect(() => {
+        // relogin users automatically
+        const x_id_key = localStorage.getItem('x-id-key')
+
+        if (!x_id_key || x_id_key == null) {
+            return;
+        }
+
+        handle_auto_login()
+
+    }, [])
+
+    async function handle_auto_login() {
+        try {
+            
+            const res = await get_auth_request('auth/user-information') as AxiosResponseHeaders
+
+            if (res.status === 200 || res.status === 201) {
+                
+                const user_role = res.data.user.patient_id ? 'patient' : 'physician'
+
+                setUser_information({...user_information, ...res.data.user, email:auth.email, role:user_role })
+
+                const {gender, country_code, phone_number, date_of_birth} = res.data.user
+                    
+                if (!gender || !country_code || !phone_number || !date_of_birth) {
+
+                    router.push(`/user-details/${res.data.user.patient_id}`)
+                    return;
+                }else{
+                    router.push('/dashboard')
+                    return;
+                }
+                return
+            }else if(res.status == 500){
+                !navigator.onLine && toast_msg({title: "Please connect to the internet.", type: 'danger'})
+
+                setTimeout(() => {
+                    handle_auto_login()
+                }, 2000);
+            }
+        } catch (error) {
+            console.log('error during auto login ', error)
+        }
+    }
 
     useEffect(() => {
         setAuth({...auth, device_type: remember_me ? 'mobile' : 'web' })

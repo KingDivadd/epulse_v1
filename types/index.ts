@@ -61,6 +61,10 @@ export interface UserInfoProps {
     description?: string;
     languages_spoken?: string[];
     current_hospital_or_clinic?: string;
+    blood_group?:string;
+    genotyp?:string;
+    weight?:number;
+    height?:number;
 }
 
 declare type TransactionHistoryProps = {
@@ -69,4 +73,33 @@ declare type TransactionHistoryProps = {
     narration: string
     amount: number | string
     date: number | string
+}
+
+export type TransactionType = {
+    transaction_id: string;
+    amount: number;
+    account_id: string | null;
+    patient_id: string | null;
+    physician_id: string | null;
+    transaction_type: string;
+    transaction_sub_type: string | null;
+    narration: string;
+    created_at: number;
+    updated_at: number;
+}
+
+export interface WalletInformationProps {
+    page_number:number;
+    items_per_page:number;
+    wallet_balance: number;
+    total_amount_credited: number;
+    total_amount_debited: number;
+    total_number_of_transactions: number;
+    total_number_of_pages: number;
+    transactions: TransactionType[];
+}
+
+export interface LoadingProps {
+    loading: boolean;
+    setLoading: (loading: boolean) =>void;
 }

@@ -5,11 +5,12 @@ import { Dot, Loader2Icon } from 'lucide-react'
 import {  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
 import { toast_msg } from '@/lib/toast'
 import { useChat } from '@/app/context/ChatContext'
+import Animated_counter from '@/lib/animated_counter'
 
 const WalletFundCont = () => {
     const [amount, setAmount] = useState(0)
     const [loading, setLoading] = useState(false)
-    const {user_information} = useChat()
+    const {user_information, wallet_information, setWallet_information} = useChat()
     
 
     async function handle_submit(e: React.FormEvent) {
@@ -102,10 +103,10 @@ const WalletFundCont = () => {
                     </span>
 
                     <span className="flex items-center gap-3 mb-5">
-                        <span className="h-10 w-10 relative overflow-hidden">
+                        {/* <span className="h-8 w-8 relative overflow-hidden">
                             <Image src={'/icons/naira-icon.png'} alt='' fill objectFit='contain' />
-                        </span>
-                        <p className="text-4xl font-bold text-white">10,000</p>
+                        </span> */}
+                        <span className="text-4xl font-bold text-white">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
                     </span>
 
                     <Dialog >
@@ -146,10 +147,10 @@ const WalletFundCont = () => {
                         </p>
 
                         <span className="flex items-center gap-1">
-                            <span className="h-5 w-5 relative overflow-hidden">
+                            {/* <span className="h-5 w-5 relative overflow-hidden">
                                 <Image src={'/icons/naira-icon-black.png'} alt='' fill objectFit='contain' />
-                            </span>
-                            <p className="text-xl font-semibold ">15,000</p>
+                            </span> */}
+                            <span className="text-xl font-semibold ">{Animated_counter({amount: wallet_information?.total_amount_credited ?? 0})}</span>
                         </span>
                     </span>
 
@@ -159,10 +160,10 @@ const WalletFundCont = () => {
                         </p>
 
                         <span className="flex items-center gap-1">
-                            <span className="h-5 w-5 relative overflow-hidden">
+                            {/* <span className="h-5 w-5 relative overflow-hidden">
                                 <Image src={'/icons/naira-icon-black.png'} alt='' fill objectFit='contain' />
-                            </span>
-                            <p className="text-xl font-semibold ">1,500</p>
+                            </span> */}
+                            <span className="text-xl font-semibold ">{Animated_counter({amount: wallet_information?.total_amount_debited ?? 0})}</span>
                         </span>
                     </span>
                 </div>

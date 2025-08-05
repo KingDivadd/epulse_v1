@@ -3,7 +3,7 @@ import React from 'react'
 import Navbar from '@/components/navbar'
 import PhysicianProfilePage from '@/page/physician/physician_profile_page'
 import { useChat } from '@/app/context/ChatContext'
-import SettingsPage from '@/page/settings_page'
+import PatientProfile from '@/page/patient_profile'
 import LoadingSettings from '@/page/skeleton/loading_settings'
 
 
@@ -20,7 +20,7 @@ const Profile = () => {
                         user_information ? 
                         <>
                             {
-                                user_information.role == 'patient' ? <SettingsPage /> :<PhysicianProfilePage />
+                                user_information.role == 'patient' ? <PatientProfile /> :<PhysicianProfilePage />
                             }
                         
                         </>

@@ -1,5 +1,11 @@
 export function format_date_from_unix(appointment_date: number) {
-    const date = new Date(appointment_date * 1000); // Convert Unix timestamp to milliseconds
+    let passed_data = appointment_date
+    
+    if (appointment_date.toString().split('').length > 10) {
+        passed_data = appointment_date / 1000
+    }
+
+    const date = new Date(passed_data * 1000); // Convert Unix timestamp to milliseconds
 
     // Get day with ordinal suffix
     const day = date.getDate();

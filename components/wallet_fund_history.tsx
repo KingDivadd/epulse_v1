@@ -2,8 +2,9 @@
 import React,{useState,useEffect} from 'react'
 import  {SearchIcon} from 'lucide-react'
 import WalletFundHistoryTable from './wallet_fund_history_table'
+import { LoadingProps } from '@/types'
 
-const WalletFundHistory = () => {
+const WalletFundHistory = ({loading, setLoading}:LoadingProps) => {
     const [fund_search, setFund_search] = useState('')
 
 
@@ -21,7 +22,7 @@ const WalletFundHistory = () => {
             </div>
 
 
-            <WalletFundHistoryTable fund_search={fund_search} setFund_search={setFund_search} />
+            <WalletFundHistoryTable fund_search={fund_search} setFund_search={setFund_search} loading={loading} setLoading={setLoading} />
 
         </div>
     )
