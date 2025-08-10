@@ -168,7 +168,7 @@ const PatientAppointments = () => {
         return filtered.sort((a, b) => Number(a.time) - Number(b.time));
     }, [position, today]);
 
-    async function app_projects_action(item: any) {
+    async function app_projects_action(item: string | number) {
         
         let new_page_number = page_number;
         const max_page_number = appointment_info?.total_number_of_pages
@@ -182,7 +182,7 @@ const PatientAppointments = () => {
                 new_page_number = page_number + 1;
             }
         } else {
-            new_page_number = item;
+            new_page_number = Number(item);
         }
 
         setLoading(true)

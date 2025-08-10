@@ -116,7 +116,7 @@ const DoctorsList = () => {
         fetch_doctors_from_server(doctors_information?.page_number, doctors_information?.items_per_page);
     }, []);
 
-    async function app_projects_action(item: any) {
+    async function app_projects_action(item: string | number) {
         
         let new_page_number = doctors_information?.page_number;
         const max_page_number = doctors_information?.total_number_of_pages
@@ -130,7 +130,7 @@ const DoctorsList = () => {
                 new_page_number = doctors_information?.page_number! + 1;
             }
         } else {
-            new_page_number = item;
+            new_page_number = Number(item);
         }
 
         setLoading(true)

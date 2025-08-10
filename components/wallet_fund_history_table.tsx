@@ -40,7 +40,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
     }, [fund_search, wallet_information?.transactions])
 
 
-    async function app_projects_action(item: any) {
+    async function app_projects_action(item: string|number) {
         
         let new_page_number = wallet_information?.page_number;
         const max_page_number = wallet_information?.total_number_of_pages
@@ -54,7 +54,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 new_page_number = wallet_information?.page_number! + 1;
             }
         } else {
-            new_page_number = item;
+            new_page_number = Number(item);
         }
 
         setLoading(true)

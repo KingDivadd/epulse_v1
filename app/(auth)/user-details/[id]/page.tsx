@@ -15,7 +15,7 @@ import { AxiosResponseHeaders } from 'axios'
 
 const UserDetails = () => {
     const router = useRouter()
-    const [auth, setAuth] = useState({gender:'', country_code:'', phone_number:'' , date_of_birth:''})
+    const [auth, setAuth] = useState({gender:'', country_code:'', phone_number:'' , date_of_birth:0})
     const [loading, setLoading] = useState(false)
     
     const { user_information, country_dial_code} = useChat()  
@@ -25,7 +25,7 @@ const UserDetails = () => {
     }, [ country_dial_code])
 
     useEffect(() => {
-        setAuth({...auth, date_of_birth: user_information?.date_of_birth || Math.floor(Date.now() / 1000).toString()}) 
+        setAuth({...auth, date_of_birth: Number(user_information?.date_of_birth) || Math.floor(Date.now() / 1000)}) 
     }, [user_information?.date_of_birth])
 
     function handle_change(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
