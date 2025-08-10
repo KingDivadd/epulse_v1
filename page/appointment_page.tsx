@@ -1,5 +1,4 @@
-import Appointments from '@/components/appointments'
-import AppointmentInformation from '@/components/appointment_information'
+import PatientAppointment from '@/components/patient_appointment'
 import React, { useState } from 'react'
 
 const AppointmentPage = () => {
@@ -18,13 +17,9 @@ const AppointmentPage = () => {
     };
 
     return (
-        <div className='p-5 min-h-[calc(100vh-70px)] w-full bg-gray-100 font-mont ' onClick={handleOutsideClick}>
-            <div className="w-full h-full overflow-y-auto gap-5  relative  sm:bg-white rounded-md sm:shadow-md py-5 hide-scrollbar">
-                <Appointments show_selected_appointment={show_selected_appointment} setShow_selected_appointment={setShow_selected_appointment}/>
-
-                <div className={`hidden md:block w-full md:w-[400px] lg:w-[500px] h-[400px] z-10 absolute top-0 duration-300 ${show_selected_appointment ? 'right-0':'right-[-500px]'}`}>  
-                    <AppointmentInformation show_selected_appointment={show_selected_appointment} setShow_selected_appointment={setShow_selected_appointment} /> 
-                </div>
+        <div className='py-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont ' >
+            <div className="w-full h-full overflow-y-auto relative rounded-md  hide-scrollbar ">
+                <PatientAppointment />
             </div>
         </div>
     )

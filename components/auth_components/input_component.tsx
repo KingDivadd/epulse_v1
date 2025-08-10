@@ -24,7 +24,7 @@ const InputComponent = ({ title, type, name, value, onChange }: InputProps) => {
 
     return (
         <span className="flex flex-col items-start justify-start gap-2 w-full">
-            <p className="text-sm font-medium text-slate-700 font-mont">{title}</p>
+            <p className="text-[13px] font-medium text-slate-700 font-mont">{title}</p>
 
             <div className="relative w-full h-[50px] sm:h-[55px] md:h-[60px]">
                 <input
@@ -66,7 +66,7 @@ export const InputComponent3 = ({ title, type, name, value, onChange }: InputPro
 
     return (
         <span className="flex flex-col items-start justify-start gap-2 w-full">
-            <p className="text-sm font-medium text-slate-700 font-mont">{title}</p>
+            <p className="text-[13px] font-medium text-slate-700 font-mont">{title}</p>
             <div className="relative w-full">
                 <input
                 type={inputType}

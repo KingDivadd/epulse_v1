@@ -5,7 +5,7 @@ import AppointmentBooking from "@/page/appointment_booking"
 
 const AppointmentBookingPage = () => {
     return (
-        <div  className='w-full h-full flex flex-col bg-white overflow-y-auto'>
+        <div  className='w-full h-full flex flex-col  overflow-y-auto'>
             <div className="w-full">
                 <Navbar />
 

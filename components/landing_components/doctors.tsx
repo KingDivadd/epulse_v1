@@ -7,7 +7,7 @@ import DoctorSlider from './doctors_slider'
 const Doctors = () => {
     return (
         <section 
-            id='doctors' className="w-full sm:min-h-screen px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15  scroll-mt-20  flex flex-col items-start  bg-gray-100">
+            id='doctors' className="w-full sm:min-h-screen px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15  scroll-mt-20  flex flex-col items-start  bg-gray-50">
 
             <motion.span    
                 initial={{y: -30, opacity: 0}}
@@ -29,7 +29,7 @@ const Doctors = () => {
                 whileInView={{y: 0, opacity: 1}}
                 transition={{duration: 0.4, delay: 0.15 }}
 
-                className="text-[13px] sm:text-md text-start sm:w-[500px] text-slate-600 mt-5 font-mont">Whether you need a general consultation, specialist care or mental health support, we have the right doctor for you.</motion.p>
+                className="text-[13px] sm:text-[15.5px] text-start sm:w-[500px] text-slate-600 mt-5 font-mont">Whether you need a general consultation, specialist care or mental health support, we have the right doctor for you.</motion.p>
             
 
             <motion.div 

@@ -25,22 +25,20 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
     const [isLoading, setIsLoading] = useState(false);
     const [isUploaded, setIsUploaded] = useState(false);
 
-
-
     useEffect(() => {
         if (url) {
-        setFilePreview(url);
-        setIsUploaded(!!url); // Set isUploaded if initial url is provided
+            setFilePreview(url);
+            setIsUploaded(true); // Set isUploaded if initial url is provided
         }
     }, [url]);
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedFile = e.target.files?.[0];
-        
+
         if (selectedFile) {
             const maxSizeInBytes = 5 * 1024 * 1024; // 5MB in bytes
             if (selectedFile.size > maxSizeInBytes) {
-                alert('File size exceeds 2MB limit. Please select a smaller file.');
+                alert('File size exceeds 5MB limit. Please select a smaller file.');
                 return;
             }
 
@@ -55,9 +53,10 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
 
             try {
                 if (!cloudinary_url) {
-                    toast_msg({title:'Cloudinary url not found', type:'danger'})
+                    toast_msg({ title: 'Cloudinary url not found', type: 'danger' });
                     return;
                 }
+
                 const response = await axios.post(cloudinary_url, formData);
                 const uploadedFileUrl = response.data.secure_url;
                 if (onFileUpload) {
@@ -82,9 +81,13 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
     const renderPreview = () => {
         if (!filePreview) return null;
 
-        const fileType = file?.type;
+        // Infer file type from URL extension
+        const urlExtension = filePreview.split('.').pop()?.toLowerCase();
+        const isImage = urlExtension && ['jpg', 'jpeg', 'png', 'gif'].includes(urlExtension);
+        const isPdf = urlExtension === 'pdf';
+        const isDwg = urlExtension === 'dwg';
 
-        if (fileType?.startsWith('image/')) {
+        if (isImage) {
         return (
             <span
             className="relative w-full h-[340px] rounded-[3px] overflow-hidden cursor-pointer"
@@ -98,7 +101,7 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
             />
             </span>
         );
-        } else if (fileType === 'application/pdf') {
+        } else if (isPdf) {
         return (
             <iframe
             src={filePreview}
@@ -107,10 +110,10 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
             onClick={() => window.open(filePreview, '_blank')}
             />
         );
-        } else if (fileType === 'application/acad' || fileType === 'application/dwg') {
+        } else if (isDwg) {
         return (
             <div
-            className="w-full h-full flex justify-center items-center h-[340px] rounded-[3px] cursor-pointer"
+            className="w-full flex justify-center items-center h-[340px] rounded-[3px] cursor-pointer"
             onClick={() => window.open(filePreview, '_blank')}
             >
             <p className="text-gray-500">DWG File Uploaded</p>
@@ -119,7 +122,7 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
         } else {
         return (
             <div
-            className="w-full h-full flex justify-center items-center h-[340px] rounded-[3px] cursor-pointer"
+            className="w-full flex justify-center items-center h-[340px] rounded-[3px] cursor-pointer"
             onClick={() => window.open(filePreview, '_blank')}
             >
             <p className="text-gray-500">File Uploaded</p>
@@ -130,28 +133,40 @@ export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props
 
     return (
         <div className="w-full flex flex-col justify-start items-start gap-2 h-full">
-            {filePreview && (
-                <>
-                {isLoading ? (
-                    <div className="w-full h-[340px] flex justify-center items-center rounded-[3px] bg-gray-200">
-                    <span className="animate-spin h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full"></span>
-                    </div>
-                ) : (
-                    renderPreview()
-                )}
-                </>
+        {filePreview && (
+            <>
+            {isLoading ? (
+                <div className="w-full h-[340px] flex justify-center items-center rounded-[3px] bg-gray-200">
+                <span className="animate-spin h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full"></span>
+                </div>
+            ) : (
+                renderPreview()
             )}
-            {!filePreview && 
-            <div className="w-full h-[340px] bg-gray-100 rounded-md flex items-center justify-center">
-                <p className="text-sm font-medium text-gray-700">No File has been uploaded yet.</p>
-            </div>}
-            <span className="w-full flex flex-col items-start justify-start">
-                <input  type="file"  name={`file-${id}`}  accept="image/*,application/pdf,application/acad,application/dwg"    onChange={handleFileChange}    id={`fileInput-${id}`} style={{ display: 'none' }} />
+            </>
+        )}
+        {!filePreview && (
+            <div className="w-full h-[340px] bg-gray-50 rounded-md flex items-center justify-center">
+            <p className="text-[13px] font-medium text-gray-700">No File has been uploaded yet.</p>
+            </div>
+        )}
+        <span className="w-full flex flex-col items-start justify-start">
+            <input
+            type="file"
+            name={`file-${id}`}
+            accept="image/*,application/pdf,application/acad,application/dwg"
+            onChange={handleFileChange}
+            id={`fileInput-${id}`}
+            style={{ display: 'none' }}
+            />
 
-                <button type="button"  className="w-full h-[50px] rounded-[3px] text-sm flex items-center justify-center bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300"  onClick={() => document.getElementById(`fileInput-${id}`)?.click()}  >
-                    {isUploaded ? 'Change File' : `${title || 'Select File'}`}
-                </button>
-            </span>
+            <button
+            type="button"
+            className="w-full h-[50px] rounded-[3px] text-[13px] flex items-center justify-center border border-gray-400 cursor-pointer 06ce9] hover:bg-gray-100 duration-300 font-mont"
+            onClick={() => document.getElementById(`fileInput-${id}`)?.click()}
+            >
+            {isUploaded ? 'change file' : `${title || 'Select File'}`}
+            </button>
+        </span>
         </div>
     );
 };
@@ -227,7 +242,7 @@ export const ImgUploader = ({ id, title, url, onFileUpload, type }: Uploader_pro
 
     return (
         <div className="w-full h-full flex flex-col justify-center items-center gap-[15px] relative">
-        {/* <h4 className="text-sm text-slate-200">{title}</h4> */}
+        {/* <h4 className="text-[13px] text-slate-200">{title}</h4> */}
 
         <div className="relative w-full h-full rounded-full overflow-hidden cursor-pointer" style={{ backgroundColor: '#f0f0f0' }}>
             {filePreview && (
@@ -265,7 +280,7 @@ export const ImgUploader = ({ id, title, url, onFileUpload, type }: Uploader_pro
         />
 
         <CiEdit
-            className="text-gray-600 size-[25px] absolute bottom-5 right-5 group-hover:text-[#306ce9] duration-150 cursor-pointer"
+            className="text-gray-600 size-[25px] absolute bottom-5 right-5 md:right-1 lg:right-5  group-hover:text-[#306ce9] duration-150 cursor-pointer"
             onClick={handleEditClick}
         />
         </div>

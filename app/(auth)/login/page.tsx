@@ -66,6 +66,7 @@ const Login = () => {
                 }, 2000);
             }
         } catch (error) {
+            toast_msg({title:'Unable to login please try again later.', type:'danger'})
             console.log('error during auto login ', error)
         }
     }
@@ -133,6 +134,8 @@ const Login = () => {
             } else if (res.status === 403){
 
                 setUser_information({...user_information, email:auth.email})
+
+                localStorage.setItem('x-id-key', res.response.headers.get('x-id-key'));
                 
                 router.push('/verification')
             }
@@ -155,7 +158,7 @@ const Login = () => {
     return (
         <section className="w-full h-full px-[1rem] md:px-[2rem] lg:px-[4rem] flex flex-col items-center justify-center gap-8 relative ">
             {/* {auth_via_email && <span className="w-full flex justify-start">
-                        <Button className=' flex items-center  text-md font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
+                        <Button className=' flex items-center  text-[15.5px] font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
                             <span className="h-5 w-5 overflow-hidden relative">
                                 <Image src="/icons/left-icon.png" alt="Back Icon" fill className="object-contain" />
                             </span>
@@ -170,7 +173,7 @@ const Login = () => {
                         third_parthy_auth.map((data) => {
                             const {name, icon, id} = data
                             return (
-                                <button key={id} className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" 
+                                <button key={id} className="h-[55px] w-full flex items-center justify-center gap-2 text-[13px] sm:text-[15.5px] font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" 
                                     onClick={()=> {
                                         if (id === 'email') {
                                             setAuth_via_email(!auth_via_email)
@@ -197,18 +200,18 @@ const Login = () => {
 
                 <span className="w-full flex items-center justify-start gap-[10px] ">
                     <input type="checkbox" name="remember_me" className='h-4 w-4' id="remember_me" onChange={(e) => setRemember_me(e.target.checked)}/>
-                    <label htmlFor="remember_me" className="text-sm  font-[500] font-mont text-slate-700 cursor-pointer " >Remember me</label>
+                    <label htmlFor="remember_me" className="text-[13px]  font-[500] font-mont text-slate-700 cursor-pointer " >Remember me</label>
                 </span>
                 
-                <Button className="mt-5 w-full h-[50px] sm:h-[55px] md:h-[60px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md flex items-center justify-center" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit">
+                <Button className="mt-5 w-full h-[50px] sm:h-[55px] md:h-[60px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-[15.5px] flex items-center justify-center" onSubmit={handle_login} disabled={auth.email === '' || auth.password === ''} type="submit">
                     {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Login'}
                 </Button>
             </form>}
 
 
-            {auth_via_email && <Link href={'/forget-password'} className="text-sm  text-center w-[300px] font-mont hover:cursor-pointer font-medium text-[#306ce9] mt-2 " >I forgot my password.</Link>}
+            {auth_via_email && <Link href={'/forget-password'} className="text-[13px]  text-center w-[300px] font-mont hover:cursor-pointer font-medium text-[#306ce9] mt-2 " >I forgot my password.</Link>}
 
-            <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
+            <h3 className="text-[13px] flex items-center justify-center gap-1  mt-[-10px] font-mont">
                 {"Don't have an account?"} <Link href={'/signup-type'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Sign up</Link>
             </h3>
 

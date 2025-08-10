@@ -65,16 +65,16 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search }: FundSearchPro
             <div className={`hidden min-w-[1000px] md:flex flex-col items-start justify-start`}>
                 <div className="w-full flex items-center justify-between border h-[55px] border-gray-200  ">
                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Date, Time</p>
+                        <p className="text-[13px] font-medium">Date, Time</p>
                     </div>
                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Transaction Type</p>
+                        <p className="text-[13px] font-medium">Transaction Type</p>
                     </div>
                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Narration</p>
+                        <p className="text-[13px] font-medium">Narration</p>
                     </div>
                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Amount</p>
+                        <p className="text-[13px] font-medium">Amount</p>
                     </div>
                 </div>
 
@@ -91,26 +91,26 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search }: FundSearchPro
                         return (
                         <div
                             key={transaction_id}
-                            className={`w-full flex items-center justify-between py-3 hover:bg-gray-100 ${
-                            ind % 2 === 1 ? 'bg-gray-100' : ''
+                            className={`w-full flex items-center justify-between py-3 hover:bg-gray-50 ${
+                            ind % 2 === 1 ? 'bg-gray-50' : ''
                             }`}
                         >
                             <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                                <p className="text-sm">
+                                <p className="text-[13px]">
                                     {formatted_date.date}, {formatted_date.time}
                                 </p>
                             </div>
                             <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
                                 <button className={transaction_type_style}>
                                     {/* <Dot size="30px" /> */}
-                                    <p className="text-sm">{transaction_type}</p>
+                                    <p className="text-[13px]">{transaction_type}</p>
                                 </button>
                             </div>
                             <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start overflow-hidden">
-                                <p className="text-sm truncate">{narration}</p>
+                                <p className="text-[13px] truncate">{narration}</p>
                             </div>
                             <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                                <p className="text-sm flex items-center">₦{amount.toFixed(2)}</p>
+                                <p className="text-[13px] flex items-center">₦{amount.toFixed(2)}</p>
                             </div>
                         </div>
                         )
@@ -119,13 +119,13 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search }: FundSearchPro
 
                 {/* Pagination Controls */}
                 <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
-                <p className="text-sm">
+                <p className="text-[13px]">
                     Page {currentPage} of {totalPages}
                 </p>
                 <div className="flex items-center gap-2">
                     <button
-                    className={`px-5 h-[30px] text-sm rounded-full border border-gray-300 ${
-                        currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'
+                    className={`px-5 h-[30px] text-[13px] rounded-full border border-gray-300 ${
+                        currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
                     }`}
                     onClick={handlePrevious}
                     disabled={currentPage === 1}
@@ -133,8 +133,8 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search }: FundSearchPro
                     Previous
                     </button>
                     <button
-                    className={`px-5 h-[30px] text-sm rounded-full border border-gray-300 ${
-                        currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'
+                    className={`px-5 h-[30px] text-[13px] rounded-full border border-gray-300 ${
+                        currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
                     }`}
                     onClick={handleNext}
                     disabled={currentPage === totalPages}
@@ -173,13 +173,13 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search }: FundSearchPro
                 })}
 
                 <div className="w-full flex items-center justify-between px-5 py-3 border-t border-gray-200">
-                <p className="text-sm">
+                <p className="text-[13px]">
                     Page {currentPage} of {totalPages}
                 </p>
                 <div className="flex items-center gap-2">
                     <button
-                    className={`px-5 h-[30px] text-sm rounded-full border border-gray-300 ${
-                        currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'
+                    className={`px-5 h-[30px] text-[13px] rounded-full border border-gray-300 ${
+                        currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
                     }`}
                     onClick={handlePrevious}
                     disabled={currentPage === 1}
@@ -187,8 +187,8 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search }: FundSearchPro
                     Previous
                     </button>
                     <button
-                    className={`px-5 h-[30px] text-sm rounded-full border border-gray-300 ${
-                        currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'
+                    className={`px-5 h-[30px] text-[13px] rounded-full border border-gray-300 ${
+                        currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-50'
                     }`}
                     onClick={handleNext}
                     disabled={currentPage === totalPages}

@@ -29,10 +29,10 @@ declare interface PhoneInputProps {
 declare interface DoctorProps {
     first_name: string;
     last_name: string;
-    description: string;
+    bio: string;
     country: string;
     registered_as: string;
-    speciality: string;
+    specialty: string;
     languages_spoken: string[];
     avatar: string;
     current_hospital_or_clinic: string;
@@ -46,7 +46,7 @@ export interface UserInfoProps {
     email?: string;
     gender?: string; 
     country_code?: string;
-    date_of_birth?: string;
+    date_of_birth?: number;
     phone_number?: string; 
     role?: string;
     address?: string;
@@ -57,14 +57,14 @@ export interface UserInfoProps {
     is_verified_by_admin?: boolean;
     avatar?: string;
     registered_as?: string;
-    speciality?: string;
-    description?: string;
+    specialty?: string;
+    bio?: string;
     languages_spoken?: string[];
     current_hospital_or_clinic?: string;
     blood_group?:string;
-    genotyp?:string;
     weight?:number;
     height?:number;
+    medical_license?: string;
 }
 
 declare type TransactionHistoryProps = {
@@ -102,4 +102,67 @@ export interface WalletInformationProps {
 export interface LoadingProps {
     loading: boolean;
     setLoading: (loading: boolean) =>void;
+}
+
+export type PhysicianType = {
+    address:string;
+    apple_apn:string;
+    avatar:string;
+    bio:string;
+    cac_document:string;
+    country:string
+    country_code:string
+    created_at:number
+    date_of_birth:number;
+    date_of_establishment:number
+    email:string;
+    first_name:string;
+    gender:string;
+    is_verified:boolean;
+    is_verified_by_admin:boolean;
+    languages_spoken:string[]
+    last_name:string;
+    medical_license:string;
+    other_names:string;
+    password:string;
+    phone_number:string;    
+    physician_id:string;
+    professional_credentials:string;
+    registered_as:string;
+    signature:string;
+    specialty:string;
+    state:string; 
+    verification_of_employment:string
+}
+
+export interface PhysicianInformationProps {
+    page_number:number;
+    items_per_page:number;
+    total_number_of_pages:number;
+    total_number_of_physicians:number;
+    physicians: PhysicianType[];
+}
+
+export type AppointmentType = {
+    appointment_id: string;
+    appointment_type: string;
+    created_at: number;
+    updated_at: number;
+    status: string;
+    in_session: boolean;
+    complain: string;
+    patient: UserInfoProps;
+    physician: UserInfoProps;
+    time: number;
+    
+}
+export interface AppointmentProps {
+    // page_number:number;
+    // items_per_page:number;
+    pending_appointment: number;
+    accepted_appointment: number;
+    completed_appointment: number;
+    total_number_of_appointments: number; 
+    total_number_of_pages: number;
+    appointments: AppointmentType[];
 }

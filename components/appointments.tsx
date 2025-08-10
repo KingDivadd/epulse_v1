@@ -164,7 +164,7 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
                       </span>
 
                       <div className="w-full flex flex-col items-center gap-2 md:gap-3">
-                        <p className={`text-sm font-medium `}>
+                        <p className={`text-[13px] font-medium `}>
                           {item.registered_as}
                         </p>
                         <p className={`text-[14px] `}>
@@ -219,7 +219,7 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
                             </span>
 
                             <div className="w-full flex flex-col items-center gap-2 md:gap-3">
-                              <p className={`text-sm font-medium `}>
+                              <p className={`text-[13px] font-medium `}>
                                 {item.registered_as}
                               </p>
                               <p className={`text-[14px] `}>
@@ -265,28 +265,28 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
 
                         <div className="w-full flex flex-col gap-2 mt-5">
                           <span className="flex w-full gap-2 items-center justify-start">
-                            <p className="text-sm font-medium">{"Doctor's Name:"}</p>
-                            <p className="text-sm">Dr. {item.first_name} {item.last_name}</p>
+                            <p className="text-[13px] font-medium">{"Doctor's Name:"}</p>
+                            <p className="text-[13px]">Dr. {item.first_name} {item.last_name}</p>
                           </span>
                           <span className="flex w-full gap-2 items-center justify-start">
-                            <p className="text-sm font-medium">{"Doctor's Speciality:"}</p>
-                            <p className="text-sm">{item.registered_as}</p>
+                            <p className="text-[13px] font-medium">{"Doctor's Speciality:"}</p>
+                            <p className="text-[13px]">{item.registered_as}</p>
                           </span>
                           <span className="flex w-full gap-2 items-center justify-start">
-                            <p className="text-sm font-medium">Language:</p>
-                            <p className="text-sm">{item.languages_spoken}</p>
+                            <p className="text-[13px] font-medium">Language:</p>
+                            <p className="text-[13px]">{item.languages_spoken}</p>
                           </span>
                           <DrawerDescription className="text-black flex flex-col gap-2">
                             <span className="flex w-full gap-2 items-center justify-start">
-                              <span className="text-sm">{item.description}</span>
+                              <span className="text-[13px]">{item.description}</span>
                             </span>
                           </DrawerDescription>
 
                           <div className="w-full flex items-center justify-end gap-5 h-[40px] mt-5">
-                            <DrawerClose className="h-full bg-[#f2f2f2] hover:bg-[#f2f2f2]/90 duration-300 font-mont rounded-sm px-5 text-sm">
+                            <DrawerClose className="h-full bg-[#f2f2f2] hover:bg-[#f2f2f2]/90 duration-300 font-mont rounded-sm px-5 text-[13px]">
                               Cancel
                             </DrawerClose>
-                            <button className="h-full bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 font-mont rounded-sm px-5 text-white text-sm">
+                            <button className="h-full bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 font-mont rounded-sm px-5 text-white text-[13px]">
                               Start Consultation
                             </button>
                           </div>
@@ -306,17 +306,17 @@ const Appointments = ({ show_selected_appointment, setShow_selected_appointment 
           <button
             onClick={() => handlePageChange(currentPage - 1)}
             disabled={currentPage === 1}
-            className="px-5 py-2.5 bg-white border border-gray-500 rounded-full disabled:text-gray-500 text-sm"
+            className="px-5 py-2.5 bg-white border border-gray-500 rounded-full disabled:text-gray-500 text-[13px]"
           >
             Previous
           </button>
-          <span className="text-sm">
+          <span className="text-[13px]">
             Page {currentPage} of {totalPages}
           </span>
           <button
             onClick={() => handlePageChange(currentPage + 1)}
             disabled={currentPage === totalPages}
-            className="px-7 py-2.5 bg-white border border-gray-500 rounded-full disabled:text-gray-500 text-sm"
+            className="px-7 py-2.5 bg-white border border-gray-500 rounded-full disabled:text-gray-500 text-[13px]"
           >
             Next
           </button>

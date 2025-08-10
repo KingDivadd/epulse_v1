@@ -18,3 +18,17 @@ const Animated_counter = ({amount}: {amount:number}) => {
 }
 
 export default Animated_counter
+
+export const Item_counter = ({amount}: {amount:number}) => {
+    return (
+        <div className='w-full'>
+            <CountUp
+                decimals={0}
+                decimal='.'
+                end={amount} 
+                duration={1}
+                className=''
+            />
+        </div>
+    )
+}

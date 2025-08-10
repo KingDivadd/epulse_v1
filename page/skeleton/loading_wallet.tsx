@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 const LoadingWallet = () => {
     return (
-        <div className='w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 hide-scrollbar flex flex-col gap-5 font-mont'>
+        <div className='w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5 font-mont'>
             <div className="w-full flex items-center justify-between gap-5 ">
                 <div className="bg-[#306ce9] h-[250px] flex-1 shadow-md rounded-md flex items-center justify-center relative">
                     <span className="w-full h-200px">

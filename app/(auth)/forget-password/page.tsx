@@ -76,13 +76,13 @@ const ForgetPassword = () => {
 
 
                     
-                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.email === ''}>
+                    <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-[15.5px]"  disabled={auth.email === ''}>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Next'}
                     </Button>
                 </form>
 
 
-                <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
+                <h3 className="text-[13px] flex items-center justify-center gap-1  mt-[-10px] font-mont">
                     Remembered Password? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Login</Link>
                 </h3>
             </div>

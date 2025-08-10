@@ -9,7 +9,7 @@ const LoadingAppointment = () => {
     const [position, setPosition] = useState('')
 
     return (
-        <div className='w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 hide-scrollbar flex flex-col gap-5 font-mont'>
+        <div className='w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5 font-mont'>
             <div className="w-full gap-5 temp-240">
                 {
                     [1,2,3,4].map((data,ind:number)=>{

@@ -85,7 +85,7 @@ const Signup = () => {
                 <div className="w-full   flex flex-col items-center justify-center gap-8 my-10">
                     {/* {auth_via_email && 
                     <span className="w-full flex justify-start ">
-                        <Button className=' flex items-center  text-md font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
+                        <Button className=' flex items-center  text-[15.5px] font-mont font-semibold'  variant={'ghost'} onClick={()=> setAuth_via_email(!auth_via_email)}>
                             <span className="h-5 w-5 overflow-hidden relative">
                                 <Image src="/icons/left-icon.png" alt="Back Icon" fill className="object-contain" />
                             </span>
@@ -101,7 +101,7 @@ const Signup = () => {
                             third_parthy_auth.map((data) => {
                                 const {name, icon, id} = data
                                 return (
-                                    <button key={id} className="h-[55px] w-full flex items-center justify-center gap-2 text-sm sm:text-md font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> {
+                                    <button key={id} className="h-[55px] w-full flex items-center justify-center gap-2 text-[13px] sm:text-[15.5px] font-mont border border-slate-400 rounded font-[500] hover:bg-slate-100 transition-all duration-300" onClick={()=> {
                                         if (id === 'email') {
                                             setAuth_via_email(true)
                                         }
@@ -130,14 +130,14 @@ const Signup = () => {
 
                         {/* <button className="w-full h- rounded bg-[#] text-white"></button> */}
 
-                        <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={auth.email === '' || auth.password === '' || auth.first_name == '' || auth.last_name == ''}>
+                        <Button size="sm" className="mt-5 w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-[15.5px]"  disabled={auth.email === '' || auth.password === '' || auth.first_name == '' || auth.last_name == ''}>
                             {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Signup'}
                         </Button>
                     </form>}
 
                     <p className="text-[14px] text-center w-full sm:w-[350px] font-mont mt-[-10px]">By continuing, you agree to ePulse Terms of Use and Privacy Policy.</p>
 
-                    <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
+                    <h3 className="text-[13px] flex items-center justify-center gap-1  mt-[-10px] font-mont">
                         Already have an account? <Link href={'/login'} className='text-[#306CE9] hover:underline duration-300 font-semibold'>Login</Link>
                     </h3>
                 </div>

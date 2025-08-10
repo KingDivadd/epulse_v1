@@ -104,47 +104,35 @@ const PatientProfile = () => {
 
     return (
         
-        <div className="p-5 h-[calc(100vh-70px)] w-full bg-gray-100 font-mont ">
-            {user_information && <div className="h-full overflow-y-auto hide-scrollbar">
+        <div className=" p-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont overflow-y-auto ">
+            {user_information && <div className="h-full ">
                 
-                <form onSubmit={handle_submit} className=" max-lg:max-w-5xl xl:w-full mx-auto">
-                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+                <form onSubmit={handle_submit} className="h-full max-lg:max-w-5xl xl:w-full mx-auto">
+                    <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-5">
                     {/* Profile Image Section */}
-                        <div className="col-span-1 flex flex-col gap-15 bg-white p-5 rounded-md shadow-md  justify-between  ">
-                            <span className="h-[300px] w-[300px] md:h-[200px] md:w-[200px] lg:w-[320px] lg:h-[320px] flex mx-auto justify-center relative group">
+                        <div className="col-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md  justify-between  ">
+                            <span className="h-[300px] w-[300px] sm:h-[350px] sm:w-[350px] lg:w-[320px] lg:h-[320px] flex mx-auto justify-center relative group ring-5 ring-blue-200 rounded-full mt-3">
                                 <ImgUploader id={'avatar'} title={''} url={information.avatar!} onFileUpload={handle_file_upload} />                                
                             </span>
-                            
-                            <button type="submit" className="hidden md:flex h-[50px] w-full rounded-sm text-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 items-center justify-center" onClick={handle_submit} >
-                                {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Update'}
-                            </button>
+
+                            <div className="w-full flex flex-col gap-5">
+
+                                <InputComponent3 title="First Name" type="text" name="first_name" value={information.first_name!} onChange={handle_change}  />
+
+                                <InputComponent3 title="Last Name" type="text" name="last_name" value={information.last_name!} onChange={handle_change} />
+                                <InputComponent3 title="Country" type="text" name="country" value={information.country!} onChange={handle_change} />
+                                
+                                {/* <button type="submit" className="hidden md:flex h-[50px] w-full rounded-sm text-[13px] text-white bg-[#306ce9] hover:bg-[#306ce9]/90 items-center justify-center" onClick={handle_submit} >
+                                    {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Update'}
+                                </button> */}
+                            </div>
+
                         </div>
 
-                        {/* Personal Info Section */}
-                        <div className="col-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md ">
-                            <InputComponent3
-                                title="First Name"
-                                type="text"
-                                name="first_name"
-                                value={information.first_name!}
-                                onChange={handle_change}
-                            />
-                            <InputComponent3
-                                title="Last Name"
-                                type="text"
-                                name="last_name"
-                                value={information.last_name!}
-                                onChange={handle_change}
-                            />
-                            <InputComponent3
-                                title="Country"
-                                type="text"
-                                name="country"
-                                value={information.country!}
-                                onChange={handle_change}
-                            />
+                        {/* Health Info Section */}
+                        <div className="bcol-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md  ">
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium text-slate-700 font-mont">Phone Number</p>
+                                <p className="text-[13px] font-medium text-slate-700 font-mont">Phone Number</p>
                                 <PhoneInputComponent
                                     country_code={information.country_code!}
                                     phone_number={information.phone_number!}
@@ -152,43 +140,39 @@ const PatientProfile = () => {
                                 />
                             </span>
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium text-slate-700 font-mont">Gender</p>
+                                <p className="text-[13px] font-medium text-slate-700 font-mont">Gender</p>
                                 <select
                                     name="gender"
                                     id="gender"
-                                    className="w-full h-[50px] border border-slate-400 px-2 bg-white text-sm rounded-[2px] focus:outline-none focus:ring-2 focus:ring-[#306ce9]"
+                                    className="w-full h-[50px] border border-slate-400 px-2 bg-white text-[13px] rounded-[2px] focus:outline-none focus:ring-2 focus:ring-[#306ce9]"
                                     value={information.gender}
                                     onChange={handle_change}
                                 >
-                                    <option value="">Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
+                                    <option value="" className='text-[13px]' >Select Gender</option>
+                                    <option value="male" className='text-[13px]' >Male</option>
+                                    <option value="female" className='text-[13px]' >Female</option>
+                                    <option value="other" className='text-[13px]' >Other</option>
                                 </select>
                             </span>
-                        </div>
-
-                        {/* Health Info Section */}
-                        <div className="bcol-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md  ">
                             <span className="flex flex-col gap-2 w-full">
-                            <p className="text-sm font-medium text-slate-700 font-mont">Date of Birth</p>
-                            <DateOfBirth />
+                                <p className="text-[13px] font-medium text-slate-700 font-mont">Date of Birth</p>
+                                <DateOfBirth />
                             </span>
                             
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium text-slate-700 font-mont">Blood Group</p>
+                                <p className="text-[13px] font-medium text-slate-700 font-mont">Blood Group</p>
                                 <select
                                     name="blood_group"
                                     id="blood_group"
-                                    className="w-full h-[50px] border border-slate-400 px-2 bg-white text-sm rounded-[2px] focus:outline-none focus:ring-2 focus:ring-[#306ce9]"
+                                    className="w-full h-[50px] border border-slate-400 px-2 bg-white text-[13px] rounded-[2px] focus:outline-none focus:ring-2 focus:ring-[#306ce9]"
                                     value={information.blood_group}
                                     onChange={handle_change}
                                 >
-                                    <option value="">Select Blood Groupp</option>
+                                    <option value="" className='text-[13px]'>Select Blood Groupp</option>
                                     {
                                         blood_groups.map((item:string, ind:number)=>{
                                             return(
-                                                <option key={ind} value={item}>{item}</option>
+                                                <option key={ind} value={item} className='text-[13px]'>{item}</option>
 
                                             )
                                         })
@@ -197,19 +181,19 @@ const PatientProfile = () => {
                             </span>
 
                             <span className="flex flex-col gap-2 w-full">
-                                <p className="text-sm font-medium text-slate-700 font-mont">Genotype</p>
+                                <p className="text-[13px] font-medium text-slate-700 font-mont">Genotype</p>
                                 <select
                                     name="genotype"
                                     id="genotype"
-                                    className="w-full h-[50px] border border-slate-400 px-2 bg-white text-sm rounded-[2px] focus:outline-none focus:ring-2 focus:ring-[#306ce9]"
+                                    className="w-full h-[50px] border border-slate-400 px-2 bg-white text-[13px] rounded-[2px] focus:outline-none focus:ring-2 focus:ring-[#306ce9]"
                                     value={information.genotype}
                                     onChange={handle_change}
                                 >
-                                    <option value="">Select Genotype</option>
+                                    <option value="" className='text-[13px]'>Select Genotype</option>
                                     {
                                         genotypes.map((item:string, ind:number)=>{
                                             return(
-                                                <option key={ind} value={item}>{item}</option>
+                                                <option key={ind} value={item} className='text-[13px]'>{item}</option>
 
                                             )
                                         })
@@ -233,7 +217,7 @@ const PatientProfile = () => {
                             />
                         </div>
 
-                        <button type="submit" className="md:hidden mt-5 h-[50px] w-full rounded-sm text-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 flex items-center justify-center" onClick={handle_submit} >
+                        <button type="submit" className="lg:col-start-2 h-[50px] w-full rounded-sm text-[13px] text-white bg-[#306ce9] hover:bg-[#306ce9]/90 flex items-center justify-center" onClick={handle_submit} >
                             {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Update'}
                         </button>
                     </div>

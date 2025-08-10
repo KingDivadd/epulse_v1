@@ -22,7 +22,7 @@ import { Loader2Icon } from 'lucide-react';
 import { PageHeader } from './reuseable_heading_component';
 
 
-const PhysicianAppointments = () => {
+const PatientAppointments = () => {
     const router = useRouter()
     const [today, setToday] = useState(Math.floor(Date.now() / 1000)); // Unix timestamp in seconds
     const [position, setPosition] = useState('');
@@ -52,6 +52,8 @@ const PhysicianAppointments = () => {
 
     useEffect(() => {
 
+        console.log('filtered appointment ', filter_appointment)
+
         const new_list = appointment_info.appointments.filter((item:AppointmentType)=>{
 
             return(
@@ -60,17 +62,22 @@ const PhysicianAppointments = () => {
 
         })
 
+        // setAppointment_info({...appointment_info, page_number:1})
+
         setFiltered_appointment_info(new_list)
     
-    }, [appointment_info.appointments, filter_appointment])
+    }, [appointment_info.appointments, filter_appointment, loading])
 
     const handle_fetch_appointments = useCallback(async(page_number:number, limit:number)=> {
         try {
             
             const res = await get_auth_request(`auth/get-appointment/${page_number}/${limit}`) as AxiosResponseHeaders
 
-            if(res.status == 200 || res.status == 201){
             
+            if(res.status == 200 || res.status == 201){
+                
+                console.log('passed here : ', res.data.data)
+
                 setAppointment_info({...appointment_info, ...res.data.data})
 
                 setLoading(false)
@@ -162,19 +169,15 @@ const PhysicianAppointments = () => {
     }, [position, today]);
 
     async function app_projects_action(item: any) {
-
-        console.log('here ', appointment_info.total_number_of_pages)
         
         let new_page_number = page_number;
         const max_page_number = appointment_info?.total_number_of_pages
 
         if (item === 'prev') {
-            console.log('page number', page_number)
             if (page_number > 1) {
                 new_page_number = page_number - 1;          
             }
         } else if (item === 'next') {
-            console.log('page number', page_number)
             if (max_page_number && page_number < max_page_number) {
                 new_page_number = page_number + 1;
             }
@@ -184,7 +187,6 @@ const PhysicianAppointments = () => {
 
         setLoading(true)
 
-        console.log(new_page_number)
         handle_fetch_appointments(new_page_number, items_per_page)
         setPage_number(new_page_number)
 
@@ -292,7 +294,7 @@ const PhysicianAppointments = () => {
                 <PageHeader text={'Appointments'} />
 
                 <div className=" w-[250px]  rounded-[4px] relative ">
-                    <span className="h-[40px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-[4px]" onClick={()=> setOpen_drop_down(!open_drop_down)}>
+                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-[4px]" onClick={()=> setOpen_drop_down(!open_drop_down)}>
                         <p className="text-[13px] ">Filter</p>
                     </span>
 
@@ -346,7 +348,7 @@ const PhysicianAppointments = () => {
             </span>
         {/* here will be the metric */}
 
-            <div className=" w-full temp-220 gap-3 md:gap-4 px-5">
+            {/* <div className=" w-full temp-220 gap-3 md:gap-4 px-5">
 
                 <div className="w-full min-h-[80px] px-4 py-3 rounded-sm shadow-md flex items-center justify-start gap-5 bg-white border border-gray-100">
                     <span className="sm:w-[55px] sm:h-[55px] w-[45px] h-[45px] flex-items-center justify-center">
@@ -401,87 +403,14 @@ const PhysicianAppointments = () => {
                 </div>
 
 
-            </div>
+            </div> */}
 
             <div className="w-full h-full">
 
-                <span className="w-full flex flex-col items-start gap-5 sm:gap-3 px-5 ">
 
-                    {/* <div className="w-full min-h-[50px] flex flex-col border border-gray-200 shadow-md duration-300 rounded-[4px] mx-1 bg-white  ">
-                        <span className="h-[45px] flex items-center justify-start gap-1 w-full px-5 cursor-pointer"
-                        onClick={()=> setShow_filter(!show_filter)}>
-                            <HiFilter className='text-gray-700 size-[20px]' />
-                            <p className="text-[15.5px] font-medium">Filter</p>
-                        </span>
-
-                        {show_filter && <div className="w-full flex flex-col gap-5 p-5 duration-300 ">
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="sm:text-[15.5px] text-[13px]">Filter By Date</p>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild className="">
-                                    <button
-                                    className="w-full  h-[45px] box-shadow-1 font-mont px-3 flex items-center justify-between border  sm:border-gray-400 border-gray-300 bg-white hover:bg-white focus:bg-white rounded text-[13px] text-gray-600">
-                                    {position || 'Filter'}
-                                    <ChevronDown size={'18px'} className=" text-gray-600" />
-                                    </button>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent  className="w-[250px] bg-white shadow-md p-2 z-20 left-0">
-                                    <DropdownMenuRadioGroup value={position} onValueChange={setPosition} className="w-full">
-                                        <DropdownMenuRadioItem
-                                            className="w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa]"
-                                            value="">
-                                            All Appointments
-                                        </DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem
-                                            className="w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa]"
-                                            value="Today">
-                                            Today
-                                        </DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem
-                                            className="w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa]"
-                                            value="Tomorrow">
-                                            Tomorrow
-                                        </DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem
-                                            className="w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa]"
-                                            value="Yesterday">
-                                            Yesterday
-                                        </DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem
-                                            className="w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa]"
-                                            value="Last 7 Days">
-                                            Last 7 Days
-                                        </DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem
-                                            className="w-full h-[40px] text-[13px] flex items-center pl-3 font-mont hover:bg-[#fafafa]"
-                                            value="Last Month">
-                                            Last Month
-                                        </DropdownMenuRadioItem>
-                                    </DropdownMenuRadioGroup>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </span>
-
-                        <div className="w-full flex flex-col gap-2 ">
-                            <p className="text-[13px]  font-mont">Filter By Status</p>
-
-                            <select name="filter_appointment" id="filter_appointment" className='w-full h-[45px] border sm:border-gray-400 border-gray-300 rounded-[4px] font-mont text-[13px] px-2 ' onChange={(e)=> setFilter_appointment(e.target.value)}>
-                                <option value="" className='text-[13px] px-5 font-mont ' >All Appointments</option>
-                                <option value="Today's Appointments" className='text-[13px] px-5 font-mont ' >{"Today's Appointments"}</option>
-                                <option value="pending" className='text-[13px] px-5 font-mont ' >Pending Appointments</option>
-                                <option value="accepted" className='text-[13px] px-5 font-mont ' >Accepted Appointments</option>
-                                <option value="completed" className='text-[13px] px-5 font-mont ' >Completed Appointments</option>
-                                <option value="cancelled" className='text-[13px] px-5 font-mont ' >Missed Appointments</option>
-                            </select>
-                        </div>
-                        </div>}
-
-                    </div> */}
-                </span>
-
-                <div className="w-full hide-scrollbar mt-2">
+                <div className="w-full hide-scrollbar ">
                     {loading ? 
-                    <div className="w-[calc(100%-39px)] mx-auto  h-[500px] flex items-center justify-center">
+                    <div className="w-[calc(100%-39px)] mx-auto h-[500px] flex items-center justify-center">
                         <p className="text-[13px] text-gray-700 text-center">Loading...</p>
                     </div> 
                     :
@@ -489,12 +418,12 @@ const PhysicianAppointments = () => {
                     
                         { 
                             filtered_appointment_info.length === 0 ? 
-                            <div className=" w-[calc(100%-39px)] mx-auto flex h-[440px] rounded-lg bg-white p-5 items-center justify-center">
+                            <div className=" w-[calc(100%-39px)] mx-auto  flex h-[440px] rounded-lg bg-white p-5 items-center justify-center">
                                 <p className="text-[13px] text-gray-600 text-center py-2">No appointment found with the selected criteria</p>
                             </div>
                         :
 
-                            <div className="w-full temp-220 min-h-[calc(100vh-150px)] gap-5  my-3 px-5">
+                            <div className="w-full temp-220 min-h-[calc(100vh-240px)] gap-5  my-3 px-5">
                                 {filtered_appointment_info.map((item, ind:number) => {
                                     const {status} = item
                                     const date = format_date_from_unix(Number(item.time));
@@ -504,7 +433,7 @@ const PhysicianAppointments = () => {
 
                                     const ring_color = status == 'pending' ? 'ring-amber-500' : (status === 'missed' || status == 'cancelled') ? 'ring-red-200' : status == 'completed' ? 'ring-blue-200' : 'ring-green-200'
 
-                                    const image = item.patient?.avatar || '/default-man.png'
+                                    const image = item.physician?.avatar || '/default-man.png'
 
                                     return (
                                     <div key={ind} className="max-w-[550px]">
@@ -514,21 +443,25 @@ const PhysicianAppointments = () => {
                                                     <div className="w-full min-h-[200px] flex flex-col items-center gap-4 p-3 sm:p-4">
                                                         
                                                         <span className="w-full flex items-center justify-between">
-                                                        <h5 className={`text-[12px] `}>
-                                                            {date.date}
-                                                        </h5>
-                                                        <h5 className={`text-[12px] `}>
-                                                            {date.time}
-                                                        </h5>
+                                                            <h5 className={`text-[12px] `}>
+                                                                {date.date}
+                                                            </h5>
+                                                            <h5 className={`text-[12px] `}>
+                                                                {date.time}
+                                                            </h5>
                                                         </span>
 
-                                                        <span className={`relative overflow-hidden rounded-full h-14 w-14 ring-2 ${ring_color}`}>
+                                                        <span className={`relative overflow-hidden rounded-full h-14 w-14 `}>
                                                             <Image src={image} alt={item.time.toString()} fill objectFit='cover' />
                                                         </span>
 
-                                                        <div className="w-full flex flex-col items-center gap-2 md:gap-3">
+                                                        <div className="w-full flex flex-col items-center gap-2 ">
                                                             <p className={`text-[13px] `}>
-                                                                {item.patient?.first_name} {item.patient.last_name}
+                                                                Dr {item.physician?.first_name} {item.physician.last_name}
+                                                            </p>
+
+                                                            <p className={`text-[12px] `}>
+                                                                {item.physician?.specialty ? item.physician?.specialty : 'General Doctor' } 
                                                             </p>
                                                         </div>
 
@@ -568,7 +501,7 @@ const PhysicianAppointments = () => {
                                                         </span>
 
 
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.patient.first_name} {selected_appointment_info && selected_appointment_info.patient.last_name}</p>
+                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.physician.first_name} {selected_appointment_info && selected_appointment_info.physician.last_name}</p>
 
                                                         <p className="text-[13px] font-medium  text-center text-gray-700 ">{date.date} {date.time}</p>
 
@@ -578,11 +511,11 @@ const PhysicianAppointments = () => {
                                                     <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Country:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.country}</p>
+                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.country}</p>
                                                         </span>
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Gender:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.gender}</p>
+                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.gender}</p>
                                                         </span>
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Age:</p>
@@ -590,19 +523,19 @@ const PhysicianAppointments = () => {
                                                         </span>
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Height (cm):</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.height}</p>
+                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.height}</p>
                                                         </span>
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Weight (kg):</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.weight}</p>
+                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.weight}</p>
                                                         </span>
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Blood Group:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.blood_group}</p>
+                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.blood_group}</p>
                                                         </span>
                                                         <span className="flex items-center justify-start gap-2">
                                                         <p className="text-[13px] font-medium">Genotype:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.genotype}</p>
+                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.genotype}</p>
                                                         </span>
                                                         <span className="flex flex-col items-start justify-start gap-1">
                                                         <p className="text-[13px] font-medium">Complaint:</p>
@@ -654,4 +587,4 @@ const PhysicianAppointments = () => {
     );
 };
 
-export default PhysicianAppointments;
+export default PatientAppointments;

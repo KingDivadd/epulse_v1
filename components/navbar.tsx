@@ -21,7 +21,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="px-5 lg:px-8 xl:px-10 w-full grid grid-cols-12 h-[60px] sm:h-[70px] gap-2 ">
+        <nav className="px-5 lg:px-8 xl:px-10 w-full grid grid-cols-12 h-[60px] sm:h-[70px] gap-2 bg-white ">
             <div className="col-span-9 md:col-span-10 lg:col-span-8 h-full flex items-center justify-start gap-3 font-mont ">
 
                 <span className=" sm:hidden h-full flex items-center jusify-center rotate-180 " 
@@ -32,13 +32,13 @@ const Navbar = () => {
                 </span>
                 
                 <span className="h-full flex items-center jusify-center">
-                    <span className="h-10 w-10 overflow-hidden relative">
+                    <span className="h-9 w-9 overflow-hidden relative">
                         <Image src={'/sun.png'} alt='sun' fill objectFit='cover' />
                     </span>
                 </span>
 
                 <div className="flex h-full w-full flex-col items-start justify-center ">
-                    <h3 className="max-sm:hidden font-mont font-semibold text-2xl">Hello {user_information && user_information.first_name}!</h3>
+                    <h3 className="max-sm:hidden font-mont font-semibold text-[20px]">Hello {user_information && user_information.first_name}!</h3>
                     <p className="text-[13px] flex items-center max-sm:h-full text-slate-700 font-mont w-full line-clamp-2">{"It's 30 degress outside. Stay hydrated"}</p>
                 </div>
             </div>
@@ -47,11 +47,11 @@ const Navbar = () => {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <div className="flex items-center justify-center">
-                            <BellIcon size={'22px'} className='text-gray-600' />
+                            <BellIcon size={'22px'} className='text-gray-700' />
                         </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className=" w-72 border-0" align="end">
-                        <DropdownMenuLabel className='text-md font-mont '>Notifications</DropdownMenuLabel>
+                        <DropdownMenuLabel className='text-[15.5px] font-mont '>Notifications</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup className='bg-[#f2f2f2] min-h-72 p-2'>
                             <DropdownMenuItem className='bg-white h-15'></DropdownMenuItem>
@@ -63,12 +63,22 @@ const Navbar = () => {
                 
 
                 <div className="flex items-center justify-start gap-3">
-                    <Link href={'/profile'} className="relative h-[40px] sm:h-[45px] w-[40px] sm:w-[45px] overflow-hidden rounded-full">
+                    <Link href={'/profile'} className="relative h-[40px] w-[40px] overflow-hidden rounded-full ring-2 ring-blue-400">
                         <Image src={user_information && user_information.avatar || '/default-male.png'} alt='profiile-img' fill objectFit='cover' />
                     </Link>
-                    <div className="hidden lg:flex flex-col items-start justify-center font-mont">
-                        <h3 className="hidden sm:block font-medium text-[14px]">{user_information && `${user_information.first_name} ${user_information.last_name}`}</h3>
-                        {(user_information && user_information.role == 'physician') && <p className="text-[13px] text-slate-700 font-mont">Optamologist</p>}
+                    <div className="hidden lg:flex flex-col items-start justify-center font-mont gap-0.5">
+                        <h3 className="hidden sm:block font-medium text-[13px] leading-[15px]">
+                            {user_information && `${user_information.first_name} ${user_information.last_name}`}
+                        </h3>
+                        {
+                            (user_information && user_information.role == 'physician') 
+                            
+                            && 
+                            
+                            <p className="text-[13px] text-slate-700 font-mont leading-[15px]">
+                                {( user_information.registered_as == 'Specialist') ? user_information.registered_as : user_information.registered_as == 'General Doctor' ? 'General Doctor' : ''}
+                            </p>
+                        }
                     </div>
                 </div>
             </div>

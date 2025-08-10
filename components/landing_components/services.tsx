@@ -30,7 +30,7 @@ const Services = () => {
                 initial={{y: -30, opacity: 0}}
                 whileInView={{y: 0, opacity: 1}}
                 transition={{duration: 0.4, delay: 0.15 }}
-            className="text-[13px] sm:text-md text-start sm:w-[500px] text-[#ffffff] mt-5 font-mont">Get quality medical care with a variety of services designed for your comfort and health needs.</motion.p>
+            className="text-[13px] sm:text-[15.5px] text-start sm:w-[500px] text-[#ffffff] mt-5 font-mont">Get quality medical care with a variety of services designed for your comfort and health needs.</motion.p>
             
 
             <motion.div 

@@ -152,11 +152,11 @@ const UserDetails = () => {
 
                     {/* <button className="w-full h- rounded bg-[#] text-white"></button> */}
 
-                    <h3 className="text-sm flex items-center justify-center gap-1  mt-[-10px] font-mont">
+                    <h3 className="text-[13px] flex items-center justify-center gap-1  mt-[-10px] font-mont">
                         {'Didn\'t receive any code?'} <p className='text-[#306CE9] hover:underline duration-300 font-semibold cursor-pointer' onClick={handle_new_otp}>Request Again</p>
                     </h3>
 
-                    <Button type='submit' size="sm" className=" w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-md"  disabled={otp.length < 6} onClick={handle_submit}>
+                    <Button type='submit' size="sm" className=" w-full h-[55px] bg-[#306CE9] text-white hover:bg-[#306CE9]/90 transition-all duration-300 font-mont font-semibold rounded text-[15.5px]"  disabled={otp.length < 6} onClick={handle_submit}>
                         {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Next'}
                     </Button>
                 </form>

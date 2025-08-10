@@ -10,12 +10,12 @@ import AdminAppointmentSchedule from '@/components/physician_appointment_schedul
 const AdminDashboardPage = () => {
     const [fund_search, setFund_search] = useState('')
     return (
-        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 hide-scrollbar flex flex-col gap-5">
+        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5">
             <AdminWalletFundCont />
 
 
-            <div className="w-full bg-white flex flex-col gap-5 p-5 rounded-md shadow-md">
-                <p className="text-lg font-medium font-mont">Appointment Schedule</p>
+            <div className="w-full bg-white flex flex-col gap-5 p-4 rounded-md shadow-md">
+                <p className="text-[15.5px] font-medium font-mont">Appointment Schedule</p>
 
                 <AdminAppointmentSchedule fund_search={fund_search} setFund_search={setFund_search} />
             </div>

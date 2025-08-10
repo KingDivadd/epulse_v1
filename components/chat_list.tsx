@@ -97,7 +97,7 @@ const ChatList = () => {
                                             </div>
 
                                             <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
-                                                <p className="text-sm font-medium">{"Mike Rebuern"}</p>
+                                                <p className="text-[13px] font-medium">{"Mike Rebuern"}</p>
                                                 <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
                                                     {"Okay, let's check your vitals and perform a physical exam. It could be a number of things let's check your vitals and perform a physical exam. It could be a number of things."}
                                                 </p>
@@ -144,7 +144,7 @@ const ChatList = () => {
                                                     </div>
 
                                                     <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
-                                                        <p className="text-sm font-medium">{"Dr Mike Rebuern"}</p>
+                                                        <p className="text-[13px] font-medium">{"Dr Mike Rebuern"}</p>
                                                         <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
                                                             {"Okay, let's check your vitals and perform a physical exam. It could be a number of things let's check your vitals and perform a physical exam. It could be a number of things."}
                                                         </p>
@@ -184,7 +184,7 @@ const ChatList = () => {
                             </div>
 
                             <div className="w-full h-[calc(100vh-265px)] bg-white flex flex-col py-3.5 rounded-sm justify-between  ">
-                                {/* <p className="text-sm w-full text-center">{"TODAY AT 11:00"}</p> */}
+                                {/* <p className="text-[13px] w-full text-center">{"TODAY AT 11:00"}</p> */}
 
                                 <div ref={messagesContainerRef} className="w-full h-full  overflow-y-auto hide-scrollbar">
                                     <div className="w-full flex flex-col gap-2">

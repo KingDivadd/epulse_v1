@@ -48,7 +48,7 @@ const Consultation = () => {
                                                 </span>
 
                                                 <div className="w-full flex flex-col items-center gap-3">
-                                                    <p className={`text-sm font-medium ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>{item.registered_as}</p>
+                                                    <p className={`text-[13px] font-medium ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>{item.registered_as}</p>
                                                     <p className={`text-[14px] ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>dr {item.last_name} {item.first_name} </p>
                                                 </div>
                                             </div>
@@ -64,7 +64,7 @@ const Consultation = () => {
 
                                         <Drawer>
                                             <DrawerTrigger className='w-full'>
-                                                <div key={ind} className={`w-full flex flex-col font-mont rounded-lg shadow-md ${appointments_within_24hrs ? "bg-[#306ce9] duration-700 ": "bg-white hover:bg-gray-100 group "}`}>
+                                                <div key={ind} className={`w-full flex flex-col font-mont rounded-lg shadow-md ${appointments_within_24hrs ? "bg-[#306ce9] duration-700 ": "bg-white hover:bg-gray-50 group "}`}>
 
                                                     <div key={ind} className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
                                                         <span className="w-full flex items-center justify-between">
@@ -77,7 +77,7 @@ const Consultation = () => {
                                                         </span>
 
                                                         <div className="w-full flex flex-col items-center gap-2 md:gap-3">
-                                                            <p className={`text-sm font-medium ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>{item.registered_as}</p>
+                                                            <p className={`text-[13px] font-medium ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>{item.registered_as}</p>
                                                             <p className={`text-[14px] ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>dr {item.last_name} {item.first_name} </p>
 
                                                             <p className={`block md:hidden text-[14px] ${appointments_within_24hrs ? 'text-white':'text-slate-700'}`}>{item.languages_spoken} </p>
@@ -118,21 +118,21 @@ const Consultation = () => {
 
                                                 <div className="w-full flex flex-col gap-2 mt-5">
                                                     <span className="flex w-full gap-2 items-center justify-starat">
-                                                        <p className="text-sm font-medium">{"Doctor's Name:"}</p>
-                                                        <p className="text-sm ">Dr. {item.first_name} {item.last_name}</p>
+                                                        <p className="text-[13px] font-medium">{"Doctor's Name:"}</p>
+                                                        <p className="text-[13px] ">Dr. {item.first_name} {item.last_name}</p>
                                                     </span>
                                                     <span className="flex w-full gap-2 items-center justify-starat">
-                                                        <p className="text-sm font-medium">{"Doctor's Speciality:"}</p>
-                                                        <p className="text-sm "> {item.registered_as}</p>
+                                                        <p className="text-[13px] font-medium">{"Doctor's Speciality:"}</p>
+                                                        <p className="text-[13px] "> {item.registered_as}</p>
                                                     </span>
                                                     <span className="flex w-full gap-2 items-center justify-starat">
-                                                        <p className="text-sm font-medium">Language:</p>
-                                                        <p className="text-sm ">{item.languages_spoken}</p>
+                                                        <p className="text-[13px] font-medium">Language:</p>
+                                                        <p className="text-[13px] ">{item.languages_spoken}</p>
                                                     </span>
                                                     <DrawerDescription className='text-black flex flex-col gap-2'>
-                                                        {/* <p className="text-sm font-medium">Description:</p> */}
+                                                        {/* <p className="text-[13px] font-medium">Description:</p> */}
                                                         <span className="flex w-full gap-2 items-center justify-starat">
-                                                            <span className="text-sm ">{item.description}</span>
+                                                            <span className="text-[13px] ">{item.description}</span>
                                                         </span>
                                                     </DrawerDescription>
                                                 </div>

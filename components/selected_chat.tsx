@@ -65,7 +65,7 @@ const SelectedChat = () => {
             </div>
 
             <div className="w-full h-[calc(100vh-265px)] bg-white flex flex-col py-3.5 rounded-sm justify-between  ">
-                {/* <p className="text-sm w-full text-center">{"TODAY AT 11:00"}</p> */}
+                {/* <p className="text-[13px] w-full text-center">{"TODAY AT 11:00"}</p> */}
 
                 <div ref={messagesContainerRef} className="w-full h-full  overflow-y-auto hide-scrollbar">
                     <div className="w-full flex flex-col gap-2">

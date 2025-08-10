@@ -7,9 +7,11 @@ import { useRouter } from 'next/navigation';
 import axios, { AxiosResponseHeaders } from 'axios';
 import { get_auth_request } from '@/app/api';
 import { toast_msg } from '@/lib/toast';
+import {  Loader2Icon } from 'lucide-react';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
 
     let count = 0
 
@@ -25,6 +27,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             if (x_id_key) {
                 
                 handle_verify_status()
+
+                setLoading(true)
+
+                if (user_information && user_information?.role == 'physician'){
+
+                    const {first_name, last_name, registered_as, specialty, avatar, bio, country, state, address, languages_spoken, medical_license} = user_information
+
+                    if (!first_name || !last_name || !registered_as || !specialty || !bio || !avatar || !country || !state || !address || !languages_spoken || !medical_license){
+                        router.push('/profile')
+                    }
+
+                }
                 
             }else{
                 
@@ -53,9 +67,28 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
                 setUser_information({...user_information, ...res.data.user, role: user_role })
 
+                if (user_role == 'physician'){
+
+                    const {first_name, last_name, registered_as, specialty, avatar, bio, country, state, address, languages_spoken, medical_license} = res.data.user
+
+                    if (!first_name || !last_name || !registered_as || !specialty || !bio || !avatar || !country || !state || !address || !languages_spoken || !medical_license){
+                        router.push('/profile')
+                    }
+
+                }
+
+                setLoading(false)
+
+                
+
                 count = 0
 
-            }else{
+            } else if (res.status == 401){
+                toast_msg({title: 'Session expired please login again.', type:'danger'})
+                router.push('/login')
+            }
+            
+            else{
                 
                 if (count < 10){
 
@@ -93,7 +126,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
     return (
         <>
-            {true ? <main className="w-screen h-screen flex overflow-hidden relative sm:p-0" onClick={handleOutsideClick}>
+            
+            <main className="w-screen h-screen flex overflow-hidden relative sm:p-0" onClick={handleOutsideClick}>
                 <section className="hidden sm:block w-[210px] xl:w-[250px]">
                     <Sidebar />
                 </section>
@@ -109,12 +143,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     onClick={handleMobileSidebarClick}>
                     <MobileSidebar />
                 </section>
-            </main>:
-            <main className="w-screen h-screen flex items-center justify-center font-mont text-lg">
-                Loading
             </main>
             
-        }
+            
+        
         </>
     );
 }

@@ -29,7 +29,7 @@ const Sidebar = () => {
     }
 
     return (
-        <div className="w-full  flex flex-col gap-3 h-full bg-white ">
+        <div className="w-full  flex flex-col gap-3 h-full bg-[#306ce9] ">
             <span className="w-full flex justify-start h-24 "> <SidebarHeading /> </span>
 
             <article className="w-full flex flex-col pr-2 xl:pr-5 relative">
@@ -48,7 +48,7 @@ const Sidebar = () => {
                         return(
 
                             <div key={ind} className={`w-full ${show_route}`}>
-                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.path ? "current-nav-item bg-blue-100  ": "nav-item "}`} 
+                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.path ? "current-nav-item ": "nav-item "}`} 
                                 onClick={()=>  {
                                         if(route.id == 'logout'){
                                             localStorage.clear()

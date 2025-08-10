@@ -8,9 +8,10 @@ import WalletFundHistoryTable from '@/components/wallet_fund_history_table'
 
 const DashboardPage = () => {
     const [fund_search, setFund_search] = useState('')
+    const [loading, setLoading] = useState(false)
 
     return (
-        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 hide-scrollbar flex flex-col gap-5">
+        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5">
             <WalletFundCont />
 
             <DashboardAppointment />
@@ -18,7 +19,7 @@ const DashboardPage = () => {
             <div className="w-full bg-white flex flex-col gap-5 p-5 rounded-md shadow-md">
                 <p className="text-lg font-medium font-mont">Transactions</p>
 
-                <WalletFundHistoryTable fund_search={fund_search} setFund_search={setFund_search} />
+                <WalletFundHistoryTable fund_search={fund_search} setFund_search={setFund_search} loading={loading} setLoading={setLoading} />
             </div>
 
         </div>

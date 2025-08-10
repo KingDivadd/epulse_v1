@@ -792,7 +792,7 @@ export const registered_doctors = [
     "languages_spoken": ["English", "Yoruba"],
     "avatar": "https://images.unsplash.com/photo-1576091160550-2173fdabea36?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Cardiology",
+    "specialty": "Cardiology",
     "description": "With over 20 years of extensive experience in the field, I focus on cardiovascular diagnostics and heart failure management, aiming to improve patient outcomes and advance cardiac care innovation.",
     "current_hospital_or_clinic": "Lagos Heart Center"
   },
@@ -804,7 +804,7 @@ export const registered_doctors = [
     "languages_spoken": ["English", "Spanish"],
     "avatar": "https://images.unsplash.com/photo-1576091160397-57d467c91409?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "general_doctor",
-    "speciality": "General Practice",
+    "specialty": "General Practice",
     "description": "With over 15 years of extensive experience in the field, I focus on preventive care and chronic disease management, aiming to improve patient outcomes and advance community health practices.",
     "current_hospital_or_clinic": "Springfield Community Clinic"
   },
@@ -816,7 +816,7 @@ export const registered_doctors = [
     "languages_spoken": ["Hindi", "English"],
     "avatar": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Dermatology",
+    "specialty": "Dermatology",
     "description": "With over 18 years of extensive experience in the field, I focus on skin health and cosmetic dermatology, aiming to improve patient outcomes and advance dermatological research.",
     "current_hospital_or_clinic": "Mumbai Skin Institute"
   },
@@ -828,7 +828,7 @@ export const registered_doctors = [
     "languages_spoken": ["Portuguese", "English"],
     "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea6f8828?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Dentist",
+    "specialty": "Dentist",
     "description": "With over 22 years of extensive experience in the field, I focus on restorative dentistry and orthodontics, aiming to improve patient outcomes and advance dental care techniques.",
     "current_hospital_or_clinic": "Rio Dental Clinic"
   },
@@ -840,7 +840,7 @@ export const registered_doctors = [
     "languages_spoken": ["English"],
     "avatar": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Pediatrics",
+    "specialty": "Pediatrics",
     "description": "With over 20 years of extensive experience in the field, I focus on childhood development and infectious diseases, aiming to improve patient outcomes and advance pediatric care standards.",
     "current_hospital_or_clinic": "London Children’s Hospital"
   },
@@ -852,7 +852,7 @@ export const registered_doctors = [
     "languages_spoken": ["Urdu", "English"],
     "avatar": "https://images.unsplash.com/photo-1594824476934-3a4b9d6b7b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Neurology",
+    "specialty": "Neurology",
     "description": "With over 20 years of extensive experience in the field, I focus on neurocritical care and neurodegenerative conditions, aiming to improve patient outcomes and advance neurological research.",
     "current_hospital_or_clinic": "Karachi Neuro Clinic"
   },
@@ -864,7 +864,7 @@ export const registered_doctors = [
     "languages_spoken": ["Spanish", "English"],
     "avatar": "https://images.unsplash.com/photo-1579684453423-8a6b9f3b7e7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "general_doctor",
-    "speciality": "General Practice",
+    "specialty": "General Practice",
     "description": "With over 17 years of extensive experience in the field, I focus on holistic primary care and chronic illness management, aiming to improve patient outcomes and advance preventive medicine.",
     "current_hospital_or_clinic": "Madrid Family Clinic"
   },
@@ -876,7 +876,7 @@ export const registered_doctors = [
     "languages_spoken": ["English", "Igbo"],
     "avatar": "https://images.unsplash.com/photo-1594824476934-3a4b9d6b7b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Obstetrics and Gynecology",
+    "specialty": "Obstetrics and Gynecology",
     "description": "With over 25 years of extensive experience in the field, I focus on women’s reproductive health and prenatal care, aiming to improve patient outcomes and advance maternal health practices.",
     "current_hospital_or_clinic": "Abuja Women’s Hospital"
   },
@@ -888,7 +888,7 @@ export const registered_doctors = [
     "languages_spoken": ["Japanese", "English"],
     "avatar": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Neurology",
+    "specialty": "Neurology",
     "description": "With over 23 years of extensive experience in the field, I focus on epilepsy management and stroke care, aiming to improve patient outcomes and advance neurological treatment methodologies.",
     "current_hospital_or_clinic": "Tokyo Neuro Clinic"
   },
@@ -900,7 +900,7 @@ export const registered_doctors = [
     "languages_spoken": ["Arabic", "English"],
     "avatar": "https://images.unsplash.com/photo-1576091160397-57d467c91409?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Ophthalmology",
+    "specialty": "Ophthalmology",
     "description": "With over 19 years of extensive experience in the field, I focus on cataract surgery and glaucoma treatment, aiming to improve patient outcomes and advance vision care technologies.",
     "current_hospital_or_clinic": "Cairo Eye Institute"
   },
@@ -912,7 +912,7 @@ export const registered_doctors = [
     "languages_spoken": ["Portuguese", "Spanish"],
     "avatar": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Gastroenterology",
+    "specialty": "Gastroenterology",
     "description": "With over 21 years of extensive experience in the field, I focus on endoscopic procedures and liver disease management, aiming to improve patient outcomes and advance digestive health research.",
     "current_hospital_or_clinic": "São Paulo Gastro Clinic"
   },
@@ -924,7 +924,7 @@ export const registered_doctors = [
     "languages_spoken": ["French", "Wolof", "English"],
     "avatar": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "general_doctor",
-    "speciality": "General Practice",
+    "specialty": "General Practice",
     "description": "With over 16 years of extensive experience in the field, I focus on community health and preventive care, aiming to improve patient outcomes and advance public health initiatives.",
     "current_hospital_or_clinic": "Dakar Community Clinic"
   },
@@ -936,7 +936,7 @@ export const registered_doctors = [
     "languages_spoken": ["German", "English"],
     "avatar": "https://images.unsplash.com/photo-1576091160550-2173fdabea36?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Psychiatry",
+    "specialty": "Psychiatry",
     "description": "With over 24 years of extensive experience in the field, I focus on mood disorders and therapeutic interventions, aiming to improve patient outcomes and advance mental health care practices.",
     "current_hospital_or_clinic": "Berlin Mental Health Center"
   },
@@ -948,7 +948,7 @@ export const registered_doctors = [
     "languages_spoken": ["Hindi", "English", "Gujarati"],
     "avatar": "https://images.unsplash.com/photo-1594824476934-3a4b9d6b7b76?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Urology",
+    "specialty": "Urology",
     "description": "With over 20 years of extensive experience in the field, I focus on kidney stone treatment and prostate health, aiming to improve patient outcomes and advance urological care techniques.",
     "current_hospital_or_clinic": "Ahmedabad Urology Clinic"
   },
@@ -960,7 +960,7 @@ export const registered_doctors = [
     "languages_spoken": ["French", "English"],
     "avatar": "https://images.unsplash.com/photo-1559839734-2b71ea6f8828?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
     "registered_as": "specialist",
-    "speciality": "Endocrinology",
+    "specialty": "Endocrinology",
     "description": "With over 22 years of extensive experience in the field, I focus on diabetes management and thyroid disorders, aiming to improve patient outcomes and advance endocrine health research.",
     "current_hospital_or_clinic": "Paris Endocrine Clinic"
   }
@@ -1075,10 +1075,10 @@ export const messages_data = [
 ];
 
 export const metrics = [
-    { name: 'All Appointments', icon: AiOutlineCalendar, id: 'all_appointments', count: 30 },
-    { name: 'Pending', icon: AiOutlineClockCircle, id: 'pending', count: 10 },
-    { name: 'Approved', icon: MdCheckCircleOutline, id: 'approved', count: 20 },
-    { name: 'Completed', icon: FaCheckCircle, id: 'completed', count: 15 },
+    { name: 'All Appointments', icon: AiOutlineCalendar, id: 'all_appointments', count: 0 },
+    { name: 'Pending', icon: AiOutlineClockCircle, id: 'pending', count: 0 },
+    { name: 'Approved', icon: MdCheckCircleOutline, id: 'approved', count: 0 },
+    { name: 'Completed', icon: FaCheckCircle, id: 'completed', count: 0 },
     // { name: 'Missed Appointments', icon: MdOutlineCancel, id: 'missed_appointments', count: 2 },
     // { name: 'Today\'s Appointments', icon: HiOutlineClock, id: 'todays_appointments', count: 3 },
 ];
@@ -1130,4 +1130,17 @@ export const physician_appointment_sample = [
   { first_name: 'Ruth', last_name: 'Morris', gender: 'Female', avatar: '/profile-img-2b.jpg', consultation_type: 'video', time: 1722406800, status: 'missed' }, // July 31, 2025, 09:40
   { first_name: 'Ronald', last_name: 'Rogers', gender: 'Male', avatar: '/profile-img-2c.jpg', consultation_type: 'chat', time: 1722409200, status: 'approved' }, // July 31, 2025, 10:20
   { first_name: 'Sharon', last_name: 'Reed', gender: 'Female', avatar: '/profile-img-2d.jpg', consultation_type: 'video', time: 1722411600, status: 'pending' } // July 31, 2025, 11:00
+];
+
+export const languages = [
+    'English',
+    'Spanish',
+    'French',
+    'German',
+    'Italian',
+    'Portuguese',
+    'Chinese',
+    'Japanese',
+    'Russian',
+    'Arabic',
 ];

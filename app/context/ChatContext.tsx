@@ -32,7 +32,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [show_mobile_nav, setShow_mobile_nav] = useState(false)
     const [header_nav, setHeader_nav] = useState('home');
     const [user_information, setUser_information] = useState<UserInfoProps | null>(null);
-    const [country_dial_code, setCountry_dial_code] = useState('+234');
+    const [country_dial_code, setCountry_dial_code] = useState('+200');
     const [show_activity_history, setShow_activity_history] = useState(false)
     const [show_mobile_sidebar, setShow_mobile_sidebar] = useState(false)
     const [show_selected_chat, setShow_selected_chat] = useState(false)

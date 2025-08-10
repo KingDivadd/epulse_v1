@@ -67,9 +67,9 @@ const ServicesSlider = () => {
                                         <div className="w-full h-full flex flex-col justify-between items-start gap-3">
                                             <p className="text-[15.5px] font-medium text-white">{title}</p>
 
-                                            <p className="text-sm text-gray-100 line-clamp-3 ">{description}</p>
+                                            <p className="text-[13px] text-gray-100 line-clamp-3 ">{description}</p>
 
-                                            <button className="h-[45px] bg-white hover:bg-gray-100 rounded-full w-[200px] flex items-center justify-center text-sm font-medium gap-1" onClick={handle_get_started}>{'Book appointment'}</button>
+                                            <button className="h-[45px] bg-white hover:bg-gray-50 rounded-full w-[200px] flex items-center justify-center text-[13px] font-medium gap-1" onClick={handle_get_started}>{'Book appointment'}</button>
                                         </div>
                                     </div>                                
                                 </SwiperSlide>

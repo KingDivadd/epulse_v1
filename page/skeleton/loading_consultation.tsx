@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 
 const LoadingConsultation = () => {
     return (
-        <div className='w-full min-h-[calc(100vh-70px)] bg-gray-100 p-5 hide-scrollbar grid grid-cols-7 gap-5 font-mont'>
+        <div className='w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar grid grid-cols-7 gap-5 font-mont'>
             <div className="col-span-7 lg:col-span-3 flex flex-col gap-5">
                 <p className="text-lg font-semibold">Consultation with doctors</p>
 

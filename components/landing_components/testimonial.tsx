@@ -7,7 +7,7 @@ import TestimonialSlider from './testimonial_slider'
 const Testimonials = () => {
     return (
         <section 
-            id='testimonials' className="w-full min-h-[55vh] px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-15 md:py-20  scroll-mt-20  flex flex-col items-center bg-gray-100 ">
+            id='testimonials' className="w-full min-h-[55vh] px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-15 md:py-20  scroll-mt-20  flex flex-col items-center bg-gray-50 ">
 
             <motion.span className=''
                 initial={{y: -30, opacity: 0}}
@@ -29,7 +29,7 @@ const Testimonials = () => {
                 whileInView={{y: 0, opacity: 1}}
                 transition={{duration: 0.4, delay: 0.15 }} 
             
-                className="text-[13px] sm:text-md text-center sm:w-[500px] text-slate-600 mt-5 font-mont">We are proud to have helped thousands of patients from various countries get the best medical services.</motion.p>
+                className="text-[13px] sm:text-[15.5px] text-center sm:w-[500px] text-slate-600 mt-5 font-mont">We are proud to have helped thousands of patients from various countries get the best medical services.</motion.p>
             
 
             <motion.div 

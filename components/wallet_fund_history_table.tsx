@@ -40,7 +40,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
     }, [fund_search, wallet_information?.transactions])
 
 
-    async function app_projects_action(item: string) {
+    async function app_projects_action(item: any) {
         
         let new_page_number = wallet_information?.page_number;
         const max_page_number = wallet_information?.total_number_of_pages
@@ -54,7 +54,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 new_page_number = wallet_information?.page_number! + 1;
             }
         } else {
-        new_page_number = item;
+            new_page_number = item;
         }
 
         setLoading(true)
@@ -74,7 +74,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
         if (max_page_number <= max_displayed_pages) {
             for (let i = 1; i <= max_page_number; i++) {
                 pages.push(
-                <p key={i} className={`text-md font-light h-[27px] w-[27.5px] rounded-[3px] flex items-center justify-center cursor-pointer ${
+                <p key={i} className={`text-[15.5px] font-light h-[27px] w-[27.5px] rounded-[3px] flex items-center justify-center cursor-pointer ${
                     page_number === i ? 'bg-gray-200 text-gray-600' : ''
                     }`}
                     onClick={() => app_projects_action(i)}
@@ -99,7 +99,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 pages.push(
                 <p
                     key={i}
-                    className={`text-sm font-light h-[27px] w-[27.5px] rounded-[3px] flex items-center justify-center cursor-pointer ${
+                    className={`text-[13px] font-light h-[27px] w-[27.5px] rounded-[3px] flex items-center justify-center cursor-pointer ${
                     page_number === i ? 'bg-blue-700 text-white' : ''
                     }`}
                     onClick={() => app_projects_action(i)}
@@ -146,16 +146,16 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
             <div className={`hidden min-w-[1000px] md:flex flex-col items-start justify-start`}>
                 <div className="w-full flex items-center justify-between border h-[55px] border-gray-200  ">
                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Date</p>
+                        <p className="text-[13px] font-medium">Date</p>
                     </div>
                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Transaction Type</p>
+                        <p className="text-[13px] font-medium">Transaction Type</p>
                     </div>
                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Narration</p>
+                        <p className="text-[13px] font-medium">Narration</p>
                     </div>
                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                        <p className="text-sm font-medium">Amount</p>
+                        <p className="text-[13px] font-medium">Amount</p>
                     </div>
                 </div>
 
@@ -171,24 +171,24 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
     
                                 const formatted_date = format_date_from_unix(Number(created_at))
                                 return (
-                                <div  key={transaction_id}  className={`w-full flex items-center justify-between py-3 ${  ind % 2 === 1 ? 'bg-gray-100' : ''  }`} >
+                                <div  key={transaction_id}  className={`w-full flex items-center justify-between py-3 ${  ind % 2 === 1 ? 'bg-gray-50' : ''  }`} >
     
                                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
-                                        <p className="text-sm">
+                                        <p className="text-[13px]">
                                             {formatted_date.date}, {formatted_date.time}
                                         </p>
                                     </div>
                                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
                                         <button className={transaction_type_style}>
                                             {/* <Dot size="30px" /> */}
-                                            <p className="text-sm">{transaction_type}</p>
+                                            <p className="text-[13px]">{transaction_type}</p>
                                         </button>
                                     </div>
                                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start overflow-hidden">
-                                        <p className="text-sm truncate">{narration}</p>
+                                        <p className="text-[13px] truncate">{narration}</p>
                                     </div>
                                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                                        <p className="text-sm flex items-center">₦ {amount.toFixed(2)}</p>
+                                        <p className="text-[13px] flex items-center">₦ {amount.toFixed(2)}</p>
                                     </div>
                                 </div>
                                 )
@@ -197,7 +197,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                         
                         :
                         <div className="w-full h-[250px] flex items-center justify-center">
-                            <p className="text-sm font-medium">No Transactions yet</p>
+                            <p className="text-[13px] font-medium">No Transactions yet</p>
                         </div>
                     }
 
@@ -211,16 +211,16 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className={`text-sm cursor-pointer ${wallet_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
+                            <p className={`text-[13px] cursor-pointer ${wallet_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                             {render_page_numbers()}
                             </span>
-                            <p className={`text-sm ${wallet_information?.page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
+                            <p className={`text-[13px] ${wallet_information?.page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
                         </span>
                         
                     </div>
 
-                    <p className="text-sm">
+                    <p className="text-[13px]">
                         Page {wallet_information?.page_number} of {wallet_information?.total_number_of_pages}
                     </p>
                 </div>
@@ -256,16 +256,16 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className={`text-sm cursor-pointer ${wallet_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
+                            <p className={`text-[13px] cursor-pointer ${wallet_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                             {render_page_numbers()}
                             </span>
-                            <p className={`text-sm ${wallet_information?.page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
+                            <p className={`text-[13px] ${wallet_information?.page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
                         </span>
                         
                     </div>
 
-                    <p className="text-sm">
+                    <p className="text-[13px]">
                         Page {wallet_information?.page_number} of {wallet_information?.total_number_of_pages}
                     </p>
                 </div>

@@ -11,16 +11,19 @@ import { useRouter } from 'next/navigation'
 
 const WalletFundingPage = () => {
     const router=useRouter()
-    const {wallet_information, setWallet_information} = useChat()
+    const {wallet_information, setWallet_information, user_information} = useChat()
     const [loading, setLoading] = useState(false)
+    const [retry, setRetry] = useState(0)
 
     useEffect(() => {
         if (!navigator.onLine) {
             toast_msg({title:'Please connect to the internet',type:'danger'})
             return;
         }
+
+        setLoading(true)
         handle_fetch_wallet_information()
-    }, [wallet_information?.page_number, wallet_information?.items_per_page])
+    }, [wallet_information?.page_number, wallet_information?.items_per_page, user_information?.first_name])
 
 
     async function handle_fetch_wallet_information() {
@@ -36,12 +39,29 @@ const WalletFundingPage = () => {
 
             }else if(res.status == 401){
 
-                toast_msg({title:'Session expired, kindly login again',})
+                toast_msg({title:'Session expired, kindly login again!',})
 
                 router.push('/login')
 
             }else{
                 toast_msg({title: res.response.data.msg})
+
+                if (retry < 5) {
+                    handle_fetch_wallet_information()
+                    setRetry(retry + 1)
+                    console.log('retry : ',retry)
+                }else{
+
+                    setRetry(0);
+                    console.log('clearing retry ',retry)
+                    setTimeout(() => {
+                        handle_fetch_wallet_information()
+                        console.log(' retrying after timeout ',retry)
+                    }, 10000);
+                }
+                
+
+
             }
             
         } catch (error) {
@@ -52,7 +72,7 @@ const WalletFundingPage = () => {
 
 
     return (
-        <div className='p-5 h-[calc(100vh-70px)] w-full  bg-gray-100 font-mont ' >
+        <div className='p-5 h-[calc(100vh-70px)] w-full  bg-gray-50 font-mont ' >
             <div className="w-full h-full overflow-y-auto hide-scrollbar gap-5 flex flex-col ">
                 <div className="w-full">  <WalletFundCont /></div>
                 <div className="w-full">  <WalletFundHistory loading={loading} setLoading={setLoading} /></div>

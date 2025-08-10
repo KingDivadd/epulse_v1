@@ -218,10 +218,14 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.temp-230 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
 .temp-220 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
 }
 
 .temp-195 {
@@ -244,17 +248,17 @@ body {
 /* ----------- landing page styling-------------- */
 
 .textarea-type-1 {
-    @apply h-[100px] p-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    @apply min-h-[100px] p-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
     font-family: "Montserrat", sans-serif;
 }
 
 .input-type-4 {
-    @apply px-3 rounded w-full outline-0 text-[15px];
+    @apply px-3 rounded w-full outline-0 text-[13.5px];
     font-family: "Montserrat", sans-serif;
 }
 
 .input-type-1 {
-    @apply h-[60px] px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    @apply h-[60px] px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[13.5px];
     font-family: "Montserrat", sans-serif;
 }
 
@@ -263,7 +267,7 @@ body {
 }
 
 .input-type {
-    @apply h-full px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    @apply h-full px-3 border border-slate-400 rounded bg-white w-full outline-0;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -272,7 +276,7 @@ body {
 }
 
 .input-type-2 {
-    @apply h-[50px] px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[15px];
+    @apply h-[50px] px-3 border border-slate-400 rounded bg-white w-full outline-0 text-[13.5px];
     font-family: "Montserrat", sans-serif;
 }
 
@@ -281,7 +285,7 @@ body {
 }
 
 .input-type-3 {
-    @apply h-full rounded bg-white w-full outline-0 text-[15px];
+    @apply h-full rounded bg-white w-full outline-0 text-[13.5px];
     font-family: "Montserrat", sans-serif;
 }
 
@@ -325,11 +329,11 @@ body {
 }
 
 .current-nav-item {
-    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full relative text-[#306ce9];
+    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full relative text-[#306ce9] bg-gray-100;
 }
 
 .current-nav-item-text {
-    @apply font-[500] text-[14px];
+    @apply font-[500] text-[13.5px];
     font-family: "Montserrat", sans-serif;
 }
 
@@ -339,11 +343,11 @@ body {
 }
 
 .nav-item {
-    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full text-gray-600;
+    @apply w-full flex items-center gap-3 h-[45px] rounded-r-full text-gray-100;
 }
 
 .nav-item-text {
-    @apply font-[500] text-[14px];
+    @apply font-[500] text-[13.5px];
     font-family: "Montserrat", sans-serif;
 }
 

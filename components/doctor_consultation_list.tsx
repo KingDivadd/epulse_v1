@@ -8,6 +8,9 @@ import { useChat } from '@/app/context/ChatContext';
 import { useRouter } from 'next/navigation';
 import { toast_msg } from '@/lib/toast';
 import { convert_to_unix } from '@/lib/date_formater';
+import { Loader2Icon } from 'lucide-react';
+import { post_auth_request } from '@/app/api';
+import { AxiosResponseHeaders } from 'axios';
 
 
 interface DoctorProps {
@@ -18,13 +21,14 @@ interface DoctorProps {
     languages_spoken: string[];
     avatar: string;
     registered_as: string;
-    speciality: string;
+    specialty: string;
     description: string;
     current_hospital_or_clinic: string;
 }
 
 const DoctorConsultationList = () => {
     const [loading, setLoading] = useState(true);
+    const [loading_2, setLoading_2] = useState(false)
     const { selected_user, setSelected_user } = useChat();
     const router = useRouter();
     const [error, setError] = useState<string | null>(null);
@@ -51,31 +55,72 @@ const DoctorConsultationList = () => {
     });
 
     useEffect(() => {
-        const id = window.location.pathname;
-        const extracted_id = id.split('/').pop() || '';
+        if (selected_user && selected_user.physician_id) {
+            const {physician_id} = selected_user
 
-        if (!selected_user) {
-        const user = registered_doctors.find((data: DoctorProps) => data.physician_id === extracted_id);
-        if (user) {
-            setSelected_user(user);
-        } else {
-            router.push('/doctors');
+            setTimeout(() => {
+                setLoading(false)
+                setNew_appointment({...new_appointment, physician_id})
+            }, 100);
+        }else{
+            router.push('/doctors')
         }
-        setLoading(false);
-        } else {
-        setLoading(false);
-        }
-    }, [selected_user, setSelected_user, router]);
+    }, [])
 
     const handle_submit = async (e: React.FormEvent) => {
         e.preventDefault();
-        toast_msg({ title: 'Appointment booking in progress' });
+        
+        setLoading_2(true)
+
+        console.log(new_appointment)
+
+        try {
+            
+            if (!navigator.onLine) return toast_msg({title: 'Not connected to the internet'});
+
+            const res = await post_auth_request(`auth/create-appointment`, new_appointment) as AxiosResponseHeaders
+
+            console.log(res)
+
+            if (res.status == 200 || res.status == 201) {
+                
+                toast_msg({title: `Appointment booked successfully`, })
+
+                setLoading_2(false)
+
+                setTimeout(() => {
+
+                    router.push('/appointments')
+
+                }, 2000);
+            }else if (res.status == 401){
+
+                toast_msg({title: 'Session expired, kindly login again to continue'})
+
+            }else if (res.status == 500){
+
+                toast_msg({title: res.response.data.msg})
+
+                setTimeout(() => {
+                    router.refresh()
+                }, 2000);
+            }else{
+
+                toast_msg({title: res.response.data.msg})
+
+            }
+
+        } catch (err) {
+            console.log(err)
+        }finally{
+            setLoading_2(false)
+        }
     };
 
     if (loading) {
         return (
         <div className="w-full h-[80vh] flex items-center justify-center bg-[#f2f2f2]">
-            <p className="text-md font-medium font-mont">Loading...</p>
+            <p className="text-[15.5px] font-medium font-mont">Loading...</p>
         </div>
         );
     }
@@ -83,70 +128,72 @@ const DoctorConsultationList = () => {
     if (error || !selected_user) {
         return (
         <div className="w-full h-[80vh] flex items-center justify-center bg-[#f2f2f2]">
-            <p className="text-md font-medium font-mont text-red-500">{error || 'Doctor not found'}</p>
+            <p className="text-[15.5px] font-medium font-mont text-red-500">{error || 'Doctor not found'}</p>
         </div>
         );
     }
 
     return (
         <div className="w-full">
-            <Link href={`/doctors`} className="text-md text-[#306ce9] flex items-center justify-start font-medium gap-1" >
+            <Link href={`/doctors`} className="px-5 text-[13px] text-[#306ce9] flex items-center justify-start font-medium gap-1" >
                 <IoArrowBackOutline size="18px" /> Back
             </Link>
 
-                <div className="w-full flex flex-col gap-3">
-                <h3 className="font-medium text-[14.5px] text-start">Select the date and time you would like to have your appointment.</h3>
-                <h3 className="text-[13px] text-start">Please note that appointments can only be selected at 30-minute intervals.</h3>
+                <div className="w-full flex flex-col gap-3 mt-5 px-5">
+                    <h3 className="font-medium text-[14px] text-start">Select the date and time you would like to have your appointment.</h3>
+                    <h3 className="text-[13px] text-start">Please note that appointments can only be selected at 30-minute intervals.</h3>
 
-                <form onSubmit={handle_submit} className="flex flex-col gap-5 p-5 rounded-md bg-white w-full">
-                    <span className="w-full flex flex-col gap-2 mt-5">
-                    <p className="text-sm">Mode of Consultation</p>
-                    <select
-                        name="appointment_type"
-                        id="appointment_type"
-                        className="h-[50px] w-full border border-gray-300 bg-white px-5 rounded-sm"
-                        onChange={(e)=> setNew_appointment({...new_appointment, appointment_type:e.target.value})}
-                    >
-                        <option value="video">Video</option>
-                        <option value="chat">Chat</option>
-                    </select>
-                    </span>
-
-                    <span className="w-full flex flex-col gap-2 mt-5">
-                        <p className="text-sm">Date for Consultation</p>
-                        <input type="date" name="date" id="date" onChange={(e)=> setSelected_date(e.target.value)} className="h-[50px] border border-gray-300 px-5 rounded-sm w-full" />
-                    </span> 
-
-                    <span className="w-full flex flex-col gap-2 mt-5">
-                        <p className="text-sm">Time for Consultation</p>
+                    <form onSubmit={handle_submit} className="flex flex-col gap-5 p-5 rounded-md shadow-md bg-white w-full">
+                        <span className="w-full flex flex-col gap-2 mt-5">
+                        <p className="text-[13px] ">Mode of Consultation</p>
                         <select
-                            name="time"
-                            id="time"
-                            className="h-[50px] w-full border border-gray-300 bg-white px-5 rounded-sm"
-                            onChange={(e)=> setSelected_time(e.target.value)}
+                            name="appointment_type"
+                            id="appointment_type"
+                            className="h-[50px] w-full border border-slate-400 bg-white px-3 text-[13px] rounded-[4px]"
+                            onChange={(e)=> setNew_appointment({...new_appointment, appointment_type:e.target.value.toLowerCase()})}
                         >
-                            {timeSlots.map((time) => (
-                                <option key={time} value={time}>
-                                    {time}
-                                </option>
-                            ))}
+                            <option value="" className='text-[14px]'>Select</option>
+                            <option value="video_call" className='text-[14px]'>Video</option>
+                            <option value="chat" className='text-[14px]'>Chat</option>
                         </select>
-                    </span>
+                        </span>
 
-                    <span className="w-full flex flex-col gap-2 mt-5">
-                        <p className="text-sm">Complaint Brief</p>
-                        <textarea
-                            placeholder="A brief description of your complaint..."
-                            name="complaint"
-                            id="complaint"
-                            className="w-full h-[100px] border border-gray-300 px-3 py-2 rounded-sm resize-none"
-                            onChange={(e)=> setNew_appointment({...new_appointment, complain:e.target.value})}
-                        ></textarea>
-                    </span>
+                        <span className="w-full flex flex-col gap-2 mt-5">
+                            <p className="text-[13px]">Date for Consultation</p>
+                            <input type="date" name="date" id="date" onChange={(e)=> setSelected_date(e.target.value)} className="h-[50px] border border-slate-400 px-3 rounded-[4px] w-full text-[13px]" />
+                        </span> 
 
-                    <button type="submit" className="h-[50px] mt-5 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 text-sm" onClick={handle_submit} > Book Appointment
-                    </button>
-                </form>
+                        <span className="w-full flex flex-col gap-2 mt-5">
+                            <p className="text-[13px]">Time for Consultation</p>
+                            <select
+                                name="time"
+                                id="time"
+                                className="h-[50px] w-full border border-slate-400 bg-white px-3 rounded-[4px] text-[13px]"
+                                onChange={(e)=> setSelected_time(e.target.value)}
+                            >
+                                {timeSlots.map((time) => (
+                                    <option key={time} value={time} className='text-[14px]'>
+                                        {time}
+                                    </option>
+                                ))}
+                            </select>
+                        </span>
+
+                        <span className="w-full flex flex-col gap-2 mt-5">
+                            <p className="text-[13px]">Complaint Brief</p>
+                            <textarea
+                                placeholder="A brief description of your complaint..."
+                                name="complaint"
+                                id="complaint"
+                                className="w-full h-[100px] border border-slate-400 px-3 py-2 rounded-[4px] resize-none text-[13px]"
+                                onChange={(e)=> setNew_appointment({...new_appointment, complain:e.target.value})}
+                            ></textarea>
+                        </span>
+
+                        <button type="submit" className="h-[50px] mt-5 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 text-[13px] flex items-center justify-center" onClick={handle_submit} > 
+                                {loading_2? <Loader2Icon className='animate-spin size-8 ' />:"Book Appointment"}
+                        </button>
+                    </form>
                 </div>
         </div>
     )

@@ -13,35 +13,35 @@ const DashboardAppointment = () => {
                     <div className="w-full flex items-center justify-between border h-[55px] bg-white border-gray-200 ">
 
                         <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start h-full ">
-                            <p className="text-sm font-medium">Dr. Name</p>
+                            <p className="text-[13px] font-medium">Dr. Name</p>
                         </div>
                         <div className="w-[35%] px-3 sm:px-5 flex items-center justify-start">
-                            <p className="text-sm font-medium">Sepcialty</p>
+                            <p className="text-[13px] font-medium">Sepcialty</p>
                         </div>
                         <div className="lg:w-[30%] 2xl:w-[25%] px-3 sm:px-5 flex items-center justify-start">
-                            <p className="text-sm font-medium">Appoitment Date</p>
+                            <p className="text-[13px] font-medium">Appoitment Date</p>
                         </div>
                         <div className="lg:w-[15%] 2xl:w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                            <p className="text-sm font-medium">Status</p>
+                            <p className="text-[13px] font-medium">Status</p>
                         </div>
                     </div>
 
                     <div className="w-full bg-white pb-5 ">
                         {[1,2,3,4,5].map((data,ind:number)=>{
                             return(
-                                <div key={ind} className="w-full flex items-center justify-between py-2.5 even:bg-gray-100 hover:bg-gray-100">
+                                <div key={ind} className="w-full flex items-center justify-between py-2.5 even:bg-gray-50 hover:bg-gray-50">
                                     <div className="w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                                        <p className="text-sm ">Dr. Sophia Wong</p>
+                                        <p className="text-[13px] ">Dr. Sophia Wong</p>
                                     </div>
                                     <div className="w-[35%] px-3 sm:px-5 flex items-center justify-start">
-                                        <p className="text-sm ">{"Allergy and Immunology"}</p>
+                                        <p className="text-[13px] ">{"Allergy and Immunology"}</p>
                                     </div>
                                     <div className="lg:w-[30%] 2xl:w-[25%] px-3 sm:px-5 flex items-center justify-start">
-                                        <p className="text-sm ">{"22nd of September, 4:40am"}</p>
+                                        <p className="text-[13px] ">{"22nd of September, 4:40am"}</p>
                                     </div>
                                     <div className="lg:w-[15%] 2xl:w-[20%] px-3 sm:px-5 flex items-center justify-start">
-                                        {ind%2==1? <button className="h-[35px] text-sm px-5 rounded-full border-amber-500 border bg-amber-500/10 text-amber-500">
-                                        pending</button>:<button className="h-[35px] text-sm px-5 rounded-full border-green-500 border bg-green-500/10 text-green-500">
+                                        {ind%2==1? <button className="h-[35px] text-[13px] px-5 rounded-full border-amber-500 border bg-amber-500/10 text-amber-500">
+                                        pending</button>:<button className="h-[35px] text-[13px] px-5 rounded-full border-green-500 border bg-green-500/10 text-green-500">
                                         approved</button>
                                         }
                                     </div>

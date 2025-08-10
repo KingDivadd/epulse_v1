@@ -13,7 +13,7 @@ const Footer = () => {
 
                     <p className="text-3xl w-[90%] md:w-[80%] text-[#ffffff] max-sm:text-center font-semibold font-mont leading-[45px] ">Seamless Healthcare, Anytime, Anywhere.</p>
 
-                    <p className="text-md w-[85%] md:w-[75%] lg:w-[65%] max-sm:text-center  text-start text-slate-200 mt-5 font-mont leading-[30px]">Manage your health effortlessly in one app. Consult doctors, order medications, and access various healthcare services at your fingertips.</p>
+                    <p className="text-[15.5px] w-[85%] md:w-[75%] lg:w-[65%] max-sm:text-center  text-start text-slate-200 mt-5 font-mont leading-[30px]">Manage your health effortlessly in one app. Consult doctors, order medications, and access various healthcare services at your fingertips.</p>
 
                 </div> 
 
@@ -50,7 +50,7 @@ const Footer = () => {
                     {
                         ['facebook', 'instagram', 'twitter', 'linkedIn'].map((icon, index) => {
                             return (
-                                <Link href={'/'} key={index} className="text-sm text-white font-mon">{icon}</Link>
+                                <Link href={'/'} key={index} className="text-[13px] text-white font-mon">{icon}</Link>
                             )
                         })
                     }

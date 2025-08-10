@@ -61,12 +61,12 @@ export const DropDownWithSearchBar = ({ dropArray, selected_item, setSelected_it
         <div className="w-full relative z-[5]" ref={dropdownRef}>
         {/* Dropdown trigger */}
             <span
-                className="h-[45px] w-full border border-gray-300 rounded-sm px-5 bg-white flex items-center justify-between cursor-pointer"
+                className="h-[45px] w-full border border-gray-300 rounded-[4px] px-3 bg-white flex items-center justify-between cursor-pointer"
                 onClick={handle_drop_menu} >
-                <p className="text-sm">{selected_item || 'Select'}</p>
-                <span className="h-[20px] w-[20px] flex items-center justify-center text-slate-700">
+                    <p className="text-[13px]">{selected_item || 'Select'}</p>
+                {/* <span className="h-[20px] w-[20px] flex items-center justify-center text-slate-700">
                 {drop_menu ? <FaCaretUp size="100%" /> : <FaCaretDown size="100%" />}
-                </span>
+                </span> */}
             </span>
 
             {/* Dropdown menu */}
@@ -78,13 +78,13 @@ export const DropDownWithSearchBar = ({ dropArray, selected_item, setSelected_it
                     placeholder="Search specialties"
                     value={drop_input.search_input}
                     onChange={handle_filter}
-                    className="w-full border border-gray-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                    className="w-full border border-gray-300 rounded-sm px-3 py-2 text-[13px] focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                 </span>
 
                 <div className="w-full flex flex-col items-start gap-[5px] min-h-[100px] max-h-[400px] overflow-y-auto">
                     {dropArrayClone.length === 0 ? (
-                    <p className="w-full px-3 py-3 text-sm text-gray-500 text-center">No specialties found</p>
+                    <p className="w-full px-3 py-3 text-[13px] text-gray-500 text-center">No specialties found</p>
                     ) : (
                     <>
                         <span

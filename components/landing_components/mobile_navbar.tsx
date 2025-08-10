@@ -48,15 +48,15 @@ const MobileNavbar = () => {
                     const {icon, id, title} = data
                     return(
                         <Link href={id} key={ind} className="w-full h-[45px] flex items-center justify-center hover:bg-[#306ce9]/90" onClick={()=>setShow_mobile_nav(!show_mobile_nav)}>
-                            <p className="text-white group text-sm font-medium">{title}</p>
+                            <p className="text-white group text-[13px] font-medium">{title}</p>
                         </Link>
                     )
                 })
             }
 
-            <button className="mt-5 h-[40px] w-[70%] bg-white rounded-full mx-auto text-sm font-medium" onClick={handle_get_started}>Get Started</button>
+            <button className="mt-5 h-[40px] w-[70%] bg-white rounded-full mx-auto text-[13px] font-medium" onClick={handle_get_started}>Get Started</button>
 
-            {/* <button className="mt-5 h-[40px] w-[70%] bg-blue-400 rounded-md mx-auto text-sm font-medium" onClick={handle_submit}>Get Started</button> */}
+            {/* <button className="mt-5 h-[40px] w-[70%] bg-blue-400 rounded-md mx-auto text-[13px] font-medium" onClick={handle_submit}>Get Started</button> */}
 
 
         </div>

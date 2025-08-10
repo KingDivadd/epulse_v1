@@ -69,7 +69,7 @@ const WalletFundCont = () => {
                             
                         <div className="w-full min-h-[150px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
                             <span className="flex flex-col gap-1">
-                                <span className="text-sm font-mont flex items-center justfy-start font-medium">
+                                <span className="text-[13px] font-mont flex items-center justfy-start font-medium">
                                     <Dot size={'18px'} className='text-[#306ce9]' /> Total Amount Credited
                                 </span>
 
@@ -82,7 +82,7 @@ const WalletFundCont = () => {
                             </span>
 
                             <span className="flex flex-col gap-1">
-                                <span className="text-sm font-mont flex items-center justfy-start font-semibold">
+                                <span className="text-[13px] font-mont flex items-center justfy-start font-semibold">
                                     <Dot size={'18px'} className='text-red-500' /> Total Amount Debited
                                 </span>
 
@@ -111,7 +111,7 @@ const WalletFundCont = () => {
 
                     <Dialog >
                         <DialogTrigger>
-                            <span className="rounded-full bg-white text-sm py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">{(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}</span>
+                            <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">{(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}</span>
                         </DialogTrigger>
                         <DialogContent className='w-xl'>
                             <DialogHeader>
@@ -125,7 +125,7 @@ const WalletFundCont = () => {
                             <form onSubmit={handle_submit} className="w-full md:mt-5 min-h-[150px] flex flex-col justify-between gap-20  rounded-lg border border-[#E6E6E6] bg-[#fafafa] p-5 ">
                                 <input type="number" placeholder="amount" name="amount" onChange={(e)=> setAmount(Number(e.target.value))} className="input-type-2" />
 
-                                <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-sm font-mont" onClick={handle_submit}>
+                                <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-[13px] font-mont" onClick={handle_submit}>
                                     {loading ? <Loader2Icon className="animate-spin size-8 " /> : `${(user_information && user_information.role == 'patient') ?  "Fund wallet" : "Withdraw"}`}
                                 </button>
                             </form>
@@ -142,7 +142,7 @@ const WalletFundCont = () => {
 
                 <div className="w-full min-h-[150px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
                     <span className="flex flex-col gap-1">
-                        <p className="text-sm font-mont flex items-center justfy-start">
+                        <p className="text-[13px] font-mont flex items-center justfy-start">
                             <Dot size={'18px'} className='text-[#306ce9]' /> Total Amount Credited
                         </p>
 
@@ -155,7 +155,7 @@ const WalletFundCont = () => {
                     </span>
 
                     <span className="flex flex-col gap-1">
-                        <p className="text-sm font-mont flex items-center justfy-start">
+                        <p className="text-[13px] font-mont flex items-center justfy-start">
                             <Dot size={'18px'} className='text-red-500' /> Total Amount Debited
                         </p>
 

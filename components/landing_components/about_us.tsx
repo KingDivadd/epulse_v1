@@ -8,7 +8,7 @@ const AboutUs = () => {
 
 
     return (
-        <section id='about' className="w-full min-h-screen  px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15 lg:py-25 scroll-mt-20  flex flex-col items-center bg-gray-100">
+        <section id='about' className="w-full min-h-screen  px-[1rem] md:px-[2rem] lg:px-[5rem] xl:px-[9rem] py-10 md:py-15 lg:py-25 scroll-mt-20  flex flex-col items-center bg-gray-50">
 
             <motion.span    
                 initial={{y: -30, opacity: 0}}

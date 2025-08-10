@@ -9,7 +9,7 @@ import { RiMenuFold3Line } from "react-icons/ri";
 
 const MobileSidebar = () => {
     const [current_route, setCurrent_route] = useState('')
-    const {show_mobile_sidebar, setShow_mobile_sidebar,} = useChat()
+    const {show_mobile_sidebar, setShow_mobile_sidebar,user_information} = useChat()
     const router = useRouter()
 
     useEffect(() => {
@@ -30,26 +30,33 @@ const MobileSidebar = () => {
 
             </span>
 
-            <article className="w-full flex flex-col pr-2 lg:pr-5 relative">
+            <article className="w-full flex flex-col pr-2 xl:pr-5 relative">
                 {
                     route_list.map((route, ind:number)=>{
+
                         const {role} = route
-                        const show_route = role.includes('physician') ? '':'hidden'
+
+                        let show_route;
+                        if (user_information && user_information.role) {
+                            
+                            show_route = role.includes(user_information.role) ? '':'hidden'
+                        }
+
 
                         return(
-                            <div  key={ind} className={`w-full ${show_route}`}>
-                                <Link href={route.path} className={current_route === route.path ? "pl-5 lg:px-8 current-nav-item bg-blue-100  ": "pl-5 lg:px-8 nav-item "} onClick={()=>  {
+
+                            <div key={ind} className={`w-full ${show_route}`}>
+                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.path ? "current-nav-item bg-blue-100  ": "nav-item "}`} 
+                                onClick={()=>  {
                                         if(route.id == 'logout'){
                                             localStorage.clear()
                                             return;
                                         }
                                         setCurrent_route(route.path)
-                                        setShow_mobile_sidebar(!show_mobile_sidebar)
 
-                                    }
-                                    }>
+                                    }}>
                                     <route.icon size={'18px'} className=' duration-200' />
-                                    <h5 className={'font-mont'}>{route.name}</h5>
+                                    <h5 className={current_route === route.path ? " current-nav-item-text": " nav-item-text"}>{route.name}</h5>
                                 </Link>
                             </div>
                         )
