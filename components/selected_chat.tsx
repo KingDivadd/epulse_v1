@@ -58,7 +58,7 @@ const SelectedChat = () => {
 
                 <span className="flex items-center justify-end gap-3 lg:gap-1">
                     
-                    <button className="bg-[#306ce9] h-[40px] md:px-5 rounded-sm text-white text-[13px] py-2.5">Start Consultation</button>
+                    <button className="bg-[#306ce9] h-[40px] md:px-5 rounded-full text-white text-[13px] py-2.5">Start Consultation</button>
                     
                     
                 </span>

@@ -288,11 +288,11 @@ const PhysicianAppointments = () => {
     return (
         <div className="flex flex-col gap-3 font-mont">
 
-            <span className="w-full flex justify-between items-center px-5">
+            <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-5">
                 <PageHeader text={'Appointments'} />
 
-                <div className=" w-[250px]  rounded-[4px] relative ">
-                    <span className="h-[40px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-[4px]" onClick={()=> setOpen_drop_down(!open_drop_down)}>
+                <div className="w-full sm:w-[300px]  rounded-[4px] relative">
+                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-md" onClick={()=> setOpen_drop_down(!open_drop_down)}>
                         <p className="text-[13px] ">Filter</p>
                     </span>
 
@@ -336,7 +336,7 @@ const PhysicianAppointments = () => {
                             </select>
                         </span>
 
-                        <span className="h-[45px] w-full mt-2">
+                        <span className="h-[45px] w-full ">
                             <input type="text" name="filter_appoitnment" placeholder='Enter patient name ...' onChange={(e)=> setFilter_appointment(e.target.value)} className='input-type text-[13px]' />
                         </span>
 
@@ -479,154 +479,166 @@ const PhysicianAppointments = () => {
                     </div> */}
                 </span>
 
-                <div className="w-full hide-scrollbar mt-2">
-                    {loading ? 
-                    <div className="w-[calc(100%-39px)] mx-auto  h-[500px] flex items-center justify-center">
-                        <p className="text-[13px] text-gray-700 text-center">Loading...</p>
-                    </div> 
-                    :
+                <div className="w-full hide-scrollbar ">
+                    
                     <>
                     
                         { 
                             filtered_appointment_info.length === 0 ? 
-                            <div className=" w-[calc(100%-39px)] mx-auto flex h-[440px] rounded-lg bg-white p-5 items-center justify-center">
-                                <p className="text-[13px] text-gray-600 text-center py-2">No appointment found with the selected criteria</p>
-                            </div>
-                        :
+                                <div className=" w-[calc(100%-39px)] mx-auto flex h-[calc(100vh-305px)] relative rounded-lg  p-5 items-center justify-center">
+                                    <p className="text-[13px] text-gray-600 text-center py-2">{!loading && "No appointment found with the selected criteria"}</p>
 
-                            <div className="w-full temp-220 min-h-[calc(100vh-150px)] gap-5  my-3 px-5">
-                                {filtered_appointment_info.map((item, ind:number) => {
-                                    const {status} = item
-                                    const date = format_date_from_unix(Number(item.time));
-                                    const appointments_within_24hrs = is_within_24hrs(Number(item.time));
+                                    {loading && 
+                                    <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                        <Loader2Icon className='size-8 animate-spin text-gray-500' />
+                                    </div> }
+                                </div>
+                            :
 
-                                    const text_color = status == 'pending' ? 'text-amber-500' : (status === 'missed' || status == 'cancelled') ? 'text-red-500' : status == 'completed' ? 'text-[#3062e9]' : 'text-green-500'
+                                <div className="w-full temp-240 justify-start items-start min-h-[calc(100vh-305px)]  gap-5  my-3 px-5 relative">
+                                    {loading && 
+                                    <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                        <Loader2Icon className='size-8 animate-spin text-gray-500' />
+                                    </div> }
 
-                                    const ring_color = status == 'pending' ? 'ring-amber-500' : (status === 'missed' || status == 'cancelled') ? 'ring-red-200' : status == 'completed' ? 'ring-blue-200' : 'ring-green-200'
+                                    {filtered_appointment_info.map((item, ind:number) => {
+                                        const {status, patient, appointment_type} = item
+                                        const date = format_date_from_unix(Number(item.time));
+                                        const appointments_within_24hrs = is_within_24hrs(Number(item.time));
 
-                                    const image = item.patient?.avatar || '/default-man.png'
+                                        const text_color = status == 'pending' ? 'text-amber-500' : (status === 'missed' || status == 'cancelled') ? 'text-red-500' : status == 'completed' ? 'text-[#3062e9]' : 'text-green-500'
 
-                                    return (
-                                    <div key={ind} className="max-w-[550px]">
-                                        <Dialog >
-                                            <DialogTrigger className='w-full'>
-                                                <div  className={` cursor-pointer hover:bg-[#306ce9] bg-white ease-in-out duration-300 w-full flex flex-col font-mont rounded-lg box-shadow-1 shadow-md text-gray-700 hover:text-white group relative`} onClick={()=> setSelected_appointment_info(item)} >
-                                                    <div className="w-full min-h-[200px] flex flex-col items-center gap-4 p-3 sm:p-4">
-                                                        
-                                                        <span className="w-full flex items-center justify-between">
-                                                        <h5 className={`text-[12px] `}>
-                                                            {date.date}
-                                                        </h5>
-                                                        <h5 className={`text-[12px] `}>
-                                                            {date.time}
-                                                        </h5>
-                                                        </span>
+                                        const ring_color = status == 'pending' ? 'ring-amber-500' : (status === 'missed' || status == 'cancelled') ? 'ring-red-200' : status == 'completed' ? 'ring-blue-200' : 'ring-green-200'
 
-                                                        <span className={`relative overflow-hidden rounded-full h-14 w-14 ring-2 ${ring_color}`}>
-                                                            <Image src={image} alt={item.time.toString()} fill objectFit='cover' />
-                                                        </span>
+                                        const image = item.patient?.avatar || '/default-man.png'
 
-                                                        <div className="w-full flex flex-col items-center gap-2 md:gap-3">
-                                                            <p className={`text-[13px] `}>
-                                                                {item.patient?.first_name} {item.patient.last_name}
-                                                            </p>
+                                        return (
+                                        <div key={ind} className="max-w-[550px]">
+                                            <Dialog >
+                                                <DialogTrigger className='w-full'>
+                                                    <div  className={` cursor-pointer hover:bg-[#306ce9] bg-white ease-in-out duration-300 w-full flex flex-col font-mont rounded-lg box-shadow-1 shadow-md text-gray-700 hover:text-white group relative`} onClick={()=> setSelected_appointment_info(item)} >
+                                                        <div className="w-full min-h-[200px] flex flex-col items-center gap-4 p-3 sm:p-4">
+                                                            
+                                                            <span className="w-full flex items-center justify-between">
+                                                            <h5 className={`text-[12px] `}>
+                                                                {date.date}
+                                                            </h5>
+                                                            <h5 className={`text-[12px] `}>
+                                                                {date.time}
+                                                            </h5>
+                                                            </span>
+
+                                                            <span className={`relative overflow-hidden rounded-full h-14 w-14 ring-2 ${ring_color}`}>
+                                                                <Image src={image} alt={item.time.toString()} fill objectFit='cover' />
+                                                            </span>
+
+                                                            <div className="w-full flex flex-col items-center gap-2 md:gap-3">
+                                                                <p className={`text-[13px] `}>
+                                                                    {item.patient?.first_name} {item.patient.last_name}
+                                                                </p>
+                                                            </div>
+
+                                                            <p className={`text-[13px] w-full text-center group-hover:text-white duration-300 ${text_color}`}>{item.status}</p>
                                                         </div>
 
-                                                        <p className={`text-[13px] w-full text-center group-hover:text-white duration-300 ${text_color}`}>{item.status}</p>
-                                                    </div>
-
-                                                    <span
-                                                        className={`h-[50px] w-full flex items-center gap-3 border-t  group-hover:border-blue-400 border-gray-200 duration-300
-                                                        `}>
-                                                        {item.appointment_type === 'chat' ? (
-                                                        <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
-                                                            <MessageSquare className="" size={'15px'} />
-                                                            Chat
-                                                        </span>
-                                                        ) : (
-                                                        <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
-                                                            <VideoIcon className="" size={'15px'} />
-                                                            Video
-                                                        </span>
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            </DialogTrigger>
-
-                                            <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
-                                                <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
-                                                    <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
-                                                    <DialogDescription className='text-[13px]'>{"David Iroegbu has booked a video appoitnment for 31st of July, at 11:00 AM"}</DialogDescription>
-                                                </DialogHeader>
-
-                                                <div className='px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
-                                                    <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
-                                                        <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
-                                                        
-                                                        <span className={`lg:w-[300px] lg:h-[300px] md:w-[250px] md:h-[250px] w-[300px] h-[300px]  relative overflow-hidden rounded-full mx-auto ring-5 ${ring_color}`}>
-                                                            <Image src={image} alt='' layout='fill' objectFit='cover' />
-                                                        </span>
-
-
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.patient.first_name} {selected_appointment_info && selected_appointment_info.patient.last_name}</p>
-
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{date.date} {date.time}</p>
-
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{`${selected_appointment_info && selected_appointment_info.appointment_type.replace(/_/,' ')} appointment`}</p>
-                                                    </div>
-
-                                                    <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Country:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.country}</p>
-                                                        </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Gender:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.gender}</p>
-                                                        </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Age:</p>
-                                                        <p className="text-[13px] ">{"35"}</p>
-                                                        </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Height (cm):</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.height}</p>
-                                                        </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Weight (kg):</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.weight}</p>
-                                                        </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Blood Group:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.blood_group}</p>
-                                                        </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Genotype:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.genotype}</p>
-                                                        </span>
-                                                        <span className="flex flex-col items-start justify-start gap-1">
-                                                        <p className="text-[13px] font-medium">Complaint:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.complain}</p>
+                                                        <span
+                                                            className={`h-[50px] w-full flex items-center gap-3 border-t  group-hover:border-blue-400 border-gray-200 duration-300
+                                                            `}>
+                                                            {item.appointment_type === 'chat' ? (
+                                                            <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
+                                                                <MessageSquare className="" size={'15px'} />
+                                                                Chat
+                                                            </span>
+                                                            ) : (
+                                                            <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
+                                                                <VideoIcon className="" size={'15px'} />
+                                                                Video
+                                                            </span>
+                                                            )}
                                                         </span>
                                                     </div>
-                                                </div>
-                                                
-                                                <DialogFooter className='px-5  gap-2  border-t border-gray-200 pt-5' >
-                                                    <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300">Cancel</DialogClose>
+                                                </DialogTrigger>
 
-                                                    {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >
-                                                        {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
-                                                    </button>}
-                                                </DialogFooter>
-                                            </DialogContent>
-                                        </Dialog>
+                                                <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
+                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
+                                                        <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
+                                                        <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a ${appointment_type.replace(/_/, ' ')} appointment with you scheduled for ${date.date}, ${date.time}`}</DialogDescription>
+                                                    </DialogHeader>
 
-                                    </div>
-                                    );
-                                })}
-                            </div>
+                                                    <div className='px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto'>
+                                                        <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
+                                                            <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
+                                                            
+                                                            <span className={`lg:w-[300px] lg:h-[300px] md:w-[250px] md:h-[250px] w-[300px] h-[300px]  relative overflow-hidden rounded-full mx-auto ring-5 ${ring_color}`}>
+                                                                <Image src={image} alt='' layout='fill' objectFit='cover' />
+                                                            </span>
+
+
+                                                            <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.patient.first_name} {selected_appointment_info && selected_appointment_info.patient.last_name}</p>
+
+                                                        </div>
+
+                                                        <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Appointment Time:</p>
+                                                                <p className="text-[13px] ">{date.date} {date.time}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Appointment Type</p>
+                                                                <p className="text-[13px] ">{`${selected_appointment_info && selected_appointment_info.appointment_type.replace(/_/,' ')} `}</p>
+                                                            </span>
+
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Country:</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.country}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Gender:</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.gender}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Age:</p>
+                                                                <p className="text-[13px] ">{"35"}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Height (cm):</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.height}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Weight (kg):</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.weight}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Blood Group:</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.blood_group}</p>
+                                                            </span>
+                                                            <span className="flex items-center justify-start gap-2">
+                                                                <p className="text-[13px] font-medium">Genotype:</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.patient.genotype}</p>
+                                                            </span>
+                                                            <span className="flex flex-col items-start justify-start gap-1">
+                                                                <p className="text-[13px] font-medium">Complaint:</p>
+                                                                <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.complain}</p>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <DialogFooter className='px-5  gap-2  border-t border-gray-200 pt-5' >
+                                                        <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm">Cancel</DialogClose>
+
+                                                        {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >
+                                                            {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
+                                                        </button>}
+                                                    </DialogFooter>
+                                                </DialogContent>
+                                            </Dialog>
+
+                                        </div>
+                                        );
+                                    })}
+                                </div>
                         }
-                    </>}
+                    </>
                 </div>
 
                 {/* Pagination */}

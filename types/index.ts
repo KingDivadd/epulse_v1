@@ -154,12 +154,24 @@ export type AppointmentType = {
     
 }
 export interface AppointmentProps {
-    // page_number:number;
-    // items_per_page:number;
     pending_appointment: number;
     accepted_appointment: number;
     completed_appointment: number;
     total_number_of_appointments: number; 
     total_number_of_pages: number;
     appointments: AppointmentType[];
+}
+
+export interface PatientDashboardProps {
+    wallet_balance: number;
+    total_amount_credited: number; 
+    total_amount_debited: number;
+    
+    total_number_of_appointments: number;
+    total_number_of_pages: number;
+    appointments: AppointmentType[],
+    
+    total_number_of_transactions: number, 
+    total_number_of_pages_1: number, 
+    transactions: TransactionType[],
 }

@@ -4,7 +4,7 @@ import Navbar from '@/components/navbar'
 import PhysicianProfilePage from '@/page/physician/physician_profile_page'
 import { useChat } from '@/app/context/ChatContext'
 import PatientProfile from '@/page/patient_profile'
-import LoadingSettings from '@/page/skeleton/loading_settings'
+import Loader from '@/page/loader'
 
 
 const Profile = () => {
@@ -25,7 +25,7 @@ const Profile = () => {
                         
                         </>
                         :
-                        <LoadingSettings />
+                        <Loader />
                     }
                 </div>
             </div>

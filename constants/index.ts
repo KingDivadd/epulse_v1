@@ -447,7 +447,7 @@ export const route_list = [
     { name: 'Appointments', icon: RiCalendar2Fill, path: '/appointments', id: 'appointments', role: ['patient', 'physician'] },
     { name: 'Consult Doctor', icon: RiStethoscopeFill, path: '/doctors', id: 'doctors', role: ['patient',] },
     { name: 'Consultation', icon: RiChat4Line , path: '/consultation', id: 'consultation', role: ['patient', 'physician'] },
-    { name: 'Wallet', icon: RiWallet3Fill, path: '/wallet', id: 'wallet-funding', role: ['patient', 'physician'] },
+    { name: 'Wallet', icon: RiWallet3Fill, path: '/wallet', id: 'wallet', role: ['patient', 'physician'] },
     { name: 'Profile', icon: FiUser, path: '/profile', id: 'profile', role: [ 'physician', 'patient'] },
     { name: 'Logout', icon: RiLogoutBoxRLine, path: '/login', id: 'logout', role: ['patient', 'physician'] },
 ];
@@ -1144,3 +1144,4 @@ export const languages = [
     'Russian',
     'Arabic',
 ];
+

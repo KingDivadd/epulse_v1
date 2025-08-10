@@ -1,13 +1,17 @@
 'use client'
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import Navbar from '@/components/navbar'
 import DashboardPage from '@/page/dashboard_page'
 import AdminDashboardPage from '@/page/physician_dashboard_page'
-import LoadingDashboard from '@/page/skeleton/loading_dashboard'
+import Loader from '@/page/loader'
+
 import { useChat } from '@/app/context/ChatContext'
+
+
 
 const Dashboard = () => {
     const {user_information} = useChat()
+    
     
     return (
         <div className="w-full h-full flex flex-col bg-white overflow-y-auto">
@@ -24,7 +28,7 @@ const Dashboard = () => {
                         
                         </>
                         :
-                        <LoadingDashboard />
+                        <Loader />
                     }
                 </div>
 

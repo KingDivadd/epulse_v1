@@ -25,6 +25,9 @@ interface ChatContextType {
     setPage_number: (page_number: number) => void;
     items_per_page: number;
     setItems_per_page: (items_per_page: number) => void;
+    route: string;
+    setRoute: (route:string)=>void;
+
 
 }
 
@@ -45,6 +48,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [wallet_information, setWallet_information] = useState<WalletInformationProps>({total_amount_credited: 0, total_amount_debited: 0, total_number_of_pages: 1, total_number_of_transactions:0, transactions: [], wallet_balance:0, })
     const [page_number, setPage_number] = useState(1)
     const [items_per_page, setItems_per_page] = useState(10)
+    const [route, setRoute] = useState('')
 
     return (
         <ChatContext.Provider value={{
@@ -57,7 +61,9 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             selected_user, setSelected_user,
             show_selected_chat, setShow_selected_chat,
             wallet_information, setWallet_information,
-            page_number, setPage_number, items_per_page, setItems_per_page
+            page_number, setPage_number, items_per_page, setItems_per_page,
+            route, setRoute
+
             
             }}>
             {children}

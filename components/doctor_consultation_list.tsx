@@ -29,7 +29,7 @@ interface DoctorProps {
 const DoctorConsultationList = () => {
     const [loading, setLoading] = useState(true);
     const [loading_2, setLoading_2] = useState(false)
-    const { selected_user, setSelected_user } = useChat();
+    const { selected_user, setSelected_user, setRoute } = useChat();
     const router = useRouter();
     const [error, setError] = useState<string | null>(null);
     const [new_appointment, setNew_appointment] = useState({physician_id:'', appointment_type:'', mode_of_consult:'virtual', complain:'', time:0})
@@ -91,6 +91,8 @@ const DoctorConsultationList = () => {
                 setTimeout(() => {
 
                     router.push('/appointments')
+
+                    setRoute('appointments')
 
                 }, 2000);
             }else if (res.status == 401){

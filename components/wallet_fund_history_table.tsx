@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import { transaction_history } from '@/constants'
 import { format_date_from_unix } from '@/lib/date_formater'
-import { Dot, Loader2 } from 'lucide-react'
+import { Dot, Loader2, Loader2Icon } from 'lucide-react'
 import { useChat } from '@/app/context/ChatContext'
 import { TransactionType } from '@/types'
 
@@ -136,7 +136,11 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 {/* Transaction Rows */}
                 <div className="w-full bg-white relative">
                     {filteredTransactions.length ? 
-                        <div className="w-full min-h-[250px] ">
+                        <div className="w-full min-h-[250px] relative">
+                            {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
+                                <Loader2Icon className="h-10 w-10 animate-spin text-slate-400 z-10" />
+                            </div>}
+                            
                             {filteredTransactions.map((data: TransactionType, ind: number) => {
     
                                 const { transaction_id, transaction_type, narration, amount, created_at } = data
@@ -170,14 +174,15 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                         </div>
                         
                         :
-                        <div className="w-full h-[250px] flex items-center justify-center">
-                            <p className="text-[13px] font-medium">No Transactions yet</p>
+                        <div className="w-full h-[250px] flex items-center justify-center relative">
+                            <p className="text-[13px] font-medium">{!loading && "You have no Transaction!"}</p>
+                            {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
+                                <Loader2Icon className="h-10 w-10 animate-spin text-slate-400 z-10" />
+                            </div>}
                         </div>
                     }
 
-                    {loading && <div className="absolute top-0 left-0 h-[250px] w-full flex items-center justify-center ">
-                        <Loader2 className="h-10 w-10 animate-spin text-gray-300" />
-                    </div>}
+                    
                     
                 </div>
 

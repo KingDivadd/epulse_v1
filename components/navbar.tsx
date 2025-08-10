@@ -7,6 +7,7 @@ import {useChat} from '@/app/context/ChatContext'
 import { DropdownMenu,  DropdownMenuContent,   DropdownMenuLabel,   DropdownMenuSeparator,  DropdownMenuTrigger, DropdownMenuItem, DropdownMenuGroup, } from "@/components/ui/dropdown-menu"
 import { HiOutlineMenu } from "react-icons/hi";
 import { RiMenuFold3Line } from "react-icons/ri";
+import { CgMenu } from "react-icons/cg";
 
 
 const Navbar = () => {
@@ -27,7 +28,7 @@ const Navbar = () => {
                 <span className=" sm:hidden h-full flex items-center jusify-center rotate-180 " 
                     onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)}>
 
-                    <RiMenuFold3Line className='size-[27.5px] text-gray-700 ' />
+                    <CgMenu  className='size-[27.5px] text-gray-700 ' />
                     
                 </span>
                 
@@ -76,7 +77,7 @@ const Navbar = () => {
                             && 
                             
                             <p className="text-[13px] text-slate-700 font-mont leading-[15px]">
-                                {( user_information.registered_as == 'Specialist') ? user_information.registered_as : user_information.registered_as == 'General Doctor' ? 'General Doctor' : ''}
+                                {( user_information.registered_as == 'Specialist') ? user_information.specialty : user_information.registered_as == 'General Doctor' ? 'General Doctor' : ''}
                             </p>
                         }
                     </div>

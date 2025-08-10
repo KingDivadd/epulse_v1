@@ -3,7 +3,7 @@ import Navbar from '@/components/navbar'
 import React from 'react'
 import ConsultDoctorPage from '@/page/consult_doctor_page'
 import { useChat } from '@/app/context/ChatContext'
-import LoadingConsultDoctor from '@/page/skeleton/loading_consult_doctor'
+import Loader from '@/page/loader'
 
 const Doctors = () => {
     const { user_information} = useChat()
@@ -17,7 +17,7 @@ const Doctors = () => {
                         user_information ? 
                         <ConsultDoctorPage />
                         :
-                        <LoadingConsultDoctor />
+                        <Loader />
                     }
                 </div>
                 

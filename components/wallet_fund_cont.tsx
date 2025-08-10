@@ -6,11 +6,14 @@ import {  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, D
 import { toast_msg } from '@/lib/toast'
 import { useChat } from '@/app/context/ChatContext'
 import Animated_counter from '@/lib/animated_counter'
+import { useRouter } from 'next/navigation'
 
 const WalletFundCont = () => {
+    const {setRoute} = useChat()
     const [amount, setAmount] = useState(0)
     const [loading, setLoading] = useState(false)
     const {user_information, wallet_information, setWallet_information} = useChat()
+    const router = useRouter()
     
 
     async function handle_submit(e: React.FormEvent) {
@@ -48,8 +51,8 @@ const WalletFundCont = () => {
         
     }
     return (
-        <div className="w-full max-md:flex-col flex items-start justify-between gap-5  min-h-[250px] font-mont">
-            <span className="flex-1 max-md:w-full min-h-[250px] bg-[#306ce9] shadow-md relative rounded-lg ">
+        <div className="w-full max-md:flex-col flex items-start justify-between gap-5  min-h-[240px] font-mont">
+            <span className="flex-1 max-md:w-full min-h-[240px] bg-[#306ce9] shadow-md relative rounded-lg ">
                 <span className="w-full h-200px">
                     <Image src={'/wallet-img-1.jpg'} alt='wallet img ' fill objectFit='cover' className='rounded-md' />
                 </span>
@@ -62,7 +65,7 @@ const WalletFundCont = () => {
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle className='text-xl font-mont font-semibold'>Overview</DialogTitle>
+                            <DialogTitle className='text-[15.5px] font-mont font-semibold'>Overview</DialogTitle>
                             <DialogDescription>
                             </DialogDescription>
                         </DialogHeader>
@@ -97,61 +100,37 @@ const WalletFundCont = () => {
                     </DialogContent>
                 </Dialog>
 
-                <div className="absolute top-0 left-0 w-full h-[250px] flex flex-col items-center justify-center gap-2">
+                <div className="absolute top-0 left-0 w-full h-[240px] flex flex-col items-center justify-center gap-2">
                     <span className="flex items-center ">
-                        <p className="text-white text-lg font-mont">Wallet Balance</p>
+                        <p className="text-white text-[15.5px] font-mont">Wallet Balance</p>
                     </span>
 
                     <span className="flex items-center gap-3 mb-5">
                         {/* <span className="h-8 w-8 relative overflow-hidden">
                             <Image src={'/icons/naira-icon.png'} alt='' fill objectFit='contain' />
                         </span> */}
-                        <span className="text-4xl font-bold text-white">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
+                        <span className="text-3xl font-bold text-white">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
                     </span>
 
-                    <Dialog >
-                        <DialogTrigger>
-                            <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]">{(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}</span>
-                        </DialogTrigger>
-                        <DialogContent className='w-xl'>
-                            <DialogHeader>
-                                <DialogTitle className='text-xl font-mont font-semibold'>{(user_information && user_information.role == 'patient') ?  "Fund your wallet" : "Withdraw from your wallet"}</DialogTitle>
-                                <DialogDescription className='font-mont text-[13px ' >
-                                    {(user_information && user_information.role == 'patient') ?  "Please, enter the amount you would like to fund your wallet with." : "Please, enter the amount you would like to withdraw from your wallet"}
-                                    
-                                </DialogDescription>
-                            </DialogHeader>
-                                
-                            <form onSubmit={handle_submit} className="w-full md:mt-5 min-h-[150px] flex flex-col justify-between gap-20  rounded-lg border border-[#E6E6E6] bg-[#fafafa] p-5 ">
-                                <input type="number" placeholder="amount" name="amount" onChange={(e)=> setAmount(Number(e.target.value))} className="input-type-2" />
-
-                                <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-[13px] font-mont" onClick={handle_submit}>
-                                    {loading ? <Loader2Icon className="animate-spin size-8 " /> : `${(user_information && user_information.role == 'patient') ?  "Fund wallet" : "Withdraw"}`}
-                                </button>
-                            </form>
-                        </DialogContent>
-                    </Dialog>
+                    <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> {router.push('/wallet'); setRoute('wallet')}} >{(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}</span>
+                        
 
                     
                 </div>
 
             </span>
 
-            <span className="hidden md-[250px] lg:w-[300px] xl:w-[350px] h-full rounded-lg border border-[#E6E6E6] bg-white shadow-md  md:flex flex-col gap-7 p-5">
-                <p className="text-lg font-semibold">Overview</p>
+            <span className="hidden md-[250px] lg:w-[300px] xl:w-[350px] h-full rounded-lg border border-[#E6E6E6] bg-white shadow-md  md:flex flex-col gap-7 p-4">
+                <p className="text-[15.5px] font-semibold">Overview</p>
 
-                <div className="w-full min-h-[150px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
+                <div className="w-full min-h-[155px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
                     <span className="flex flex-col gap-1">
                         <p className="text-[13px] font-mont flex items-center justfy-start">
                             <Dot size={'18px'} className='text-[#306ce9]' /> Total Amount Credited
                         </p>
 
-                        <span className="flex items-center gap-1">
-                            {/* <span className="h-5 w-5 relative overflow-hidden">
-                                <Image src={'/icons/naira-icon-black.png'} alt='' fill objectFit='contain' />
-                            </span> */}
-                            <span className="text-xl font-semibold ">{Animated_counter({amount: wallet_information?.total_amount_credited ?? 0})}</span>
-                        </span>
+                            
+                        <span className="text-xl font-semibold text-gray-700 ">{Animated_counter({amount: wallet_information?.total_amount_credited ?? 0})}</span>
                     </span>
 
                     <span className="flex flex-col gap-1">
@@ -159,12 +138,9 @@ const WalletFundCont = () => {
                             <Dot size={'18px'} className='text-red-500' /> Total Amount Debited
                         </p>
 
-                        <span className="flex items-center gap-1">
-                            {/* <span className="h-5 w-5 relative overflow-hidden">
-                                <Image src={'/icons/naira-icon-black.png'} alt='' fill objectFit='contain' />
-                            </span> */}
-                            <span className="text-xl font-semibold ">{Animated_counter({amount: wallet_information?.total_amount_debited ?? 0})}</span>
-                        </span>
+                        
+                        <span className="text-xl font-semibold text-gray-700 ">{Animated_counter({amount: wallet_information?.total_amount_debited ?? 0})}</span>
+                        
                     </span>
                 </div>
             </span>

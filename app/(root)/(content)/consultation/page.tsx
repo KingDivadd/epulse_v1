@@ -2,7 +2,8 @@
 import React from 'react'
 import Navbar from '@/components/navbar'
 import ConsultationPage from '@/page/consultation_page'
-import LoadingConsultation from '@/page/skeleton/loading_consultation'
+import Loader from '@/page/loader'
+
 import { useChat } from '@/app/context/ChatContext'
 
 
@@ -19,7 +20,7 @@ const Consultation = () => {
                         user_information ? 
                         <ConsultationPage />
                         :
-                        <LoadingConsultation />
+                        <Loader />
                     }
                 </div>
 

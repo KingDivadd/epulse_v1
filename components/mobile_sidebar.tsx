@@ -19,12 +19,12 @@ const MobileSidebar = () => {
 
 
     return (
-        <div className="w-full  flex flex-col gap-3 h-full bg-white ">
+        <div className="w-full  flex flex-col gap-3 h-full bg-[#306ce9] ">
             <span className="w-full flex justify-between items-center h-24  pr-5"> 
                 <span className="w-full flex justify-start h-24 "> <SidebarHeading /> </span>
 
 
-                <RiMenuFold3Line className=' size-[27.5px] text-gray-700 ' onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)} />
+                <RiMenuFold3Line className=' size-[27.5px] text-gray-100 ' onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)} />
                 
 
 

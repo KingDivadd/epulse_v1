@@ -4,7 +4,7 @@ import React from 'react'
 import AppointmentPage from '@/page/appointment_page'
 import PhysicianAppointmentPage from '@/page/physician/physician_appointment_page'
 import { useChat } from '@/app/context/ChatContext'
-import LoadingAppointment from '@/page/skeleton/loading_appointment'
+import Loader from '@/page/loader'
 
 const Appointments = () => {
     const {user_information}= useChat()
@@ -24,7 +24,7 @@ const Appointments = () => {
                         
                         </>
                         :
-                        <LoadingAppointment />
+                        <Loader />
                     }
                 </div>
 

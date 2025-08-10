@@ -61,7 +61,7 @@ const PhysicianProfileComponent = () => {
             
             setTimeout(() => {
                 setPhysician_info({first_name, last_name, avatar, gender, country_code, phone_number, country, address, registered_as, specialty, state, medical_license, languages_spoken: !languages_spoken?.length ? ['English']: languages_spoken , date_of_birth, bio })
-            }, 150);
+            }, 100);
         }
     }, [])
 

@@ -3,7 +3,7 @@ import Navbar from '@/components/navbar'
 import React from 'react'
 import WalletFundingPage from '@/page/wallet_funding_page'
 import { useChat } from '@/app/context/ChatContext'
-import LoadingWallet from '@/page/skeleton/loading_wallet'
+import Loader from '@/page/loader'
 
 
 const WalletFunding = () => {
@@ -21,7 +21,7 @@ const WalletFunding = () => {
                         user_information ? 
                         <WalletFundingPage />
                         :
-                        <LoadingWallet />
+                        <Loader />
                     }
                 </div>
             </div>

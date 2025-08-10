@@ -373,3 +373,7 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }
+
+.table-content-bg:nth-child(even) {
+    @apply bg-red-500
+}

@@ -11,22 +11,20 @@ import { useChat } from '@/app/context/ChatContext';
 const Sidebar = () => {
     const [current_route, setCurrent_route] = useState('')
     const router = useRouter()
-    const {user_information} = useChat()
+    const {user_information, route, setRoute} = useChat()
 
     useEffect(() => {
-        const path = window.location.pathname
-        setCurrent_route(path)
-    }, [])
+        const path = window.location.pathname.replace(/\//, '')
 
-    function handle_route(id:string) {
-        setCurrent_route(id)
-        // localStorage.setItem('route', id) 
-
-        if(id === 'logout'){
-            localStorage.clear();
-            sessionStorage.clear();
+        if (route) {
+            console.log('clicked and here now ', route, path)
+            setCurrent_route(route)
+        }else{
+            setCurrent_route(path)
+            console.log('path ----------- ',path)
         }
-    }
+    }, [route])
+
 
     return (
         <div className="w-full  flex flex-col gap-3 h-full bg-[#306ce9] ">
@@ -44,19 +42,19 @@ const Sidebar = () => {
                             show_route = role.includes(user_information.role) ? '':'hidden'
                         }
 
-
                         return(
-
                             <div key={ind} className={`w-full ${show_route}`}>
-                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.path ? "current-nav-item ": "nav-item "}`} 
+                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.id ? "current-nav-item ": "nav-item "}`} 
                                 onClick={()=>  {
                                         if(route.id == 'logout'){
                                             localStorage.clear()
                                             return;
                                         }
-                                        setCurrent_route(route.path)
+                                        setCurrent_route(route.path);
+                                        setRoute(route.id);
 
-                                    }}>
+                                    }
+                                    }>
                                     <route.icon size={'18px'} className=' duration-200' />
                                     <h5 className={current_route === route.path ? " current-nav-item-text": " nav-item-text"}>{route.name}</h5>
                                 </Link>

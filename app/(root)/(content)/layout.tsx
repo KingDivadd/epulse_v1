@@ -137,9 +137,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 </section>
 
                 <section
-                    className={`absolute w-[250px] h-screen bg-white border-r border-[#f2f2f2] sm:hidden top-0 ${
+                    className={`absolute w-[275px] h-screen bg-white border-r border-[#f2f2f2] sm:hidden top-0 ${
                     show_mobile_sidebar ? 'left-0' : 'left-[-280px]'
-                    } duration-500 ease-in-out z-10 flex items-start justify-between`}
+                    } duration-300 ease-in-out z-10 flex items-start justify-between`}
                     onClick={handleMobileSidebarClick}>
                     <MobileSidebar />
                 </section>

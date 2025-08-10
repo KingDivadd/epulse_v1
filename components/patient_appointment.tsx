@@ -20,14 +20,14 @@ import { useRouter } from 'next/navigation';
 import { AppointmentProps, AppointmentType } from '@/types';
 import { Loader2Icon } from 'lucide-react';
 import { PageHeader } from './reuseable_heading_component';
+import { useChat } from '@/app/context/ChatContext';
 
 
 const PatientAppointments = () => {
     const router = useRouter()
+    const {user_information} = useChat()
     const [today, setToday] = useState(Math.floor(Date.now() / 1000)); // Unix timestamp in seconds
     const [position, setPosition] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
-    const [show_filter, setShow_filter] = useState(false)
     const [open, setOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [filter_appointment, setFilter_appointment] = useState('')
@@ -62,8 +62,6 @@ const PatientAppointments = () => {
 
         })
 
-        // setAppointment_info({...appointment_info, page_number:1})
-
         setFiltered_appointment_info(new_list)
     
     }, [appointment_info.appointments, filter_appointment, loading])
@@ -76,8 +74,6 @@ const PatientAppointments = () => {
             
             if(res.status == 200 || res.status == 201){
                 
-                console.log('passed here : ', res.data.data)
-
                 setAppointment_info({...appointment_info, ...res.data.data})
 
                 setLoading(false)
@@ -293,8 +289,8 @@ const PatientAppointments = () => {
             <span className="w-full flex justify-between items-center px-5">
                 <PageHeader text={'Appointments'} />
 
-                <div className=" w-[250px]  rounded-[4px] relative ">
-                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-[4px]" onClick={()=> setOpen_drop_down(!open_drop_down)}>
+                <div className=" w-[300px]  rounded-[4px] relative ">
+                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-md" onClick={()=> setOpen_drop_down(!open_drop_down)}>
                         <p className="text-[13px] ">Filter</p>
                     </span>
 
@@ -409,24 +405,33 @@ const PatientAppointments = () => {
 
 
                 <div className="w-full hide-scrollbar ">
-                    {loading ? 
-                    <div className="w-[calc(100%-39px)] mx-auto h-[500px] flex items-center justify-center">
-                        <p className="text-[13px] text-gray-700 text-center">Loading...</p>
-                    </div> 
-                    :
+
                     <>
                     
                         { 
                             filtered_appointment_info.length === 0 ? 
-                            <div className=" w-[calc(100%-39px)] mx-auto  flex h-[440px] rounded-lg bg-white p-5 items-center justify-center">
-                                <p className="text-[13px] text-gray-600 text-center py-2">No appointment found with the selected criteria</p>
+                            <div className=" w-[calc(100%-39px)] mx-auto  flex h-[calc(100vh-220px)] rounded-lg p-5 items-center justify-center relative">
+                                <p className="text-[13px] text-gray-600 text-center py-2">{!loading && "No appointment found with the selected criteria"}</p>
+
+                                {loading && 
+                                <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                    <Loader2Icon className='size-8 animate-spin text-gray-600' />
+                                </div> }
                             </div>
                         :
 
-                            <div className="w-full temp-220 min-h-[calc(100vh-240px)] gap-5  my-3 px-5">
+                            <div className="w-full temp-240 min-h-[calc(100vh-220px)] gap-5  my-3 px-5 relative">
+                                {loading && 
+                                <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                    <Loader2Icon className='size-8 animate-spin text-gray-600' />
+                                </div> }
+
                                 {filtered_appointment_info.map((item, ind:number) => {
-                                    const {status} = item
+                                    const {status, physician} = item
                                     const date = format_date_from_unix(Number(item.time));
+
+                                    const {first_name, last_name, registered_as, gender, bio, specialty, languages_spoken, country} = physician
+
                                     const appointments_within_24hrs = is_within_24hrs(Number(item.time));
 
                                     const text_color = status == 'pending' ? 'text-amber-500' : (status === 'missed' || status == 'cancelled') ? 'text-red-500' : status == 'completed' ? 'text-[#3062e9]' : 'text-green-500'
@@ -489,7 +494,7 @@ const PatientAppointments = () => {
                                             <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
                                                 <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
                                                     <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
-                                                    <DialogDescription className='text-[13px]'>{"David Iroegbu has booked a video appoitnment for 31st of July, at 11:00 AM"}</DialogDescription>
+                                                    <DialogDescription className='text-[13px]'>{`You've booked an appointment with Dr ${physician.first_name} ${physician.last_name} scheduled for ${date.date}, ${date.time}`}</DialogDescription>
                                                 </DialogHeader>
 
                                                 <div className='px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
@@ -503,53 +508,56 @@ const PatientAppointments = () => {
 
                                                         <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.physician.first_name} {selected_appointment_info && selected_appointment_info.physician.last_name}</p>
 
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{date.date} {date.time}</p>
-
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{`${selected_appointment_info && selected_appointment_info.appointment_type.replace(/_/,' ')} appointment`}</p>
                                                     </div>
 
                                                     <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Country:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.country}</p>
+                                                        <span className="w-full flex gap-2">
+                                                            <p className="text-[13px] font-medium">Name:</p>
+                                                            <p className="text-[13px]">{first_name} {last_name}</p>
                                                         </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Gender:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.gender}</p>
+                                                        <span className="w-full flex gap-2">
+                                                            <p className="text-[13px] font-medium">Gender:</p>
+                                                            <p className="text-[13px]">{ gender }</p>
                                                         </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Age:</p>
-                                                        <p className="text-[13px] ">{"35"}</p>
+                                                        <span className="w-full flex gap-2">
+                                                            <p className="text-[13px] font-medium">Registered As:</p>
+                                                            <p className="text-[13px]">{registered_as }</p>
                                                         </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Height (cm):</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.height}</p>
+                                                        <span className="w-full flex gap-2">
+                                                            <p className="text-[13px] font-medium">Specialty:</p>
+                                                            <p className="text-[13px]">{specialty }</p>
                                                         </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Weight (kg):</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.weight}</p>
+                                                        <span className="w-full flex gap-2">
+                                                            <p className="text-[13px] font-medium">Country:</p>
+                                                            <p className="text-[13px]">{country }</p>
                                                         </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Blood Group:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.blood_group}</p>
+                                                        <span className="w-full flex gap-2">
+                                                            <p className="text-[13px] font-medium">Languages:</p>
+                                                            {
+                                                                languages_spoken?.map((data, ind:number)=>{
+                                                                    return(
+                                                                        <p key={ind} className="text-[13px]">{data},</p>
+                                                                    )
+                                                                })
+                                                            }
                                                         </span>
-                                                        <span className="flex items-center justify-start gap-2">
-                                                        <p className="text-[13px] font-medium">Genotype:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.physician.genotype}</p>
-                                                        </span>
-                                                        <span className="flex flex-col items-start justify-start gap-1">
-                                                        <p className="text-[13px] font-medium">Complaint:</p>
-                                                        <p className="text-[13px] ">{selected_appointment_info && selected_appointment_info.complain}</p>
+                                                        
+                                                        <span className="w-full flex flex-col gap-2">
+                                                            <p className="text-[13px] font-medium">Bio:</p>
+                                                            <p className="text-[13px] leading-[25px]">{bio}</p>
                                                         </span>
                                                     </div>
                                                 </div>
                                                 
                                                 <DialogFooter className='px-5  gap-2  border-t border-gray-200 pt-5' >
-                                                    <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300">Cancel</DialogClose>
+                                                    <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm ">Cancel</DialogClose>
 
-                                                    {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >
-                                                        {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
-                                                    </button>}
+                                                    {user_information?.role == 'physician' && <>
+
+                                                        {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center text-sm " onClick={handle_submit} disabled={loading} >
+                                                            {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
+                                                        </button>}
+                                                    </>}
                                                 </DialogFooter>
                                             </DialogContent>
                                         </Dialog>
@@ -559,7 +567,7 @@ const PatientAppointments = () => {
                                 })}
                             </div>
                         }
-                    </>}
+                    </>
                 </div>
 
                 {/* Pagination */}

@@ -11,7 +11,7 @@ import { get_auth_request } from '@/app/api';
 import { AxiosResponseHeaders } from 'axios';
 import { HiFilter } from 'react-icons/hi';
 import { IoCaretUp, IoCaretDown } from 'react-icons/io5';
-import {  MessageSquare, VideoIcon } from 'lucide-react';
+import {  Loader2Icon, MessageSquare, VideoIcon } from 'lucide-react';
 import {  Dialog,  DialogClose,  DialogContent,  DialogDescription,  DialogFooter,  DialogHeader,  DialogTitle,  DialogTrigger } from "@/components/ui/dialog"
 import { Skeleton } from './ui/skeleton';
 import { PhysicianInformationProps, PhysicianType } from '@/types';
@@ -65,13 +65,10 @@ const DoctorsList = () => {
     // Fetch doctors from server with pagination
     const fetch_doctors_from_server = useCallback(async (page_number: number, limit:number) => { 
 
-        
         setLoading(true);
         
         try {
             const res = await get_auth_request(`auth/all-physicians/${page_number}/${limit}`) as AxiosResponseHeaders;
-
-            console.log('api response ', res.data.data)
             
             if (res.status === 200 || res.status === 201) {
 
@@ -191,11 +188,11 @@ const DoctorsList = () => {
 
     return (
         <div className="w-full flex flex-col gap-4  rounded-md">
-            <span className="w-full flex justify-between items-center px-5">
+            <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-5">
                 <PageHeader text={'All Physicians'} />
 
-                <div className=" w-[250px]  rounded-[4px] relative ">
-                    <span className="h-[40px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-md" onClick={()=> setOpen_drop_down(!open_drop_down)}>
+                <div className=" w-full sm:w-[300px]  rounded-[4px] relative ">
+                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-md" onClick={()=> setOpen_drop_down(!open_drop_down)}>
                         <p className="text-[13px] ">Filter</p>
                     </span>
 
@@ -248,144 +245,136 @@ const DoctorsList = () => {
 
             <div className="w-full px-5 max-h-[90vh] sm:max-h-[800px] overflow-y-auto scrollbar-hidden py-2 max-sm:-mt-2 -mt-1 hide-scrollbar">
                 <>
+                    
                     {
-                        loading ? ( 
-                            <div className="w-full temp-240 gap-5 ">
-                                {
-                                    [1,2,3,4,5,6,7,8].map((data,ind:number)=>{
-                                        return(
-                                            <Skeleton key={ind} className='w-full h-[250px] bg-gray-300 rounded-md' />
-                                            
-                                        )
-                                    })
-                                }
-                            </div>
-                        ):
-                        (
-                            <> 
-                            
-                                {
-                                    filtered_doctors_information.length === 0 ? (
-                                    <div className=" w-full flex h-[500px] sm:h-[600px] rounded-lg bg-white p-5 items-center justify-center">
-                                        <p className="text-[13px] text-gray-600 text-center py-2">No doctors found with the selected criteria</p>
-                                    </div>
-                                    ) : (
-                                    <div className=" w-full flex flex-col gap-3 ">
-                                        <div className="w-full temp-230 gap-4 min-h-[500px]">
-                                            {filtered_doctors_information
-                                                .map((data: PhysicianType, ind: number) => {
-                                                const { first_name, last_name, registered_as,specialty, languages_spoken, avatar, physician_id, gender = 'Not specified' } = data;
+                        !filtered_doctors_information.length ? (
+                        <div className=" w-full flex h-[calc(100vh-250px)] relative rounded-lg  p-5 items-center justify-center">
+                            <p className="text-[13px] text-gray-600 text-center py-2">{!loading && "No doctors found with the selected criteria"}</p>
 
-                                                const job_title = registered_as == 'Specialist' ? specialty : 'General Doctor'
-                    
-                                                return (
-                                                    <div key={ind} className="w-full " >
-                                                        <Dialog>
-                                                            <DialogTrigger className='w-full'>
-                                                                <div className={`bg-white max-w-[550px] ease-in-out duration-150 w-full flex flex-col font-mont rounded-lg box-shadow-1 shadow-md hover:bg-[#306ce9] group`} onClick={()=> setSelected_user(data)}>
-                                                                    <div className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
-                                                                        <span className="relative overflow-hidden rounded-full h-17 w-17 mt-2">
-                                                                            <Image src={avatar || '/profile-img-2c.jpg'} alt="" fill className="object-cover" />
-                                                                        </span>
-                                                                        <div className="w-full flex flex-col items-center gap-2 md:gap-3">
-                                                                            <p className="text-[13px] font-medium text-gray-700 group-hover:text-white">Dr {last_name} {first_name}</p>
-                                                                            <p className="text-[12.5px] line-clamp-1 text-gray-700 group-hover:text-white text-center w-[85%] mx-auto">{job_title}</p>
-                                                                            <span className="w-[90%] flex items-center justify-center gap-2">
-                                                                            {languages_spoken.map((item: string, ind: number) => (
-                                                                                <p key={ind} className="text-[12.5px] text-gray-700 group-hover:text-white">{item}</p>
-                                                                            ))}
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                    
-                                                                    <span className="h-[50px] w-full flex items-center gap-3 border-t group-hover:text-white group-hover:border-blue-400 duration-150 border-gray-200">
-                                                                        <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
-                                                                            <MessageSquare className="" size={'15px'} />
-                                                                            Chat
-                                                                        </span>
-                                                                        <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
-                                                                            <VideoIcon className="" size={'15px'} />
-                                                                            Video
-                                                                        </span>
-                                                                    </span>
-                                                                </div>
-                                                            </DialogTrigger>
-                    
-                                                            <DialogContent className='font-mont w-full md:w-[70vw] lg:w-[80vw] px-0 font-mont  max-md:h-[90vh] max-lg:h-[80vh] overflow-y-auto hide-scrollbar'>
-                                                                <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
-                                                                    <DialogTitle className='text-[15.5px]'>{"Doctor's Information"}</DialogTitle>
-                                                                    <DialogDescription className='text-[13px]'> {selected_user && selected_user.specialty} </DialogDescription>
-                                                                </DialogHeader>
-                    
-                                                                <div className="w-full px-5 grid  lg:grid-cols-2 gap-5">
-                                                                    <div className="col-span-1  min-h-[400px] relative ">
-                                                                        <span className="h-full w-full">
-                                                                            <Image src={(selected_user && selected_user.avatar) || '/default-male.png'} alt='' fill objectFit='cover' className='rounded-md' />
-                                                                        </span>
-                                                                    </div>
-                                                                    <div className="col-span-1 h-full flex flex-col justify-between gap-3 ">
-                                                                        <div className="w-full flex flex-col gap-3">
-                                                                            <span className="w-full flex gap-2">
-                                                                                <p className="text-[14px] font-medium">Name:</p>
-                                                                                <p className="text-[14px]">{selected_user && `${selected_user?.first_name} ${selected_user?.last_name}` }</p>
-                                                                            </span>
-                                                                            <span className="w-full flex gap-2">
-                                                                                <p className="text-[14px] font-medium">Gender:</p>
-                                                                                <p className="text-[14px]">{ selected_user && selected_user.gender }</p>
-                                                                            </span>
-                                                                            <span className="w-full flex gap-2">
-                                                                                <p className="text-[14px] font-medium">Registered As:</p>
-                                                                                <p className="text-[14px]">{selected_user && selected_user.registered_as }</p>
-                                                                            </span>
-                                                                            <span className="w-full flex gap-2">
-                                                                                <p className="text-[14px] font-medium">Specialty:</p>
-                                                                                <p className="text-[14px]">{selected_user && selected_user.specialty }</p>
-                                                                            </span>
-                                                                            <span className="w-full flex gap-2">
-                                                                                <p className="text-[14px] font-medium">Country:</p>
-                                                                                <p className="text-[14px]">{selected_user && selected_user.country }</p>
-                                                                            </span>
-                                                                            <span className="w-full flex gap-2">
-                                                                                <p className="text-[14px] font-medium">Languages:</p>
-                                                                                {
-                                                                                    selected_user?.languages_spoken && selected_user.languages_spoken.map((data, ind:number)=>{
-                                                                                        return(
-                                                                                            <p key={ind} className="text-[14px]">{data},</p>
-                                                                                        )
-                                                                                    })
-                                                                                }
-                                                                            </span>
-                                                                            
-                                                                            <span className="w-full flex flex-col gap-2">
-                                                                                <p className="text-[14px] font-medium">Bio:</p>
-                                                                                <p className="text-[14px] leading-[25px]">{selected_user && selected_user.bio}</p>
-                                                                            </span>
-                                                                        </div>
-                    
-                                                                        <div className="w-full flex items-center justify-end gap-1">
-                                                                            <DialogClose className="px-7 rounded-sm text-gray-700 bg-gray-200 hover:bg-gray-200/70 duration-300 h-[45px] text-[13px]">Cancel</DialogClose>
-                                                                            <Link href={`/doctors/appointment-booking/${selected_user && selected_user?.physician_id}`} className="px-7 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 h-[45px] flex items-center justify-center text-[13px]">Proceed</Link>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </DialogContent>
-                    
-                    
-                    
-                                                        </Dialog>
-                                                                            
-                                                        
+                            {loading && 
+                                <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                    <Loader2Icon className='size-8 animate-spin text-gray-500' />
+                                </div> }
+                        </div>
+                        ) : (
+                        <div className=" w-full flex flex-col gap-3 relative">
+                            <div className="w-full temp-230 gap-4 min-h-[calc(100vh-250px)] relative">
+                                {loading && 
+                                <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                    <Loader2Icon className='size-8 animate-spin text-gray-500' />
+                                </div> }
+
+                                {filtered_doctors_information
+                                    .map((data: PhysicianType, ind: number) => {
+                                    const { first_name, last_name, registered_as,specialty, languages_spoken, avatar, physician_id, gender = 'Not specified' } = data;
+
+                                    const job_title = registered_as == 'Specialist' ? specialty : 'General Doctor'
+        
+                                    return (
+                                        <div key={ind} className="w-full " >
+                                            <Dialog>
+                                                <DialogTrigger className='w-full'>
+                                                    <div className={`bg-white max-w-[550px] ease-in-out duration-150 w-full flex flex-col font-mont rounded-lg box-shadow-1 shadow-md hover:bg-[#306ce9] group`} onClick={()=> setSelected_user(data)}>
+                                                        <div className="w-full min-h-[240px] flex flex-col items-center gap-7 p-3 sm:p-5">
+                                                            <span className="relative overflow-hidden rounded-full h-17 w-17 mt-2">
+                                                                <Image src={avatar || '/profile-img-2c.jpg'} alt="" fill className="object-cover" />
+                                                            </span>
+                                                            <div className="w-full flex flex-col items-center gap-2 md:gap-3">
+                                                                <p className="text-[13px] font-medium text-gray-700 group-hover:text-white">Dr {last_name} {first_name}</p>
+                                                                <p className="text-[12.5px] line-clamp-1 text-gray-700 group-hover:text-white text-center w-[85%] mx-auto">{job_title}</p>
+                                                                <span className="w-[90%] flex items-center justify-center gap-2">
+                                                                {languages_spoken.map((item: string, ind: number) => (
+                                                                    <p key={ind} className="text-[12.5px] text-gray-700 group-hover:text-white">{item}</p>
+                                                                ))}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+        
+                                                        <span className="h-[50px] w-full flex items-center gap-3 border-t group-hover:text-white group-hover:border-blue-400 duration-150 border-gray-200">
+                                                            <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
+                                                                <MessageSquare className="" size={'15px'} />
+                                                                Chat
+                                                            </span>
+                                                            <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
+                                                                <VideoIcon className="" size={'15px'} />
+                                                                Video
+                                                            </span>
+                                                        </span>
                                                     </div>
-                                                );
-                                                })}
+                                                </DialogTrigger>
+        
+                                                <DialogContent className='font-mont w-full md:w-[70vw] lg:w-[80vw] px-0 font-mont  max-md:h-[90vh] max-lg:h-[80vh] overflow-y-auto hide-scrollbar'>
+                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
+                                                        <DialogTitle className='text-[15.5px]'>{"Doctor's Information"}</DialogTitle>
+                                                        <DialogDescription className='text-[13px]'> {selected_user && selected_user.specialty} </DialogDescription>
+                                                    </DialogHeader>
+        
+                                                    <div className="w-full px-5 grid  lg:grid-cols-2 gap-5">
+                                                        <div className="col-span-1  min-h-[400px] relative ">
+                                                            <span className="h-full w-full">
+                                                                <Image src={(selected_user && selected_user.avatar) || '/default-male.png'} alt='' fill objectFit='cover' className='rounded-md' />
+                                                            </span>
+                                                        </div>
+                                                        <div className="col-span-1 h-full flex flex-col justify-between gap-3 ">
+                                                            <div className="w-full flex flex-col gap-3">
+                                                                <span className="w-full flex gap-2">
+                                                                    <p className="text-[13px] font-medium">Name:</p>
+                                                                    <p className="text-[14px]">{selected_user && `${selected_user?.first_name} ${selected_user?.last_name}` }</p>
+                                                                </span>
+                                                                <span className="w-full flex gap-2">
+                                                                    <p className="text-[13px] font-medium">Gender:</p>
+                                                                    <p className="text-[14px]">{ selected_user && selected_user.gender }</p>
+                                                                </span>
+                                                                <span className="w-full flex gap-2">
+                                                                    <p className="text-[13px] font-medium">Registered As:</p>
+                                                                    <p className="text-[14px]">{selected_user && selected_user.registered_as }</p>
+                                                                </span>
+                                                                <span className="w-full flex gap-2">
+                                                                    <p className="text-[13px] font-medium">Specialty:</p>
+                                                                    <p className="text-[14px]">{selected_user && selected_user.specialty }</p>
+                                                                </span>
+                                                                <span className="w-full flex gap-2">
+                                                                    <p className="text-[13px] font-medium">Country:</p>
+                                                                    <p className="text-[14px]">{selected_user && selected_user.country }</p>
+                                                                </span>
+                                                                <span className="w-full flex gap-2">
+                                                                    <p className="text-[13px] font-medium">Languages:</p>
+                                                                    {
+                                                                        selected_user?.languages_spoken && selected_user.languages_spoken.map((data, ind:number)=>{
+                                                                            return(
+                                                                                <p key={ind} className="text-[14px]">{data},</p>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </span>
+                                                                
+                                                                <span className="w-full flex flex-col gap-2">
+                                                                    <p className="text-[13px] font-medium">Bio:</p>
+                                                                    <p className="text-[13px] leading-[25px]">{selected_user && selected_user.bio}</p>
+                                                                </span>
+                                                            </div>
+        
+                                                            <div className="w-full flex items-center justify-end gap-1">
+                                                                <DialogClose className="px-7 rounded-sm text-gray-700 bg-gray-200 hover:bg-gray-200/70 duration-300 h-[45px] text-[13px]">Cancel</DialogClose>
+                                                                <Link href={`/doctors/appointment-booking/${selected_user && selected_user?.physician_id}`} className="px-7 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 h-[45px] flex items-center justify-center text-[13px]">Proceed</Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </DialogContent>
+        
+        
+        
+                                            </Dialog>
+                                                                
+                                            
                                         </div>
-                                    </div>
-                                    )
-                                }
-                            </>
-
+                                    );
+                                    })}
+                            </div>
+                        </div>
                         )
                     }
+
                 </>
             </div>
 

@@ -6,10 +6,14 @@ import {  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, D
 import { toast_msg } from '@/lib/toast'
 import Animated_counter, { Item_counter } from '@/lib/animated_counter'
 import { title } from 'process'
+import { useRouter } from 'next/navigation'
+import { useChat } from '@/app/context/ChatContext'
 
-const AdminWalletFundCont = () => {
+const AdminWalletFundCont = ({appointment_taken, pending_appointment}:{appointment_taken:number; pending_appointment:number}) => {
+    const {wallet_information} = useChat()
     const [amount, setAmount] = useState(0)
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
     
 
     async function handle_submit(e: React.FormEvent) {
@@ -44,7 +48,7 @@ const AdminWalletFundCont = () => {
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle className='text-xl font-mont font-semibold'>Overview</DialogTitle>
+                            <DialogTitle className='text-[15.5px] font-mont font-semibold'>Overview</DialogTitle>
                             <DialogDescription>
                             </DialogDescription>
                         </DialogHeader>
@@ -87,30 +91,11 @@ const AdminWalletFundCont = () => {
 
                         <span className="flex items-center gap-3 mb-5">
                             
-                            <span className="text-3xl font-bold text-white font-mont">{Animated_counter({amount: 10000})}</span>
+                            <span className="text-3xl font-bold text-white font-mont">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
                         </span>
 
-                        <Dialog>
-                            <DialogTrigger>
-                                <span className="rounded-full bg-white text-[13px] py-2.5 px-7 cursor-pointer hover:bg-[#f2f2f2]">Withdraw</span>
-                            </DialogTrigger>
-                            <DialogContent className='w-xl'>
-                                <DialogHeader>
-                                    <DialogTitle className='text-xl font-mont font-semibold'>Withdraw from your wallet</DialogTitle>
-                                    <DialogDescription className='font-mont text-[13px ' >
-                                        Please, enter the amount you would like to fund withdraw from your wallet.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                    
-                                <form onSubmit={handle_submit} className="w-full md:mt-5 min-h-[150px] flex flex-col justify-between gap-20  rounded-lg border border-[#E6E6E6] bg-[#fafafa] p-5 ">
-                                    <input type="number" placeholder="amount" name="amount" onChange={(e)=> setAmount(Number(e.target.value))} className="input-type-2" />
-
-                                    <button type='submit' className="w-full sm:h-[50px] h-[45px] rounded-sm bg-[#306ce9] hover:bg-[#306ce9]/90 text-white text-[13px] font-mont" onClick={handle_submit}>
-                                        {loading ? <Loader2Icon className="animate-spin size-8 " /> : 'Withdraw'}
-                                    </button>
-                                </form>
-                            </DialogContent>
-                        </Dialog>
+                        <span className="rounded-full bg-white text-[13px] py-2.5 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> router.push('/wallet')}>Withdraw</span>
+                            
                     </div>
 
                     <div className=" hidden  md-[250px] lg:w-[300px] xl:w-[350px] h-full  xl:flex flex-col gap-3 p-4 border-[#E6E6E6] bg-white rounded-md">
@@ -123,7 +108,7 @@ const AdminWalletFundCont = () => {
                                     <Dot size={'18px'} className='text-[#306ce9]' /> Total Amount Credited
                                 </p>
 
-                                <span className="text-xl font-semibold ">{Animated_counter({amount: 15000})}</span>
+                                <span className="text-xl font-semibold text-gray-700 ">{Animated_counter({amount: wallet_information?.total_amount_credited ?? 0})}</span>
                                 
                             </span>
 
@@ -132,7 +117,7 @@ const AdminWalletFundCont = () => {
                                     <Dot size={'18px'} className='text-red-500' /> Total Amount Debited
                                 </p>
 
-                                <span className="text-xl font-semibold ">{Animated_counter({amount: 5500})}</span>
+                                <span className="text-xl font-semibold text-gray-700 ">{Animated_counter({amount: wallet_information?.total_amount_debited ?? 0})}</span>
                             </span>
                         </div>
                     </div>
@@ -150,7 +135,7 @@ const AdminWalletFundCont = () => {
                             <Dot size={'18px'} className='text-[#306ce9]' />Appointments Taken
                         </span>
 
-                        <span className="text-xl font-semibold ml-10">{Item_counter({amount: 500})}</span>
+                        <span className="text-xl font-semibold text-gray-700 ml-10">{Item_counter({amount: appointment_taken})}</span>
                     </span>
 
                     <span className="flex flex-col gap-3">
@@ -158,7 +143,7 @@ const AdminWalletFundCont = () => {
                             <Dot size={'20px'} className='text-amber-500' /> Pending Appointment
                         </span>
                         
-                        <span className="text-xl font-semibold ml-10">{Item_counter({amount: 10})}</span>
+                        <span className="text-xl font-semibold text-gray-700 ml-10">{Item_counter({amount: pending_appointment})}</span>
                     </span>
                 </div>
             </span>
