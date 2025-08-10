@@ -23,7 +23,7 @@ interface FormInformation {
     weight?: number;
     height?: number;
     blood_group?: string;
-    date_of_birth?: string;
+    date_of_birth?: number;
     genotype?: string;
 }
 
@@ -31,7 +31,7 @@ const PatientProfile = () => {
     const {user_information, setUser_information, country_dial_code} = useChat()
     const [position, setPosition] = useState('')
     const [information, setInformation] = useState<FormInformation>({
-        first_name: '',last_name: '',avatar: '',gender: '', country_code: '', phone_number: '',country: '',  weight: 0, height: 0, blood_group: '',genotype: '', date_of_birth: '',
+        first_name: '',last_name: '',avatar: '',gender: '', country_code: '', phone_number: '',country: '',  weight: 0, height: 0, blood_group: '',genotype: '', date_of_birth: 0,
     });
     const [loading, setLoading] = useState(false)
 
@@ -51,7 +51,10 @@ const PatientProfile = () => {
     }, [position, country_dial_code])
 
     useEffect(() => {
-        setInformation({...information, date_of_birth: user_information?.date_of_birth || Math.floor(Date.now() / 1000).toString()}) 
+        if (user_information?.date_of_birth){
+
+            setInformation({...information, date_of_birth: Number(user_information?.date_of_birth) || Math.floor(Date.now() / 1000)}) 
+        }
     }, [user_information?.date_of_birth])
 
     const handle_change = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {

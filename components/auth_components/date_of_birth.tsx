@@ -34,7 +34,7 @@ const DateOfBirth = () => {
                             setDate(selectedDate);
                             setUser_information({
                             ...user_information,
-                            date_of_birth: Math.floor(selectedDate.getTime() / 1000).toString(),
+                            date_of_birth: Math.floor(selectedDate.getTime() / 1000),
                             });
                         }
                         setOpen(false);

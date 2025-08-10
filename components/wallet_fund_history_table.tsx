@@ -14,11 +14,9 @@ interface FundSearchProps {
 }
 
 const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoading }: FundSearchProps) => {
-    const {wallet_information, setWallet_information} = useChat()
+    const {wallet_information, setWallet_information, page_number, setPage_number, items_per_page, setItems_per_page} = useChat()
     const [currentPage, setCurrentPage] = useState(1)
     const [filteredTransactions, setFilteredTransactions] = useState<TransactionType[]>([])
-    const [page_number, setPage_number] = useState(1)
-    const [items_per_page, setItems_per_page] = useState(10)
 
   // Filter transactions based on search input
     useEffect(() => {

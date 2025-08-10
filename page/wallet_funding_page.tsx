@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 
 const WalletFundingPage = () => {
     const router=useRouter()
-    const {wallet_information, setWallet_information, user_information} = useChat()
+    const {wallet_information, setWallet_information, user_information, page_number, setPage_number, items_per_page, setItems_per_page} = useChat()
     const [loading, setLoading] = useState(false)
     const [retry, setRetry] = useState(0)
 
@@ -23,13 +23,13 @@ const WalletFundingPage = () => {
 
         setLoading(true)
         handle_fetch_wallet_information()
-    }, [wallet_information?.page_number, wallet_information?.items_per_page, user_information?.first_name])
+    }, [page_number, items_per_page, user_information?.first_name])
 
 
     async function handle_fetch_wallet_information() {
         try {
 
-            const res = await get_auth_request(`auth/user-wallet-information/${wallet_information?.page_number ?? 1}/${wallet_information?.items_per_page ?? 10}`) as AxiosResponseHeaders
+            const res = await get_auth_request(`auth/user-wallet-information/${page_number }/${items_per_page}`) as AxiosResponseHeaders
 
             if (res.status == 200 || res.status == 201){
 
