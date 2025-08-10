@@ -89,8 +89,7 @@ export type TransactionType = {
 }
 
 export interface WalletInformationProps {
-    page_number:number;
-    items_per_page:number;
+    
     wallet_balance: number;
     total_amount_credited: number;
     total_amount_debited: number;
@@ -136,8 +135,6 @@ export type PhysicianType = {
 }
 
 export interface PhysicianInformationProps {
-    page_number:number;
-    items_per_page:number;
     total_number_of_pages:number;
     total_number_of_physicians:number;
     physicians: PhysicianType[];

@@ -34,14 +34,13 @@ interface DoctorProps {
 const DoctorsList = () => {
     const {selected_user, setSelected_user} = useChat()
     const [filter_doctor, setFilter_doctor] = useState('');
-    const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
-    const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({});
     const router = useRouter();
-    const [show_filter, setShow_filter] = useState(false);
-    const [doctors_information, setDoctors_information] = useState<PhysicianInformationProps>({items_per_page: 8, page_number:1, physicians:[], total_number_of_pages:1, total_number_of_physicians:0})
+    const [doctors_information, setDoctors_information] = useState<PhysicianInformationProps>({ physicians:[], total_number_of_pages:1, total_number_of_physicians:0})
     const [filtered_doctors_information, setFiltered_doctors_information] = useState<PhysicianType[]>([])
     const [open_drop_down, setOpen_drop_down] = useState(false)
+    const [page_number, setPage_number] = useState(1)
+    const [items_per_page, setItems_per_page] = useState(10)
 
     // Filter doctors based on specialty
     useEffect(() => {
@@ -58,8 +57,6 @@ const DoctorsList = () => {
                 )
             })
 
-            setCurrentPage(1)
-            setDoctors_information({...doctors_information, page_number: 1})
             setFiltered_doctors_information(new_list)            
         }
 
@@ -113,21 +110,23 @@ const DoctorsList = () => {
 
     // Initial fetch on mount
     useEffect(() => {
-        fetch_doctors_from_server(doctors_information?.page_number, doctors_information?.items_per_page);
+
+        fetch_doctors_from_server(page_number, items_per_page);
+
     }, []);
 
     async function app_projects_action(item: string | number) {
         
-        let new_page_number = doctors_information?.page_number;
+        let new_page_number = page_number;
         const max_page_number = doctors_information?.total_number_of_pages
 
         if (item === 'prev') {
-            if (doctors_information?.page_number! > 1) {
-                new_page_number = doctors_information?.page_number! - 1;          
+            if (page_number > 1) {
+                new_page_number = page_number - 1;          
             }
         } else if (item === 'next') {
-            if (max_page_number && doctors_information?.page_number! < max_page_number) {
-                new_page_number = doctors_information?.page_number! + 1;
+            if (max_page_number && page_number < max_page_number) {
+                new_page_number = page_number + 1;
             }
         } else {
             new_page_number = Number(item);
@@ -135,9 +134,8 @@ const DoctorsList = () => {
 
         setLoading(true)
 
-        console.log(new_page_number)
-        fetch_doctors_from_server(new_page_number, doctors_information?.items_per_page)
-        setDoctors_information({...doctors_information, page_number:new_page_number})
+        fetch_doctors_from_server(new_page_number, items_per_page)
+        setPage_number(new_page_number)
 
     }
 
@@ -146,7 +144,6 @@ const DoctorsList = () => {
         const max_page_number = doctors_information?.total_number_of_pages ?? 1;
         const max_displayed_pages = 3;
 
-        const page_number = doctors_information?.page_number ?? 1
 
         if (max_page_number <= max_displayed_pages) {
             for (let i = 1; i <= max_page_number; i++) {
@@ -276,7 +273,6 @@ const DoctorsList = () => {
                                     <div className=" w-full flex flex-col gap-3 ">
                                         <div className="w-full temp-230 gap-4 min-h-[500px]">
                                             {filtered_doctors_information
-                                                .slice((currentPage - 1) * doctors_information?.items_per_page, doctors_information.page_number * doctors_information.items_per_page)
                                                 .map((data: PhysicianType, ind: number) => {
                                                 const { first_name, last_name, registered_as,specialty, languages_spoken, avatar, physician_id, gender = 'Not specified' } = data;
 
@@ -397,19 +393,19 @@ const DoctorsList = () => {
                 <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className={`text-[13px] cursor-pointer ${doctors_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
+                            <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
 
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                                 {render_page_numbers()}
                             </span>
 
-                            <p className={`text-[13px] ${doctors_information?.page_number == doctors_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
+                            <p className={`text-[13px] ${page_number == doctors_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
                         </span>
                         
                     </div>
 
                     <p className="text-[13px]">
-                        Page {doctors_information?.page_number} of {doctors_information?.total_number_of_pages}
+                        Page {page_number} of {doctors_information?.total_number_of_pages}
                     </p>
                 </div>
         </div>

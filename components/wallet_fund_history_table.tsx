@@ -17,6 +17,8 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
     const {wallet_information, setWallet_information} = useChat()
     const [currentPage, setCurrentPage] = useState(1)
     const [filteredTransactions, setFilteredTransactions] = useState<TransactionType[]>([])
+    const [page_number, setPage_number] = useState(1)
+    const [items_per_page, setItems_per_page] = useState(10)
 
   // Filter transactions based on search input
     useEffect(() => {
@@ -42,16 +44,16 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
 
     async function app_projects_action(item: string|number) {
         
-        let new_page_number = wallet_information?.page_number;
+        let new_page_number = page_number;
         const max_page_number = wallet_information?.total_number_of_pages
 
         if (item === 'prev') {
-            if (wallet_information?.page_number! > 1) {
-                new_page_number = wallet_information?.page_number! - 1;          
+            if (page_number > 1) {
+                new_page_number = page_number - 1;          
             }
         } else if (item === 'next') {
-            if (max_page_number && wallet_information?.page_number! < max_page_number) {
-                new_page_number = wallet_information?.page_number! + 1;
+            if (max_page_number && page_number < max_page_number) {
+                new_page_number = page_number + 1;
             }
         } else {
             new_page_number = Number(item);
@@ -59,8 +61,9 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
 
         setLoading(true)
 
-        // handle_fetch_projects(list_number, new_page_number)
-        setWallet_information({...wallet_information, page_number:new_page_number});
+        // handle_fetch_projects(new_page_number, items_per_page)
+
+        setPage_number(new_page_number)
         
     }
 
@@ -69,7 +72,6 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
         const max_page_number = wallet_information?.total_number_of_pages ?? 1;
         const max_displayed_pages = 3;
 
-        const page_number = wallet_information?.page_number ?? 1
 
         if (max_page_number <= max_displayed_pages) {
             for (let i = 1; i <= max_page_number; i++) {
@@ -113,32 +115,6 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
         return pages;
     }; 
 
-    
-
-  // Calculate pagination
-    const totalPages = Math.ceil(wallet_information?.total_number_of_transactions/ wallet_information?.items_per_page )
-    const startIndex = (currentPage - 1) * wallet_information?.items_per_page
-    const endIndex = startIndex + wallet_information?.items_per_page
-    const currentTransactions = filteredTransactions.slice(startIndex, endIndex)
-
-    // Handle navigation
-    const handleNext = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1)
-            if (wallet_information) {
-                setWallet_information({...wallet_information, page_number: currentPage + 1})
-            }
-        }
-    }
-
-    const handlePrevious = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1)
-            if (wallet_information) {
-                setWallet_information({...wallet_information, page_number: currentPage - 1})
-            }
-        }
-    }
 
     return (
         <div className="w-full max-sm:-mt-2 bg-white  pb-0  overflow-x-auto scrollbar-hidden font-mont">
@@ -161,9 +137,9 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
 
                 {/* Transaction Rows */}
                 <div className="w-full bg-white relative">
-                    {currentTransactions.length ? 
+                    {filteredTransactions.length ? 
                         <div className="w-full min-h-[250px] ">
-                            {currentTransactions.map((data: TransactionType, ind: number) => {
+                            {filteredTransactions.map((data: TransactionType, ind: number) => {
     
                                 const { transaction_id, transaction_type, narration, amount, created_at } = data
     
@@ -211,24 +187,24 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className={`text-[13px] cursor-pointer ${wallet_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
+                            <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                             {render_page_numbers()}
                             </span>
-                            <p className={`text-[13px] ${wallet_information?.page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
+                            <p className={`text-[13px] ${page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
                         </span>
                         
                     </div>
 
                     <p className="text-[13px]">
-                        Page {wallet_information?.page_number} of {wallet_information?.total_number_of_pages}
+                        Page {page_number} of {wallet_information?.total_number_of_pages}
                     </p>
                 </div>
             </div>
 
             {/* Mobile View */}
             <div className="w-full flex flex-col md:hidden">
-                {currentTransactions.map((data: TransactionType, ind: number) => {
+                {filteredTransactions.map((data: TransactionType, ind: number) => {
                 const { transaction_id, transaction_type, narration, amount, created_at } = data
                 const formatted_date = format_date_from_unix(Number(created_at))
                 const transaction_type_style = `text-[14px] flex items-center ${
@@ -256,17 +232,17 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className={`text-[13px] cursor-pointer ${wallet_information?.page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
+                            <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
                             <span className="w-auto h-full flex flex-row items-center justify-start">
                             {render_page_numbers()}
                             </span>
-                            <p className={`text-[13px] ${wallet_information?.page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
+                            <p className={`text-[13px] ${page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
                         </span>
                         
                     </div>
 
                     <p className="text-[13px]">
-                        Page {wallet_information?.page_number} of {wallet_information?.total_number_of_pages}
+                        Page {page_number} of {wallet_information?.total_number_of_pages}
                     </p>
                 </div>
             </div>
@@ -275,3 +251,4 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
 }
 
 export default WalletFundHistoryTable
+
