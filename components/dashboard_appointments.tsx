@@ -101,10 +101,10 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
     }
 
     return (
-        <div className="w-full  bg-white rounded-md shadow-md p-5 pb- flex flex-col gap-5 font-mont overflow-hidden">
-            <p className="text-[15.5px] font-medium">Recent Appointments</p>
+        <div className="w-full  bg-white rounded-md shadow-md p-5 pb-2 flex flex-col gap-5 font-mont overflow-hidden">
+            <p className="text-[14.5px] sm:text-[15.5px] font-medium">Recent Appointments</p>
 
-            <div className="hidden md:block  w-full overflow-x-auto">
+            <div className="  w-full overflow-x-auto">
 
                 <div className="min-w-[975px]  min-h-30">
                     <div className="w-full flex items-center justify-between border h-[55px] bg-white border-gray-200 ">
@@ -270,7 +270,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                     </div>
 
                     {/* Pagination */}
-                    <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
+                    <div className="w-full flex items-center justify-between px-5 pt-3 pb-2 border-t border-gray-200">
                         <div className="flex items-center gap-2">
                             <span className="flex flex-row items-center justify-start gap-3 h-full">
                                 <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
@@ -291,7 +291,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                 </div>
             </div>
 
-            <div className="w-full  flex flex-col md:hidden gap-0">
+            {/* <div className="w-full flex-col hidden gap-0">
                 {
                     [1,2,3,4,5].map((data,ind:number)=>{
                         return(
@@ -309,7 +309,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                         )
                     })
                 }
-            </div>
+            </div> */}
 
         </div>
     )

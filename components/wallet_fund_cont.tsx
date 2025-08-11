@@ -1,51 +1,98 @@
 'use client'
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
 import { Dot, Loader2Icon } from 'lucide-react'
 import {  Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger,} from "@/components/ui/dialog"
 import { toast_msg } from '@/lib/toast'
+import {handle_encrypt} from '@/lib/funds_encryption'
 import { useChat } from '@/app/context/ChatContext'
 import Animated_counter from '@/lib/animated_counter'
 import { useRouter } from 'next/navigation'
+import InputComponent from './auth_components/input_component'
+import { Button } from './ui/button'
+import { post_auth_request } from '@/app/api'
+import { AxiosResponseHeaders } from 'axios'
 
-const WalletFundCont = () => {
+interface TriggerProps {
+    trigger_refresh: boolean;
+    setTrigger_refresh: (trigger_refresh:boolean) =>void;
+}
+const WalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
     const {setRoute} = useChat()
-    const [amount, setAmount] = useState(0)
+    const [funds_data, setFunds_data] = useState({patient_id:'', physician_id: '', amount:0, transaction_type:''})
     const [loading, setLoading] = useState(false)
     const {user_information, wallet_information, setWallet_information} = useChat()
     const router = useRouter()
+    const [trigger, setTrigger] = useState(false)
+
+    useEffect(() => {
+
+        if (!user_information || !user_information.role) {
+            
+            toast_msg({title:'Error occured, kindly login again ', type:'danger'})
+
+            router.push('/login')
+
+            return;
+        }
+        const {patient_id, physician_id} = user_information
+
+        patient_id && setFunds_data({...funds_data, patient_id, transaction_type:'credit' })
+
+        physician_id && setFunds_data({...funds_data, physician_id, transaction_type: 'debit'})
+
+    }, [trigger])
     
 
     async function handle_submit(e: React.FormEvent) {
         e.preventDefault()
+
         setLoading(true)
 
-        if (amount < 100){
+        if (funds_data.amount < 100){
             toast_msg({title: 'Amount cannot be less than ₦100'})
             setLoading(false)
             return;
         }
 
-        if (user_information && user_information.role == 'patient') {
-            
-            try {
-                toast_msg({title: 'Funds transafer in progress'})
-            } catch (error) {
-                console.log(error)
-            }finally{
-                setLoading(false)
-            }
-            return
-        }else{
-            try {
-                toast_msg({title: 'Funds withdrawal in progress'})
-            } catch (error) {
-                console.log(error)
-            }finally{
-                setLoading(false)
-            }
-            return
+        try {
 
+            // get encrypted string
+
+            const new_data = {...funds_data, amount:funds_data.amount * 100}
+
+            console.log(new_data)
+
+            const encrypted_string = await handle_encrypt(JSON.stringify(new_data));
+
+            if (!encrypted_string) return toast_msg({title: 'Error occured while encrypting data', type:'danger'});
+
+            if (encrypted_string?.status == 404) return toast_msg({title: encrypted_string.msg, type: 'danger'});
+
+            const route = user_information?.role == 'patient' ? 'decrypt-deposit-transaction-data' : 'decrypt-withdrawal-transaction-data'
+
+            const res = await post_auth_request(`auth/${route}`, {encrypted_data: encrypted_string.msg}) as AxiosResponseHeaders;
+
+            console.log(res)
+
+            if (res.status == 200 || res.status == 201) {
+
+                setFunds_data({...funds_data, amount:0})
+
+                setLoading(false)
+
+                toast_msg({title: res.data.msg})
+
+                setTrigger_refresh(!trigger_refresh)
+
+            }else{
+                toast_msg({title: res.response.data.msg, type:'danger'})
+            }
+            
+        } catch (err) {
+            console.log(err)
+        }finally{
+            setLoading(false)
         }
 
         
@@ -112,8 +159,35 @@ const WalletFundCont = () => {
                         <span className="text-3xl font-bold text-white">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
                     </span>
 
-                    <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> {router.push('/wallet'); setRoute('wallet')}} >{(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}</span>
-                        
+                    <Dialog >
+                        <DialogTrigger>
+                            <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> setTrigger(!trigger)} >
+                                {(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}
+                            </span>
+                        </DialogTrigger>
+                        <DialogContent className='w-full sm:max-w-lg '>
+                            <DialogHeader>
+                                <DialogTitle className='text-[15.5px] font-mont font-semibold'>{user_information?.role == 'patient' ? "Fund Wallet":"Withdraw"}</DialogTitle>
+                                <DialogDescription className='font-mont text-[13px]'>{`Enter the amount you want to ${user_information?.role == 'patient' ? "deposit":"withdraw"}`}
+                                </DialogDescription>
+                            </DialogHeader>
+                                
+                            <div className="w-full flex flex-col gap-10 bg-gray-100 border border-gray-200 rounded-md p-3">
+                                <span className="w-full flex flex-col gap-5">
+                                    <p className="text-[13px] font-medium text-slate-700 font-mont">{"Amount"}</p>
+
+                                    <span className="h-[45px] w-full">
+                                        <input type="number" name="amount" id="" onChange={(e)=> setFunds_data({...funds_data, amount: Number(e.target.value)})} value={funds_data.amount} className='input-type text-[13px]' />
+                                    </span>
+                                </span>
+
+                                <Button className='w-full h-[50px] text-white bg-[#306ce9] hover:bg-[#306ce9]/90 rounded-sm text-[13px] font-mont duration-200' disabled={funds_data.amount < 100 } onClick={handle_submit}>
+                                {loading ? <Loader2Icon className='size-7 animate-spin' /> : 'Submit' }
+                                </Button>
+                            </div>
+                        </DialogContent>
+                    </Dialog>
+                    
 
                     
                 </div>

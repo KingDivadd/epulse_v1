@@ -114,7 +114,7 @@ const PatientProfile = () => {
                     <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-5">
                     {/* Profile Image Section */}
                         <div className="col-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md  justify-between  ">
-                            <span className="h-[300px] w-[300px] sm:h-[350px] sm:w-[350px] lg:w-[320px] lg:h-[320px] flex mx-auto justify-center relative group ring-5 ring-blue-200 rounded-full mt-3">
+                            <span className="h-[300px] w-[300px] sm:h-[295px] sm:w-[295px] lg:w-[310px] lg:h-[310px] flex mx-auto justify-center relative group ring-5 ring-blue-200 rounded-full mt-3">
                                 <ImgUploader id={'avatar'} title={''} url={information.avatar!} onFileUpload={handle_file_upload} />                                
                             </span>
 

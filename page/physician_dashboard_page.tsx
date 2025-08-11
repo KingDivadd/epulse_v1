@@ -70,7 +70,7 @@ const AdminDashboardPage = () => {
 
 
             <div className="w-full bg-white flex flex-col gap-3.5 p-4 pb-2 rounded-md shadow-md">
-                <p className="text-[15.5px] font-medium font-mont">Appointment Schedule</p>
+                <p className="text-[14.5px] sm:text-[15.5px] font-medium font-mont">Appointment Schedule</p>
 
                 <AdminAppointmentSchedule fund_search={fund_search} setFund_search={setFund_search} appointment_info={appointment_info}  setAppointment_info={setAppointment_info} loading={loading} setLoading={setLoading} page_number={appointemnt_page_number} setPage_number={setAppointemnt_page_number} />
             </div>

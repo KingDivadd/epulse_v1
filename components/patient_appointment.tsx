@@ -48,8 +48,6 @@ const PatientAppointments = () => {
 
     useEffect(() => {
 
-        console.log('filtered appointment ', filter_appointment)
-
         const new_list = appointment_info.appointments.filter((item:AppointmentType)=>{
 
             return(

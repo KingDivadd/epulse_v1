@@ -59,13 +59,13 @@ const ChatList = () => {
             <div className="hidden lg:flex flex-col gap-3  w-full h-full justify-start ">
                 <h3 className="font-mont font-semibold text-[15.5px]  text-slate-700">{(user_information && user_information.role == 'physician') ? "Patients":"Physicians"}</h3>
 
-                <div className="w-full mt-2 overflow-y-auto max-h-[calc(100vh-160px)]  hide-scrollbar ">
+                <div className="w-full overflow-y-auto max-h-[calc(100vh-145px)]  hide-scrollbar ">
                         
                         
                         <div className="w-full flex flex-col gap-2">
                             {
                                 [1,2,3,4,5,6,7,8,9,0].map((data,ind)=>{
-                                    const selected_chat = ind == selected ? 'bg-[#306ce9] text-white  ' : 'bg-white hover:bg-[#306ce9] border-gray-300  duration-200 hover:text-white '
+                                    const selected_chat = ind == selected ? 'bg-[#306ce9] text-white  ' : 'bg-white hover:bg-[#306ce9] border-gray-200  duration-200 hover:text-white '
 
                                     const selected_chat_text = ind == selected ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
@@ -105,21 +105,21 @@ const ChatList = () => {
                 {
                     show_list ?
                         <div className=" flex flex-col gap-3  w-full h-full justify-start ">
-                            <h3 className="font-mont font-semibold text-lg  text-slate-700">{true ? "Patients":"Physicians"}</h3>
+                            <h3 className="font-mont font-semibold text-[15.5px]  text-slate-700">{true ? "Patients":"Physicians"}</h3>
 
-                            <div className="w-full mt-2 overflow-y-auto max-h-[calc(100vh-160px)]  hide-scrollbar ">
+                            <div className="w-full  overflow-y-auto max-h-[calc(100vh-145px)]  hide-scrollbar ">
 
                                 <div className="w-full flex flex-col gap-2.5 lg:gap-1.5">
                                     {
                                         [1,2,3,4,5,6,7,8,9,0].map((data,ind)=>{
-                                            const selected_chat = ind == selected ? 'bg-[#306ce9] text-white  ' : 'bg-white hover:bg-[#306ce9] duration-200 hover:text-white '
+                                            const selected_chat = ind == selected ? 'bg-[#306ce9] text-white  ' : 'bg-white hover:bg-[#306ce9] duration-200 hover:text-white border-gray-200 '
 
                                             const selected_chat_text = ind == selected ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
                                             const selected_chat_msg_count = ind == selected ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
                                             return(
-                                                <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat}   rounded-sm shadow-md p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=> {setShow_selected_chat(!show_selected_chat); setSelected(ind); setShow_list( !show_list) } }>
+                                                <div key={ind} className={`w-full h-[80px] sm:h-[90px] border shadow-xs ${selected_chat}   rounded-sm  p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=> {setShow_selected_chat(!show_selected_chat); setSelected(ind); setShow_list( !show_list) } }>
                                                     <div className=" h-full flex items-start">
                                                         <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                                             <Image src={'/profile-img-2b.jpg'} alt='' fill objectFit='cover'  />
@@ -146,7 +146,7 @@ const ChatList = () => {
 
                         </div>
                         :
-                        <div className="w-full h-full bg-white rounded-sm p-4 flex flex-col items-start justify-between gap-2 shadow-md">
+                        <div className=" w-full h-full bg-white rounded-sm p-4 flex flex-col items-start justify-between gap-2 shadow-md">
                             <div className=" w-full flex items-center justify-between max-md:justify-end border-b border-[#f2f2f2] pb-3">
                                 <span className="max-md:hidden h-[40px] flex items-center justify-start gap-2">
                                     <span className="h-[40px] w-[40px] rounded-full relative overflow-hidden">
@@ -160,9 +160,9 @@ const ChatList = () => {
 
                                 <span className="flex items-center justify-end gap-1">
                                     {/* <RiSearchLine size="18px" className="text-gray-600" /> */}
-                                    <button className=" h-[40px] px-5 rounded-sm bg-gray-200 hover:bg-gray-200/70 duration-200 text-[13px] text-gray-700" onClick={()=> setShow_list(!show_list)}>Cancel</button>
+                                    <button className=" h-[40px] px-5 rounded-full bg-gray-200 hover:bg-gray-200/70 duration-200 text-[13px] text-gray-700" onClick={()=> setShow_list(!show_list)}>Cancel</button>
 
-                                    <button className="bg-[#306ce9] h-[40px] px-5 rounded-sm text-white text-[13px] py-2.5">Start Consultation</button>
+                                    <button className="bg-[#306ce9] h-[40px] px-5 rounded-full text-white text-[13px] py-2.5">Start Consultation</button>
                                 </span>
                             </div>
 

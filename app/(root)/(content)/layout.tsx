@@ -128,7 +128,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <>
             
             <main className="w-screen h-screen flex overflow-hidden relative sm:p-0" onClick={handleOutsideClick}>
-                <section className="hidden sm:block w-[210px] xl:w-[250px]">
+                <section className="hidden sm:block w-[250px]">
                     <Sidebar />
                 </section>
 

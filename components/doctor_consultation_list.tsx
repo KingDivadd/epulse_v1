@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import { toast_msg } from '@/lib/toast';
 import { convert_to_unix } from '@/lib/date_formater';
 import { Loader2Icon } from 'lucide-react';
-import { post_auth_request } from '@/app/api';
+import { get_auth_request, post_auth_request } from '@/app/api';
 import { AxiosResponseHeaders } from 'axios';
 
 
@@ -55,6 +55,13 @@ const DoctorConsultationList = () => {
     });
 
     useEffect(() => {
+        const path = window.location.pathname
+
+        const list = path.split('/')
+
+        const physician_url_id = list[list.length - 1]
+
+
         if (selected_user && selected_user.physician_id) {
             const {physician_id} = selected_user
 
@@ -63,9 +70,47 @@ const DoctorConsultationList = () => {
                 setNew_appointment({...new_appointment, physician_id})
             }, 100);
         }else{
-            router.push('/doctors')
+            // router.push('/doctors')
+            handle_verify_physician_id(physician_url_id)
         }
     }, [])
+
+    async function handle_verify_physician_id(id:string) {
+
+        try {
+
+            const res = await get_auth_request(`auth/verify-physician-id/${id}`) as AxiosResponseHeaders;
+
+            if (res.status == 200 || res.status == 201) {
+                
+                setLoading(false)
+
+                setNew_appointment({...new_appointment, physician_id:id})
+
+                setSelected_user(res.data.physician)
+                
+            }else if(res.status == 404){
+
+                router.push('/doctors')
+
+            }else if(res.status == 401){
+
+                toast_msg({title:'Session expired, kindly login again'})
+
+                router.push("/login")
+            }else{
+                toast_msg({title: res.response.data.msg, type: 'danger'})
+
+                setTimeout(() => {
+                    handle_verify_physician_id(id)
+                }, 3000);
+            }
+            
+        } catch (err) {
+            console.log('Error verifying physician id ',err)
+        }
+        
+    }
 
     const handle_submit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -121,15 +166,15 @@ const DoctorConsultationList = () => {
 
     if (loading) {
         return (
-        <div className="w-full h-[80vh] flex items-center justify-center bg-[#f2f2f2]">
-            <p className="text-[15.5px] font-medium font-mont">Loading...</p>
+        <div className="w-full h-[80vh] flex items-center justify-center ">
+            <Loader2Icon className='w-8 h-8 text-gray-500 animate-spin' />
         </div>
         );
     }
 
     if (error || !selected_user) {
         return (
-        <div className="w-full h-[80vh] flex items-center justify-center bg-[#f2f2f2]">
+        <div className="w-full h-[80vh] flex items-center justify-center ">
             <p className="text-[15.5px] font-medium font-mont text-red-500">{error || 'Doctor not found'}</p>
         </div>
         );
@@ -145,27 +190,26 @@ const DoctorConsultationList = () => {
                     <h3 className="font-medium text-[14px] text-start">Select the date and time you would like to have your appointment.</h3>
                     <h3 className="text-[13px] text-start">Please note that appointments can only be selected at 30-minute intervals.</h3>
 
-                    <form onSubmit={handle_submit} className="flex flex-col gap-5 p-5 rounded-md shadow-md bg-white w-full">
-                        <span className="w-full flex flex-col gap-2 mt-5">
-                        <p className="text-[13px] ">Mode of Consultation</p>
-                        <select
-                            name="appointment_type"
-                            id="appointment_type"
-                            className="h-[50px] w-full border border-slate-400 bg-white px-3 text-[13px] rounded-[4px]"
-                            onChange={(e)=> setNew_appointment({...new_appointment, appointment_type:e.target.value.toLowerCase()})}
-                        >
-                            <option value="" className='text-[14px]'>Select</option>
-                            <option value="video_call" className='text-[14px]'>Video</option>
-                            <option value="chat" className='text-[14px]'>Chat</option>
-                        </select>
+                    <form onSubmit={handle_submit} className="flex flex-col gap-8 p-5 rounded-md shadow-md bg-white w-full">
+                        <span className="w-full flex flex-col gap-2 ">
+                            <p className="text-[13px] ">Mode of Consultation</p>
+                            <select
+                                name="appointment_type"
+                                id="appointment_type"
+                                className="h-[50px] w-full border border-slate-400 bg-white px-3 text-[13px] rounded-[4px]"
+                                onChange={(e)=> setNew_appointment({...new_appointment, appointment_type:e.target.value.toLowerCase()})}>
+                                <option value="" className='text-[14px]'>Select</option>
+                                <option value="video_call" className='text-[14px]'>Video</option>
+                                <option value="chat" className='text-[14px]'>Chat</option>
+                            </select>
                         </span>
 
-                        <span className="w-full flex flex-col gap-2 mt-5">
+                        <span className="w-full flex flex-col gap-2 ">
                             <p className="text-[13px]">Date for Consultation</p>
                             <input type="date" name="date" id="date" onChange={(e)=> setSelected_date(e.target.value)} className="h-[50px] border border-slate-400 px-3 rounded-[4px] w-full text-[13px]" />
                         </span> 
 
-                        <span className="w-full flex flex-col gap-2 mt-5">
+                        <span className="w-full flex flex-col gap-2 ">
                             <p className="text-[13px]">Time for Consultation</p>
                             <select
                                 name="time"
@@ -181,7 +225,7 @@ const DoctorConsultationList = () => {
                             </select>
                         </span>
 
-                        <span className="w-full flex flex-col gap-2 mt-5">
+                        <span className="w-full flex flex-col gap-2 ">
                             <p className="text-[13px]">Complaint Brief</p>
                             <textarea
                                 placeholder="A brief description of your complaint..."
@@ -192,7 +236,7 @@ const DoctorConsultationList = () => {
                             ></textarea>
                         </span>
 
-                        <button type="submit" className="h-[50px] mt-5 rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 text-[13px] flex items-center justify-center" onClick={handle_submit} > 
+                        <button type="submit" className="h-[50px]  rounded-sm text-white bg-[#306ce9] hover:bg-[#306ce9]/90 duration-300 text-[13px] flex items-center justify-center" onClick={handle_submit} > 
                                 {loading_2? <Loader2Icon className='animate-spin size-8 ' />:"Book Appointment"}
                         </button>
                     </form>

@@ -19,6 +19,7 @@ const DashboardPage = () => {
     const [loading, setLoading] = useState(true)
     const [appointemnt_page_number, setAppointemnt_page_number] = useState(1)
     const [appointment_items_per_page, setAppointment_items_per_page] = useState(10)
+    const [trigger_refresh, setTrigger_refresh] = useState(false)
 
     const [pagination, setPagination] = useState({page_number: 1, page_number_1:1, items_per_page:10, items_per_page_1:10})
 
@@ -78,11 +79,11 @@ const DashboardPage = () => {
 
     return (
         <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5">
-            <WalletFundCont />
+            <WalletFundCont trigger_refresh={trigger_refresh} setTrigger_refresh={setTrigger_refresh} />
 
             <DashboardAppointment appointment_info={appointment_info}  setAppointment_info={setAppointment_info} loading={loading} setLoading={setLoading} page_number={appointemnt_page_number} setPage_number={setAppointemnt_page_number} />
 
-            <div className="w-full bg-white flex flex-col gap-5 p-4 rounded-md shadow-md">
+            <div className="w-full bg-white flex flex-col gap-5 p-4 pb-2 rounded-md shadow-md">
                 <p className="text-[15.5px] font-medium font-mont">Transactions</p>
 
                 <WalletFundHistoryTable fund_search={fund_search} setFund_search={setFund_search} loading={loading} setLoading={setLoading} />

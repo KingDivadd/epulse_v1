@@ -117,7 +117,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
     return (
         <div className="w-full max-sm:-mt-2 bg-white  pb-0  overflow-x-auto scrollbar-hidden font-mont">
         {/* Desktop View */}
-            <div className={`hidden min-w-[1000px] md:flex flex-col items-start justify-start`}>
+            <div className={` min-w-[1000px] flex flex-col items-start justify-start`}>
                 <div className="w-full flex items-center justify-between border h-[55px] border-gray-200  ">
                     <div className="w-[30%] px-3 sm:px-5 flex items-center justify-start">
                         <p className="text-[13px] font-medium">Date</p>
@@ -134,9 +134,9 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 </div>
 
                 {/* Transaction Rows */}
-                <div className="w-full bg-white relative">
+                <div className="w-full  min-h-[calc(100vh-500px)] bg-white relative">
                     {filteredTransactions.length ? 
-                        <div className="w-full min-h-[250px] relative">
+                        <div className="w-full  relative">
                             {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
                                 <Loader2Icon className="h-10 w-10 animate-spin text-slate-400 z-10" />
                             </div>}
@@ -174,7 +174,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                         </div>
                         
                         :
-                        <div className="w-full h-[250px] flex items-center justify-center relative">
+                        <div className="w-full  h-[calc(100vh-500px)] flex items-center justify-center relative bg-white">
                             <p className="text-[13px] font-medium">{!loading && "You have no Transaction!"}</p>
                             {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
                                 <Loader2Icon className="h-10 w-10 animate-spin text-slate-400 z-10" />
@@ -187,7 +187,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 </div>
 
                 {/* Pagination Controls */}
-                <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
+                <div className="w-full flex items-center justify-between px-5 pt-3 pb-2 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
                             <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
@@ -206,7 +206,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
             </div>
 
             {/* Mobile View */}
-            <div className="w-full flex flex-col md:hidden">
+            {/* <div className="w-full flex flex-col md:hidden">
                 {filteredTransactions.map((data: TransactionType, ind: number) => {
                 const { transaction_id, transaction_type, narration, amount, created_at } = data
                 const formatted_date = format_date_from_unix(Number(created_at))
@@ -248,7 +248,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                         Page {page_number} of {wallet_information?.total_number_of_pages}
                     </p>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

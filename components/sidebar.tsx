@@ -17,14 +17,12 @@ const Sidebar = () => {
     useEffect(() => {
         const path = window.location.pathname.replace(/\//, '')
 
-        console.log('clicked ', route, 'path ', path)
 
-        if (route) {
-            console.log('clicked and here now ', route, path)
-            setCurrent_route(route)
+        if (localStorage.getItem('route') || route) {
+            setCurrent_route(localStorage.getItem('route') || route)
         }else{
             setCurrent_route(path)
-            console.log('path ----------- ',path)
+            setRoute(route)
         }
     }, [route, clicked])
 
@@ -56,6 +54,7 @@ const Sidebar = () => {
                                         setCurrent_route(route.path);
                                         setRoute(route.id);
                                         setClicked(!clicked)
+                                        localStorage.setItem('route',route.id)
 
                                     }
                                     }>
