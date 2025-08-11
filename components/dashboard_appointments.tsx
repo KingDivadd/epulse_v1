@@ -110,7 +110,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                     <div className="w-full flex items-center justify-between border h-[55px] bg-white border-gray-200 ">
 
                         <div className="w-[27.5%] px-3 sm:px-5 flex items-center justify-start">
-                            <p className="text-[13px] font-medium">Appoitment Date, Time</p>
+                            <p className="text-[13px] font-medium">Appointment Date, Time</p>
                         </div>
                         <div className="w-[17.5%] px-3 sm:px-5 flex items-center justify-start h-full ">
                             <p className="text-[13px] font-medium">Dr. Name</p>
@@ -193,7 +193,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                                                         <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
                                                             <DialogHeader className='border-b border-gray-200 pb-3 px-4'>
                                                                 <DialogTitle className='text-[15.5px] font-semibold' >Appointment Information</DialogTitle>
-                                                                <DialogDescription className='text-[13px]'>{`You've booked a ${appointment_type} appointment with Dr ${first_name} ${last_name} scheduled for ${date.date}, ${date.time} `}</DialogDescription>
+                                                                <DialogDescription className='text-[13px]'>{`You've booked a ${appointment_type.replace(/_/, ' ')} appointment with Dr ${first_name} ${last_name} scheduled for ${date.date}, ${date.time} `}</DialogDescription>
                                                             </DialogHeader>
 
                                                             <div className='px-4 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>

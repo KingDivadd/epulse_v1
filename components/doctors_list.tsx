@@ -9,13 +9,13 @@ import { useRouter } from 'next/navigation';
 import { toast_msg } from '@/lib/toast';
 import { get_auth_request } from '@/app/api';
 import { AxiosResponseHeaders } from 'axios';
-import { HiFilter } from 'react-icons/hi';
-import { IoCaretUp, IoCaretDown } from 'react-icons/io5';
 import {  Loader2Icon, MessageSquare, VideoIcon } from 'lucide-react';
-import {  Dialog,  DialogClose,  DialogContent,  DialogDescription,  DialogFooter,  DialogHeader,  DialogTitle,  DialogTrigger } from "@/components/ui/dialog"
-import { Skeleton } from './ui/skeleton';
+import {  Dialog,  DialogClose,  DialogContent,  DialogDescription, DialogHeader,  DialogTitle,  DialogTrigger } from "@/components/ui/dialog"
 import { PhysicianInformationProps, PhysicianType } from '@/types';
 import { PageHeader } from './reuseable_heading_component';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, } from '@/components/ui/dropdown-menu';
+import { HiFilter } from 'react-icons/hi';
+import { IoIosArrowDown } from 'react-icons/io';
 
 interface DoctorProps {
     first_name: string;
@@ -191,55 +191,67 @@ const DoctorsList = () => {
             <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-5">
                 <PageHeader text={'All Physicians'} />
 
-                <div className=" w-full sm:w-[300px]  rounded-[4px] relative ">
-                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-md" onClick={()=> setOpen_drop_down(!open_drop_down)}>
-                        <p className="text-[13px] ">Filter</p>
-                    </span>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                            <span className="h-full flex items-center gap-0.5">
+                                <HiFilter className=' size-4 ' />
+                                <p className="text-[13px] ">Filter</p>
+                            </span>
 
-                    <div className={`w-full flex flex-col p-3 absolute ${open_drop_down ? "block": "hidden"} right-0 top-[45px] duration-200 ease-in-out rounded-[4px] bg-white border border-gray-200 shadow-md gap-5 z-10`}>
 
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="text-[13px]">Registered as</p>
-
-                            <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_doctor(e.target.value)}>
-                                <option value="" className='text-[13px]'>Select Time</option>
-                                <option value="Specialist" className='text-[13px]'>A Specilist</option>
-                                <option value="General Doctor" className='text-[13px]'>A General Doctor</option>
-                            </select>
+                            <IoIosArrowDown className='size-5 ' />
                         </span>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent  className='w-[350px] sm:w-[300px] rounded-[4px] border-0 font-mont'>
+                        
+                        <div className="w-[350px] sm:w-[300px] flex flex-col p-3 rounded-[4px]   gap-5">
 
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="text-[13px]">Specialist Specialty</p>
+                            <span className="w-full flex flex-col gap-2">
+                                <p className="text-[13px]">Registered as</p>
 
-                                <div className="xl:w-[230px] w-full">
-                                <DropDownWithSearchBar
-                                    dropArray={doctors_specialties}
-                                    selected_item={filter_doctor}
-                                    setSelected_item={setFilter_doctor}
-                                />
-                            </div>
-                        </span>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_doctor(e.target.value)}>
+                                    <option value="" className='text-[13px]'>Select Time</option>
+                                    <option value="Specialist" className='text-[13px]'>A Specilist</option>
+                                    <option value="General Doctor" className='text-[13px]'>A General Doctor</option>
+                                </select>
+                            </span>
 
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="text-[13px]">Consultation Type</p>
+                            <span className="w-full flex flex-col gap-2">
+                                <p className="text-[13px]">Specialist Specialty</p>
 
-                            <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_doctor(e.target.value)}>
-                                <option value="" className='text-[13px]'>Select status</option>
-                                <option value="chat" className='text-[13px]'>Chat</option>
-                                <option value="video_call" className='text-[13px]'>Video</option>
-                            </select>
-                        </span>
+                                <div className=" w-full">
+                                    <DropDownWithSearchBar
+                                        dropArray={doctors_specialties}
+                                        selected_item={filter_doctor}
+                                        setSelected_item={setFilter_doctor}
+                                    />
+                                </div>
+                            </span>
+
+                            <span className="w-full flex flex-col gap-2">
+                                <p className="text-[13px]">Consultation Type</p>
+
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px] w-full ' onChange={(e)=> setFilter_doctor(e.target.value)}>
+                                    <option value="" className='text-[13px]'>Select status</option>
+                                    <option value="chat" className='text-[13px]'>Chat</option>
+                                    <option value="video_call" className='text-[13px]'>Video</option>
+                                </select>
+                            </span>
 
 
-                        <span className="h-[45px] w-full">
-                            <input type="text" name="filter_appoitnment" placeholder='Enter doctor name ...' onChange={(e)=> setFilter_doctor(e.target.value)} className='input-type text-[13px]' />
-                        </span>
+                            <span className="h-[45px] w-full">
+                                <input type="text" name="filter_appointment" placeholder='Enter doctor name ...' onChange={(e)=> setFilter_doctor(e.target.value)} className='input-type text-[13px]' />
+                            </span>
 
-                        <button className="w-full h-[45px] mt-2 text-[13px] cursor-pointer border border-gray-400 hover:bg-gray-100 duration-300  rounded-[4px]" onClick={()=> {setFilter_doctor(''); setOpen_drop_down(false)}}>Clear Filter</button>
+                            <button className="w-full h-[45px] text-[13px] cursor-pointer border border-red-400 text-red-500 hover:bg-red-500/5 duration-300  rounded-[4px]" onClick={()=> {setFilter_doctor(''); setOpen_drop_down(false)}}>Clear Filter</button>
 
 
-                    </div>
-                </div>
+                        </div>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+
             </span>
             
 

@@ -69,18 +69,11 @@ const AdminDashboardPage = () => {
             <AdminWalletFundCont appointment_taken={appointment_taken} pending_appointment={pending_appointment} />
 
 
-            <div className="w-full bg-white flex flex-col gap-3.5 p-4 rounded-md shadow-md">
+            <div className="w-full bg-white flex flex-col gap-3.5 p-4 pb-2 rounded-md shadow-md">
                 <p className="text-[15.5px] font-medium font-mont">Appointment Schedule</p>
 
                 <AdminAppointmentSchedule fund_search={fund_search} setFund_search={setFund_search} appointment_info={appointment_info}  setAppointment_info={setAppointment_info} loading={loading} setLoading={setLoading} page_number={appointemnt_page_number} setPage_number={setAppointemnt_page_number} />
             </div>
-
-            {/* <div className="w-full bg-white flex flex-col gap-5 p-5 rounded-md shadow-md">
-                <p className="text-lg font-medium font-mont">Patient Consultations</p>
-
-                <AdminAppointmentSchedule fund_search={fund_search} setFund_search={setFund_search} />
-            </div> */}
-
         </div>
     )
 }

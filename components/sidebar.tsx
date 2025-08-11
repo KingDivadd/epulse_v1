@@ -12,9 +12,12 @@ const Sidebar = () => {
     const [current_route, setCurrent_route] = useState('')
     const router = useRouter()
     const {user_information, route, setRoute} = useChat()
+    const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
         const path = window.location.pathname.replace(/\//, '')
+
+        console.log('clicked ', route, 'path ', path)
 
         if (route) {
             console.log('clicked and here now ', route, path)
@@ -23,7 +26,7 @@ const Sidebar = () => {
             setCurrent_route(path)
             console.log('path ----------- ',path)
         }
-    }, [route])
+    }, [route, clicked])
 
 
     return (
@@ -52,6 +55,7 @@ const Sidebar = () => {
                                         }
                                         setCurrent_route(route.path);
                                         setRoute(route.id);
+                                        setClicked(!clicked)
 
                                     }
                                     }>

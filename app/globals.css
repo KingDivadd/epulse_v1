@@ -377,3 +377,8 @@ body {
 .table-content-bg:nth-child(even) {
     @apply bg-red-500
 }
+
+[data-slot="dropdown-menu-content"] {
+    width: 100% !important;
+    max-width: 100% !important;
+}

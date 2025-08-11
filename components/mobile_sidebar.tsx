@@ -23,10 +23,7 @@ const MobileSidebar = () => {
             <span className="w-full flex justify-between items-center h-24  pr-5"> 
                 <span className="w-full flex justify-start h-24 "> <SidebarHeading /> </span>
 
-
                 <RiMenuFold3Line className=' size-[27.5px] text-gray-100 ' onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)} />
-                
-
 
             </span>
 
@@ -53,6 +50,7 @@ const MobileSidebar = () => {
                                             return;
                                         }
                                         setCurrent_route(route.path)
+                                        setShow_mobile_sidebar(!show_mobile_sidebar)
 
                                     }}>
                                     <route.icon size={'18px'} className=' duration-200' />

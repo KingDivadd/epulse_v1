@@ -3,16 +3,12 @@ import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { format_date_from_unix, is_within_24hrs } from '@/lib/date_formater';
 import Image from 'next/image';
 import {  VideoIcon, MessageSquare, MessageSquareDot, ChevronDown} from 'lucide-react';
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem } from '@radix-ui/react-dropdown-menu';
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, } from '@/components/ui/dropdown-menu';
 import {metrics, physician_appointment_sample} from "@/constants"
 import { HiFilter } from "react-icons/hi";
 import {  Dialog,  DialogClose,  DialogContent,  DialogDescription,  DialogFooter,  DialogHeader,  DialogTitle,  DialogTrigger } from "@/components/ui/dialog"
-import { AiOutlineCalendar, AiOutlineClockCircle } from 'react-icons/ai';
-import { MdCheckCircleOutline } from 'react-icons/md';
-import { FaCheckCircle } from 'react-icons/fa';
 
-import { Button } from '@/components/ui/button';
-
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { toast_msg } from '@/lib/toast';
 import { get_auth_request, patch_auth_request } from '@/app/api';
 import { AxiosResponseHeaders } from 'axios';
@@ -29,7 +25,7 @@ const PatientAppointments = () => {
     const [today, setToday] = useState(Math.floor(Date.now() / 1000)); // Unix timestamp in seconds
     const [position, setPosition] = useState('');
     const [open, setOpen] = useState(false)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [filter_appointment, setFilter_appointment] = useState('')
     const [loading_2, setLoading_2] = useState(false)
     const [open_drop_down, setOpen_drop_down] = useState(false)
@@ -260,6 +256,8 @@ const PatientAppointments = () => {
 
                 setLoading_2(false)
 
+                setLoading(false)
+
             }else if (res.status = 401){
 
                 toast_msg({title: 'Session expired, kindly login!',  })
@@ -286,61 +284,73 @@ const PatientAppointments = () => {
     return (
         <div className="flex flex-col gap-3 font-mont">
 
-            <span className="w-full flex justify-between items-center px-5">
+            <span className="w-full flex max-sm:flex-col justify-between items-start sm:items-center gap-2 px-5 relative">
                 <PageHeader text={'Appointments'} />
 
-                <div className=" w-[300px]  rounded-[4px] relative ">
-                    <span className="h-[50px] w-full flex items-center justify-start gap-1 px-5 border border-gray-300 bg-white rounded-md" onClick={()=> setOpen_drop_down(!open_drop_down)}>
-                        <p className="text-[13px] ">Filter</p>
-                    </span>
 
-                    <div className={`w-full flex flex-col p-3 absolute ${open_drop_down ? "block": "hidden"} right-0 top-[45px] duration-200 ease-in-out rounded-[4px] bg-white border border-gray-200 shadow-md gap-5 z-10`}>
+                <DropdownMenu>
+                    <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                            <span className="h-full flex items-center gap-0.5">
+                                <HiFilter className=' size-4 ' />
+                                <p className="text-[13px] ">Filter</p>
+                            </span>
 
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="text-[13px]">Filter by time</p>
 
-                            <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
-                                <option value="" className='text-[13px]'>Select Time</option>
-                                <option value="" className='text-[13px]'>All</option>
-                                <option value="today" className='text-[13px]'>Today</option>
-                                <option value="yesterday" className='text-[13px]'>Yesterday</option>
-                                <option value="last_week" className='text-[13px]'>Last Week</option>
-                                <option value="this_month" className='text-[13px]'>This Month</option>
-                                <option value="last_30_days" className='text-[13px]'>Last 30 days</option>
-                            </select>
+                            <IoIosArrowDown className='size-5 ' />
                         </span>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent  className='w-[350px] sm:w-[300px] rounded-[4px] border-0 font-mont'>
+                        
+                        <div className="w-[350px] sm:w-[300px] flex flex-col p-3 rounded-[4px]   gap-5">
 
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="text-[13px]">Filter by status</p>
+                            <span className="w-full flex flex-col gap-2">
+                                <p className="text-[13px]">Filter by time</p>
 
-                            <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
-                                <option value="" className='text-[13px]'>Select status</option>
-                                <option value="" className='text-[13px]'>All</option>
-                                <option value="pending" className='text-[13px]'>Pending</option>
-                                <option value="accepted" className='text-[13px]'>Accepted</option>
-                                <option value="cancelled" className='text-[13px]'>Cancelled</option>
-                                <option value="completed" className='text-[13px]'>Completed</option>
-                            </select>
-                        </span>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
+                                    <option value="" className='text-[13px]'>Select Time</option>
+                                    <option value="" className='text-[13px]'>All</option>
+                                    <option value="today" className='text-[13px]'>Today</option>
+                                    <option value="yesterday" className='text-[13px]'>Yesterday</option>
+                                    <option value="last_week" className='text-[13px]'>Last Week</option>
+                                    <option value="this_month" className='text-[13px]'>This Month</option>
+                                    <option value="last_30_days" className='text-[13px]'>Last 30 days</option>
+                                </select>
+                            </span>
 
-                        <span className="w-full flex flex-col gap-2">
-                            <p className="text-[13px]">Filter by Consultation type</p>
+                            <span className="w-full flex flex-col gap-2">
+                                <p className="text-[13px]">Filter by status</p>
 
-                            <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
-                                <option value="" className='text-[13px]'>Select type</option>
-                                <option value="" className='text-[13px]'>All</option>
-                                <option value="chat" className='text-[13px]'>Chat</option>
-                                <option value="video" className='text-[13px]'>Video Call</option>
-                            </select>
-                        </span>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
+                                    <option value="" className='text-[13px]'>Select status</option>
+                                    <option value="" className='text-[13px]'>All</option>
+                                    <option value="pending" className='text-[13px]'>Pending</option>
+                                    <option value="accepted" className='text-[13px]'>Accepted</option>
+                                    <option value="cancelled" className='text-[13px]'>Cancelled</option>
+                                    <option value="completed" className='text-[13px]'>Completed</option>
+                                </select>
+                            </span>
 
-                        <span className="h-[45px] w-full mt-2">
-                            <input type="text" name="filter_appoitnment" placeholder='Enter patient name ...' onChange={(e)=> setFilter_appointment(e.target.value)} className='input-type text-[13px]' />
-                        </span>
+                            <span className="w-full flex flex-col gap-2">
+                                <p className="text-[13px]">Filter by Consultation type</p>
+
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
+                                    <option value="" className='text-[13px]'>Select type</option>
+                                    <option value="" className='text-[13px]'>All</option>
+                                    <option value="chat" className='text-[13px]'>Chat</option>
+                                    <option value="video" className='text-[13px]'>Video Call</option>
+                                </select>
+                            </span>
+
+                            <span className="h-[45px] w-full mt-2">
+                                <input type="text" name="filter_appointment" placeholder='Enter patient name ...' onChange={(e)=> setFilter_appointment(e.target.value)} className='input-type text-[13px]' />
+                            </span>
 
 
-                    </div>
-                </div>
+                        </div>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                
             </span>
         {/* here will be the metric */}
 

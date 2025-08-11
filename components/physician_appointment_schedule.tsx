@@ -110,15 +110,15 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
     }
 
     return (
-        <div className="w-full max-sm:-mt-2 bg-white  pb-0  overflow-x-auto scrollbar-hidden font-mont">
-        {/* Desktop View */}
-            <div className="hidden md:block  w-full overflow-x-auto">
+        <div className="w-full  bg-white  pb-0  overflow-x-auto scrollbar-hidden font-mont">
+        
+            <div className="block min-w-[975px] pb-2 w-full overflow-x-auto bg-white">
 
-                <div className="min-w-[975px]  min-h-30">
+                <div className="w-full  min-h-30 ">
                     <div className="w-full flex items-center justify-between border h-[55px] bg-white border-gray-200 ">
 
                         <div className="w-[22.5%] px-3 sm:px-5 flex items-center justify-start">
-                            <p className="text-[13px] font-medium">Appoitment Date, Time</p>
+                            <p className="text-[13px] font-medium">Appointment Date, Time</p>
                         </div>
                         <div className="w-[17.5%] px-3 sm:px-5 flex items-center justify-start h-full ">
                             <p className="text-[13px] font-medium">Patient Name</p>
@@ -134,7 +134,7 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                         </div>
                     </div>
 
-                    <div className="w-full bg-white pb-5 relative ">
+                    <div className="w-full bg-white  relative ">
                         
                             
                             
@@ -199,7 +199,7 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                                                         <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
                                                             <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
                                                                 <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
-                                                                <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a/an ${appointment_type} appoitment with you scheduled for ${date.date}, ${date.time} `}</DialogDescription>
+                                                                <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a ${appointment_type.replace(/_/, ' ')} appointment with you scheduled for ${date.date}, ${date.time} `}</DialogDescription>
                                                             </DialogHeader>
 
                                                             <div className='px-4 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
