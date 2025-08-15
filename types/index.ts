@@ -151,6 +151,8 @@ export type AppointmentType = {
     patient: UserInfoProps;
     physician: UserInfoProps;
     time: number;
+    last_message:string;
+    last_message_time:number;
     
 }
 export interface AppointmentProps {
@@ -174,4 +176,18 @@ export interface PatientDashboardProps {
     total_number_of_transactions: number, 
     total_number_of_pages_1: number, 
     transactions: TransactionType[],
+}
+
+export type ChatListType = {
+    appointment_id: string; 
+    createdAt: string;
+    date: number;
+    idempotency_key: string;
+    is_patient: boolean;
+    is_physician: boolean;
+    media: string[];
+    patient_id: string;
+    physician_id: string;
+    text: string;
+    updatedAt: string;
 }

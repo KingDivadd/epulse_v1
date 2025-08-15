@@ -413,8 +413,6 @@ const PatientAppointments = () => {
 
 
                 <div className="w-full hide-scrollbar ">
-
-                    <>
                     
                         { 
                             filtered_appointment_info.length === 0 ? 
@@ -575,7 +573,7 @@ const PatientAppointments = () => {
                                 })}
                             </div>
                         }
-                    </>
+                    
                 </div>
 
                 {/* Pagination */}

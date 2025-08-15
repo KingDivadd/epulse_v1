@@ -370,6 +370,10 @@ body {
     @apply cursor-pointer;
 }
 
+.ScrollToBottom>div {
+    scrollbar-width: none;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
     display: none;
 }

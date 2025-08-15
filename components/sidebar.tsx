@@ -15,14 +15,27 @@ const Sidebar = () => {
     const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
+        const routes = ['dashboard', 'appointments', 'doctors', 'consultation', 'wallet', 'profile']
+
         const path = window.location.pathname.replace(/\//, '')
 
+        const stored_route = localStorage.getItem('route')
 
-        if (localStorage.getItem('route') || route) {
-            setCurrent_route(localStorage.getItem('route') || route)
-        }else{
+        const verified_stored_root = stored_route && routes.includes(stored_route)
+
+
+        if (route) {
+            setCurrent_route( route)
+            stored_route !== route && localStorage.setItem('route', route)
+            
+        }else if(verified_stored_root){
+            setCurrent_route(stored_route)
+            path !== stored_route && router.push(`/${stored_route}`)
+        }
+        else{
             setCurrent_route(path)
-            setRoute(route)
+            setRoute(path)
+            localStorage.setItem('route', path)
         }
     }, [route, clicked])
 
@@ -48,7 +61,7 @@ const Sidebar = () => {
                                 <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.id ? "current-nav-item ": "nav-item "}`} 
                                 onClick={()=>  {
                                         if(route.id == 'logout'){
-                                            localStorage.clear()
+                                            // localStorage.clear()
                                             return;
                                         }
                                         setCurrent_route(route.path);

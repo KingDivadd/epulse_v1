@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { UserInfoProps, WalletInformationProps } from '@/types';
+import { AppointmentType, ChatListType, UserInfoProps, WalletInformationProps } from '@/types';
 
 interface ChatContextType {
     show_mobile_nav: boolean;
@@ -27,6 +27,12 @@ interface ChatContextType {
     setItems_per_page: (items_per_page: number) => void;
     route: string;
     setRoute: (route:string)=>void;
+    selected_appointment_info: AppointmentType | null;
+    setSelected_appointment_info: (selected_appointment_info: AppointmentType | null) => void;
+    appointment_info: AppointmentType[];
+    setAppointment_info: (appointment_info: AppointmentType[]) => void;
+    chat_list: ChatListType[];
+    setChat_list: (chat_list: ChatListType[]) => void;
 
 
 }
@@ -49,6 +55,9 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [page_number, setPage_number] = useState(1)
     const [items_per_page, setItems_per_page] = useState(10)
     const [route, setRoute] = useState('')
+    const [selected_appointment_info, setSelected_appointment_info] = useState<AppointmentType|null>(null)
+    const [appointment_info, setAppointment_info] = useState<AppointmentType[]>([])
+    const [chat_list, setChat_list] = useState<ChatListType[]>([])
 
     return (
         <ChatContext.Provider value={{
@@ -62,7 +71,8 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             show_selected_chat, setShow_selected_chat,
             wallet_information, setWallet_information,
             page_number, setPage_number, items_per_page, setItems_per_page,
-            route, setRoute
+            route, setRoute, selected_appointment_info, setSelected_appointment_info,
+            appointment_info, setAppointment_info, chat_list, setChat_list,
 
             
             }}>

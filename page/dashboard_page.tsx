@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import WalletFundCont from '@/components/wallet_fund_cont'
+import PatientWalletFundCont from '@/components/patient_wallet_fund_cont'
 import DashboardAppointment from '@/components/dashboard_appointments'
 import WalletFundHistory from '@/components/wallet_fund_history'
 import WalletFundHistoryTable from '@/components/wallet_fund_history_table'
@@ -79,7 +79,7 @@ const DashboardPage = () => {
 
     return (
         <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5">
-            <WalletFundCont trigger_refresh={trigger_refresh} setTrigger_refresh={setTrigger_refresh} />
+            <PatientWalletFundCont trigger_refresh={trigger_refresh} setTrigger_refresh={setTrigger_refresh} />
 
             <DashboardAppointment appointment_info={appointment_info}  setAppointment_info={setAppointment_info} loading={loading} setLoading={setLoading} page_number={appointemnt_page_number} setPage_number={setAppointemnt_page_number} />
 

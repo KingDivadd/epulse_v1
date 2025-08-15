@@ -100,7 +100,7 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 <p
                     key={i}
                     className={`text-[13px] font-light h-[27px] w-[27.5px] rounded-[3px] flex items-center justify-center cursor-pointer ${
-                    page_number === i ? 'bg-blue-700 text-white' : ''
+                    page_number === i ? 'bg-gray-200 text-gray-600' : ''
                     }`}
                     onClick={() => app_projects_action(i)}
                 >
@@ -190,12 +190,18 @@ const WalletFundHistoryTable = ({ fund_search, setFund_search, loading, setLoadi
                 <div className="w-full flex items-center justify-between px-5 pt-3 pb-2 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
-                            <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>
+                            <p className={`text-[13px] ${page_number === 1 ? "text-gray-400 cursor-not-allowed" : "text-gray-700 cursor-pointer"}`} onClick={() => page_number !== 1 && app_projects_action("prev")} >
+                                Prev
+                            </p>
+
                             <span className="w-auto h-full flex flex-row items-center justify-start">
-                            {render_page_numbers()}
+                                {render_page_numbers()}
                             </span>
-                            <p className={`text-[13px] ${page_number == wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed ":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('next')}>Next</p>
-                        </span>
+
+                            <p className={`text-[13px] ${ page_number === wallet_information?.total_number_of_pages ? "text-gray-400 cursor-not-allowed" : "text-gray-700 cursor-pointer" }`} onClick={() => page_number !== wallet_information?.total_number_of_pages &&  app_projects_action("next") } >
+                                Next
+                            </p>
+                            </span>
                         
                     </div>
 

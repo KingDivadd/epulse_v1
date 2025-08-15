@@ -34,7 +34,7 @@ const Navbar = () => {
                 
                 <span className="h-full flex items-center jusify-center">
                     <span className="h-9 w-9 overflow-hidden relative">
-                        <Image src={'/sun.png'} alt='sun' fill objectFit='cover' />
+                        <Image src={'/sun.png'} alt='sun' layout='fill' objectFit='cover' />
                     </span>
                 </span>
 
@@ -65,7 +65,7 @@ const Navbar = () => {
 
                 <div className="flex items-center justify-start gap-3">
                     <Link href={'/profile'} className="relative h-[40px] w-[40px] overflow-hidden rounded-full ring-2 ring-blue-400">
-                        <Image src={user_information && user_information.avatar || '/default-male.png'} alt='profiile-img' fill objectFit='cover' />
+                        <Image src={user_information && user_information.avatar || '/default-male.png'} alt='profiile-img' layout='fill' objectFit='cover' />
                     </Link>
                     <div className="hidden lg:flex flex-col items-start justify-center font-mont gap-0.5">
                         <h3 className="hidden sm:block font-medium text-[13px] leading-[15px]">

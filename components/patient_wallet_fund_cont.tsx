@@ -17,7 +17,7 @@ interface TriggerProps {
     trigger_refresh: boolean;
     setTrigger_refresh: (trigger_refresh:boolean) =>void;
 }
-const WalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
+const PatientWalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
     const {setRoute} = useChat()
     const [funds_data, setFunds_data] = useState({patient_id:'', physician_id: '', amount:0, transaction_type:''})
     const [loading, setLoading] = useState(false)
@@ -159,34 +159,14 @@ const WalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
                         <span className="text-3xl font-bold text-white">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
                     </span>
 
-                    <Dialog >
-                        <DialogTrigger>
-                            <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> setTrigger(!trigger)} >
-                                {(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}
-                            </span>
-                        </DialogTrigger>
-                        <DialogContent className='w-full sm:max-w-lg '>
-                            <DialogHeader>
-                                <DialogTitle className='text-[15.5px] font-mont font-semibold'>{user_information?.role == 'patient' ? "Fund Wallet":"Withdraw"}</DialogTitle>
-                                <DialogDescription className='font-mont text-[13px]'>{`Enter the amount you want to ${user_information?.role == 'patient' ? "deposit":"withdraw"}`}
-                                </DialogDescription>
-                            </DialogHeader>
-                                
-                            <form onSubmit={handle_submit} className="w-full flex flex-col gap-10 bg-gray-100 border border-gray-200 rounded-md p-3">
-                                <span className="w-full flex flex-col gap-5">
-                                    <p className="text-[13px] font-medium text-slate-700 font-mont">{"Amount"}</p>
+                    <span className="rounded-full bg-white text-[13px] py-3 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> {
+                        router.push('/wallet');
+                        setRoute('wallet')
+                        localStorage.setItem('route', 'wallet')
+                    } } >
+                        {(user_information && user_information.role == 'patient') ? "Fund Wallet" : "Withdraw"}
+                    </span>
 
-                                    <span className="h-[45px] w-full">
-                                        <input type="number" name="amount" id="" onChange={(e)=> setFunds_data({...funds_data, amount: Number(e.target.value)})} value={funds_data.amount} className='input-type text-[13px]' />
-                                    </span>
-                                </span>
-
-                                <Button className='w-full h-[50px] text-white bg-[#306ce9] hover:bg-[#306ce9]/90 rounded-sm text-[13px] font-mont duration-200' disabled={funds_data.amount < 100 } onClick={handle_submit}>
-                                {loading ? <Loader2Icon className='size-7 animate-spin' /> : 'Submit' }
-                                </Button>
-                            </form>
-                        </DialogContent>
-                    </Dialog>
                     
 
                     
@@ -222,6 +202,6 @@ const WalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
     )
 }
 
-export default WalletFundCont
+export default PatientWalletFundCont
 
 

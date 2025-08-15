@@ -83,6 +83,11 @@ const Login = () => {
     }
 
     async function handle_login(e: React.FormEvent) {
+
+        const routes = ['dashboard', 'appointments', 'doctors', 'consultation', 'wallet', 'profile']
+
+        const stored_route = localStorage.getItem('route')
+
         e.preventDefault()
         
         setLoading(true)
@@ -108,7 +113,8 @@ const Login = () => {
                 setLoading(false)
                 
                 if (res.data.user_data.physican_id !== null) {
-                    router.push('/dashboard')
+
+                    stored_route && routes.includes(stored_route) ? router.push(`/${stored_route}`) : router.push('/dashboard')
 
                     return
                 }
@@ -120,7 +126,9 @@ const Login = () => {
                         router.push(`/user-details/${res.data.user_data.patient_id}`)
                         
                     }else{
-                        router.push('/dashboard')
+
+                        stored_route && routes.includes(stored_route) ? router.push(`/${stored_route}`) : router.push('/dashboard')
+                        
                     }
                     return
                 }
