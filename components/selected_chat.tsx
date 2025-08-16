@@ -21,14 +21,22 @@ interface SelectedChatProps {
     setShow_list: (show_list:boolean)=>void;
 }
 
-    // const endpoint = process.env.NEXT_PUBLIC_LIVE
-    const endpoint = process.env.NEXT_PUBLIC_BASE
+    
+
+
 
 const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, setShow_list, show_list}:SelectedChatProps) => {
     const [message, setMessage] = useState('');
     const {user_information, show_selected_chat, chat_list, setChat_list, selected_user} = useChat()
     const [filtered_chat_list, setFiltered_chat_list] = useState<ChatListType[]>([])
     const [filter_msg, setFilter_msg] = useState('')
+
+    // const endpoint = process.env.NEXT_PUBLIC_LIVE
+    const endpoint = process.env.NEXT_PUBLIC_BASE
+
+    if (!endpoint) {
+        console.log('please provide the socket endpoint')
+    }
 
     useEffect(() => {
 
@@ -61,7 +69,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
     // working with sockets...
     useEffect(() => {
-        const socket = io(endpoint!);
+        const socket = io(endpoint);
         const user_id = user_information?.role === 'patient' ? user_information?.patient_id : user_information?.physician_id;
 
         if (user_id) {
@@ -104,7 +112,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
     function handle_submit(e: React.FormEvent) {
         e.preventDefault();
-        const socket = io(endpoint!);
+        const socket = io(endpoint);
 
         const appointment_id = sessionStorage.getItem('a-pp');
         const patient_id = user_information ? user_information.patient_id : '';
@@ -210,7 +218,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                                                     <p className="text-[10px] w-full text-end mt-1">{date_time.time}</p>
                                                 </div>
                                                 {(user_role == sender) && <span className="h-[35px] w-[35px] rounded-full relative overflow-hidden">
-                                                    <Image src={user_information?.avatar! || 'default-male.png' } alt={''} fill className="object-cover" />
+                                                    <Image src={user_information?.avatar || 'default-male.png' } alt={''} fill className="object-cover" />
                                                 </span>}
                                             </div>
                                         </div>
