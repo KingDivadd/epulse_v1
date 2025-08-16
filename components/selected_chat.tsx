@@ -48,6 +48,8 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                 )
             })
 
+            console.log(new_list.length)
+
             setFiltered_chat_list(new_list)            
         }
 
@@ -142,7 +144,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
                 // Update filtered_chat_list only if the message matches the filter
                 if (res.text.toLowerCase().includes(filter_msg.toLowerCase())) {
-                setFiltered_chat_list((prev: ChatListType[]) => [...prev, res]);
+                    setFiltered_chat_list((prev: ChatListType[]) => [...prev, res]);
                 }
             } else {
                 console.log('Error sending chat:', response.message);
