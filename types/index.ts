@@ -191,3 +191,23 @@ export type ChatListType = {
     text: string;
     updatedAt: string;
 }
+
+type ChatType = {
+    statusCode: number;
+    data:  ChatListType;
+}
+
+export type ChatResponseType = {
+    statusCode: number;
+    chat: ChatType;
+    idempotency_key: number;
+    message: string;
+}
+
+export type ReceiverChatResponseType = {
+    chat: ChatType;
+    idempotency_key: string;
+    note: string;
+    statusCode: number;
+    senderData: UserInfoProps
+}

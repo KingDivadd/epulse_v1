@@ -267,7 +267,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                         </div>
                         :
-                        <div className=" w-full h-full bg-white rounded-sm p-4 flex flex-col items-start justify-between gap-2 shadow-md">
+                        <div className=" w-full h-full">
                             <SelectedChat loading_2={loading_2} receiver_img={receiver_img} setReceiver_img={setReceiver_img} setLoading_2={setLoading_2} setShow_list={setShow_list} show_list={show_list} />
                         </div>
                 }

@@ -10,7 +10,7 @@ import { useChat } from '@/app/context/ChatContext';
 import { Loader2Icon } from 'lucide-react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import io from 'socket.io-client'
-import { ChatListType } from '@/types';
+import { ChatListType, ChatResponseType, ReceiverChatResponseType } from '@/types';
 
 interface SelectedChatProps {
     loading_2:boolean; 
@@ -40,8 +40,6 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                 )
             })
 
-            console.log('new list ... ', new_list,)
-
             setFiltered_chat_list(new_list)            
         }
 
@@ -67,7 +65,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
         const user_id = user_information?.role === 'patient' ? user_information?.patient_id : user_information?.physician_id;
 
         if (user_id) {
-            socket.on(user_id, (data: any) => {
+            socket.on(user_id, (data: ReceiverChatResponseType) => {
                 if (data.statusCode === 200) {
                     const res: ChatListType = data.chat.data;
                     const new_data = {
@@ -125,7 +123,8 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
             idempotency_key: 'fd6e5c9d-8729-4d7e-b847-17d4f5f491jd',
         };
 
-        socket.emit('send-chat-text', text_data, (response: any) => {
+        socket.emit('send-chat-text', text_data, (response: ChatResponseType) => {
+            
             if (response.statusCode === 200) {
                 setMessage('');
                 const res: ChatListType = response.chat.data;
