@@ -88,9 +88,9 @@ const DoctorsList = () => {
 
                 setTimeout(() => {
                     
-                    router.refresh();
+                    fetch_doctors_from_server(page_number, items_per_page)
 
-                }, 2000);
+                }, 3000);
 
             } else {
 

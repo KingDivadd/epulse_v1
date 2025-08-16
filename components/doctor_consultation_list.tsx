@@ -40,6 +40,7 @@ const DoctorConsultationList = () => {
         if (selected_date && selected_time) {
             const date_time = `${selected_date} ${selected_time}`
             const unix_date_time = convert_to_unix(date_time)
+            console.log('unix date time ..... ',unix_date_time)
             setNew_appointment({...new_appointment, time:unix_date_time})
         }
     
@@ -80,6 +81,8 @@ const DoctorConsultationList = () => {
         try {
 
             const res = await get_auth_request(`auth/verify-physician-id/${id}`) as AxiosResponseHeaders;
+
+            console.log(res)
 
             if (res.status == 200 || res.status == 201) {
                 

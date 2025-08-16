@@ -7,7 +7,7 @@ const AppointmentBooking = () => {
     
 
     return (
-        <div className="py-5 h-[calc(100vh-70px)] w-full bg-gray-50 font-mont min-h-[70vh]">
+        <div className="py-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont ">
             <div className="w-full h-full overflow-y-auto hide-scrollbar sm:w-[100%] md:w-[75%] lg:w-[50%] rounded-lg flex flex-col gap-5">
                 <h3 className="font-mont font-semibold text-[15.5px] text-gray-700 px-5">Consultation with Doctors</h3>
 

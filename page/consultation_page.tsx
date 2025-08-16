@@ -15,7 +15,8 @@ const ConsultationPage = () => {
     const {user_information, selected_appointment_info, appointment_info, setAppointment_info, setChat_list, chat_list} = useChat()
     const [loading, setLoading] = useState(true)
     const [loading_2, setLoading_2] = useState(true)
-    const [physician_img, setPhysician_img] = useState('')
+    const [receiver_img, setReceiver_img] = useState('')
+    const [show_list, setShow_list] = useState(true)
 
 
     useEffect(() => {
@@ -107,11 +108,11 @@ const ConsultationPage = () => {
     return (
         <div className='p-5 min-h-[calc(100vh-70px)] w-full grid grid-cols-7 gap-5 bg-gray-50 font-mont '>
             <div className="col-span-7 lg:col-span-3 h-full overflow-y-auto relative rounded-md  hide-scrollbar  ">
-                <ChatList loading={loading} setLoading={setLoading} loading_2={loading_2} setLoading_2={setLoading_2} physician_img={physician_img} setPhysician_img={setPhysician_img}  />
+                <ChatList loading={loading} setLoading={setLoading} loading_2={loading_2} setLoading_2={setLoading_2} receiver_img={receiver_img} setReceiver_img={setReceiver_img} show_list={show_list} setShow_list={setShow_list} />
             </div>
 
             <div className="hidden lg:block lg:col-span-4 h-full">
-                <SelectedChat loading_2={loading_2} physician_img={physician_img} setPhysician_img={setPhysician_img} setLoading_2={setLoading_2} />
+                <SelectedChat loading_2={loading_2} receiver_img={receiver_img} setReceiver_img={setReceiver_img} setLoading_2={setLoading_2} show_list={show_list} setShow_list={setShow_list} />
             </div>
         </div>
     )
