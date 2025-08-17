@@ -48,7 +48,6 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                 )
             })
 
-            console.log(new_list.length)
 
             setFiltered_chat_list(new_list)            
         }
