@@ -185,11 +185,11 @@ const DoctorConsultationList = () => {
 
     return (
         <div className="w-full">
-            <Link href={`/doctors`} className="px-5 text-[13px] text-[#306ce9] flex items-center justify-start font-medium gap-1" >
+            <Link href={`/doctors`} className="px-3 sm:px-5 text-[13px] text-[#306ce9] flex items-center justify-start font-medium gap-1" >
                 <IoArrowBackOutline size="18px" /> Back
             </Link>
 
-                <div className="w-full flex flex-col gap-3 mt-5 px-5">
+                <div className="w-full flex flex-col gap-3 mt-5 px-3 sm:px-5">
                     <h3 className="font-medium text-[14px] text-start">Select the date and time you would like to have your appointment.</h3>
                     <h3 className="text-[13px] text-start">Please note that appointments can only be selected at 30-minute intervals.</h3>
 

@@ -5,9 +5,10 @@ import MobileSidebar from '@/components/mobile_sidebar';
 import { useChat } from '@/app/context/ChatContext';
 import { useRouter } from 'next/navigation';
 import axios, { AxiosResponseHeaders } from 'axios';
-import { get_auth_request } from '@/app/api';
+import { get_auth_request, post_auth_request } from '@/app/api';
 import { toast_msg } from '@/lib/toast';
 import {  Loader2Icon } from 'lucide-react';
+import {urlBase64ToUint8Array} from '@/lib/url_to_unit8_array'
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
@@ -62,6 +63,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             const res = await get_auth_request('auth/user-information') as AxiosResponseHeaders
 
             if (res.status === 200 || res.status === 201) {
+
+                handle_subscribe_user()
                 
                 const user_role = res.data.user.patient_id ? 'patient' : 'physician'
 
@@ -78,8 +81,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 }
 
                 setLoading(false)
-
-                
 
                 count = 0
 
@@ -111,6 +112,43 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             console.log(err);
         }
     }
+
+    async function handle_subscribe_user(){
+        try {
+            const sub = await subscribeUser()
+            console.log('sub .... ',sub)
+            const res = await post_auth_request(`auth/save-subscription`, { subscription: sub }) as AxiosResponseHeaders
+
+            if (res.status == 200 || res.status == 201){
+                console.log('sub added. ')
+            }else{
+                console.log(res)
+            }
+            
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const subscribeUser = async() => {
+        try {
+            const permission = await Notification.requestPermission();
+            if (permission !== 'granted') {
+                throw new Error('Permission not granted for Notification');
+            }
+
+            const registration = await navigator.serviceWorker.register('/worker.js');
+
+            const new_subscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array('BAQTDYROjWk02zDRmK9d83aaS_GNOn_4BvbwPT4VQxIb9FEwbTgwHqQpXQQ55IwrsuSMVi8k63a4t6XGsNcY3oc')
+            });
+
+            return JSON.stringify(new_subscription)
+        } catch (error) {
+            console.error('Error during subscription:', error);
+        }
+    };
 
     // Handler to close mobile sidebar when clicking outside
     const handleOutsideClick = (e: React.MouseEvent) => {

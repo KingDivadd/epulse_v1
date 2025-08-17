@@ -23,8 +23,6 @@ const MobileSidebar = () => {
 
         const verified_stored_root = stored_route && routes.includes(stored_route)
 
-        console.log('path ... ',path)
-
         if (route) {
             setCurrent_route( route)
             stored_route !== route && localStorage.setItem('route', route)
@@ -52,7 +50,7 @@ const MobileSidebar = () => {
 
             </span>
 
-            <article className="w-full flex flex-col pr-2 xl:pr-5 relative">
+            <article className="w-full flex flex-col pr-5 relative">
                 {
                     route_list.map((route, ind:number)=>{
 
@@ -64,11 +62,10 @@ const MobileSidebar = () => {
                             show_route = role.includes(user_information.role) ? '':'hidden'
                         }
 
-
                         return(
 
                             <div key={ind} className={`w-full ${show_route}`}>
-                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.path ? "current-nav-item bg-blue-100  ": "nav-item "}`} 
+                                <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.id ? "current-nav-item ": "nav-item "}`} 
                                 onClick={()=>  {
                                         if(route.id == 'logout'){
                                             localStorage.clear()
@@ -76,8 +73,9 @@ const MobileSidebar = () => {
                                         }
                                         setCurrent_route(route.path);
                                         setRoute(route.id);
-                                        setClicked(!clicked)
-                                        localStorage.setItem('route',route.id)
+                                        setClicked(!clicked);
+                                        localStorage.setItem('route',route.id);
+                                        setShow_mobile_sidebar(!show_mobile_sidebar)
 
                                     }
                                     }>
