@@ -65,11 +65,11 @@ const AdminDashboardPage = () => {
 
 
     return (
-        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5">
+        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-3 sm:p-5 hide-scrollbar flex flex-col gap-3 sm:gap-5">
             <AdminWalletFundCont appointment_taken={appointment_taken} pending_appointment={pending_appointment} />
 
 
-            <div className="w-full bg-white flex flex-col gap-3.5 p-4 pb-2 rounded-md shadow-md">
+            <div className="w-full bg-white flex flex-col gap-3.5 p-3 sm:p-4 pb-2 rounded-md shadow-md">
                 <p className="text-[14.5px] sm:text-[15.5px] font-medium font-mont">Appointment Schedule</p>
 
                 <AdminAppointmentSchedule fund_search={fund_search} setFund_search={setFund_search} appointment_info={appointment_info}  setAppointment_info={setAppointment_info} loading={loading} setLoading={setLoading} page_number={appointemnt_page_number} setPage_number={setAppointemnt_page_number} />

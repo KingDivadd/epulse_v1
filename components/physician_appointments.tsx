@@ -284,14 +284,14 @@ const PhysicianAppointments = () => {
     }
 
     return (
-        <div className="flex flex-col gap-3 font-mont">
+        <div className="flex flex-col gap-1.5 sm:gap-3 font-mont">
 
-            <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-5">
+            <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-3 sm:px-5">
                 <PageHeader text={'Appointments'} />
 
                 <DropdownMenu>
                     <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
-                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
                             <span className="h-full flex items-center gap-0.5">
                                 <HiFilter className=' size-4 ' />
                                 <p className="text-[13px] ">Filter</p>
@@ -354,7 +354,7 @@ const PhysicianAppointments = () => {
             </span>
         {/* here will be the metric */}
 
-            <div className=" w-full temp-220 gap-3 md:gap-4 px-5">
+            <div className=" w-full temp-220 gap-2.5 md:gap-4 px-3 sm:px-5">
 
                 <div className="w-full min-h-[80px] px-4 py-3 rounded-sm shadow-md flex items-center justify-start gap-5 bg-white border border-gray-100">
                     <span className="sm:w-[55px] sm:h-[55px] w-[45px] h-[45px] flex-items-center justify-center">
@@ -413,10 +413,10 @@ const PhysicianAppointments = () => {
 
             <div className="w-full h-full">
 
-                <span className="w-full flex flex-col items-start gap-5 sm:gap-3 px-5 ">
+                <span className="w-full flex flex-col items-start gap-5 sm:gap-3 px-3 sm:px-5 ">
 
                     {/* <div className="w-full min-h-[50px] flex flex-col border border-gray-200 shadow-md duration-300 rounded-[4px] mx-1 bg-white  ">
-                        <span className="h-[45px] flex items-center justify-start gap-1 w-full px-5 cursor-pointer"
+                        <span className="h-[45px] flex items-center justify-start gap-1 w-full px-3 sm:px-5 cursor-pointer"
                         onClick={()=> setShow_filter(!show_filter)}>
                             <HiFilter className='text-gray-700 size-[20px]' />
                             <p className="text-[15.5px] font-medium">Filter</p>
@@ -474,12 +474,12 @@ const PhysicianAppointments = () => {
                             <p className="text-[13px]  font-mont">Filter By Status</p>
 
                             <select name="filter_appointment" id="filter_appointment" className='w-full h-[45px] border sm:border-gray-400 border-gray-300 rounded-[4px] font-mont text-[13px] px-2 ' onChange={(e)=> setFilter_appointment(e.target.value)}>
-                                <option value="" className='text-[13px] px-5 font-mont ' >All Appointments</option>
-                                <option value="Today's Appointments" className='text-[13px] px-5 font-mont ' >{"Today's Appointments"}</option>
-                                <option value="pending" className='text-[13px] px-5 font-mont ' >Pending Appointments</option>
-                                <option value="accepted" className='text-[13px] px-5 font-mont ' >Accepted Appointments</option>
-                                <option value="completed" className='text-[13px] px-5 font-mont ' >Completed Appointments</option>
-                                <option value="cancelled" className='text-[13px] px-5 font-mont ' >Missed Appointments</option>
+                                <option value="" className='text-[13px] px-3 sm:px-5 font-mont ' >All Appointments</option>
+                                <option value="Today's Appointments" className='text-[13px] px-3 sm:px-5 font-mont ' >{"Today's Appointments"}</option>
+                                <option value="pending" className='text-[13px] px-3 sm:px-5 font-mont ' >Pending Appointments</option>
+                                <option value="accepted" className='text-[13px] px-3 sm:px-5 font-mont ' >Accepted Appointments</option>
+                                <option value="completed" className='text-[13px] px-3 sm:px-5 font-mont ' >Completed Appointments</option>
+                                <option value="cancelled" className='text-[13px] px-3 sm:px-5 font-mont ' >Missed Appointments</option>
                             </select>
                         </div>
                         </div>}
@@ -503,7 +503,7 @@ const PhysicianAppointments = () => {
                                 </div>
                             :
 
-                                <div className="w-full temp-240 justify-start items-start min-h-[calc(100vh-305px)]  gap-4 my-3 px-5 relative">
+                                <div className="w-full temp-240 justify-start items-start min-h-[calc(100vh-305px)]  gap-3 sm:gap-4 my-3 px-3 sm:px-5 relative">
                                     {loading && 
                                     <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                         <Loader2Icon className='size-8 animate-spin text-gray-500' />
@@ -568,12 +568,12 @@ const PhysicianAppointments = () => {
                                                 </DialogTrigger>
 
                                                 <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
-                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
+                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-5'>
                                                         <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
                                                         <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a ${appointment_type.replace(/_/, ' ')} appointment with you scheduled for ${date.date}, ${date.time}`}</DialogDescription>
                                                     </DialogHeader>
 
-                                                    <div className='px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto'>
+                                                    <div className='px-3 sm:px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto'>
                                                         <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
                                                             <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
                                                             
@@ -631,8 +631,8 @@ const PhysicianAppointments = () => {
                                                         </div>
                                                     </div>
                                                     
-                                                    <DialogFooter className='px-5  gap-2  border-t border-gray-200 pt-5' >
-                                                        <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm">Cancel</DialogClose>
+                                                    <DialogFooter className='px-3 sm:px-5  gap-2  border-t border-gray-200 pt-5' >
+                                                        <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm">Cancel</DialogClose>
 
                                                         {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >
                                                             {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
@@ -650,7 +650,7 @@ const PhysicianAppointments = () => {
                 </div>
 
                 {/* Pagination */}
-                <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
+                <div className="w-full flex items-center justify-between px-3 sm:px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
                             <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>

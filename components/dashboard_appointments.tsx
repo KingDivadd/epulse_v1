@@ -101,7 +101,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
     }
 
     return (
-        <div className="w-full  bg-white rounded-md shadow-md p-5 pb-2 flex flex-col gap-5 font-mont overflow-hidden">
+        <div className="w-full  bg-white rounded-md shadow-md p-3 sm:p-5 pb-2 flex flex-col gap-5 font-mont overflow-hidden">
             <p className="text-[14.5px] sm:text-[15.5px] font-medium">Recent Appointments</p>
 
             <div className="  w-full overflow-x-auto">
@@ -134,7 +134,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                                 {
                                     appointment_info.appointments.length == 0 ?
 
-                                    <div className=" w-[calc(100%-39px)] mx-auto  flex h-[440px] rounded-lg bg-white p-5 items-center justify-center relative">
+                                    <div className=" w-[calc(100%-39px)] mx-auto  flex h-[350px] rounded-lg bg-white p-5 items-center justify-center relative">
                                         <p className="text-[13px] text-gray-600 text-center py-2">{!loading && "No appointment created yet!"}</p>
 
                                         {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
@@ -142,7 +142,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                                         </div>}
                                     </div>
                                     :
-                                    <div className="w-full flex flex-col relative">
+                                    <div className="w-full flex flex-col relative min-h-[350px]">
                                         {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
                                             <Loader2Icon className="h-10 w-10 animate-spin text-slate-400 z-10" />
                                         </div>}

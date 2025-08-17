@@ -6,7 +6,7 @@ const PhysicianAppointmentPage = () => {
     
 
     return (
-        <div className='py-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont ' >
+        <div className=' py-3 sm:py-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont ' >
             <div className="w-full h-full overflow-y-auto relative rounded-md  hide-scrollbar ">
                 <PhysicianAppointments />
             </div>

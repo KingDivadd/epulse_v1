@@ -280,15 +280,14 @@ const PatientAppointments = () => {
     }
 
     return (
-        <div className="flex flex-col gap-3 font-mont">
+        <div className="flex flex-col gap-2 sm:gap-3 font-mont">
 
-            <span className="w-full flex max-sm:flex-col justify-between items-start sm:items-center gap-2 px-5 relative">
+            <span className="w-full flex max-sm:flex-col justify-between items-start sm:items-center gap-1 sm:gap-2 px-3 sm:px-5 relative">
                 <PageHeader text={'Appointments'} />
-
 
                 <DropdownMenu>
                     <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
-                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
                             <span className="h-full flex items-center gap-0.5">
                                 <HiFilter className=' size-4 ' />
                                 <p className="text-[13px] ">Filter</p>
@@ -350,64 +349,6 @@ const PatientAppointments = () => {
                 </DropdownMenu>
                 
             </span>
-        {/* here will be the metric */}
-
-            {/* <div className=" w-full temp-220 gap-3 md:gap-4 px-5">
-
-                <div className="w-full min-h-[80px] px-4 py-3 rounded-sm shadow-md flex items-center justify-start gap-5 bg-white border border-gray-100">
-                    <span className="sm:w-[55px] sm:h-[55px] w-[45px] h-[45px] flex-items-center justify-center">
-                        <span className={`w-full h-full rounded-full bg-[#306ce9]/10 text-[#306ce9] flex items-center justify-center`}>
-                            <AiOutlineCalendar  className='size-[25px] sm:size-[30px] '  />
-                        </span>
-                    </span>
-
-                    <div className="flex-1 flex-col items-start justify-center gap-1">
-                        <p className="text-[13.5px] ">All Appointment </p>
-                        <p className=" text-[15.5px] font-medium">{appointment_info.total_number_of_appointments ?? 0} </p>
-                    </div>
-                </div>
-
-                <div className="w-full min-h-[80px] px-4 py-3 rounded-md shadow-md flex items-center justify-start gap-5 bg-white border border-gray-100">
-                    <span className="sm:w-[55px] sm:h-[55px] w-[45px] h-[45px] flex-items-center justify-center">
-                        <span className={`w-full h-full rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center`}>
-                            <AiOutlineClockCircle  className='size-[25px] sm:size-[30px] '  />
-                        </span>
-                    </span>
-
-                    <div className="flex-1 flex-col items-start justify-center gap-1">
-                        <p className="text-[13.5px] ">Pending </p>
-                        <p className=" text-[15.5px] font-medium">{appointment_info.pending_appointment ?? 0} </p>
-                    </div>
-                </div>
-
-                <div className="w-full min-h-[80px] px-4 py-3 rounded-md shadow-md flex items-center justify-start gap-5 bg-white border border-gray-100">
-                    <span className="sm:w-[55px] sm:h-[55px] w-[45px] h-[45px] flex-items-center justify-center">
-                        <span className={`w-full h-full rounded-full bg-green-500/10 text-green-500 flex items-center justify-center`}>
-                            <MdCheckCircleOutline  className='size-[25px] sm:size-[30px] '  />
-                        </span>
-                    </span>
-
-                    <div className="flex-1 flex-col items-start justify-center gap-1">
-                        <p className="text-[13.5px] ">Accepted </p>
-                        <p className=" text-[15.5px] font-medium">{appointment_info.accepted_appointment ?? 0} </p>
-                    </div>
-                </div>
-
-                <div className="w-full min-h-[80px] px-4 py-3 rounded-md shadow-md flex items-center justify-start gap-5 bg-white border border-gray-100">
-                    <span className="sm:w-[55px] sm:h-[55px] w-[45px] h-[45px] flex-items-center justify-center">
-                        <span className={`w-full h-full rounded-full bg-[#306ce9]/10 text-[#306ce9] flex items-center justify-center`}>
-                            <FaCheckCircle  className='size-[25px] sm:size-[30px] '  />
-                        </span>
-                    </span>
-
-                    <div className="flex-1 flex-col items-start justify-center gap-1">
-                        <p className="text-[13.5px] ">Completed </p>
-                        <p className=" text-[15.5px] font-medium">{appointment_info.completed_appointment ?? 0} </p>
-                    </div>
-                </div>
-
-
-            </div> */}
 
             <div className="w-full h-full">
 
@@ -426,7 +367,7 @@ const PatientAppointments = () => {
                             </div>
                         :
 
-                            <div className="w-full temp-240 min-h-[calc(100vh-220px)] gap-5  my-3 px-5 relative">
+                            <div className="w-full temp-240 min-h-[calc(100vh-220px)] gap-3 sm:gap-5  my-3 px-3 sm:px-5 relative">
                                 {loading && 
                                 <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                     <Loader2Icon className='size-8 animate-spin text-gray-600' />
@@ -498,12 +439,12 @@ const PatientAppointments = () => {
                                             </DialogTrigger>
 
                                             <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
-                                                <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
+                                                <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-5'>
                                                     <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
                                                     <DialogDescription className='text-[13px]'>{`You've booked an appointment with Dr ${physician.first_name} ${physician.last_name} scheduled for ${date.date}, ${date.time}`}</DialogDescription>
                                                 </DialogHeader>
 
-                                                <div className='px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
+                                                <div className='px-3 sm:px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
                                                     <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
                                                         <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
                                                         
@@ -555,8 +496,8 @@ const PatientAppointments = () => {
                                                     </div>
                                                 </div>
                                                 
-                                                <DialogFooter className='px-5  gap-2  border-t border-gray-200 pt-5' >
-                                                    <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm ">Cancel</DialogClose>
+                                                <DialogFooter className='px-3 sm:px-5  gap-2  border-t border-gray-200 pt-5' >
+                                                    <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm ">Cancel</DialogClose>
 
                                                     {user_information?.role == 'physician' && <>
 
@@ -577,7 +518,7 @@ const PatientAppointments = () => {
                 </div>
 
                 {/* Pagination */}
-                <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
+                <div className="w-full flex items-center justify-between px-3 sm:px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
                             <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>

@@ -142,7 +142,7 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                                 {
                                     appointment_info.appointments.length == 0 ?
 
-                                    <div className=" w-[calc(100%-39px)] mx-auto  flex h-[440px] rounded-lg bg-white p-5 items-center justify-center relative">
+                                    <div className=" w-[calc(100%-39px)] mx-auto  flex h-[350px] rounded-lg bg-white p-5 items-center justify-center relative">
                                         <p className="text-[13px] text-gray-600 text-center py-2">{!loading && "No appointment created yet!"}</p>
 
                                         {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
@@ -150,7 +150,7 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                                         </div>}
                                     </div>
                                     :
-                                    <div className="w-full flex flex-col relative">
+                                    <div className="w-full min-h-[350px] flex flex-col relative">
                                         {loading && <div className="absolute top-0 left-0 h-full w-full flex items-center justify-center ">
                                             <Loader2Icon className="h-10 w-10 animate-spin text-slate-400 z-10" />
                                         </div>}

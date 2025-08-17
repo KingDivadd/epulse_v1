@@ -22,7 +22,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="px-5 lg:px-8 xl:px-10 w-full grid grid-cols-12 h-[60px] sm:h-[70px] gap-2 bg-white ">
+        <nav className="px-3 sm:px-5 lg:px-8 xl:px-10 w-full grid grid-cols-12 h-[60px] sm:h-[70px] gap-2 bg-white ">
             <div className="col-span-9 md:col-span-10 lg:col-span-8 h-full flex items-center justify-start gap-3 font-mont ">
 
                 <span className=" sm:hidden h-full flex items-center jusify-center rotate-180 " 

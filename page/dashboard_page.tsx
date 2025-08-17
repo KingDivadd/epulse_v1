@@ -78,12 +78,12 @@ const DashboardPage = () => {
     }
 
     return (
-        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-5 hide-scrollbar flex flex-col gap-5">
+        <div className="w-full min-h-[calc(100vh-70px)] bg-gray-50 p-3 sm:p-5 hide-scrollbar flex flex-col gap-3 sm:gap-5">
             <PatientWalletFundCont trigger_refresh={trigger_refresh} setTrigger_refresh={setTrigger_refresh} />
 
             <DashboardAppointment appointment_info={appointment_info}  setAppointment_info={setAppointment_info} loading={loading} setLoading={setLoading} page_number={appointemnt_page_number} setPage_number={setAppointemnt_page_number} />
 
-            <div className="w-full bg-white flex flex-col gap-5 p-4 pb-2 rounded-md shadow-md">
+            <div className="w-full bg-white flex flex-col gap-5 p-3 sm:p-5 pb-2 rounded-md shadow-md">
                 <p className="text-[15.5px] font-medium font-mont">Transactions</p>
 
                 <WalletFundHistoryTable fund_search={fund_search} setFund_search={setFund_search} loading={loading} setLoading={setLoading} />
