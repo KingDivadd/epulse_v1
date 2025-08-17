@@ -28,7 +28,7 @@ const Navbar = () => {
                 <span className=" sm:hidden h-full flex items-center jusify-center rotate-180 " 
                     onClick={()=> setShow_mobile_sidebar(!show_mobile_sidebar)}>
 
-                    <CgMenu  className='size-[27.5px] text-gray-700 ' />
+                    <CgMenu  className='size-[24.5px] text-gray-700 ' />
                     
                 </span>
                 
@@ -64,7 +64,7 @@ const Navbar = () => {
                 
 
                 <div className="flex items-center justify-start gap-3">
-                    <Link href={'/profile'} className="relative h-[40px] w-[40px] overflow-hidden rounded-full ring-2 ring-blue-400">
+                    <Link href={'/profile'} className="relative h-[30px] sm:h-[40px] w-[30px] sm:w-[40px] overflow-hidden rounded-full ring-2 ring-blue-400">
                         <Image src={user_information && user_information.avatar || '/default-male.png'} alt='profiile-img' layout='fill' objectFit='cover' />
                     </Link>
                     <div className="hidden lg:flex flex-col items-start justify-center font-mont gap-0.5">

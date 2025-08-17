@@ -48,11 +48,10 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                 )
             })
 
-
             setFiltered_chat_list(new_list)            
         }
 
-    }, [filter_msg, loading_2])
+    }, [filter_msg, loading_2 ])
 
     useEffect(() => {
 
@@ -66,7 +65,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
         if (!receiver_img) {
             setReceiver_img(sessionStorage.getItem('p-i') || '/default-male.png')
         }
-    }, [loading_2])
+    }, [])
 
     // working with sockets...
     useEffect(() => {
@@ -152,11 +151,11 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
     }
 
     return (
-        <div className="w-full h-full bg-white rounded-sm p-4 flex flex-col items-start justify-between gap-2 shadow-md">
+        <div className="w-full h-full bg-white rounded-sm py-4 flex flex-col items-start justify-between shadow-md max-sm:gap-2">
             {selected_user && 
-            <div className=" w-full flex items-center justify-between max-md:justify-end border-b border-[#f2f2f2] pb-3">
-                <span className="max-md:hidden h-[40px] flex items-center justify-start gap-2">
-                    <span className="h-[40px] w-[40px] rounded-full relative overflow-hidden">
+            <div className="px-3 sm:px-4 w-full flex items-center justify-between border-b border-[#f2f2f2] pb-3 ">
+                <span className=" h-[40px] flex items-center justify-start gap-2">
+                    <span className="h-[40px] w-[40px] rounded-sm relative overflow-hidden">
                         <Image src={selected_user.avatar || 'default-male.png'} alt="" fill className="object-cover" />
                     </span>
                     <span className="flex flex-col items-start justify-center">
@@ -167,13 +166,13 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
                 <span className="flex items-center justify-end gap-3 lg:gap-1">
                     
-                    <button className="lg:hidden bg-gray-100 hover:bg-gray-100/50 duration-200 h-[40px] md:px-5 rounded-full text-[12px] py-2.5 " onClick={()=> setShow_list(!show_list)}>cancel</button>
+                    <button className="lg:hidden bg-gray-100 hover:bg-gray-100/50 duration-200  px-5 rounded-full text-[12px] py-2 " onClick={()=> setShow_list(!show_list)}>cancel</button>
                     
                     
                 </span>
             </div>}
 
-            <div className={`w-full ${selected_user ? 'h-[calc(100vh-265px)]':'h-[calc(100vh-200px)]'} bg-white flex flex-col py-3.5 rounded-sm justify-between ` }>
+            <div className={`w-full ${selected_user ? 'h-[calc(100vh-265px)]':'h-[calc(100vh-200px)]'} bg-white  flex flex-col   justify-between ` }>
             
                 { filtered_chat_list.length == 0 ?
 
@@ -186,9 +185,9 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                         </div> }
                     </div>
                     :
-                    <ScrollToBottom className="w-full h-full " >
+                    <ScrollToBottom className="w-full h-full  " >
 
-                        <div className="w-full h-full flex flex-col gap-2 relative ">
+                        <div className="w-full h-full flex flex-col gap-1.5 relative px-4">
                             {loading_2 && 
                                 <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                     <Loader2Icon className='size-8 animate-spin text-[#306ce9]' />
@@ -202,9 +201,9 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                                     const sender = is_patient ? 'patient' : 'physician'
 
                                     const sender_dir = (user_role == sender) ? 'justify-end':'justify-start'
-                                    const sender_box_color = (user_role == sender) ? 'bg-[#306ce9] text-white':'bg-[#306ce9]/70 text-white'
+                                    const sender_box_color = (user_role == sender) ? 'bg-[#306ce9] text-white rounded-tl-sm ':'rounded-tr-sm bg-[#306ce9]/70 text-white'
                                     const prevSender = ind > 0 ? filtered_chat_list[ind - 1].is_patient : null;
-                                    const additionalSpacing = ind > 0 && is_patient !== prevSender ? 'mt-4' : 'mt-2';
+                                    const additionalSpacing = ind > 0 && is_patient !== prevSender ? 'mt-1' : '';
                                     const unix_date_time = Math.floor(new Date(updatedAt).getTime() / 1000)
                                     const date_time = format_date_from_unix(Number(unix_date_time))
 
@@ -233,25 +232,28 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
             </div>
 
-            <form onSubmit={handle_submit} className="w-full h-[50px] flex items-center justify-start bg-[#f2f2f2] rounded-sm">
-                {/* <span className="w-16 flex items-center justify-center">
-                    <RiAttachment2 size="22px" className="text-gray-600" />
-                </span> */}
+            <div className="w-full bg-white px-3 sm:px-4">
 
-                <input
-                    onChange={(e) => setMessage(e.target.value)}
-                    type="text"
-                    name="message"
-                    id=""
-                    className="input-type-4 h-full flex-1"
-                    placeholder="Write your message..."
-                    value={message}
-                />
+                <form onSubmit={handle_submit} className=" w-full h-[50px] flex items-center justify-start bg-[#f2f2f2] rounded-sm">
+                    {/* <span className="w-16 flex items-center justify-center">
+                        <RiAttachment2 size="22px" className="text-gray-600" />
+                    </span> */}
 
-                {<button type='submit' onClick={handle_submit} className="h-full w-15 flex items-center justify-center">
-                    <IoSend size={'18px'} className={`cursor-pointer duration-300 ${message ? "text-[#306ce9]": "text-gray-600"} `}/>
-                </button>}
-            </form>
+                    <input
+                        onChange={(e) => setMessage(e.target.value)}
+                        type="text"
+                        name="message"
+                        id=""
+                        className="input-type-4 h-full flex-1"
+                        placeholder="Write your message..."
+                        value={message}
+                    />
+
+                    {<button type='submit' onClick={handle_submit} className="h-full w-15 flex items-center justify-center">
+                        <IoSend size={'18px'} className={`cursor-pointer duration-300 ${message ? "text-[#306ce9]": "text-gray-600"} `}/>
+                    </button>}
+                </form>
+            </div>
         </div>
     );
 };

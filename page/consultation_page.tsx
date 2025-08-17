@@ -106,7 +106,7 @@ const ConsultationPage = () => {
     }
     
     return (
-        <div className='p-5 min-h-[calc(100vh-70px)] w-full grid grid-cols-7 gap-5 bg-gray-50 font-mont '>
+        <div className='p-3 sm:p-5 min-h-[calc(100vh-70px)] w-full grid grid-cols-7 gap-5 bg-gray-50 font-mont '>
             <div className="col-span-7 lg:col-span-3 h-full overflow-y-auto relative rounded-md  hide-scrollbar  ">
                 <ChatList loading={loading} setLoading={setLoading} loading_2={loading_2} setLoading_2={setLoading_2} receiver_img={receiver_img} setReceiver_img={setReceiver_img} show_list={show_list} setShow_list={setShow_list} />
             </div>

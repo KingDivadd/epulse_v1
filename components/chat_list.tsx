@@ -149,14 +149,14 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                             const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
 
-                                            const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border-[#306ce9]  ' : 'bg-white hover:bg-[#306ce9] border-gray-100  duration-200 hover:text-white '
+                                            const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-gray-400  duration-200 hover:text-white '
 
                                             const selected_chat_text = selected == ind ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
                                             const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
                                             return(
-                                                <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat}   rounded-sm shadow-sm border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
+                                                <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat}   rounded-sm  border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
                                                     <div className=" h-full flex items-start">
                                                         <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                                             <Image src={display_img} alt='' fill objectFit='cover'  />
@@ -231,14 +231,14 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
 
-                                                    const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border-[#306ce9]  ' : 'bg-white hover:bg-[#306ce9] border-gray-100  duration-200 hover:text-white '
+                                                    const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-gray-400  duration-200 hover:text-white '
 
                                                     const selected_chat_text = selected == ind ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
                                                     const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
                                                     return(
-                                                        <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat}   rounded-sm shadow-sm border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
+                                                        <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat} rounded-sm border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
                                                             <div className=" h-full flex items-start">
                                                                 <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                                                     <Image src={display_img} alt='' fill objectFit='cover'  />
