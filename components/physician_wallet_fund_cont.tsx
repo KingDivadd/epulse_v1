@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation'
 import { useChat } from '@/app/context/ChatContext'
 
 const AdminWalletFundCont = ({appointment_taken, pending_appointment}:{appointment_taken:number; pending_appointment:number}) => {
-    const {wallet_information} = useChat()
+    const {wallet_information, setRoute} = useChat()
     const [amount, setAmount] = useState(0)
     const [loading, setLoading] = useState(false)
     const router = useRouter()
@@ -94,7 +94,11 @@ const AdminWalletFundCont = ({appointment_taken, pending_appointment}:{appointme
                             <span className="text-3xl font-bold text-white font-mont">{Animated_counter({amount: wallet_information?.wallet_balance ?? 0})}</span>
                         </span>
 
-                        <span className="rounded-full bg-white text-[13px] py-2.5 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> router.push('/wallet')}>Withdraw</span>
+                        <span className="rounded-full bg-white text-[13px] py-2.5 px-7 cursor-pointer hover:bg-[#f2f2f2]" onClick={()=> {
+                        router.push('/wallet');
+                            setRoute('wallet')
+                            localStorage.setItem('route', 'wallet')
+                        } } >Withdraw</span>
                             
                     </div>
 

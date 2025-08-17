@@ -28,11 +28,13 @@ const Sidebar = () => {
             setCurrent_route( route)
             stored_route !== route && localStorage.setItem('route', route)
             
+        }else if (path && routes.includes(path)) {
+            setCurrent_route(path)
+            localStorage.setItem('route', path)
         }else if(verified_stored_root){
             setCurrent_route(stored_route)
             path !== stored_route && router.push(`/${stored_route}`)
-        }
-        else{
+        }else{
             setCurrent_route(path)
             setRoute(path)
             localStorage.setItem('route', path)
@@ -61,7 +63,7 @@ const Sidebar = () => {
                                 <Link href={route.path} className={`pl-5 xl:px-8   ${ current_route === route.id ? "current-nav-item ": "nav-item "}`} 
                                 onClick={()=>  {
                                         if(route.id == 'logout'){
-                                            // localStorage.clear()
+                                            localStorage.clear()
                                             return;
                                         }
                                         setCurrent_route(route.path);

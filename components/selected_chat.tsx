@@ -210,14 +210,14 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                                     return(
                                         <div key={ind} className={`w-full flex ${sender_dir} ${additionalSpacing} `} onClick={()=> console.log(msg)}>
                                             <div key={ind} className={`flex items-start gap-3 min-w-auto w-[80%]  lg:max-w-[75%] 2xl:max-w-[60%] `}>
-                                                {(user_role != sender) && <span className="h-[35px] w-[35px] rounded-full relative overflow-hidden">
+                                                {(user_role != sender) && <span className="hidden h-[35px] w-[35px] rounded-full relative overflow-hidden">
                                                     <Image src={receiver_img || '/default-male.png'} alt={''} fill className="object-cover" />
                                                 </span>}
                                                 <div className={`p-2 rounded-b-sm flex-1  ${sender_box_color}`}>
                                                     <p className="text-[12px]">{msg.text}</p>
                                                     <p className="text-[10px] w-full text-end mt-1">{date_time.time}</p>
                                                 </div>
-                                                {(user_role == sender) && <span className="h-[35px] w-[35px] rounded-full relative overflow-hidden">
+                                                {(user_role == sender) && <span className="hidden h-[35px] w-[35px] rounded-full relative overflow-hidden">
                                                     <Image src={user_information?.avatar || 'default-male.png' } alt={''} fill className="object-cover" />
                                                 </span>}
                                             </div>

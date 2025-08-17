@@ -9,13 +9,38 @@ import { RiMenuFold3Line } from "react-icons/ri";
 
 const MobileSidebar = () => {
     const [current_route, setCurrent_route] = useState('')
-    const {show_mobile_sidebar, setShow_mobile_sidebar,user_information} = useChat()
+    const {show_mobile_sidebar, setShow_mobile_sidebar,user_information, route, setRoute} = useChat()
     const router = useRouter()
+    const [clicked, setClicked] = useState(false)
 
     useEffect(() => {
-        const path = window.location.pathname
-        setCurrent_route(path)
-    }, [])
+        
+        const path = window.location.pathname.replace(/\//, '')
+
+        const routes = ['dashboard', 'appointments', 'doctors', 'consultation', 'wallet', 'profile']
+
+        const stored_route = localStorage.getItem('route')
+
+        const verified_stored_root = stored_route && routes.includes(stored_route)
+
+        console.log('path ... ',path)
+
+        if (route) {
+            setCurrent_route( route)
+            stored_route !== route && localStorage.setItem('route', route)
+            
+        }else if (path && routes.includes(path)) {
+            setCurrent_route(path)
+            localStorage.setItem('route', path)
+        }else if(verified_stored_root){
+            setCurrent_route(stored_route)
+            path !== stored_route && router.push(`/${stored_route}`)
+        }else{
+            setCurrent_route(path)
+            setRoute(path)
+            localStorage.setItem('route', path)
+        }
+    }, [route, clicked])
 
 
     return (
@@ -49,10 +74,13 @@ const MobileSidebar = () => {
                                             localStorage.clear()
                                             return;
                                         }
-                                        setCurrent_route(route.path)
-                                        setShow_mobile_sidebar(!show_mobile_sidebar)
+                                        setCurrent_route(route.path);
+                                        setRoute(route.id);
+                                        setClicked(!clicked)
+                                        localStorage.setItem('route',route.id)
 
-                                    }}>
+                                    }
+                                    }>
                                     <route.icon size={'18px'} className=' duration-200' />
                                     <h5 className={current_route === route.path ? " current-nav-item-text": " nav-item-text"}>{route.name}</h5>
                                 </Link>
