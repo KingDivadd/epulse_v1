@@ -158,7 +158,7 @@ const PhysicianProfileComponent = () => {
         <div className="w-full h-full">
 
             {user_information ?  
-                <div className="w-full h-full gap-5 font-mont grid grid-cols-1 lg:grid-cols-2 3xl:grid-cols-3 ">
+                <div className="w-full h-full gap-3 sm:gap-5 font-mont grid grid-cols-1 lg:grid-cols-2 3xl:grid-cols-3 ">
                     {/* the first column */}
                     <div className="col-span-1 flex flex-col justify-between gap-5 bg-white p-5 rounded-md shadow-md  ">
                         <span className="h-[300px] w-[300px] sm:h-[295px] sm:w-[295px] lg:w-[310px] lg:h-[310px] flex mx-auto justify-center relative group ring-5 ring-blue-200 rounded-full mt-3">

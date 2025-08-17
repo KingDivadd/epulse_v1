@@ -107,11 +107,11 @@ const PatientProfile = () => {
 
     return (
         
-        <div className=" p-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont overflow-y-auto ">
+        <div className="p-3 sm:p-5 min-h-[calc(100vh-70px)] w-full bg-gray-50 font-mont overflow-y-auto ">
             {user_information && <div className="h-full ">
                 
                 <form onSubmit={handle_submit} className="h-full max-lg:max-w-5xl xl:w-full mx-auto">
-                    <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    <div className="w-full h-full grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-5">
                     {/* Profile Image Section */}
                         <div className="col-span-1 flex flex-col gap-5 bg-white p-5 rounded-md shadow-md  justify-between  ">
                             <span className="h-[300px] w-[300px] sm:h-[295px] sm:w-[295px] lg:w-[310px] lg:h-[310px] flex mx-auto justify-center relative group ring-5 ring-blue-200 rounded-full mt-3">

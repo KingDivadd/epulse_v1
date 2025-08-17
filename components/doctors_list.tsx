@@ -188,12 +188,12 @@ const DoctorsList = () => {
 
     return (
         <div className="w-full flex flex-col gap-4  rounded-md">
-            <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-5">
+            <span className="w-full flex max-sm:flex-col gap-3  justify-between items-start sm:items-center px-3 sm:px-5">
                 <PageHeader text={'All Physicians'} />
 
                 <DropdownMenu>
                     <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
-                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
                             <span className="h-full flex items-center gap-0.5">
                                 <HiFilter className=' size-4 ' />
                                 <p className="text-[13px] ">Filter</p>
@@ -255,7 +255,7 @@ const DoctorsList = () => {
             </span>
             
 
-            <div className="w-full px-5 max-h-[90vh] sm:max-h-[800px] overflow-y-auto scrollbar-hidden py-2 max-sm:-mt-2 -mt-1 hide-scrollbar">
+            <div className="w-full px-3 sm:px-5 max-h-[90vh] sm:max-h-[800px] overflow-y-auto scrollbar-hidden py-2 max-sm:-mt-2 -mt-1 hide-scrollbar">
                 <>
                     
                     {
@@ -270,7 +270,7 @@ const DoctorsList = () => {
                         </div>
                         ) : (
                         <div className=" w-full flex flex-col gap-3 relative">
-                            <div className="w-full temp-230 gap-4 min-h-[calc(100vh-250px)] relative">
+                            <div className="w-full temp-230 gap-3 sm:gap-4 min-h-[calc(100vh-250px)] relative">
                                 {loading && 
                                 <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                     <Loader2Icon className='size-8 animate-spin text-gray-500' />
@@ -316,12 +316,12 @@ const DoctorsList = () => {
                                                 </DialogTrigger>
         
                                                 <DialogContent className='font-mont w-full md:w-[70vw] lg:w-[80vw] px-0 font-mont  max-md:h-[90vh] max-lg:h-[80vh] overflow-y-auto hide-scrollbar'>
-                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
+                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-5'>
                                                         <DialogTitle className='text-[15.5px]'>{"Doctor's Information"}</DialogTitle>
                                                         <DialogDescription className='text-[13px]'> {selected_user && selected_user.specialty} </DialogDescription>
                                                     </DialogHeader>
         
-                                                    <div className="w-full px-5 grid  lg:grid-cols-2 gap-5">
+                                                    <div className="w-full px-3 sm:px-5 grid  lg:grid-cols-2 gap-5">
                                                         <div className="col-span-1  min-h-[400px] relative ">
                                                             <span className="h-full w-full">
                                                                 <Image src={(selected_user && selected_user.avatar) || '/default-male.png'} alt='' fill objectFit='cover' className='rounded-md' />
@@ -391,7 +391,7 @@ const DoctorsList = () => {
             </div>
 
             {/* Pagination Controls */}
-                <div className="w-full flex items-center justify-between px-5 pt-3 border-t border-gray-200">
+                <div className="w-full flex items-center justify-between px-3 sm:px-5 pt-3 border-t border-gray-200">
                     <div className="flex items-center gap-2">
                         <span className="flex flex-row items-center justify-start gap-3 h-full">
                             <p className={`text-[13px] cursor-pointer ${page_number == 1 ? "text-gray-400 cursor-not-allowed":'text-gray-700 cursor-pointer'}`} onClick={() => app_projects_action('prev')}>Prev</p>

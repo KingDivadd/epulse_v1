@@ -9,7 +9,7 @@ const WalletFundHistory = ({loading, setLoading}:LoadingProps) => {
 
 
     return (
-        <div className="w-full flex flex-col gap-7 sm:gap-5  bg-white shadow-md p-4 rounded-md">
+        <div className="w-full flex flex-col gap-7 sm:gap-5  bg-white shadow-md p-3 sm:p-4 rounded-md">
 
             <div className="w-full flex flex-wrap gap-3 items-center justify-between">
                 <p className="text-[15.5px] font-medium font-mont">Transactions</p>

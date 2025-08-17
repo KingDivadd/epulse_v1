@@ -70,8 +70,8 @@ const WalletFundingPage = () => {
 
 
     return (
-        <div className='p-5 min-h-[calc(100vh-70px)] w-full  bg-gray-50 font-mont ' >
-            <div className="w-full h-full overflow-y-auto hide-scrollbar gap-5 flex flex-col ">
+        <div className='p-3 sm:p-5 min-h-[calc(100vh-70px)] w-full  bg-gray-50 font-mont ' >
+            <div className="w-full h-full overflow-y-auto hide-scrollbar gap-3 sm:gap-5 flex flex-col ">
                 <div className="w-full">  <WalletFundCont trigger_refresh={trigger_refresh} setTrigger_refresh={setTrigger_refresh} /></div>
                 <div className="w-full">  <WalletFundHistory loading={loading} setLoading={setLoading} /></div>
 
