@@ -253,7 +253,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                     :
                     <ScrollToBottom className="w-full h-full " >
 
-                        <div className="w-full h-full flex flex-col gap-1.5 relative px-4 overflow-hidden">
+                        <div className="w-full h-full flex flex-col gap-1.5 relative px-4 overflow-x-hidden">
                             {loading_2 && 
                                 <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                     <Loader2Icon className='size-8 animate-spin text-[#306ce9]' />
