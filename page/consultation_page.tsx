@@ -18,7 +18,7 @@ const ConsultationPage = () => {
     const [receiver_img, setReceiver_img] = useState('')
     const [show_list, setShow_list] = useState(true)
     const [typing, setTyping] = useState(false)
-    const [typing_receiver_id, setTyping_receiver_id] = useState(true)
+    const [typing_receiver_id, setTyping_receiver_id] = useState('')
     
 
 
