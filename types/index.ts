@@ -190,6 +190,7 @@ export type ChatListType = {
     physician_id: string;
     text: string;
     updatedAt: string;
+    token?: string;
 }
 
 type ChatType = {

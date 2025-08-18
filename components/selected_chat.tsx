@@ -30,13 +30,16 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
     const {user_information, show_selected_chat, chat_list, setChat_list, selected_user} = useChat()
     const [filtered_chat_list, setFiltered_chat_list] = useState<ChatListType[]>([])
     const [filter_msg, setFilter_msg] = useState('')
+    const [typing, setTyping] = useState(false)
 
-    const endpoint = process.env.NEXT_PUBLIC_LIVE
-    // const endpoint = process.env.NEXT_PUBLIC_BASE
+    // const endpoint = process.env.NEXT_PUBLIC_LIVE
+    const endpoint = process.env.NEXT_PUBLIC_BASE
 
     if (!endpoint) {
         console.log('please provide the socket endpoint')
     }
+
+    
 
     useEffect(() => {
 
@@ -101,6 +104,18 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                     console.log('Socket emit error:', data);
                 }
             });
+            
+            socket.on(`typing-${user_id}`, (data: {statusCode: number, message: string, is_typing:boolean}) => {
+                if (data.statusCode === 200) {
+                    // console.log('Typing event received:', data.message);
+                    setTyping(true);
+                    setTimeout(() => {
+                        setTyping(false)
+                    }, 3000); // Reset typing status after 3 seconds
+                } else {
+                    console.log('Error receiving typing event:', data.message);
+                }
+            })
 
             // Cleanup socket on component unmount
             return () => {
@@ -110,8 +125,9 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
         }
     }, [user_information, filter_msg, setChat_list]);
 
-    function handle_submit(e: React.FormEvent) {
-        e.preventDefault();
+    function handle_typing(e: React.ChangeEvent<HTMLInputElement>) {
+        setMessage(e.target.value);
+
         const socket = io(endpoint);
 
         const appointment_id = sessionStorage.getItem('a-pp');
@@ -119,22 +135,72 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
         const physician_id = user_information ? user_information.physician_id : '';
         const token = localStorage.getItem('x-id-key');
 
-        const text_data = {
-            appointment_id,
-            patient_id,
+        const text_data:ChatListType = {
+            appointment_id: appointment_id || '',
+            patient_id: patient_id || '',
             is_patient: user_information?.role === 'patient',
-            physician_id,
+            physician_id: physician_id || '',
             is_physician: user_information?.role === 'physician',
             text: message,
-            token,
+            token: token || '',
             media: [],
             idempotency_key: 'fd6e5c9d-8729-4d7e-b847-17d4f5f491jd',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            date: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
         };
+        const {createdAt, updatedAt, date, ...new_text_data} = text_data
 
-        socket.emit('send-chat-text', text_data, (response: ChatResponseType) => {
+        if (message.trim() !== '') {
+            // Emit typing event to the server
+            socket.emit('typing', new_text_data, (response: {statusCode: number, message: string}) => {
+                if (response.statusCode !== 200) {
+                    toast_msg({title: response.message, type: 'danger'});
+                    console.log('Error sending typing event:', response.message);
+                }else{
+                    // console.log('Typing event sent successfully:', response.message);
+                }
+            });
+        }
+        
+            
+
+    }
+
+    function handle_submit(e: React.FormEvent) {
+        e.preventDefault();
+        const socket = io(endpoint);
+
+        if(!message) return;
+
+        const appointment_id = sessionStorage.getItem('a-pp');
+        const patient_id = user_information ? user_information.patient_id : '';
+        const physician_id = user_information ? user_information.physician_id : '';
+        const token = localStorage.getItem('x-id-key');
+
+        const text_data:ChatListType = {
+            appointment_id: appointment_id || '',
+            patient_id: patient_id || '',
+            is_patient: user_information?.role === 'patient',
+            physician_id: physician_id || '',
+            is_physician: user_information?.role === 'physician',
+            text: message,
+            token: token || '',
+            media: [],
+            idempotency_key: 'fd6e5c9d-8729-4d7e-b847-17d4f5f491jd',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            date: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
+        };
+        const {createdAt, updatedAt, date, ...new_text_data} = text_data
+
+        setFiltered_chat_list((prev: ChatListType[]) => [...prev, text_data]);
+
+        setMessage('');
+        
+        socket.emit('send-chat-text', new_text_data, (response: ChatResponseType) => {
             
             if (response.statusCode === 200) {
-                setMessage('');
                 const res: ChatListType = response.chat.data;
 
                 // Update chat_list (source of truth)
@@ -142,9 +208,10 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
                 // Update filtered_chat_list only if the message matches the filter
                 if (res.text.toLowerCase().includes(filter_msg.toLowerCase())) {
-                    setFiltered_chat_list((prev: ChatListType[]) => [...prev, res]);
+                    // setFiltered_chat_list((prev: ChatListType[]) => [...prev, res]);
                 }
             } else {
+                toast_msg({title: response.message, type: 'danger'});
                 console.log('Error sending chat:', response.message);
             }
         });
@@ -168,7 +235,6 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                     
                     <button className="lg:hidden bg-gray-100 hover:bg-gray-100/50 duration-200  px-5 rounded-full text-[12px] py-2 " onClick={()=> setShow_list(!show_list)}>cancel</button>
                     
-                    
                 </span>
             </div>}
 
@@ -185,9 +251,9 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                         </div> }
                     </div>
                     :
-                    <ScrollToBottom className="w-full h-full  " >
+                    <ScrollToBottom className="w-full h-full " >
 
-                        <div className="w-full h-full flex flex-col gap-1.5 relative px-4">
+                        <div className="w-full h-full flex flex-col gap-1.5 relative px-4 overflow-hidden">
                             {loading_2 && 
                                 <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                     <Loader2Icon className='size-8 animate-spin text-[#306ce9]' />
@@ -225,7 +291,16 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                                     )
                                 })
                             }
+
+
+                            {typing && 
+                            <div className="w-full flex items-center justify-center h-[50px] ">
+                                <p className="text-[13px] animate-pulse">Typing...</p>
+                            </div>}
+                        
                         </div>
+                        
+
                 </ScrollToBottom>}
                 
 
@@ -240,7 +315,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                     </span> */}
 
                     <input
-                        onChange={(e) => setMessage(e.target.value)}
+                        onChange={handle_typing}
                         type="text"
                         name="message"
                         id=""
