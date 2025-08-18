@@ -35,8 +35,8 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
     const [filtered_chat_list, setFiltered_chat_list] = useState<ChatListType[]>([])
     const [filter_msg, setFilter_msg] = useState('')
 
-    // const endpoint = process.env.NEXT_PUBLIC_LIVE
-    const endpoint = process.env.NEXT_PUBLIC_BASE
+    const endpoint = process.env.NEXT_PUBLIC_LIVE
+    // const endpoint = process.env.NEXT_PUBLIC_BASE
 
     if (!endpoint) {
         console.log('please provide the socket endpoint')
