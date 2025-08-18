@@ -71,7 +71,8 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
         if (!receiver_img) {
             setReceiver_img(sessionStorage.getItem('p-i') || '/default-male.png')
         }
-    }, [])
+
+    }, [])  
 
     // working with sockets...
     useEffect(() => {
@@ -261,9 +262,9 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                     :
                     <ScrollToBottom className="w-full h-full " >
 
-                        <div className="w-full h-full flex flex-col gap-1.5 relative px-4 overflow-x-hidden">
+                        <div className="w-full min-h-full flex flex-col gap-1.5 relative px-4 ">
                             {loading_2 && 
-                                <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                <div className="absolute w-[70%] mx-auto h-full flex items-center justify-center z-20">
                                     <Loader2Icon className='size-8 animate-spin text-[#306ce9]' />
                                 </div> }
                             
