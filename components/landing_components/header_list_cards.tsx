@@ -9,7 +9,7 @@ const HeaderListCards = () => {
             {
                     header_list.map((data, ind)=>{
                         return(
-                            <div key={ind} className="min-w-[195px] h-[195px] rounded-[8px]  flex flex-col py-[25px] px-[20px] hover:-translate-y-1 duration-400 shadow-md bg-[#ffffff] ">
+                            <div key={ind} className="min-w-[195px] h-[170px] sm:h-[195px] rounded-[8px]  flex flex-col py-[25px] px-[20px] hover:-translate-y-1 duration-400 shadow-md bg-[#ffffff] ">
                                 <span className="h-[40px] w-[40px] flex items-center justify-center rounded-[50px] bg-[#f0f8ff] ">
                                     <data.icon className={`size-[20px] text-[#306ce9]`} />
                                 </span>

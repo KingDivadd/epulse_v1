@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import {landing_navbar_data} from '@/constants/index'
 import { useChat } from '@/app/context/ChatContext'
-import { FaCaretRight } from "react-icons/fa";
+import { IoIosArrowForward } from "react-icons/io";
 import { useRouter } from 'next/navigation'
 
 
@@ -44,12 +44,12 @@ const Navbar = () => {
                 <Image src={'/header-bg-color.png'} alt='header bg color' fill={true} objectFit='contain'  className='w-full' />
             </div> */}
             
-            <nav className={`navbar px-[0.75rem] py-[1rem] md:px-[2rem]  ${is_scroll ? 'scrolled ' : 'default '}`}>
+            <nav className={`navbar p-[0.5rem] md:p-[1rem]  ${is_scroll ? 'scrolled ' : 'default '}`}>
 
-                <div className=" w-full nav-cont flex items-center justify-between bg-white ">
+                <div className=" w-full nav-cont px-2.5 py-1.5 flex items-center justify-between bg-white ">
                     
                     <Link href={'/'} className="xl:w-[250px] flex justify-start items-end ">
-                        <p className="text-lg md:text-xl font-mich font-semibold text-gray-700">ePulse</p>
+                        <p className="text-lg md:text-xl font-mont font-semibold text-gray-700">epulse</p>
                     </Link>
 
                     <span className={`max-md:hidden flex gap-8 rounded-full px-5 lg:px-12 py-3 items-center justify-center h-[70%] duration-300; `}>
@@ -70,11 +70,11 @@ const Navbar = () => {
                         <button className="hidden rounded-full md:flex items-center justify-center gap-1 px-7 lg:px-8 py-2 text-white bg-[#306CE9] hover:bg-[#306ce9]/90 text-[13px] font-mont whitespace-nowrap" onClick={handle_get_started} >
                             Get Started
 
-                            <FaCaretRight size={'18px'} />
+                            <IoIosArrowForward size={'16px'} />
                             
                         </button>
 
-                        <button className="md:hidden relative overflow-hidden flex h-[18px] w-[18px] md:h-[20px] md:w-[22px] md:font-medium" onClick={()=> {setShow_mobile_nav(!show_mobile_nav); }}>
+                        <button className="md:hidden relative overflow-hidden flex h-[16px] w-[16px] md:h-[20px] md:w-[22px] md:font-medium" onClick={()=> {setShow_mobile_nav(!show_mobile_nav); }}>
                             <Image src={'/icons/menu-black.png'} alt='menu' objectFit='contain' layout='fill' />
                         </button>
                     </span>
