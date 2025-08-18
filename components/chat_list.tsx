@@ -24,8 +24,8 @@ interface ChatListProps{
     setShow_list: (show_list:boolean)=>void;
     typing: boolean;
     setTyping: (typing:boolean)=>void;
-    typing_receiver_id: boolean;
-    setTyping_receiver_id: (typing_receiver_id:boolean)=>void;
+    typing_receiver_id: string;
+    setTyping_receiver_id: (typing_receiver_id:string)=>void;
 }
 
 
@@ -149,10 +149,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                             const display_img = user_information?.role == 'patient' ? `${physician.avatar}` : `${patient.avatar}`
 
-                                            if(patient &&  physician){
-                                                const receiver_user = user_information?.role == 'patient' ? physician.physician_id == typing_receiver_id : patient.patient_id == typing_receiver_id
-
-                                            }
+                                            const receiver_user = user_information?.role == 'patient' ? physician.physician_id == typing_receiver_id : patient.patient_id == typing_receiver_id
 
                                             const date_time = format_date_from_unix(Number(time))
 
@@ -246,10 +243,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
-                                                    if(patient &&  physician){
-                                                const receiver_user = user_information?.role == 'patient' ? physician.physician_id == typing_receiver_id : patient.patient_id == typing_receiver_id
-
-                                            }
+                                                    const receiver_user = user_information?.role == 'patient' ? physician.physician_id == typing_receiver_id : patient.patient_id == typing_receiver_id
 
 
                                                     return(

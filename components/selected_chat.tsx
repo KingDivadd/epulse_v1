@@ -21,8 +21,8 @@ interface SelectedChatProps {
     setShow_list: (show_list:boolean)=>void;
     typing: boolean;
     setTyping: (typing:boolean)=>void;
-    typing_receiver_id: boolean;
-    setTyping_receiver_id: (typing_receiver_id:boolean)=>void;
+    typing_receiver_id: string;
+    setTyping_receiver_id: (typing_receiver_id:string)=>void;
 }
 
     
