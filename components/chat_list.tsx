@@ -149,7 +149,11 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                             const display_img = user_information?.role == 'patient' ? `${physician.avatar}` : `${patient.avatar}`
 
-                                            const receiver_user = patient.patient_id || physician.physician_id
+                                            const {patient_id} = patient;
+
+                                            const {physician_id} = physician;
+
+                                            const receiver_user = user_information && user_information?.role == 'patient' ? physician_id == typing_receiver_id : patient_id == typing_receiver_id
 
                                             const date_time = format_date_from_unix(Number(time))
 
@@ -172,7 +176,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                                     <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
                                                         <p className="text-[13px] font-medium">{display_name}</p>
                                                         <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
-                                                            {receiver_user && ""}
+                                                            {receiver_user && "Typing"}
                                                         </p>
                                                     </span>
 
@@ -247,7 +251,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const {physician_id} = physician
 
-                                                    const receiver_user = user_information?.role == 'patient' ? physician_id == typing_receiver_id : patient_id == typing_receiver_id
+                                                    const receiver_user = user_information && user_information?.role == 'patient' ? physician_id == typing_receiver_id : patient_id == typing_receiver_id
 
 
                                                     return(
