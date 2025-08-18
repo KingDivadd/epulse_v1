@@ -22,10 +22,14 @@ interface ChatListProps{
     setReceiver_img: (receiver_img: string) => void;
     show_list: boolean;
     setShow_list: (show_list:boolean)=>void;
+    typing: boolean;
+    setTyping: (typing:boolean)=>void;
+    typing_receiver_id: boolean;
+    setTyping_receiver_id: (typing_receiver_id:boolean)=>void;
 }
 
 
-const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img, receiver_img, show_list, setShow_list}:ChatListProps) => {
+const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img, receiver_img, show_list, setShow_list, typing, setTyping, typing_receiver_id,setTyping_receiver_id }:ChatListProps) => {
     const [filter_appointment, setFilter_appointment] = useState('')
     const [selected, setSelected] = useState(0)
     
@@ -145,6 +149,8 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                             const display_img = user_information?.role == 'patient' ? `${physician.avatar}` : `${patient.avatar}`
 
+                                            const receiver_user = patient.patient_id || physician.physician_id
+
                                             const date_time = format_date_from_unix(Number(time))
 
                                             const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
@@ -166,7 +172,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                                     <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
                                                         <p className="text-[13px] font-medium">{display_name}</p>
                                                         <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
-                                                            {last_message}
+                                                            {receiver_user && ""}
                                                         </p>
                                                     </span>
 
@@ -237,6 +243,13 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
+                                                    const {patient_id} = patient
+
+                                                    const {physician_id} = physician
+
+                                                    const receiver_user = user_information?.role == 'patient' ? physician_id == typing_receiver_id : patient_id == typing_receiver_id
+
+
                                                     return(
                                                         <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat} rounded-sm border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
                                                             <div className=" h-full flex items-start">
@@ -248,7 +261,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                                             <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
                                                                 <p className="text-[13px] font-medium">{display_name}</p>
                                                                 <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
-                                                                    {last_message}
+                                                                    {receiver_user && "Typing..."}
                                                                 </p>
                                                             </span>
 
@@ -268,7 +281,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                         </div>
                         :
                         <div className=" w-full h-full">
-                            <SelectedChat loading_2={loading_2} receiver_img={receiver_img} setReceiver_img={setReceiver_img} setLoading_2={setLoading_2} setShow_list={setShow_list} show_list={show_list} />
+                            <SelectedChat loading_2={loading_2} receiver_img={receiver_img} setReceiver_img={setReceiver_img} setLoading_2={setLoading_2} setShow_list={setShow_list} show_list={show_list} typing={typing} setTyping={setTyping}  typing_receiver_id={typing_receiver_id} setTyping_receiver_id={setTyping_receiver_id} />
                         </div>
                 }
             </div>

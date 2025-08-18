@@ -19,21 +19,24 @@ interface SelectedChatProps {
     setReceiver_img:(receiver_img:string)=>void;
     show_list: boolean;
     setShow_list: (show_list:boolean)=>void;
+    typing: boolean;
+    setTyping: (typing:boolean)=>void;
+    typing_receiver_id: boolean;
+    setTyping_receiver_id: (typing_receiver_id:boolean)=>void;
 }
 
     
 
 
 
-const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, setShow_list, show_list}:SelectedChatProps) => {
+const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, setShow_list, show_list, typing, setTyping, typing_receiver_id, setTyping_receiver_id}:SelectedChatProps) => {
     const [message, setMessage] = useState('');
     const {user_information, show_selected_chat, chat_list, setChat_list, selected_user} = useChat()
     const [filtered_chat_list, setFiltered_chat_list] = useState<ChatListType[]>([])
     const [filter_msg, setFilter_msg] = useState('')
-    const [typing, setTyping] = useState(false)
 
-    const endpoint = process.env.NEXT_PUBLIC_LIVE
-    // const endpoint = process.env.NEXT_PUBLIC_BASE
+    // const endpoint = process.env.NEXT_PUBLIC_LIVE
+    const endpoint = process.env.NEXT_PUBLIC_BASE
 
     if (!endpoint) {
         console.log('please provide the socket endpoint')
@@ -105,13 +108,17 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                 }
             });
             
-            socket.on(`typing-${user_id}`, (data: {statusCode: number, message: string, is_typing:boolean}) => {
+            socket.on(`typing-${user_id}`, (data: {statusCode: number, message: string, is_typing:boolean, receiver_id:string, patient_id:string, physician_id: string }) => {
+
                 if (data.statusCode === 200) {
-                    // console.log('Typing event received:', data.message);
                     setTyping(true);
+
+                    setTyping_receiver_id(user_information?.role == 'patient' ? data.physician_id:data.patient_id)
+
                     setTimeout(() => {
+                        setTyping_receiver_id('')
                         setTyping(false)
-                    }, 3000); // Reset typing status after 3 seconds
+                    }, 5000); 
                 } else {
                     console.log('Error receiving typing event:', data.message);
                 }
@@ -149,6 +156,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
             updatedAt: new Date().toISOString(),
             date: Math.floor(Date.now() / 1000), // Unix timestamp in seconds
         };
+
         const {createdAt, updatedAt, date, ...new_text_data} = text_data
 
         if (message.trim() !== '') {
@@ -274,7 +282,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                                     const date_time = format_date_from_unix(Number(unix_date_time))
 
                                     return(
-                                        <div key={ind} className={`w-full flex ${sender_dir} ${additionalSpacing} `} onClick={()=> console.log(msg)}>
+                                        <div key={ind} className={`w-full flex ${sender_dir} ${additionalSpacing} `} >
                                             <div key={ind} className={`flex items-start gap-3 min-w-auto w-[80%]  lg:max-w-[75%] 2xl:max-w-[60%] `}>
                                                 {(user_role != sender) && <span className="hidden h-[35px] w-[35px] rounded-full relative overflow-hidden">
                                                     <Image src={receiver_img || '/default-male.png'} alt={''} fill className="object-cover" />
@@ -292,14 +300,12 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                                 })
                             }
 
-
-                            {typing && 
-                            <div className="w-full flex items-center justify-center h-[50px] ">
-                                <p className="text-[13px] animate-pulse">Typing...</p>
-                            </div>}
-                        
                         </div>
                         
+                        {typing && 
+                            <div className="w-auto mx-auto flex items-center justify-center h-[50px] ">
+                                <p className="text-[13px] animate-pulse whitespace-nowrap">Typing...</p>
+                            </div>}
 
                 </ScrollToBottom>}
                 
