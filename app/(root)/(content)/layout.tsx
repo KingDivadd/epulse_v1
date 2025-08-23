@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         if (user_id){
 
-            socket.on(`notification-${user_id}`, (data:any)=>{
+            socket.on(`notification-${user_id}`, (data:{statusCode:number, is_read:boolean})=>{
                 console.log('socket data ',data)
             })
 
