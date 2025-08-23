@@ -160,14 +160,11 @@ const PhysicianAppointments = () => {
     }, [position, today]);
 
     async function app_projects_action(item: string | number) {
-
-        console.log('here ', appointment_info.total_number_of_pages)
         
         let new_page_number = page_number;
         const max_page_number = appointment_info?.total_number_of_pages
 
         if (item === 'prev') {
-            console.log('page number', page_number)
             if (page_number > 1) {
                 new_page_number = page_number - 1;          
             }
@@ -182,7 +179,6 @@ const PhysicianAppointments = () => {
 
         setLoading(true)
 
-        console.log(new_page_number)
         handle_fetch_appointments(new_page_number, items_per_page)
         setPage_number(new_page_number)
 
@@ -249,8 +245,6 @@ const PhysicianAppointments = () => {
         try{
 
             const res = await patch_auth_request(`auth/accept-appointment`, {appointment_id: selected_appointment_info?.appointment_id, status: 'accepted'}) as AxiosResponseHeaders
-
-            console.log(res)
 
             if (res.status == 200 || res.status == 201){
 
@@ -573,20 +567,28 @@ const PhysicianAppointments = () => {
                                                         <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a ${appointment_type.replace(/_/, ' ')} appointment with you scheduled for ${date.date}, ${date.time}`}</DialogDescription>
                                                     </DialogHeader>
 
-                                                    <div className='px-3 sm:px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto'>
-                                                        <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
-                                                            <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
-                                                            
-                                                            <span className={`lg:w-[300px] lg:h-[300px] md:w-[250px] md:h-[250px] w-[300px] h-[300px]  relative overflow-hidden rounded-full mx-auto ring-5 ${ring_color}`}>
-                                                                <Image src={image} alt='' layout='fill' objectFit='cover' />
-                                                            </span>
+                                                    <div className='w-full px-3 sm:px-4 grid  lg:grid-cols-2 gap-4 '>
+                                                        <div className="col-span-1  relative gap-5 flex flex-col ">
+                                                                    
+                                                            <div className={`w-full min-h-[350px] relative  rounded-md `}>
 
+                                                                <span className={`h-full w-full rounded-md `}>
+                                                                    <Image src={image} alt='' layout='fill' objectFit='cover' className='rounded-md'  />
+                                                                </span>
+                                                            </div>
 
-                                                            <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.patient.first_name} {selected_appointment_info && selected_appointment_info.patient.last_name}</p>
 
                                                         </div>
 
                                                         <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Status:</p>
+                                                                <p className={` text-[13px] font-medium text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Patient Name:</p>
+                                                                <p className="text-[13px]">{selected_appointment_info && selected_appointment_info.patient.first_name} {selected_appointment_info && selected_appointment_info.patient.last_name}</p>
+                                                            </span>
                                                             <span className="flex items-center justify-start gap-2">
                                                                 <p className="text-[13px] font-medium">Appointment Time:</p>
                                                                 <p className="text-[13px] ">{date.date} {date.time}</p>
@@ -632,10 +634,10 @@ const PhysicianAppointments = () => {
                                                     </div>
                                                     
                                                     <DialogFooter className='px-3 sm:px-5  gap-2  border-t border-gray-200 pt-5' >
-                                                        <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm">Cancel</DialogClose>
+                                                        <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5  rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-[13px]">Cancel</DialogClose>
 
-                                                        {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >
-                                                            {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
+                                                        {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="text-[13px] md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >
+                                                            {loading_2 ? <Loader2Icon className={'animate-spin size-5'} /> : "Accept" }
                                                         </button>}
                                                     </DialogFooter>
                                                 </DialogContent>

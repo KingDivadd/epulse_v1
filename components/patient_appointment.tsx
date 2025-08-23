@@ -367,151 +367,157 @@ const PatientAppointments = () => {
                             </div>
                         :
 
-                            <div className="w-full temp-240 min-h-[calc(100vh-220px)] gap-3 sm:gap-5  my-3 px-3 sm:px-5 relative">
-                                {loading && 
-                                <div className="absolute w-full mx-auto h-full flex items-center justify-center">
-                                    <Loader2Icon className='size-8 animate-spin text-gray-600' />
-                                </div> }
+                            <div className="w-full min-h-[calc(100vh-220px)]  my-3 px-3 sm:px-5 relative">
+                                <div className="w-full temp-240 gap-3 sm:gap-4 relative">
 
-                                {filtered_appointment_info.map((item, ind:number) => {
-                                    const {status, physician} = item
-                                    const date = format_date_from_unix(Number(item.time));
+                                    {loading && 
+                                    <div className="absolute w-full mx-auto h-full flex items-center justify-center">
+                                        <Loader2Icon className='size-8 animate-spin text-gray-600' />
+                                    </div> }
 
-                                    const {first_name, last_name, registered_as, gender, bio, specialty, languages_spoken, country} = physician
+                                    {filtered_appointment_info.map((item, ind:number) => {
+                                        const {status, physician} = item
+                                        const date = format_date_from_unix(Number(item.time));
 
-                                    const appointments_within_24hrs = is_within_24hrs(Number(item.time));
+                                        const {first_name, last_name, registered_as, gender, bio, specialty, languages_spoken, country} = physician
 
-                                    const text_color = status == 'pending' ? 'text-amber-500' : (status === 'missed' || status == 'cancelled') ? 'text-red-500' : status == 'completed' ? 'text-[#3062e9]' : 'text-green-500'
+                                        const appointments_within_24hrs = is_within_24hrs(Number(item.time));
 
-                                    const ring_color = status == 'pending' ? 'ring-amber-500' : (status === 'missed' || status == 'cancelled') ? 'ring-red-200' : status == 'completed' ? 'ring-blue-200' : 'ring-green-200'
+                                        const text_color = status == 'pending' ? 'text-amber-500' : (status === 'missed' || status == 'cancelled') ? 'text-red-500' : status == 'completed' ? 'text-[#3062e9]' : 'text-green-500'
 
-                                    const image = item.physician?.avatar || '/default-man.png'
+                                        const ring_color = status == 'pending' ? 'ring-amber-500' : (status === 'missed' || status == 'cancelled') ? 'ring-red-200' : status == 'completed' ? 'ring-blue-200' : 'ring-green-200'
 
-                                    return (
-                                    <div key={ind} className="max-w-[550px]">
-                                        <Dialog >
-                                            <DialogTrigger className='w-full'>
-                                                <div  className={` cursor-pointer hover:bg-[#306ce9] bg-white ease-in-out duration-300 w-full flex flex-col font-mont rounded-lg box-shadow-1 shadow-md text-gray-700 hover:text-white group relative`} onClick={()=> setSelected_appointment_info(item)} >
-                                                    <div className="w-full min-h-[200px] flex flex-col items-center gap-4 p-3 sm:p-4">
-                                                        
-                                                        <span className="w-full flex items-center justify-between">
-                                                            <h5 className={`text-[12px] `}>
-                                                                {date.date}
-                                                            </h5>
-                                                            <h5 className={`text-[12px] `}>
-                                                                {date.time}
-                                                            </h5>
-                                                        </span>
+                                        const image = item.physician?.avatar || '/default-man.png'
 
-                                                        <span className={`relative overflow-hidden rounded-full h-14 w-14 `}>
-                                                            <Image src={image} alt={item.time.toString()} fill objectFit='cover' />
-                                                        </span>
+                                        return (
+                                        <div key={ind} className="max-w-[550px]">
+                                            <Dialog >
+                                                <DialogTrigger className='w-full'>
+                                                    <div  className={` cursor-pointer hover:bg-[#306ce9] bg-white ease-in-out duration-300 w-full flex flex-col font-mont rounded-lg box-shadow-1 shadow-md text-gray-700 hover:text-white group relative`} onClick={()=> setSelected_appointment_info(item)} >
+                                                        <div className="w-full min-h-[200px] flex flex-col items-center gap-4 p-3 sm:p-4">
+                                                            
+                                                            <span className="w-full flex items-center justify-between">
+                                                                <h5 className={`text-[12px] `}>
+                                                                    {date.date}
+                                                                </h5>
+                                                                <h5 className={`text-[12px] `}>
+                                                                    {date.time}
+                                                                </h5>
+                                                            </span>
 
-                                                        <div className="w-full flex flex-col items-center gap-2 ">
-                                                            <p className={`text-[13px] `}>
-                                                                Dr {item.physician?.first_name} {item.physician.last_name}
-                                                            </p>
+                                                            <span className={`relative overflow-hidden rounded-full h-14 w-14 `}>
+                                                                <Image src={image} alt={item.time.toString()} fill objectFit='cover' />
+                                                            </span>
 
-                                                            <p className={`text-[12px] `}>
-                                                                {item.physician?.specialty ? item.physician?.specialty : 'General Doctor' } 
-                                                            </p>
+                                                            <div className="w-full flex flex-col items-center gap-2 ">
+                                                                <p className={`text-[13px] `}>
+                                                                    Dr {item.physician?.first_name} {item.physician.last_name}
+                                                                </p>
+
+                                                                <p className={`text-[12px] `}>
+                                                                    {item.physician?.specialty ? item.physician?.specialty : 'General Doctor' } 
+                                                                </p>
+                                                            </div>
+
+                                                            <p className={`text-[13px] w-full text-center group-hover:text-white duration-300 ${text_color}`}>{item.status}</p>
                                                         </div>
 
-                                                        <p className={`text-[13px] w-full text-center group-hover:text-white duration-300 ${text_color}`}>{item.status}</p>
-                                                    </div>
-
-                                                    <span
-                                                        className={`h-[50px] w-full flex items-center gap-3 border-t  group-hover:border-blue-400 border-gray-200 duration-300
-                                                        `}>
-                                                        {item.appointment_type === 'chat' ? (
-                                                        <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
-                                                            <MessageSquare className="" size={'15px'} />
-                                                            Chat
-                                                        </span>
-                                                        ) : (
-                                                        <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
-                                                            <VideoIcon className="" size={'15px'} />
-                                                            Video
-                                                        </span>
-                                                        )}
-                                                    </span>
-                                                </div>
-                                            </DialogTrigger>
-
-                                            <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
-                                                <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-5'>
-                                                    <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
-                                                    <DialogDescription className='text-[13px]'>{`You've booked an appointment with Dr ${physician.first_name} ${physician.last_name} scheduled for ${date.date}, ${date.time}`}</DialogDescription>
-                                                </DialogHeader>
-
-                                                <div className='px-3 sm:px-5 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
-                                                    <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
-                                                        <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
-                                                        
-                                                        <span className={`lg:w-[300px] lg:h-[300px] md:w-[250px] md:h-[250px] w-[300px] h-[300px]  relative overflow-hidden rounded-full mx-auto ring-5 ${ring_color}`}>
-                                                            <Image src={image} alt='' layout='fill' objectFit='cover' />
-                                                        </span>
-
-
-                                                        <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.physician.first_name} {selected_appointment_info && selected_appointment_info.physician.last_name}</p>
-
-                                                    </div>
-
-                                                    <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
-                                                        <span className="w-full flex gap-2">
-                                                            <p className="text-[13px] font-medium">Name:</p>
-                                                            <p className="text-[13px]">{first_name} {last_name}</p>
-                                                        </span>
-                                                        <span className="w-full flex gap-2">
-                                                            <p className="text-[13px] font-medium">Gender:</p>
-                                                            <p className="text-[13px]">{ gender }</p>
-                                                        </span>
-                                                        <span className="w-full flex gap-2">
-                                                            <p className="text-[13px] font-medium">Registered As:</p>
-                                                            <p className="text-[13px]">{registered_as }</p>
-                                                        </span>
-                                                        <span className="w-full flex gap-2">
-                                                            <p className="text-[13px] font-medium">Specialty:</p>
-                                                            <p className="text-[13px]">{specialty }</p>
-                                                        </span>
-                                                        <span className="w-full flex gap-2">
-                                                            <p className="text-[13px] font-medium">Country:</p>
-                                                            <p className="text-[13px]">{country }</p>
-                                                        </span>
-                                                        <span className="w-full flex gap-2">
-                                                            <p className="text-[13px] font-medium">Languages:</p>
-                                                            {
-                                                                languages_spoken?.map((data, ind:number)=>{
-                                                                    return(
-                                                                        <p key={ind} className="text-[13px]">{data},</p>
-                                                                    )
-                                                                })
-                                                            }
-                                                        </span>
-                                                        
-                                                        <span className="w-full flex flex-col gap-2">
-                                                            <p className="text-[13px] font-medium">Bio:</p>
-                                                            <p className="text-[13px] leading-[25px]">{bio}</p>
+                                                        <span
+                                                            className={`h-[50px] w-full flex items-center gap-3 border-t  group-hover:border-blue-400 border-gray-200 duration-300
+                                                            `}>
+                                                            {item.appointment_type === 'chat' ? (
+                                                            <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
+                                                                <MessageSquare className="" size={'15px'} />
+                                                                Chat
+                                                            </span>
+                                                            ) : (
+                                                            <span className="flex items-center justify-center h-[50px] w-full text-[13px] gap-2">
+                                                                <VideoIcon className="" size={'15px'} />
+                                                                Video
+                                                            </span>
+                                                            )}
                                                         </span>
                                                     </div>
-                                                </div>
-                                                
-                                                <DialogFooter className='px-3 sm:px-5  gap-2  border-t border-gray-200 pt-5' >
-                                                    <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-sm ">Cancel</DialogClose>
+                                                </DialogTrigger>
 
-                                                    {user_information?.role == 'physician' && <>
+                                                <DialogContent  className='font-mont w-full md:w-[70vw]  px-0 font-mont max-lg:h-[90vh]  overflow-y-auto hide-scrollbar py-3 sm:py-4'>
+                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-5'>
+                                                        <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
+                                                        <DialogDescription className='text-[13px]'>{`You've booked an appointment with Dr ${physician.first_name} ${physician.last_name} scheduled for ${date.date}, ${date.time}`}</DialogDescription>
+                                                    </DialogHeader>
 
-                                                        {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center text-sm " onClick={handle_submit} disabled={loading} >
-                                                            {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
-                                                        </button>}
-                                                    </>}
-                                                </DialogFooter>
-                                            </DialogContent>
-                                        </Dialog>
+                                                    <div className='w-full px-3 sm:px-4 grid  lg:grid-cols-2 gap-4 '>
+                                                        <div className="col-span-1  relative gap-5 flex flex-col ">
 
-                                    </div>
-                                    );
-                                })}
+                                                            <div className={`w-full min-h-[350px] relative  rounded-md `}>
+
+                                                                <span className={`h-full w-full rounded-md `}>
+                                                                    <Image src={image} alt='' layout='fill' objectFit='cover' className='rounded-md'  />
+                                                                </span>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="col-span-1 h-full flex flex-col justify-start gap-3 ">
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Status:</p>
+                                                                <p className={` text-[13px] font-medium text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Name:</p>
+                                                                <p className="text-[13px]">{first_name} {last_name}</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Gender:</p>
+                                                                <p className="text-[13px]">{ gender }</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Registered As:</p>
+                                                                <p className="text-[13px]">{registered_as }</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Specialty:</p>
+                                                                <p className="text-[13px]">{specialty }</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Country:</p>
+                                                                <p className="text-[13px]">{country }</p>
+                                                            </span>
+                                                            <span className="w-full flex gap-2">
+                                                                <p className="text-[13px] font-medium">Languages:</p>
+                                                                {
+                                                                    languages_spoken?.map((data, ind:number)=>{
+                                                                        return(
+                                                                            <p key={ind} className="text-[13px]">{data},</p>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </span>
+                                                            
+                                                            <span className="w-full flex flex-col gap-2">
+                                                                <p className="text-[13px] font-medium">Bio:</p>
+                                                                <p className="text-[13px] leading-[25px]">{bio}</p>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <DialogFooter className='px-3 sm:px-4  gap-2  border-t border-gray-200 pt-4' >
+                                                        <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-[13px] ">Cancel</DialogClose>
+
+                                                        {user_information?.role == 'physician' && <>
+
+                                                            {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center text-sm " onClick={handle_submit} disabled={loading} >
+                                                                {loading_2 ? <Loader2Icon className={'animate-spin size-8'} /> : "Accept" }
+                                                            </button>}
+                                                        </>}
+                                                    </DialogFooter>
+                                                </DialogContent>
+                                            </Dialog>
+
+                                        </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         }
                     

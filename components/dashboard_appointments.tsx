@@ -190,26 +190,26 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                                                             </div>
 
                                                         </DialogTrigger>
-                                                        <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
+                                                        <DialogContent  className='font-mont w-full md:w-[70vw]  px-0 font-mont max-lg:h-[90vh]  overflow-y-auto hide-scrollbar py-3 sm:py-4'>
                                                             <DialogHeader className='border-b border-gray-200 pb-3 px-4'>
                                                                 <DialogTitle className='text-[15.5px] font-semibold' >Appointment Information</DialogTitle>
                                                                 <DialogDescription className='text-[13px]'>{`You've booked a ${appointment_type.replace(/_/, ' ')} appointment with Dr ${first_name} ${last_name} scheduled for ${date.date}, ${date.time} `}</DialogDescription>
                                                             </DialogHeader>
 
-                                                            <div className='px-4 w-full grid grid-cols-2 gap-5 lg:gap-0 max-h-[65vh]  overflow-y-auto mt-2'>
-                                                                <div className="col-span-2 md:col-span-1 flex flex-col gap-5  h-full max-md:border-b border-gray-200 max-md:pb-5">
-                                                                    <p className={`text-[12px] font-medium w-full text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
+                                                            <div className='w-full px-3 sm:px-4 grid  lg:grid-cols-2 gap-4 '>
+                                                                <div className="w-full min-h-[350px] relative  rounded-md">
                                                                     
-                                                                    <span className={`lg:w-[300px] lg:h-[300px] md:w-[250px] md:h-[250px] w-[300px] h-[300px]  relative overflow-hidden rounded-full mx-auto ring-5 ${ring_color}`}>
-                                                                        <Image src={image} alt='' layout='fill' objectFit='cover' />
+                                                                    <span className={`h-full w-full rounded-md `}>
+                                                                        <Image src={image} alt='' layout='fill' objectFit='cover' className='rounded-md'  />
                                                                     </span>
-
-
-                                                                    <p className="text-[13px] font-medium  text-center text-gray-700 ">{selected_appointment_info && selected_appointment_info.physician.first_name} {selected_appointment_info && selected_appointment_info.physician.last_name}</p>
 
                                                                 </div>
 
                                                                 <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
+                                                                    <span className="w-full flex gap-2">
+                                                                        <p className="text-[13px] font-medium">Status:</p>
+                                                                        <p className={`text-[13px] font-medium text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
+                                                                    </span>
                                                                     <span className="w-full flex gap-2">
                                                                         <p className="text-[13px] font-medium">Name:</p>
                                                                         <p className="text-[13px]">{first_name} {last_name}</p>
@@ -249,7 +249,7 @@ const DashboardAppointment = ({ appointment_info, loading, setLoading, page_numb
                                                             </div>
                                                 
                                                             <DialogFooter className='px-4  gap-2  border-t border-gray-200 pt-5' >
-                                                                <DialogClose className="text-sm md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300">Cancel</DialogClose>
+                                                                <DialogClose className="text-sm md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-[13px]">Cancel</DialogClose>
 
                                                                 {user_information?.role == 'physician' && <>
 

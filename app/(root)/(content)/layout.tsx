@@ -9,15 +9,42 @@ import { get_auth_request, post_auth_request } from '@/app/api';
 import { toast_msg } from '@/lib/toast';
 import {  Loader2Icon } from 'lucide-react';
 import {urlBase64ToUint8Array} from '@/lib/url_to_unit8_array'
+import { io } from 'socket.io-client';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
+    const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information } = useChat();
+
+    const endpoint = process.env.NEXT_PUBLIC_LIVE
+    // const endpoint = process.env.NEXT_PUBLIC_BASE
+
+    if (!endpoint) {
+        console.log('please provide the socket endpoint')
+    }
+
+    useEffect(() => {
+        const socket = io(endpoint)
+
+        const user_id = user_information?.role === 'patient' ? user_information?.patient_id : user_information?.physician_id;
+
+        if (user_id){
+
+            socket.on(`notification-${user_id}`, (data:any)=>{
+                console.log('socket data ',data)
+            })
+
+            return () => {
+                socket.off(user_id);
+                socket.disconnect();
+            };
+        }
+    }, [])
+    
 
     let count = 0
 
 
-    const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information } = useChat();
 
     useEffect(() => {
     
