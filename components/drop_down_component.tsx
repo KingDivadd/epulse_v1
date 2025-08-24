@@ -4,9 +4,9 @@ import { FaCaretUp, FaCaretDown } from 'react-icons/fa6';
 import { IoCheckmark } from 'react-icons/io5';
 
 interface DropDownWithSearchBarProps {
-  selected_item: string;
-  setSelected_item: (selected_item: string) => void;
-  dropArray: string[];
+    selected_item: string;
+    setSelected_item: (selected_item: string) => void;
+    dropArray: string[];
 }
 
 export const DropDownWithSearchBar = ({ dropArray, selected_item, setSelected_item }: DropDownWithSearchBarProps) => {
@@ -61,7 +61,7 @@ export const DropDownWithSearchBar = ({ dropArray, selected_item, setSelected_it
         <div className="w-full relative z-[5]" ref={dropdownRef}>
         {/* Dropdown trigger */}
             <span
-                className="h-[45px] w-full border border-gray-300 rounded-[4px] px-3 bg-white flex items-center justify-between cursor-pointer"
+                className="h-[45px] w-full border border-gray-300 rounded-[4px] px-3 bg-[#306cd9]/80 flex items-center justify-between cursor-pointer"
                 onClick={handle_drop_menu} >
                     <p className="text-[13px]">{selected_item || 'Select'}</p>
                 {/* <span className="h-[20px] w-[20px] flex items-center justify-center text-slate-700">
@@ -82,27 +82,20 @@ export const DropDownWithSearchBar = ({ dropArray, selected_item, setSelected_it
                     />
                 </span>
 
-                <div className="w-full flex flex-col items-start gap-[5px] min-h-[100px] max-h-[400px] overflow-y-auto">
+                <div className="w-full flex flex-col items-start gap-[5px] min-h-[100px]">
                     {dropArrayClone.length === 0 ? (
                     <p className="w-full px-3 py-3 text-[13px] text-gray-500 text-center">No specialties found</p>
                     ) : (
                     <>
-                        <span
-                        className="w-full px-3 py-3 hover:bg-[#f2f2f2] flex items-center justify-between cursor-pointer"
-                        onClick={() => handle_select_drop_down('')}
-                        >
-                        <p className="text-[13px] font-mont">All Specialties</p>
-                        <span className="h-[20px] w-[20px] flex items-center justify-center text-black">
-                            {selected_item === '' && <IoCheckmark size="100%" />}
-                        </span>
+                        <span className="w-full px-3 py-3 hover:bg-[#f2f2f2] flex items-center justify-between cursor-pointer" onClick={() => handle_select_drop_down('')} >
+                            <p className="text-[13px] text-gray-600 font-mont">All Specialties</p>
+                            <span className="h-[20px] w-[20px] flex items-center justify-center text-black">
+                                {selected_item === '' && <IoCheckmark size="100%" />}
+                            </span>
                         </span>
                         {dropArrayClone.map((data) => (
-                        <span
-                            key={data}
-                            className="w-full px-3 py-3 hover:bg-[#f2f2f2] flex items-center justify-between cursor-pointer"
-                            onClick={() => handle_select_drop_down(data)}
-                        >
-                            <p className="text-[13px] font-mont">{data}</p>
+                        <span key={data} className="w-full px-3 py-3 hover:bg-[#f2f2f2] flex items-center justify-between cursor-pointer" onClick={() => handle_select_drop_down(data)} >
+                            <p className="text-[13px] font-mont text-gray-600">{data}</p>
                             <span className="h-[20px] w-[20px] flex items-center justify-center text-black">
                             {selected_item === data && <IoCheckmark size="100%" />}
                             </span>

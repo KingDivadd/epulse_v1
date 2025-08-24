@@ -32,9 +32,22 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         if (user_id){
 
             socket.on(`notification-${user_id}`, (data:SocketType)=>{
-                console.log('socket status code ',data.statusCode, 'data ... ', data)
-                if (data.statusCode == 200 && data.is_read == false){
-                    toast_msg({title: 'You have a new notification', type: 'success'})
+                const {is_read, notificationData, statusCode} = data
+                console.log('socket status code ',statusCode, 'data ... ', data)
+                if (data.statusCode == 200 ){
+                    if (notificationData.notification_type.toLocaleLowerCase() == 'appointment'){
+                        
+                        setTriggerActions({...triggerActions, trigger_appointment_refresh:  !triggerActions.trigger_appointment_refresh})
+
+                    }else if (notificationData.notification_type.toLocaleLowerCase() == 'transaction'){
+                            
+                        setTriggerActions({...triggerActions, trigger_transaction_refresh:  !triggerActions.trigger_transaction_refresh})
+
+                    }else if (notificationData.notification_type.toLocaleLowerCase() == 'doctor'){
+                            
+                        setTriggerActions({...triggerActions, trigger_doctors_refresh:  !triggerActions.trigger_doctors_refresh})
+
+                    }
                 }
             })
 

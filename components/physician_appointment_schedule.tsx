@@ -241,15 +241,16 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                                                             </div>
 
                                                         </DialogTrigger>
-                                                        <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
-                                                            <DialogHeader className='border-b border-gray-200 pb-3 px-5'>
+
+                                                        <DialogContent  className='font-mont w-full md:w-[70vw]  px-0 font-mont max-lg:h-[90vh]  overflow-y-auto hide-scrollbar py-3 sm:py-4'>
+                                                            <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-4'>
                                                                 <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
                                                                 <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a ${appointment_type.replace(/_/, ' ')} appointment with you scheduled for ${date.date}, ${date.time} `}</DialogDescription>
                                                             </DialogHeader>
 
                                                             <div className='w-full px-3 sm:px-4 grid  lg:grid-cols-2 gap-4 '>
                                                                 <div className="col-span-1  relative gap-5 flex flex-col ">
-                                                                    
+
                                                                     <div className={`w-full min-h-[350px] relative  rounded-md `}>
 
                                                                         <span className={`h-full w-full rounded-md `}>
@@ -257,10 +258,9 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                                                                         </span>
                                                                     </div>
 
-
                                                                 </div>
 
-                                                                <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
+                                                                <div className="col-span-1 h-full flex flex-col justify-start gap-3 ">
                                                                     <span className="w-full flex gap-2">
                                                                         <p className="text-[13px] font-medium">Status:</p>
                                                                         <p className={` text-[13px] font-medium text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
@@ -312,7 +312,7 @@ const AdminAppointmentSchedule = ({ fund_search, setFund_search,  appointment_in
                                                                 </div>
                                                             </div>
                                                 
-                                                            <DialogFooter className='px-4  gap-2  border-t border-gray-200 pt-5' >
+                                                            <DialogFooter className='px-4  gap-2  border-t border-gray-200 pt-4' >
                                                                 <DialogClose className="md:h-[45px] h-[40px] px-5 sm:px-7 rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-[13px]">Cancel</DialogClose>
 
                                                                 {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="text-[13px] md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading_2} >

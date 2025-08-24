@@ -18,6 +18,7 @@ import { AppointmentProps, AppointmentType } from '@/types';
 import { Loader2Icon } from 'lucide-react';
 import { PageHeader } from './reuseable_heading_component';
 import { IoIosArrowDown } from 'react-icons/io';
+import { useChat } from '@/app/context/ChatContext';
 
 
 const PhysicianAppointments = () => {
@@ -33,6 +34,7 @@ const PhysicianAppointments = () => {
     const [open_drop_down, setOpen_drop_down] = useState(false)
     const [page_number, setPage_number] = useState(1)
     const [items_per_page, setItems_per_page] = useState(10)
+    const {triggerActions} = useChat()
     let count = 0
     
 
@@ -46,7 +48,7 @@ const PhysicianAppointments = () => {
 
         handle_fetch_appointments(page_number, items_per_page)
 
-    }, [selected_appointment_info?.status])
+    }, [selected_appointment_info?.status, triggerActions.trigger_appointment_refresh])
 
     useEffect(() => {
 
@@ -285,7 +287,7 @@ const PhysicianAppointments = () => {
 
                 <DropdownMenu>
                     <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
-                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-5 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-5 bg-white text-gray-600  border border-gray-100 shadow-md rounded-sm">
                             <span className="h-full flex items-center gap-0.5">
                                 <HiFilter className=' size-4 ' />
                                 <p className="text-[13px] ">Filter</p>
@@ -294,28 +296,28 @@ const PhysicianAppointments = () => {
                             <IoIosArrowDown className='size-5 ' />
                         </span>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent  className='w-[350px] sm:w-[300px] rounded-[4px] border-0 font-mont'>
+                    <DropdownMenuContent  className='w-[350px] sm:w-[300px] rounded-[4px] border-0 font-mont text-white bg-[#306ce9]'>
                         
                         <div className="w-[350px] sm:w-[300px] flex flex-col p-3 rounded-[4px]   gap-5">
 
                             <span className="w-full flex flex-col gap-2">
                                 <p className="text-[13px]">Filter by time</p>
 
-                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
-                                    <option value="" className='text-[13px]'>Select Time</option>
-                                    <option value="" className='text-[13px]'>All</option>
-                                    <option value="today" className='text-[13px]'>Today</option>
-                                    <option value="yesterday" className='text-[13px]'>Yesterday</option>
-                                    <option value="last_week" className='text-[13px]'>Last Week</option>
-                                    <option value="this_month" className='text-[13px]'>This Month</option>
-                                    <option value="last_30_days" className='text-[13px]'>Last 30 days</option>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-[#306ce9]/80  border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
+                                    <option value="" className='text-[13px] '>Select Time</option>
+                                    <option value="" className='text-[13px] '>All</option>
+                                    <option value="today" className='text-[13px] '>Today</option>
+                                    <option value="yesterday" className='text-[13px] '>Yesterday</option>
+                                    <option value="last_week" className='text-[13px] '>Last Week</option>
+                                    <option value="this_month" className='text-[13px] '>This Month</option>
+                                    <option value="last_30_days" className='text-[13px] '>Last 30 days</option>
                                 </select>
                             </span>
 
                             <span className="w-full flex flex-col gap-2">
                                 <p className="text-[13px]">Filter by status</p>
 
-                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-[#306ce9]/80 border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
                                     <option value="" className='text-[13px]'>Select status</option>
                                     <option value="" className='text-[13px]'>All</option>
                                     <option value="pending" className='text-[13px]'>Pending</option>
@@ -328,7 +330,7 @@ const PhysicianAppointments = () => {
                             <span className="w-full flex flex-col gap-2">
                                 <p className="text-[13px]">Filter by Consultation type</p>
 
-                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-[#306ce9]/80 border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_appointment(e.target.value)}>
                                     <option value="" className='text-[13px]'>Select type</option>
                                     <option value="" className='text-[13px]'>All</option>
                                     <option value="chat" className='text-[13px]'>Chat</option>
@@ -337,7 +339,7 @@ const PhysicianAppointments = () => {
                             </span>
 
                             <span className="h-[45px] w-full ">
-                                <input type="text" name="filter_appointment" placeholder='Enter patient name ...' onChange={(e)=> setFilter_appointment(e.target.value)} className='input-type text-[13px]' />
+                                <input type="text" name="filter_appointment" placeholder='Enter patient name ...' onChange={(e)=> setFilter_appointment(e.target.value)} className='input-type-filter text-[13px] ' />
                             </span>
 
 
@@ -561,15 +563,15 @@ const PhysicianAppointments = () => {
                                                     </div>
                                                 </DialogTrigger>
 
-                                                <DialogContent  className='font-mont w-[500px] md:w-[700px] lg:w-[900px] px-0'>
-                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-5'>
+                                                <DialogContent  className='font-mont w-full md:w-[70vw]  px-0 font-mont max-lg:h-[90vh]  overflow-y-auto hide-scrollbar py-3 sm:py-4'>
+                                                    <DialogHeader className='border-b border-gray-200 pb-3 px-3 sm:px-4'>
                                                         <DialogTitle className='text-[15.5px]' >Appointment Information</DialogTitle>
                                                         <DialogDescription className='text-[13px]'>{`${patient.first_name} ${patient.last_name} has booked a ${appointment_type.replace(/_/, ' ')} appointment with you scheduled for ${date.date}, ${date.time}`}</DialogDescription>
                                                     </DialogHeader>
 
                                                     <div className='w-full px-3 sm:px-4 grid  lg:grid-cols-2 gap-4 '>
                                                         <div className="col-span-1  relative gap-5 flex flex-col ">
-                                                                    
+
                                                             <div className={`w-full min-h-[350px] relative  rounded-md `}>
 
                                                                 <span className={`h-full w-full rounded-md `}>
@@ -577,10 +579,9 @@ const PhysicianAppointments = () => {
                                                                 </span>
                                                             </div>
 
-
                                                         </div>
 
-                                                        <div className="col-span-2 md:col-span-1 flex flex-col gap-4  h-full  ">
+                                                        <div className="col-span-1 h-full flex flex-col justify-start gap-3 ">
                                                             <span className="w-full flex gap-2">
                                                                 <p className="text-[13px] font-medium">Status:</p>
                                                                 <p className={` text-[13px] font-medium text-center ${text_color} `}>{selected_appointment_info && selected_appointment_info.status.toUpperCase() }</p>
@@ -633,7 +634,7 @@ const PhysicianAppointments = () => {
                                                         </div>
                                                     </div>
                                                     
-                                                    <DialogFooter className='px-3 sm:px-5  gap-2  border-t border-gray-200 pt-5' >
+                                                    <DialogFooter className='px-3 sm:px-4  gap-2  border-t border-gray-200 pt-4' >
                                                         <DialogClose className="md:h-[45px] h-[40px] px-3 sm:px-5  rounded-sm bg-gray-200 text-gray-700 hover:bg-gray-200/80 duration-300 text-[13px]">Cancel</DialogClose>
 
                                                         {(selected_appointment_info && selected_appointment_info.status == 'pending') && <button className="text-[13px] md:h-[45px] h-[40px] w-[120px] sm:px-7 rounded-sm bg-[#306ce9] text-white hover:bg-[#306ce9]/90 duration-300 flex items-center justify-center" onClick={handle_submit} disabled={loading} >

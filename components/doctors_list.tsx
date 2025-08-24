@@ -32,7 +32,7 @@ interface DoctorProps {
 }
 
 const DoctorsList = () => {
-    const {selected_user, setSelected_user} = useChat()
+    const {selected_user, setSelected_user, triggerActions} = useChat()
     const [filter_doctor, setFilter_doctor] = useState('');
     const [loading, setLoading] = useState(true);
     const router = useRouter();
@@ -110,7 +110,7 @@ const DoctorsList = () => {
 
         fetch_doctors_from_server(page_number, items_per_page);
 
-    }, []);
+    }, [triggerActions.trigger_doctors_refresh]);
 
     async function app_projects_action(item: string | number) {
         
@@ -193,24 +193,23 @@ const DoctorsList = () => {
 
                 <DropdownMenu>
                     <DropdownMenuTrigger className='w-full sm:w-[300px] rounded-[4px]'>
-                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-4 bg-[#306ce9] text-white border border-gray-200 shadow-md rounded-sm">
+                        <span className="h-[50px] w-full flex items-center justify-between gap-1 px-3 sm:px-5 bg-white text-gray-600  border border-gray-100 shadow-md rounded-sm">
                             <span className="h-full flex items-center gap-0.5">
                                 <HiFilter className=' size-4 ' />
                                 <p className="text-[13px] ">Filter</p>
                             </span>
 
-
                             <IoIosArrowDown className='size-5 ' />
                         </span>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent  className='w-[350px] sm:w-[300px] rounded-[4px] border-0 font-mont'>
+                    <DropdownMenuContent  className='w-[350px] sm:w-[300px] rounded-[4px] border-0 font-mont bg-[#306ce9] text-white'>
                         
                         <div className="w-[350px] sm:w-[300px] flex flex-col p-3 rounded-[4px]   gap-5">
 
                             <span className="w-full flex flex-col gap-2">
                                 <p className="text-[13px]">Registered as</p>
 
-                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_doctor(e.target.value)}>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-[#306ce9]/80 border border-gray-300 rounded-[4px] px-3 text-[13px]' onChange={(e)=> setFilter_doctor(e.target.value)}>
                                     <option value="" className='text-[13px]'>Select Time</option>
                                     <option value="Specialist" className='text-[13px]'>A Specilist</option>
                                     <option value="General Doctor" className='text-[13px]'>A General Doctor</option>
@@ -220,7 +219,7 @@ const DoctorsList = () => {
                             <span className="w-full flex flex-col gap-2">
                                 <p className="text-[13px]">Specialist Specialty</p>
 
-                                <div className=" w-full">
+                                <div className=" w-full bg-[#306ce9]/80">
                                     <DropDownWithSearchBar
                                         dropArray={doctors_specialties}
                                         selected_item={filter_doctor}
@@ -232,7 +231,7 @@ const DoctorsList = () => {
                             <span className="w-full flex flex-col gap-2">
                                 <p className="text-[13px]">Consultation Type</p>
 
-                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-white border border-gray-300 rounded-[4px] px-3 text-[13px] w-full ' onChange={(e)=> setFilter_doctor(e.target.value)}>
+                                <select name="filter_appointment" id="filter_appointment" className='h-[45px] bg-[#306ce9]/80 border border-gray-300 rounded-[4px] px-3 text-[13px] w-full ' onChange={(e)=> setFilter_doctor(e.target.value)}>
                                     <option value="" className='text-[13px]'>Select status</option>
                                     <option value="chat" className='text-[13px]'>Chat</option>
                                     <option value="video_call" className='text-[13px]'>Video</option>
@@ -241,7 +240,7 @@ const DoctorsList = () => {
 
 
                             <span className="h-[45px] w-full">
-                                <input type="text" name="filter_appointment" placeholder='Enter doctor name ...' onChange={(e)=> setFilter_doctor(e.target.value)} className='input-type text-[13px]' />
+                                <input type="text" name="filter_appointment" placeholder='Enter doctor name ...' onChange={(e)=> setFilter_doctor(e.target.value)} className='input-type-filter text-[13px]' />
                             </span>
 
                             <button className="w-full h-[45px] text-[13px] cursor-pointer border border-red-400 text-red-500 hover:bg-red-500/5 duration-300  rounded-[4px]" onClick={()=> {setFilter_doctor(''); setOpen_drop_down(false)}}>Clear Filter</button>
