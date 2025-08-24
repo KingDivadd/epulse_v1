@@ -95,7 +95,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
         setSelected_appointment_info(data); 
 
-        setLoading_2(!loading_2)
+        setLoading_2(true)
 
         const {patient, physician, appointment_id} = data
 

@@ -25,13 +25,11 @@ interface SelectedChatProps {
     setTyping_receiver_id: (typing_receiver_id:string)=>void;
 }
 
-    
-
 
 
 const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, setShow_list, show_list, typing, setTyping, typing_receiver_id, setTyping_receiver_id}:SelectedChatProps) => {
     const [message, setMessage] = useState('');
-    const {user_information, show_selected_chat, chat_list, setChat_list, selected_user} = useChat()
+    const {user_information, show_selected_chat, chat_list, setChat_list, selected_user, selected_appointment_info} = useChat()
     const [filtered_chat_list, setFiltered_chat_list] = useState<ChatListType[]>([])
     const [filter_msg, setFilter_msg] = useState('')
 
@@ -41,8 +39,6 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
     if (!endpoint) {
         console.log('please provide the socket endpoint')
     }
-
-    
 
     useEffect(() => {
 
@@ -63,16 +59,16 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
 
         const selected_chat = sessionStorage.getItem('s-c')
         if (selected_chat) {
-            setLoading_2(!loading_2)
+            setLoading_2(true)
         }
         if (!selected_chat) {
-            setLoading_2(!loading_2)
+            setLoading_2(false)
         }
         if (!receiver_img) {
             setReceiver_img(sessionStorage.getItem('p-i') || '/default-male.png')
         }
 
-    }, [])  
+    }, [selected_appointment_info])  
 
     // working with sockets...
     useEffect(() => {
@@ -304,7 +300,7 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                         </div>
                         
                         {typing && 
-                            <div className="w-auto mx-auto flex items-center justify-center h-[50px] ">
+                            <div className="w-auto  mx-auto flex items-center justify-center h-[50px] ">
                                 <p className="text-[13px] animate-pulse whitespace-nowrap">Typing...</p>
                             </div>}
 

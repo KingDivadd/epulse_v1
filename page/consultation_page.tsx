@@ -7,7 +7,6 @@ import { get_auth_request } from '@/app/api'
 import { AxiosResponseHeaders } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useChat } from '@/app/context/ChatContext'
-import { AppointmentType } from '@/types'
 
 
 const ConsultationPage = () => {
@@ -65,15 +64,11 @@ const ConsultationPage = () => {
         const chat_route = sessionStorage.getItem('s-c')
 
         if (selected_appointment_info){
-
             handle_fetch_chat_data()
         }
         else if (chat_route) {
-            
             handle_fetch_chat_data(chat_route)
-
         }
-
 
     }, [selected_appointment_info])
 
@@ -81,10 +76,12 @@ const ConsultationPage = () => {
         
         try {
 
+            setLoading_2(true)
 
             const route = selected_appointment_info ? `${selected_appointment_info.patient.patient_id}/${selected_appointment_info.physician.physician_id}` : passed_route
 
             const res = await get_auth_request(`auth/get-chats/${route}`) as AxiosResponseHeaders
+            console.log('Fetched chat data ... ', res)
 
             if (res.status == 200 || res.status == 201) {
 
@@ -93,18 +90,16 @@ const ConsultationPage = () => {
                 setLoading_2(false)
 
             }else if(res.status == 401){
-
                 return toast_msg({title: 'Session expired, kindly login again'})
-
             }
             else{
-
                 return toast_msg({title: res.response.data.msg, type:'danger'})
-
             }
 
         } catch (err) {
             console.log(err)
+        } finally{
+            setLoading_2(false)
         }
     }
     

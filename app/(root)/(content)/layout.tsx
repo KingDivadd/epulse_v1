@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import axios, { AxiosResponseHeaders } from 'axios';
 import { get_auth_request, post_auth_request } from '@/app/api';
 import { toast_msg } from '@/lib/toast';
-import {  Loader2Icon } from 'lucide-react';
 import {urlBase64ToUint8Array} from '@/lib/url_to_unit8_array'
 import { io } from 'socket.io-client';
 import { SocketType } from '@/types';
@@ -33,7 +32,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
             socket.on(`notification-${user_id}`, (data:SocketType)=>{
                 const {is_read, notificationData, statusCode} = data
-                console.log('socket status code ',statusCode, 'data ... ', data)
+                // console.log('socket status code ',statusCode, 'data ... ', data)
                 if (data.statusCode == 200 ){
                     if (notificationData.notification_type.toLocaleLowerCase() == 'appointment'){
                         
@@ -160,11 +159,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     async function handle_subscribe_user(){
         try {
             const sub = await subscribeUser()
-            console.log('sub .... ',sub)
+
             const res = await post_auth_request(`auth/save-subscription`, { subscription: sub }) as AxiosResponseHeaders
 
             if (res.status == 200 || res.status == 201){
-                console.log('sub added. ')
+                // console.log('sub added. ')
             }else{
                 console.log(res)
             }
