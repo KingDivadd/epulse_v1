@@ -10,6 +10,7 @@ import { toast_msg } from '@/lib/toast';
 import {  Loader2Icon } from 'lucide-react';
 import {urlBase64ToUint8Array} from '@/lib/url_to_unit8_array'
 import { io } from 'socket.io-client';
+import { SocketType } from '@/types';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
@@ -30,8 +31,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
         if (user_id){
 
-            socket.on(`notification-${user_id}`, (data:{statusCode:number, is_read:boolean})=>{
-                console.log('socket data ',data)
+            socket.on(`notification-${user_id}`, (data:SocketType)=>{
+                console.log('socket status code ',data.statusCode, 'data ... ', data)
                 if (data.statusCode == 200 && data.is_read == false){
                     toast_msg({title: 'You have a new notification', type: 'success'})
                 }
