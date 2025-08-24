@@ -1,6 +1,6 @@
 'use client'
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { AppointmentType, ChatListType, UserInfoProps, WalletInformationProps } from '@/types';
+import { AppointmentType, ChatListType, TriggerActionRefresh, UserInfoProps, WalletInformationProps } from '@/types';
 
 interface ChatContextType {
     show_mobile_nav: boolean;
@@ -33,6 +33,8 @@ interface ChatContextType {
     setAppointment_info: (appointment_info: AppointmentType[]) => void;
     chat_list: ChatListType[];
     setChat_list: (chat_list: ChatListType[]) => void;
+    triggerActions: TriggerActionRefresh;
+    setTriggerActions: (triggerActions: TriggerActionRefresh) => void;
 
 
 }
@@ -58,6 +60,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [selected_appointment_info, setSelected_appointment_info] = useState<AppointmentType|null>(null)
     const [appointment_info, setAppointment_info] = useState<AppointmentType[]>([])
     const [chat_list, setChat_list] = useState<ChatListType[]>([])
+    const [triggerActions, setTriggerActions] = useState({trigger_doctors_refresh: false, trigger_appointment_refresh: false, trigger_transaction_refresh: false})
 
     return (
         <ChatContext.Provider value={{
@@ -72,7 +75,7 @@ export const ChatProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             wallet_information, setWallet_information,
             page_number, setPage_number, items_per_page, setItems_per_page,
             route, setRoute, selected_appointment_info, setSelected_appointment_info,
-            appointment_info, setAppointment_info, chat_list, setChat_list,
+            appointment_info, setAppointment_info, chat_list, setChat_list, triggerActions, setTriggerActions,
 
             
             }}>

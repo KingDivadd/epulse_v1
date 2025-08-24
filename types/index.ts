@@ -212,3 +212,32 @@ export type ReceiverChatResponseType = {
     statusCode: number;
     senderData: UserInfoProps
 }
+
+export type TriggerActionRefresh = {
+    trigger_doctors_refresh: boolean;
+    trigger_transaction_refresh: boolean;
+    trigger_appointment_refresh: boolean;
+}
+
+type NotificationData = {
+    appointment_id?: string;
+    case_note_id?: string;
+    created_at: string;
+    is_read: boolean;
+    notification_for_patient: boolean;
+    notification_for_physician: boolean;
+    notification_id: string
+    notification_sub_type: string;
+    notification_type: string;
+    patient_id: string | null;
+    physician_id: string | null;
+    status: string;
+    transaction_id: string | null;
+    updated_at: string; 
+}
+
+export type SocketType ={
+    statusCode: number;
+    is_read: boolean;
+    notificationData: NotificationData;
+}

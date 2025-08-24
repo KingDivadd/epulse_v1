@@ -14,7 +14,7 @@ import { io } from 'socket.io-client';
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-    const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information } = useChat();
+    const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information, triggerActions, setTriggerActions } = useChat();
 
     const endpoint = process.env.NEXT_PUBLIC_LIVE
     // const endpoint = process.env.NEXT_PUBLIC_BASE
@@ -32,6 +32,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
             socket.on(`notification-${user_id}`, (data:{statusCode:number, is_read:boolean})=>{
                 console.log('socket data ',data)
+                if (data.statusCode == 200 && data.is_read == false){
+                    toast_msg({title: 'You have a new notification', type: 'success'})
+                }
             })
 
             return () => {

@@ -27,19 +27,14 @@ const WalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
 
     useEffect(() => {
 
-        if (!user_information || !user_information.role) {
-            
-            toast_msg({title:'Error occured, kindly login again ', type:'danger'})
-
-            router.push('/login')
-
-            return;
+        if (user_information && user_information.role){
+            setFunds_data({
+                ...funds_data, 
+                patient_id: user_information?.patient_id || '', 
+                physician_id: user_information?.physician_id || '', 
+                transaction_type: user_information.role == 'patient' ? 'credit':'debit' 
+            })
         }
-        const {patient_id, physician_id} = user_information
-
-        patient_id && setFunds_data({...funds_data, patient_id, transaction_type:'credit' })
-
-        physician_id && setFunds_data({...funds_data, physician_id, transaction_type: 'debit'})
 
     }, [trigger])
     
