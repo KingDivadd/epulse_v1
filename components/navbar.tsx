@@ -121,31 +121,31 @@ const Navbar = () => {
                             <BellIcon size={'22px'} className='text-gray-700' />
                         </div>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="  border-0" align="end">
-                        <DropdownMenuLabel className='text-[15.5px] font-mont '>Notifications</DropdownMenuLabel>
+                    <DropdownMenuContent className=" bg-[#306ce9] border-0 p-0" align="end">
+                        <DropdownMenuLabel className='text-[15.5px] font-mont text-white'>Notifications</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuGroup className='bg-[#f2f2f2] min-h-72 max-h-[60vh] p-2 w-[350px] sm:w-[400px] overflow-y-auto'>
+                        <DropdownMenuGroup className=' min-h-72 max-h-[60vh] p-2 w-[350px] sm:w-[400px] overflow-y-auto'>
                             {
                                 !notification_list ? 
                                     <div className="w-full h-[50vh] flex items-center justify-center">
-                                        <p className="text-[13px] text-gray-700">No notifications yet</p>
+                                        <p className="text-[13px] text-gray-100">No notifications yet</p>
                                     </div>:
                                     (
                                         !notification_list.length ?
                                             <div className="w-full h-[50vh] flex items-center justify-center">
-                                                <p className="text-[13px] text-slate-700 font-mont ">No new notifications</p>
+                                                <p className="text-[13px] text-gray-100 font-mont ">No new notifications</p>
                                             </div> :
                                             notification_list.map((item, ind)=> {
                                                 const date_time = format_date_from_unix(Number(item.created_at))
                                                 const notification = notification_logic(item)
                                                 return(
-                                                    <DropdownMenuItem key={ind} className={`bg-white min-h-15 max-h-25 p-0 rounded-0 ${!item.is_read && 'bg-white border-b border-[#f2f2f2] last:border-0 p-0'}`} onClick={()=> console.log(item)} >
+                                                    <div key={ind} className={` min-h-15 max-h-25 p-0 rounded-b-0 hover:bg-red-500 ${!item.is_read && 'border-b border-gray-400 last:border-0 p-0 rounded-b-0'}`} onClick={()=> console.log(item)} >
                                                         <div className="flex flex-col items-start justify-center font-mont w-full p-2 gap-1.5">
-                                                            <p className="text-[13px] text-gray-700 leading-[15px] ">{notification?.title}</p>
-                                                            <p className="text-[12px] text-gray-700 leading-[16.5px] ">{notification?.message}</p>
-                                                            <p className="text-[11px] w-full  text-gray-500 text-end whitespace-nowrap ">{date_time.date}, {date_time.time}</p>
+                                                            <p className="text-[13px] text-gray-100 leading-[15px] ">{notification?.title}</p>
+                                                            <p className="text-[12px] text-gray-200 leading-[16.5px] ">{notification?.message}</p>
+                                                            <p className="text-[11px] w-full  text-gray-200 text-end whitespace-nowrap ">{date_time.date}, {date_time.time}</p>
                                                         </div>
-                                                    </DropdownMenuItem>
+                                                    </div>
                                                 )
                                             })
                                     )
