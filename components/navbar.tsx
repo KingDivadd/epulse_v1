@@ -139,7 +139,7 @@ const Navbar = () => {
                                                 const date_time = format_date_from_unix(Number(item.created_at))
                                                 const notification = notification_logic(item)
                                                 return(
-                                                    <div key={ind} className={` min-h-15 max-h-25 p-0 rounded-b-0 hover:bg-red-500 ${!item.is_read && 'border-b border-gray-400 last:border-0 p-0 rounded-b-0'}`} onClick={()=> console.log(item)} >
+                                                    <div key={ind} className={` min-h-15 max-h-25 p-0 rounded-b-0 ${!item.is_read && 'border-b border-blue-400 last:border-0 p-0 rounded-b-0'}`} onClick={()=> console.log(item)} >
                                                         <div className="flex flex-col items-start justify-center font-mont w-full p-2 gap-1.5">
                                                             <p className="text-[13px] text-gray-100 leading-[15px] ">{notification?.title}</p>
                                                             <p className="text-[12px] text-gray-200 leading-[16.5px] ">{notification?.message}</p>
