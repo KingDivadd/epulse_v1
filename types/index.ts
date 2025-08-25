@@ -241,3 +241,26 @@ export type SocketType ={
     is_read: boolean;
     notificationData: NotificationData;
 }
+
+export type NotificationType = {
+    appointment: AppointmentType | null;
+    appointment_id: string | null;
+    case_note: null;
+    case_note_id: null;
+    created_at: string;
+    is_read: boolean;
+    notification_for_patient: boolean;
+    notification_for_physician: boolean;
+    notification_id: string;
+    notification_sub_type: string;
+    notification_type: string;
+    patient: UserInfoProps | null;
+    patient_id: string | null;
+    physician: PhysicianType | null;
+    physician_id: string | null;
+    status: string;
+    transaction: TransactionType | null;
+    transaction_id: string | null;
+    updated_at: string;
+
+}

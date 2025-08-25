@@ -125,7 +125,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                 </div> }
                         </div>
                         :
-                        <div className="w-full overflow-y-auto max-h-[calc(100vh-145px)] flex flex-col gap-2 hide-scrollbar ">
+                        <div className="w-full overflow-y-auto max-h-[calc(100vh-145px)] flex flex-col  hide-scrollbar ">
                             {loading && 
                                 <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                     <Loader2Icon className='size-8 animate-spin text-gray-500' />
@@ -136,6 +136,8 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                         filtered_appointments.map((data: AppointmentType, ind: number)=>{
 
                                             const {patient, physician, last_message, time, last_message_time, appointment_id } = data
+
+                                            const user_specialty = physician ? ( physician.registered_as == 'Specialist') ? physician.specialty : physician.registered_as == 'General Doctor' ? 'General Doctor' : '' : ''
 
                                             const item = sessionStorage.getItem('s-c')
 
@@ -155,24 +157,24 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                             const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
 
-                                            const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-gray-400  duration-200 hover:text-white '
+                                            const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-b border-gray-300 last:border-0 duration-200 hover:text-white '
 
                                             const selected_chat_text = selected == ind ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
                                             const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
                                             return(
-                                                <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat}   rounded-sm  border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
+                                                <div key={ind} className={`w-full h-[75px] ${selected_chat} p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
                                                     <div className=" h-full flex items-start">
                                                         <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                                             <Image src={display_img} alt='' fill objectFit='cover'  />
                                                         </span>
                                                     </div>
 
-                                                    <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
+                                                    <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 ">
                                                         <p className="text-[13px] font-medium">{display_name}</p>
                                                         <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
-                                                            {receiver_user && "Typing"}
+                                                            {receiver_user ? "Typing" : user_specialty}
                                                         </p>
                                                     </span>
 
@@ -221,6 +223,8 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const {patient, physician, last_message, time, last_message_time, appointment_id } = data
 
+                                                    const user_specialty = physician ? ( physician.registered_as == 'Specialist') ? physician.specialty : physician.registered_as == 'General Doctor' ? 'General Doctor' : '' : ''
+
                                                     const item = sessionStorage.getItem('s-c')
 
                                                     const item_array = item && item.split('/')
@@ -237,7 +241,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
 
-                                                    const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-gray-400  duration-200 hover:text-white '
+                                                    const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-b border-gray-300 last:border-0 duration-200 hover:text-white '
 
                                                     const selected_chat_text = selected == ind ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
@@ -247,7 +251,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
 
                                                     return(
-                                                        <div key={ind} className={`w-full h-[80px] sm:h-[90px] ${selected_chat} rounded-sm border p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
+                                                        <div key={ind} className={`w-full h-[75px] ${selected_chat} p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
                                                             <div className=" h-full flex items-start">
                                                                 <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                                                     <Image src={display_img} alt='' fill objectFit='cover'  />
@@ -257,7 +261,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                                             <span className="flex-1 h-full flex flex-col justify-center items-start gap-1 sm:gap-2">
                                                                 <p className="text-[13px] font-medium">{display_name}</p>
                                                                 <p className={`text-[12px] h-[35px] w-full line-clamp-2 ${selected_chat_text} duration-200`}>
-                                                                    {receiver_user && "Typing..."}
+                                                                    {receiver_user ? "Typing...": user_specialty}
                                                                 </p>
                                                             </span>
 

@@ -14,49 +14,9 @@ import { SocketType } from '@/types';
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-    const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information, triggerActions, setTriggerActions } = useChat();
+    const { show_mobile_sidebar, setShow_mobile_sidebar, setUser_information, user_information,  } = useChat();
 
-    const endpoint = process.env.NEXT_PUBLIC_LIVE
-    // const endpoint = process.env.NEXT_PUBLIC_BASE
 
-    if (!endpoint) {
-        console.log('please provide the socket endpoint')
-    }
-
-    useEffect(() => {
-        const socket = io(endpoint)
-
-        const user_id = user_information?.role === 'patient' ? user_information?.patient_id : user_information?.physician_id;
-
-        if (user_id){
-
-            socket.on(`notification-${user_id}`, (data:SocketType)=>{
-                const {is_read, notificationData, statusCode} = data
-                // console.log('socket status code ',statusCode, 'data ... ', data)
-                if (data.statusCode == 200 ){
-                    if (notificationData.notification_type.toLocaleLowerCase() == 'appointment'){
-                        
-                        setTriggerActions({...triggerActions, trigger_appointment_refresh:  !triggerActions.trigger_appointment_refresh})
-
-                    }else if (notificationData.notification_type.toLocaleLowerCase() == 'transaction'){
-                            
-                        setTriggerActions({...triggerActions, trigger_transaction_refresh:  !triggerActions.trigger_transaction_refresh})
-
-                    }else if (notificationData.notification_type.toLocaleLowerCase() == 'doctor'){
-                            
-                        setTriggerActions({...triggerActions, trigger_doctors_refresh:  !triggerActions.trigger_doctors_refresh})
-
-                    }
-                }
-            })
-
-            return () => {
-                socket.off(user_id);
-                socket.disconnect();
-            };
-        }
-    }, [])
-    
 
     let count = 0
 
