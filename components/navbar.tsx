@@ -135,7 +135,7 @@ const Navbar = () => {
                                             <div className="w-full h-[50vh] flex items-center justify-center">
                                                 <p className="text-[13px] text-gray-100 font-mont ">No new notifications</p>
                                             </div> :
-                                            notification_list.map((item, ind)=> {
+                                            notification_list.map((item:NotificationType, ind:number)=> {
                                                 const date_time = format_date_from_unix(Number(item.created_at))
                                                 const notification = notification_logic(item)
                                                 return(

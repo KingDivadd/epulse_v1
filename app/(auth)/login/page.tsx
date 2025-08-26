@@ -54,7 +54,8 @@ const Login = () => {
                     router.push(`/user-details/${res.data.user.patient_id}`)
                     return;
                 }else{
-                    router.push('/dashboard')
+                    const route = localStorage.getItem('route')
+                    route ? router.push(route) : router.push('/dashboard')
                     return;
                 }
                 return

@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { RiSearchLine, RiAttachment2 } from 'react-icons/ri';
+import { RiSearchLine, RiAttachment2, RiChat4Line, RiVideoOnLine  } from 'react-icons/ri';
 import { toast_msg } from '@/lib/toast';
 import {messages_data} from '@/constants'
 import { format_date_from_unix, get_time_from_unix } from '@/lib/date_formater';
@@ -11,7 +11,8 @@ import { Skeleton } from './ui/skeleton';
 import { AppointmentType } from '@/types';
 import { Loader2Icon } from 'lucide-react';
 import SelectedChat from './selected_chat';
-
+import { BiVideo } from "react-icons/bi";
+import { useRouter } from 'next/navigation';
 
 interface ChatListProps{
     loading: boolean;
@@ -31,13 +32,14 @@ interface ChatListProps{
 
 const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img, receiver_img, show_list, setShow_list, typing, setTyping, typing_receiver_id,setTyping_receiver_id }:ChatListProps) => {
     const [filter_appointment, setFilter_appointment] = useState('')
-    const [selected, setSelected] = useState(0)
+    const [selected, setSelected] = useState('')
     
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState(messages_data);
     const messagesContainerRef = useRef<HTMLDivElement>(null); // Renamed for clarity
     const {setShow_selected_chat, show_selected_chat, user_information, selected_appointment_info, setSelected_appointment_info, appointment_info, chat_list, setSelected_user, selected_user} = useChat()
     const [filtered_appointments, setFiltered_appointments] = useState<AppointmentType[]>([])
+    const router = useRouter()
 
 
     useEffect(() => {
@@ -51,15 +53,20 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
         const selected_chat = sessionStorage.getItem('c-ind')
 
         if (selected_chat) {
-            setSelected(Number(selected_chat))
+            setSelected(selected_chat)
         }else{
-            setSelected(-1)
+            // setSelected(-1)
         }
 
+
         const new_list = appointment_info.filter((item:AppointmentType)=>{
+            const {patient, physician, } = item
+
+            const display_name = user_information?.role == 'patient' ? `${physician.first_name} ${physician.last_name}`: `${patient.first_name} ${patient.last_name}`
 
             return(
-                item.status.toLowerCase().includes(filter_appointment.toLowerCase()) 
+                item?.physician?.specialty?.toLowerCase().includes(filter_appointment.toLowerCase()) ||
+                display_name.toLowerCase().includes(filter_appointment.toLowerCase())
             )
 
         })
@@ -70,6 +77,22 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
     
     function handle_select_chat(data:AppointmentType, ind:number){
+
+
+        if (data.appointment_type.toLowerCase() == 'video_call' ){
+
+            sessionStorage.setItem('c-ind', data.appointment_id)
+
+            setSelected(data.appointment_id)
+
+            setSelected_appointment_info(data);
+
+            router.push(`/consultation/video-consultation`);
+
+            return;
+
+        }
+
 
         const user_role = data.patient.patient_id ? "patient" : "physician"
 
@@ -91,17 +114,16 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
         setShow_selected_chat(!show_selected_chat);
 
-        setSelected(1); 
 
-        setSelected_appointment_info(data); 
+        setSelected_appointment_info(data);
 
         setLoading_2(true)
 
         const {patient, physician, appointment_id} = data
 
-        sessionStorage.setItem('c-ind', ind.toString())
+        sessionStorage.setItem('c-ind', appointment_id)
 
-        setSelected(ind)
+        setSelected(appointment_id)
 
         sessionStorage.setItem('s-c', `${patient.patient_id}/${physician.physician_id}`)
 
@@ -111,7 +133,10 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
     return (
         <>
             <div className="hidden lg:flex flex-col gap-3  w-full h-full justify-start ">
-                <h3 className="font-mont font-semibold text-[15.5px]  text-slate-700">{(user_information && user_information.role == 'physician') ? "Patients":"Physicians"}</h3>
+                <span className="h-[40px] w-full">
+                    <input type="text" className="input-type text-[12px] rounded-full" onChange={(e)=> setFilter_appointment(e.target.value)} placeholder={`search for participants...`} />
+                </span>
+                
 
                 <div className="w-full">
                     {
@@ -135,7 +160,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                     {
                                         filtered_appointments.map((data: AppointmentType, ind: number)=>{
 
-                                            const {patient, physician, last_message, time, last_message_time, appointment_id } = data
+                                            const {patient, physician, last_message, time, last_message_time, appointment_id, appointment_type } = data
 
                                             const user_specialty = physician ? ( physician.registered_as == 'Specialist') ? physician.specialty : physician.registered_as == 'General Doctor' ? 'General Doctor' : '' : ''
 
@@ -157,11 +182,11 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                             const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
 
-                                            const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-b border-gray-300 last:border-0 duration-200 hover:text-white '
+                                            const selected_chat = selected == data?.appointment_id ? 'bg-[#306ce9] text-white border border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-b border-gray-300 last:border-0 duration-200 hover:text-white '
 
-                                            const selected_chat_text = selected == ind ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
+                                            const selected_chat_text = selected == data?.appointment_id ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
-                                            const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
+                                            const selected_chat_msg_count = selected == data?.appointment_id ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
                                             return(
                                                 <div key={ind} className={`w-full h-[75px] ${selected_chat} p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
@@ -178,9 +203,10 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                                         </p>
                                                     </span>
 
-                                                    <span className="w-[60px] flex flex-col h-full items-end justify-between">
-                                                        <p className="text-[12px]">{last_msg_time && last_msg_time.time}</p>
-                                                        {/* <p className={`text-[10px] w-[30px] text-center py-0.5 rounded-full duration-200 ${selected_chat_msg_count} `}>{"12"}</p> */}
+                                                    <span className="w-[20px] flex flex-col h-full items-end justify-between">
+                                                        {appointment_type.toLowerCase() == 'chat' ? <RiChat4Line className={selected_chat} />:
+                                                        <BiVideo  className={selected_chat} size={19} />}
+                                                        
                                                     </span>
                                                 </div>
                                             )
@@ -198,7 +224,9 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                 {
                     show_list ?
                         <div className=" flex flex-col gap-3  w-full h-full justify-start ">
-                            <h3 className="font-mont font-semibold text-[15.5px]  text-slate-700">{(user_information && user_information.role == 'physician') ? "Patients":"Physicians"}</h3>
+                            <span className="h-[40px] w-full">
+                                <input type="text" className="input-type text-[12px] rounded-full" onChange={(e)=> setFilter_appointment(e.target.value)} placeholder={`search for participants...`} />
+                            </span>
 
                             {
                                 !filtered_appointments.length ?
@@ -211,7 +239,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                         </div> }
                                 </div>
                                 :
-                                <div className="w-full overflow-y-auto max-h-[calc(100vh-145px)] flex flex-col gap-2 hide-scrollbar ">
+                                <div className="w-full overflow-y-auto max-h-[calc(100vh-145px)] flex flex-col hide-scrollbar ">
                                     {loading && 
                                         <div className="absolute w-full mx-auto h-full flex items-center justify-center">
                                             <Loader2Icon className='size-8 animate-spin text-gray-500' />
@@ -221,7 +249,7 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                             {
                                                 filtered_appointments.map((data: AppointmentType, ind: number)=>{
 
-                                                    const {patient, physician, last_message, time, last_message_time, appointment_id } = data
+                                                    const {patient, physician, last_message, time, last_message_time,  appointment_type} = data
 
                                                     const user_specialty = physician ? ( physician.registered_as == 'Specialist') ? physician.specialty : physician.registered_as == 'General Doctor' ? 'General Doctor' : '' : ''
 
@@ -241,17 +269,17 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
 
                                                     const last_msg_time = !last_message_time && format_date_from_unix(Number(last_message_time))
 
-                                                    const selected_chat = selected == ind ? 'bg-[#306ce9] text-white border border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-b border-gray-300 last:border-0 duration-200 hover:text-white '
+                                                    const selected_chat = selected == data?.appointment_id ? 'bg-[#306ce9] text-white border border-[#306ce9]  ' : ' hover:bg-[#306ce9] border-b border-gray-300 last:border-0 duration-200 hover:text-white '
 
-                                                    const selected_chat_text = selected == ind ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
+                                                    const selected_chat_text = selected == data?.appointment_id ? "text-slate-200":"text-gray-500 group-hover:text-slate-200"
 
-                                                    const selected_chat_msg_count = selected == ind ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
+                                                    const selected_chat_msg_count = selected == data?.appointment_id ? "bg-blue-400":"bg-[#f2f2f2] group-hover:bg-blue-400"
 
                                                     const receiver_user = user_information?.role == 'patient' ? physician.physician_id == typing_receiver_id : patient.patient_id == typing_receiver_id
 
 
                                                     return(
-                                                        <div key={ind} className={`w-full h-[75px] ${selected_chat} p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
+                                                        <div key={ind} className={`w-full h-[67.5px] ${selected_chat} p-2 sm:p-3 font-mont flex items-center justify-start gap-2 group cursor-pointer`} onClick={()=>handle_select_chat(data, ind) }>
                                                             <div className=" h-full flex items-start">
                                                                 <span className="h-[50px] w-[50px] relative overflow-hidden rounded-full">
                                                                     <Image src={display_img} alt='' fill objectFit='cover'  />
@@ -265,9 +293,10 @@ const ChatList = ({loading, setLoading, loading_2, setLoading_2, setReceiver_img
                                                                 </p>
                                                             </span>
 
-                                                            <span className="w-[60px] flex flex-col h-full items-end justify-between">
-                                                                <p className="text-[12px]">{last_msg_time && last_msg_time.time}</p>
-                                                                {/* <p className={`text-[10px] w-[30px] text-center py-0.5 rounded-full duration-200 ${selected_chat_msg_count} `}>{"12"}</p> */}
+                                                            <span className="w-[20px] flex flex-col h-full items-end justify-between">
+                                                                {appointment_type.toLowerCase() == 'chat' ? <RiChat4Line className={selected_chat} />:
+                                                                <BiVideo  className={selected_chat} size={19} />}
+                                                                
                                                             </span>
                                                         </div>
                                                     )

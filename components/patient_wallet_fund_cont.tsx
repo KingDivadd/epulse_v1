@@ -119,29 +119,22 @@ const PatientWalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProp
                             
                         <div className="w-full min-h-[150px] flex flex-col justify-between gap-2 px-5 py-3.5 rounded-lg border border-[#E6E6E6] bg-[#f2f2f2]">
                             <span className="flex flex-col gap-1">
-                                <span className="text-[13px] font-mont flex items-center justfy-start font-medium">
+                                <p className="text-[13px] font-mont flex items-center justfy-start">
                                     <Dot size={'18px'} className='text-[#306ce9]' /> Total Amount Credited
-                                </span>
+                                </p>
 
-                                <span className="flex items-center gap-1">
-                                    <span className="h-5 w-5 relative overflow-hidden">
-                                        <Image src={'/icons/naira-icon-black.png'} alt='' fill objectFit='contain' />
-                                    </span>
-                                    <span className="text-xl font-bold font-mont">15,000</span>
-                                </span>
+                                    
+                                <span className="text-xl font-semibold text-gray-700 ">{Animated_counter({amount: wallet_information?.total_amount_credited ?? 0})}</span>
                             </span>
 
                             <span className="flex flex-col gap-1">
-                                <span className="text-[13px] font-mont flex items-center justfy-start font-semibold">
+                                <p className="text-[13px] font-mont flex items-center justfy-start">
                                     <Dot size={'18px'} className='text-red-500' /> Total Amount Debited
-                                </span>
+                                </p>
 
-                                <span className="flex items-center gap-1">
-                                    <span className="h-5 w-5 relative overflow-hidden">
-                                        <Image src={'/icons/naira-icon-black.png'} alt='' fill objectFit='contain' />
-                                    </span>
-                                    <span className="text-xl font-bold font-mont">1,500</span>
-                                </span>
+                                
+                                <span className="text-xl font-semibold text-gray-700 ">{Animated_counter({amount: wallet_information?.total_amount_debited ?? 0})}</span>
+                                
                             </span>
                         </div>
                     </DialogContent>

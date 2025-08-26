@@ -172,7 +172,7 @@ const WalletFundCont = ({trigger_refresh, setTrigger_refresh}:TriggerProps) => {
                                     <p className="text-[13px] font-medium text-slate-700 font-mont">{"Amount"}</p>
 
                                     <span className="h-[45px] w-full">
-                                        <input type="number" name="amount" id="" onChange={(e)=> setFunds_data({...funds_data, amount: Number(e.target.value)})} value={funds_data.amount} className='input-type text-[13px]' />
+                                        <input type="number" name="amount" id="" onChange={(e)=> setFunds_data({...funds_data, amount: Number(e.target.value)})} value={funds_data.amount} className='input-type rounded text-[13px]' />
                                     </span>
                                 </span>
 

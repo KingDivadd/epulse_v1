@@ -5,7 +5,7 @@ import { RiSearchLine, RiAttachment2 } from 'react-icons/ri';
 import { toast_msg } from '@/lib/toast';
 import {messages_data} from '@/constants'
 import { format_date_from_unix, get_time_from_unix } from '@/lib/date_formater';
-import { IoSend,IoClose } from "react-icons/io5";
+import { IoSend,IoClose, IoArrowBackOutline } from "react-icons/io5";
 import { useChat } from '@/app/context/ChatContext';
 import { Loader2Icon } from 'lucide-react';
 import ScrollToBottom from 'react-scroll-to-bottom';
@@ -225,7 +225,13 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
     return (
         <div className="w-full h-full bg-white rounded-sm py-4 flex flex-col items-start justify-between shadow-md max-sm:gap-2">
             {selected_user && 
-            <div className="px-3 sm:px-4 w-full flex items-center justify-between border-b border-[#f2f2f2] pb-3 ">
+            <div className="px-3 sm:px-4 w-full flex items-center justify-start border-b border-[#f2f2f2] pb-3 ">
+                    
+                <span  className="px-3  text-[13px] text-gray-600 h-[40px] lg:hidden flex items-center justify-start font-medium gap-1 " onClick={()=> setShow_list(!show_list)} >
+                    <IoArrowBackOutline size="18px" /> 
+                </span>
+                    
+                
                 <span className=" h-[40px] flex items-center justify-start gap-2">
                     <span className="h-[40px] w-[40px] rounded-sm relative overflow-hidden">
                         <Image src={selected_user.avatar || 'default-male.png'} alt="" fill className="object-cover" />
@@ -236,11 +242,6 @@ const SelectedChat = ({loading_2, setLoading_2, receiver_img, setReceiver_img, s
                     </span>
                 </span>
 
-                <span className="flex items-center justify-end gap-3 lg:gap-1">
-                    
-                    <button className="lg:hidden bg-gray-100 hover:bg-gray-100/50 duration-200  px-5 rounded-full text-[12px] py-2 " onClick={()=> setShow_list(!show_list)}>cancel</button>
-                    
-                </span>
             </div>}
 
             <div className={`w-full ${selected_user ? 'h-[calc(100vh-265px)]':'h-[calc(100vh-200px)]'} bg-white  flex flex-col   justify-between ` }>

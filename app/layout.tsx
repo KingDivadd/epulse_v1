@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner"
 import {ChatProvider} from '@/app/context/ChatContext'
+import '@stream-io/video-react-sdk/dist/css/styles.css'
 
 
 export const metadata: Metadata = {

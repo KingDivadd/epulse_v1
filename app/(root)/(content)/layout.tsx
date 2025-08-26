@@ -8,8 +8,8 @@ import axios, { AxiosResponseHeaders } from 'axios';
 import { get_auth_request, post_auth_request } from '@/app/api';
 import { toast_msg } from '@/lib/toast';
 import {urlBase64ToUint8Array} from '@/lib/url_to_unit8_array'
-import { io } from 'socket.io-client';
-import { SocketType } from '@/types';
+import StreamVideoProvider from '@/providers/streamVideoClient';
+
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const router = useRouter()
@@ -169,12 +169,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <>
             
             <main className="w-screen h-screen flex overflow-hidden relative sm:p-0" onClick={handleOutsideClick}>
-                <section className="hidden sm:block w-[250px]">
+                <section className="hidden sm:block w-[230px] xl:w-[250px]">
                     <Sidebar />
                 </section>
 
                 <section className="flex-1 h-full flex flex-col bg-[#ffffff] overflow-y-auto overflow-x-hidden">
-                    {children}
+                    <StreamVideoProvider>
+                        {children}
+                    </StreamVideoProvider>
                 </section>
 
                 <section

@@ -153,6 +153,7 @@ export type AppointmentType = {
     time: number;
     last_message:string;
     last_message_time:number;
+    meeting_id: string;
     
 }
 export interface AppointmentProps {
