@@ -141,7 +141,7 @@ const VideoConsultationPage = () => {
                     <div className={`w-full min-h-[350px] relative  rounded-md `}>
 
                         <span className={`h-full w-full rounded-md `}>
-                            <Image src={image} alt='' layout='fill' objectFit='cover' className='rounded-md'  />
+                            <Image src={image || '/default-male.png'} alt='' layout='fill' objectFit='cover' className='rounded-md'  />
                         </span>
                     </div>
 
