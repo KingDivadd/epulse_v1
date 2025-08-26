@@ -53,7 +53,7 @@ const Meeting_room = () => {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden pt-4 text-white bg-red-500">
+    <section className="relative h-screen w-full overflow-hidden pt-4 text-white max-md:p-3">
       <div className="flex flex-col h-full w-full items-center justify-center">
         <div className="flex w-full max-w-[1000px] md:max-w-[800px] sm:max-w-[90%]">
           <CallLayout />
