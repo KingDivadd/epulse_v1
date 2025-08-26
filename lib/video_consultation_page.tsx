@@ -17,7 +17,7 @@ interface Uploader_props {
 
 
 
-const cloudinary_url = process.env.NEXT_PUBLIC_CLOUDINARY_URL
+const cloudinary_url = process.env.NEXT_PUBLIC_CLOUDINARY_URL || "https://api.cloudinary.com/v1_1/iroegbu-cloud-1/upload"
 
 export const FileUploaderNew = ({ id, title, url, onFileUpload }: Uploader_props) => {
     const [filePreview, setFilePreview] = useState('');
